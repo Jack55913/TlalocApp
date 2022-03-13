@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:tlaloc/models/user.dart';
 import 'package:gsheets/gsheets.dart';
 
@@ -24,7 +26,7 @@ class UserSheetsApi {
   static Future init() async {
     try {
       final spreadsheet = await _gsheets.getSpreadsheet(_spreadsheetID);
-      _userSheet = await _getWorkSheet(spreadsheet, title: 'Users');
+      _userSheet = (await _getWorkSheet(spreadsheet, title: 'Users')) as Worksheet?;
 
       final firstRow = UserFields.getFields();
       _userSheet!.values.insertRow(1, firstRow);
@@ -33,12 +35,12 @@ class UserSheetsApi {
     }
   }
 
-  static Future<WorkSheet> _getWorkSheet(
+  static Future _getWorkSheet(
     Spreadsheet spreadsheet, {
     required String title,
   }) async {
     try {
-      return await spreadsheet.addWorkSheet(title);
+      return await spreadsheet.addWorksheet(title);
     } catch (e) {
       return spreadsheet.worksheetByTitle(title);
     }
@@ -47,6 +49,7 @@ class UserSheetsApi {
   static Future insert(List<Map<String, dynamic>> rowList) async {
     if (_userSheet == null) return;
 
-    _userSheet!.values.map.appenRows();
+    _userSheet!.values.map.appendRows(rowList);
   }
 }
+

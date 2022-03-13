@@ -8,11 +8,11 @@ class CreateSheetsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('MyAPp.title'),
+          title: const Text('MyApp.title'),
         ),
         body: Container(
-          aligment: Alignment.center,
-          padding: EdgeInsets.all(32),
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(32),
           child: ButtonWidget(
             text: 'Guardar',
             onClicked: () async {
