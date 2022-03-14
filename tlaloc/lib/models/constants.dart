@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
+// import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+
+// FirebaseAnalytics analytics = FirebaseAnalytics();
 
 const String appName = 'Tlaloc App';
 const meses = <String>[

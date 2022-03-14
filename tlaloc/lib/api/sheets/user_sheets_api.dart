@@ -3,7 +3,6 @@
 import 'package:tlaloc/models/user.dart';
 import 'package:gsheets/gsheets.dart';
 
-
 class UserSheetsApi {
   static const _credentials = r''' 
   {
@@ -19,14 +18,16 @@ class UserSheetsApi {
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tlaloc%40curious-set-343803.iam.gserviceaccount.com"
 }
   ''';
-  static const _spreadsheetID = '1IOzgexdgx6Zp0ca-vKOcxVBRcrSNkRRfZGRjVvwmANo';
+  // ignore: prefer_const_declarations
+  static final _spreadsheetID = '1IOzgexdgx6Zp0ca-vKOcxVBRcrSNkRRfZGRjVvwmANo';
   static final _gsheets = GSheets(_credentials);
   static Worksheet? _userSheet;
 
   static Future init() async {
     try {
-      final spreadsheet = await _gsheets.getSpreadsheet(_spreadsheetID);
-      _userSheet = (await _getWorkSheet(spreadsheet, title: 'Users')) as Worksheet?;
+      final spreadsheet = await _gsheets.spreadsheet(_spreadsheetID);
+      _userSheet = (await _getWorkSheet(spreadsheet, title: 'Precipitación'))
+          as Worksheet?;
 
       final firstRow = UserFields.getFields();
       _userSheet!.values.insertRow(1, firstRow);
@@ -52,4 +53,3 @@ class UserSheetsApi {
     _userSheet!.values.map.appendRows(rowList);
   }
 }
-

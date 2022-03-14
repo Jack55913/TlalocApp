@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:tlaloc/models/constants.dart';
+import 'package:tlaloc/screens/navigation_bar.dart';
 
 class CardPlanetData {
   final String title;
@@ -8,17 +9,22 @@ class CardPlanetData {
   final Color backgroundColor;
   final Color titleColor;
   final Color subtitleColor;
+  final Color buttonColor;
+  final Icon icon;
   final Widget? background;
+  final bool? button;
 
-  CardPlanetData({
-    required this.title,
-    required this.subtitle,
-    required this.image,
-    required this.backgroundColor,
-    required this.titleColor,
-    required this.subtitleColor,
-    this.background,
-  });
+  CardPlanetData(
+      {required this.title,
+      required this.subtitle,
+      required this.image,
+      required this.backgroundColor,
+      required this.titleColor,
+      required this.subtitleColor,
+      this.background,
+      required this.buttonColor,
+      required this.icon,
+      this.button});
 }
 
 class CardPlanet extends StatelessWidget {
@@ -32,10 +38,11 @@ class CardPlanet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      
       children: [
         if (data.background != null) data.background!,
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+          padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 50),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -44,7 +51,7 @@ class CardPlanet extends StatelessWidget {
                 flex: 20,
                 child: Image(image: data.image),
               ),
-              const Spacer(flex: 1),
+              const Spacer(flex: 5),
               Text(
                 data.title.toUpperCase(),
                 style: TextStyle(
@@ -67,7 +74,28 @@ class CardPlanet extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 2,
               ),
-              const Spacer(flex: 10),
+              const Spacer(flex: 15),
+              if (data.button != null && data.button!)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    FloatingActionButton(
+                      
+                    backgroundColor: AppColors.green1,
+                    child: data.icon,
+                    onPressed: data.button == true
+                        ? () {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute<void>(
+                                    builder: (BuildContext context) {
+                              return const BottomNavBar();
+                            }), (Route<dynamic> route) => false);
+                          }
+                        : null,
+              ),
+                  ],
+                )
+             
             ],
           ),
         ),

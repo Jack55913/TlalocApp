@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/screens/onbording.dart';
+import 'package:tlaloc/api/sheets/user_sheets_api.dart';
+import 'package:tlaloc/page/create_sheets_page.dart';
 import 'package:tlaloc/screens/navigation_bar.dart';
-void main() {
+import 'package:tlaloc/screens/onbording.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await UserSheetsApi.init();
   runApp(const MyApp());
 }
 
@@ -17,10 +21,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BottomNavBar(),
       darkTheme: ThemeData.dark(),
-      // home: Onboarding(),
+      home: 
+          Onboarding(),
+          // const BottomNavBar(),
+
     );
   }
 }
-

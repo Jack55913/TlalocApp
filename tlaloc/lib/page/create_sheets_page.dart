@@ -1,6 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:tlaloc/api/sheets/user_sheets_api.dart';
-
+import 'package:tlaloc/models/user.dart';
+import 'package:tlaloc/widgets/button_widget.dart';
+import 'package:tlaloc/widgets/user_form_widget.dart';
 
 class CreateSheetsPage extends StatelessWidget {
   const CreateSheetsPage({Key? key}) : super(key: key);
@@ -16,19 +20,23 @@ class CreateSheetsPage extends StatelessWidget {
           child: ButtonWidget(
             text: 'Guardar',
             onClicked: () async {
-              insertUsers();
-              //   final user = User(
-              //     id: 1,
-              //     author: 'Emilio Álvarez Herrera',
-              //     common:
-              //   );
-              // await UserSheetsApi.insert([user.toJson()]);
+              final user = {
+                UserFields.id: 1,
+                UserFields.author: 'Emilio',
+                UserFields.common: 'Texcoco'
+              };
+              await UserSheetsApi.insert([user]);
             },
           ),
         ),
       );
   Future insertUsers() async {
-    final jsonUsers = users.map().toList();
+    final users = [
+      User(id: 1, author: 'Emilio', common: 'tex'),
+      User(id: 2, author: 'jhon', common: 'hola'),
+      User(id: 3, author: 'ala', common: 'porque')
+    ];
+    final jsonUsers = users.map((user) => user.toJson()).toList();
     await UserSheetsApi.insert(jsonUsers);
   }
 }

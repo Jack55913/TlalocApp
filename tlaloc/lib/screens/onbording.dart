@@ -1,14 +1,17 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/onbording_cards.dart';
 import 'package:concentric_transition/concentric_transition.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tlaloc/models/constants.dart';
-
+import 'package:tlaloc/screens/navigation_bar.dart';
 
 class Onboarding extends StatelessWidget {
   Onboarding({Key? key}) : super(key: key);
 
-  final data = [
+  final List<CardPlanetData> data = [
     CardPlanetData(
       title: "Tláloc App",
       subtitle: "¡Vamos a conservar y proteger nuestro monte!",
@@ -17,6 +20,12 @@ class Onboarding extends StatelessWidget {
       titleColor: Colors.white,
       subtitleColor: Colors.white,
       background: LottieBuilder.asset("assets/animation/bg-1.json"),
+      button: false,
+      icon:Icon(
+        Icons.arrow_forward,
+        color: Colors.transparent,
+      ),
+      buttonColor: Colors.transparent
     ),
     // CardPlanetData(
     //   title: "imagine",
@@ -35,6 +44,13 @@ class Onboarding extends StatelessWidget {
       titleColor: Colors.yellow,
       subtitleColor: Colors.white,
       background: LottieBuilder.asset("assets/animation/bg-3.json"),
+      button: true,
+      icon: //inserta un icono:
+      Icon(
+        Icons.arrow_forward,
+        color: Colors.white,
+      ),
+      buttonColor: AppColors.green1,
     ),
   ];
 
@@ -46,8 +62,10 @@ class Onboarding extends StatelessWidget {
         itemCount: data.length,
         itemBuilder: (int index, double value) {
           return CardPlanet(data: data[index]);
+          
         },
       ),
+      
     );
   }
 }
