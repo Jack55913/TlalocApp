@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tlaloc/models/image_picker.dart';
+import 'package:tlaloc/models/add_model.dart';
 
 class AddScreen extends StatelessWidget {
   const AddScreen({Key? key}) : super(key: key);

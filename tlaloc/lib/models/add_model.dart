@@ -60,21 +60,22 @@ class _MyAddPageState extends State<MyAddPage> {
           ),
           backgroundColor: AppColors.dark2,
           actions: <Widget>[
-            ButtonWidget(
-              text: 'Guardar',
-              onClicked: () async {
-                final user = {
-                  UserFields.id: 1,
-                  UserFields.author: 'Emilio',
-                  UserFields.common: 'Tequexquinahuac',
-                };
-                await UserSheetsApi.insert([user]);
-              },
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: ButtonWidget(
+                text: 'Guardar',
+                onClicked: () async {
+                  final user = {
+                    UserFields.id: 1,
+                    UserFields.author: 'Emilio',
+                    UserFields.common: 'Tequexquinahuac',
+                  };
+                  await UserSheetsApi.insert([user]);
+                },
+              ),
             ),
-          ]
-          ),
-      body: ListView(
-        padding: const EdgeInsets.only(top: 20),
+          ]),
+      body: Column(
         children: [
           Datetime(),
           const Divider(
@@ -82,28 +83,43 @@ class _MyAddPageState extends State<MyAddPage> {
             thickness: 1,
             color: Colors.black26,
           ),
-          SizedBox(
-            height: 15,
+          const SizedBox(height: 15),
+          const Text(
+            'Imágen del pluviómetro',
+            style: TextStyle(
+              fontSize: 24,
+              fontFamily: 'FredokaOne',
+            ),
           ),
-          MaterialButton(
-              color: AppColors.green1,
-              child: Text("Elegir imágen de la Galería",
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold)),
-              onPressed: () {
-                pickImage();
-              }),
-          SizedBox(
-            height: 30,
+          const SizedBox(height: 15),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MaterialButton(
+                color: AppColors.green1,
+                child: Text("Desde la Galería 🖼️",
+                    style: TextStyle(
+                        fontFamily: 'poppins',
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  pickImage();
+                }),
+            MaterialButton(
+                color: AppColors.green1,
+                child: Text("Desde la Cámara 📷",
+                    style: TextStyle(
+                        fontFamily: 'poppins',
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  pickImageC();
+                }),
+              ],
+            ),
           ),
-          MaterialButton(
-              color: AppColors.green1,
-              child: Text("Elegir imágen desde la Cámara",
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold)),
-              onPressed: () {
-                pickImageC();
-              }),
           const SizedBox(
             height: 16,
           ),

@@ -40,6 +40,7 @@ dependencies:
   image_picker: ^0.8.3
   gsheets: ^0.3.2
   firebase_analytics: ^9.1.2
+  auto_size_text: ^3.0.0
   
 
 dev_dependencies:

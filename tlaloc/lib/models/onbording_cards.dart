@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/screens/navigation_bar.dart';
@@ -38,7 +39,6 @@ class CardPlanet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      
       children: [
         if (data.background != null) data.background!,
         Padding(
@@ -52,7 +52,7 @@ class CardPlanet extends StatelessWidget {
                 child: Image(image: data.image),
               ),
               const Spacer(flex: 5),
-              Text(
+              AutoSizeText(
                 data.title.toUpperCase(),
                 style: TextStyle(
                   fontFamily: 'FredokaOne',
@@ -64,7 +64,7 @@ class CardPlanet extends StatelessWidget {
                 maxLines: 1,
               ),
               const Spacer(flex: 1),
-              Text(
+              AutoSizeText(
                 data.subtitle,
                 style: TextStyle(
                   fontFamily: 'poppins',
@@ -77,25 +77,32 @@ class CardPlanet extends StatelessWidget {
               const Spacer(flex: 15),
               if (data.button != null && data.button!)
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    FloatingActionButton(
-                      
-                    backgroundColor: AppColors.green1,
-                    child: data.icon,
-                    onPressed: data.button == true
-                        ? () {
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute<void>(
-                                    builder: (BuildContext context) {
-                              return const BottomNavBar();
-                            }), (Route<dynamic> route) => false);
-                          }
-                        : null,
-              ),
+                    ElevatedButton.icon(
+                      label: const AutoSizeText('¡Empezar ahora!',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold)),
+                      icon: data.icon,
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.green1,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      onPressed: data.button == true
+                          ? () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute<void>(
+                                      builder: (BuildContext context) {
+                                return const BottomNavBar();
+                              }), (Route<dynamic> route) => false);
+                            }
+                          : null,
+                    ),
                   ],
                 )
-             
             ],
           ),
         ),

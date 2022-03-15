@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tlaloc/api/sheets/user_sheets_api.dart';
-import 'package:tlaloc/page/create_sheets_page.dart';
-import 'package:tlaloc/screens/navigation_bar.dart';
 import 'package:tlaloc/screens/onbording.dart';
 
 void main() async {
