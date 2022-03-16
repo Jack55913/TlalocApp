@@ -1,4 +1,4 @@
-package com.example.tlaloc
+package com.TlalocApps.tlaloc
 
 import io.flutter.embedding.android.FlutterActivity
 

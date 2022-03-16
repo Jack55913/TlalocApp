@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
-// import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
-// FirebaseAnalytics analytics = FirebaseAnalytics();
+
+FirebaseAnalytics analytics = FirebaseAnalytics();
 
 const String appName = 'Tlaloc App';
 const meses = <String>[
@@ -36,5 +37,4 @@ class AppColors {
   static Color orange1 = Color(0xFFE6473A);
   static Color lightBlue = Color(0xFF50A8AE);
   static Color blue3 = Color(0xFF081A30);
-
 }
