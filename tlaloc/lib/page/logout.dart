@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tlaloc/page/logged_in_widget.dart';
+// import 'package:tlaloc/page/logged_in_widget.dart';
 import 'package:tlaloc/screens/navigation_bar.dart';
 import 'package:tlaloc/screens/sign_in.dart';
 

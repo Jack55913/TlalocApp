@@ -64,6 +64,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: GestureDetector(
+                child: const CircleAvatar(
+                  maxRadius: 16,
+                  backgroundImage: ExactAssetImage("assets/images/img-1.png"),
+                  // NetworkImage(user.photoURL!),
+                ),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -71,10 +76,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         builder: (context) => const ConfigureScreen()),
                   );
                 },
-                child: const CircleAvatar(
-                  maxRadius: 16,
-                  backgroundImage: ExactAssetImage("assets/images/img-1.png"),
-                ),
               ),
             ),
           ],

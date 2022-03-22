@@ -3,6 +3,7 @@
     "source": "functions"
   },
   "hosting": {
+    "site": "tlaloc",
     "public": "build/web",
     "ignore": [
       "firebase.json",

@@ -9,7 +9,7 @@ class Datetime extends StatefulWidget {
 }
 
 class _DatetimeState extends State<Datetime> {
-  DateTime dateTime = DateTime(2022, 12, 24, 5, 30);
+  DateTime dateTime = DateTime.now();
   @override
   Widget build(BuildContext context) {
     final hours = dateTime.hour.toString().padLeft(2, '0');

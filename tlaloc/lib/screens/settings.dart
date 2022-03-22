@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tlaloc/models/constants.dart';
+import 'package:tlaloc/page/logged_in_widget.dart';
+import 'package:tlaloc/screens/politics.dart';
 import 'package:tlaloc/screens/privacy.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -48,8 +50,6 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                   '¡Próximamente podrás obtener varios datos de él!\n\nDescárgala en tlaloc.org',
                   subject:
                       '¿Sabías que hay una app donde puedes registrar los datos de la lluvia en el Monte Tláloc? ');
-              // Share.share(
-              //     ' ');
             },
           ),
           ListTile(
@@ -64,12 +64,21 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
             },
           ),
           ListTile(
-              leading: Icon(Icons.privacy_tip),
-              title: Text('Enviar retroalimentación'),
+              leading: Icon(Icons.description),
+              title: Text('Términos y condiciones'),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => PrivacyPage()),
+                );
+              }),
+          ListTile(
+              leading: Icon(Icons.privacy_tip),
+              title: Text('Política de privacidad'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PoliticPage()),
                 );
               }),
           ListTile(
@@ -131,6 +140,15 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                       launch('https://github.com/Jack55913/TlalocApp');
                     },
                   ),
+          ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Cerrar sesión'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoggedInWidget()),
+                );
+              }),
                 ],
               );
             },

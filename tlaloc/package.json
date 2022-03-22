@@ -1,4 +1,8 @@
 {
+  "name": "tlaloc",
+  "lockfileVersion": 2,
+  "requires": true,
+  "packages": {},
   "dependencies": {
     "firebase-functions": "^3.19.0"
   }

@@ -3,9 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:tlaloc/models/constants.dart';
-// import '../shared/markdown_demo_widget.dart';
-
-// ignore_for_file: public_member_api_docs
 
 const String _markdownData = """
 
@@ -135,13 +132,12 @@ class PrivacyPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.dark2,
-        title: const Text('Política de privacidad'),
+        title: const Text('Términos y condiciones del servicio'),
       ),
       body: const SafeArea(
         child: Markdown(
           selectable: true,
           data: _markdownData,
-          imageDirectory: 'https://raw.githubusercontent.com',
         ),
       ),
     );

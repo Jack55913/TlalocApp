@@ -11,9 +11,7 @@ import 'package:tlaloc/models/user.dart';
 import 'package:tlaloc/widgets/button_widget.dart';
 
 class MyAddPage extends StatefulWidget {
-  const MyAddPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const MyAddPage({Key? key}) : super(key: key);
 
   @override
   State<MyAddPage> createState() => _MyAddPageState();
@@ -138,4 +136,5 @@ class _MyAddPageState extends State<MyAddPage> {
       ),
     );
   }
+  
 }

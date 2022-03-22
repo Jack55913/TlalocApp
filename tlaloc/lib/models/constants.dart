@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-
 FirebaseAnalytics analytics = FirebaseAnalytics();
+// FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
 const String appName = 'Tlaloc App';
 const meses = <String>[
