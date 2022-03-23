@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:tlaloc/page/logged_in_widget.dart';
 import 'package:tlaloc/screens/navigation_bar.dart';
-import 'package:tlaloc/screens/sign_in.dart';
+import 'package:tlaloc/onboarding/sign_in.dart';
 
 class LogOut extends StatelessWidget {
   const LogOut({Key? key}) : super(key: key);

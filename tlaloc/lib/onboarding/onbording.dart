@@ -6,7 +6,7 @@ import 'package:tlaloc/models/onbording_cards.dart';
 import 'package:concentric_transition/concentric_transition.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:tlaloc/screens/navigation_bar.dart';
-import 'package:tlaloc/screens/sign_in.dart';
+import 'package:tlaloc/onboarding/sign_in.dart';
 
 class Onboarding extends StatelessWidget {
   Onboarding({Key? key}) : super(key: key);
@@ -47,11 +47,11 @@ class Onboarding extends StatelessWidget {
     return Scaffold(
       body: ConcentricPageView(
         onFinish: () {
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute<void>(builder: (BuildContext context) {
-            return const SignUpWidget();
-            // BottomNavBar
-          }), (Route<dynamic> route) => false);
+          Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpWidget()),
+                    );
         },
         colors: data.map((e) => e.backgroundColor).toList(),
         itemCount: data.length,

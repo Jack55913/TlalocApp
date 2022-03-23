@@ -31,9 +31,7 @@ class CreateSheetsPage extends StatelessWidget {
       );
   Future insertUsers() async {
     final users = [
-      User(id: 1, author: 'Emilio', common: 'tex'),
-      User(id: 2, author: 'jhon', common: 'hola'),
-      User(id: 3, author: 'ala', common: 'porque')
+      User(id: 1, author: 'Emilio', common: 'tex', hour: '12:00', date: '2020-01-01', measurement: ''),
     ];
     final jsonUsers = users.map((user) => user.toJson()).toList();
     await UserSheetsApi.insert(jsonUsers);

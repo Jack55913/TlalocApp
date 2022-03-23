@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-// import 'package:tlaloc/screens/settings.dart';
+import 'package:tlaloc/models/home_widget_classes.dart';
+import 'package:tlaloc/screens/navigation_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,6 +22,20 @@ class MyTutorial extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          // elevation: 0,
+          title: AutoSizeText('Tláloc App',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'FredokaOne',
+                fontSize: 24,
+                letterSpacing: 2,
+              )),
+          actions: const <Widget>[
+            InfoButton(),
+            ProfilePage(),
+          ],
+        ),
         body: ListView(
           padding: const EdgeInsets.only(top: 20),
           scrollDirection: Axis.vertical,
@@ -50,16 +68,29 @@ class MyTutorial extends StatelessWidget {
             const Divider(
               height: 20,
               thickness: 1,
-              color: Colors.black26,
+              color: Colors.white30,
             ),
             const PhraseCard(),
             const Divider(
               height: 20,
               thickness: 1,
-              color: Colors.black26,
+              color: Colors.white30,
             ),
-            // const PhraseCard(),
+            SizedBox(height:20),
+            const DynamicTlalocMap(),
+            const Divider(
+              height: 20,
+              thickness: 1,
+              color: Colors.white30,
+            ),
+            SizedBox(height:20),
             const ContactUsButton(),
+            const Divider(
+              height: 20,
+              thickness: 1,
+              color: Colors.white30,
+            ),
+            SizedBox(height:20),
           ],
         ),
       ),
@@ -84,85 +115,4 @@ Widget _buildItem(String textTitle, String textsubtitle, String url) {
           launch(url);
         }),
   );
-}
-
-class PhraseCard extends StatelessWidget {
-  const PhraseCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        //Poner fondo con gradiente
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromRGBO(0, 229, 131, 1),
-              Color.fromRGBO(44, 42, 107, 1),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.all(50.0),
-          child: Text(
-              'La captación de agua de lluvia, es la solución caida del cielo. Ésto implica que debemos cuidar los bosques, porque son ellos los reguladores hidrológicos más importantes',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'poppins',
-                fontSize: 15,
-              )),
-        ),
-      ),
-    );
-  }
-}
-
-class MeditionDataShow extends StatelessWidget {
-  const MeditionDataShow({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: const [
-          Text('Medición de datos',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'poppins',
-                fontSize: 15,
-              )),
-          Text('Revisa los errores comúnes al momento de medir',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'poppins',
-                fontSize: 15,
-              )),
-        ],
-      ),
-    );
-  }
-}
-
-class ContactUsButton extends StatelessWidget {
-  const ContactUsButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-        onPressed: () {
-          launch('mailto:tlloc-app@googlegroups.com');
-        },
-        child: const Text(
-          'Contactanos',
-        ),
-      ),
-    );
-  }
 }

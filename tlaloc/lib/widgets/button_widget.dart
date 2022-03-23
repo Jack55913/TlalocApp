@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
 
@@ -10,7 +12,7 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
+    return ElevatedButton(
       style: ElevatedButton.styleFrom(
           primary: AppColors.green1,
           shape:
@@ -34,9 +36,9 @@ class ButtonWidget extends StatelessWidget {
           ],
         ),
       ),
-      label: const Text('Guardar',
+      child: Text('Guardar',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-      icon: const Icon(Icons.save, color: Colors.black),
+      // icon: const Icon(Icons.save, color: Colors.black),
     );
   }
 }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "228815382617",
+    "firebase_url": "https://tlaloc-3c65c-default-rtdb.firebaseio.com",
+    "project_id": "tlaloc-3c65c",
+    "storage_bucket": "tlaloc-3c65c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228815382617:android:1075daa96e2aaf9cda2948",
+        "android_client_info": {
+          "package_name": "io.fireship.tlalocapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228815382617-3gie6629fq3its848ukg74o7gf9merda.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.fireship.tlalocapp",
+            "certificate_hash": "24f035fca033d2c25fef707cb8571f0e2288d5f0"
+          }
+        },
+        {
+          "client_id": "228815382617-98ljg943un48rj78n636ccggepr3evaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUwkYNkdvsnappHUPiiVQcYpfFdZ8vDrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228815382617-98ljg943un48rj78n636ccggepr3evaa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

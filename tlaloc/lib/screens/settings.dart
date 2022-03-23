@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/page/logged_in_widget.dart';
+import 'package:tlaloc/onboarding/logged_in_widget.dart';
+import 'package:tlaloc/onboarding/common_select.dart';
 import 'package:tlaloc/screens/politics.dart';
 import 'package:tlaloc/screens/privacy.dart';
 import 'package:ionicons/ionicons.dart';
@@ -35,6 +36,12 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
           ListTile(
             leading: Icon(Icons.place),
             title: Text('Cambiar de Ejido'),
+            onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CommonSelectPage()),
+                );
+              }
           ),
           // ListTile(
           //   leading: Icon(Icons.settings),
@@ -140,6 +147,11 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                       launch('https://github.com/Jack55913/TlalocApp');
                     },
                   ),
+                ],
+              );
+            },
+          ),
+
           ListTile(
               leading: Icon(Icons.logout),
               title: Text('Cerrar sesión'),
@@ -148,11 +160,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                   context,
                   MaterialPageRoute(builder: (context) => LoggedInWidget()),
                 );
-              }),
-                ],
-              );
-            },
-          ),
+              })
         ]));
   }
 }

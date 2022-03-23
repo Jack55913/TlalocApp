@@ -82,9 +82,11 @@ flutter {
 }
 
 dependencies {
+    implementation platform('com.google.firebase:firebase-bom:29.2.1')
+    implementation 'com.google.firebase:firebase-analytics'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-core:16.0.9'
-    implementation 'com.google.firebase:firebase-analytics:17.2.2' // Firebase analytics
+    // implementation 'com.google.firebase:firebase-analytics:17.2.2' // Firebase analytics
     implementation 'com.android.support:multidex:1.0.3' // Fix compile error after adding Firebase
 }
 apply plugin: 'com.google.gms.google-services'

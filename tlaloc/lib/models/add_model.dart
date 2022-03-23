@@ -59,7 +59,7 @@ class _MyAddPageState extends State<MyAddPage> {
           backgroundColor: AppColors.dark2,
           actions: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(14.0),
+              padding: const EdgeInsets.all(11.0),
               child: ButtonWidget(
                 text: 'Guardar',
                 onClicked: () async {
@@ -73,68 +73,70 @@ class _MyAddPageState extends State<MyAddPage> {
               ),
             ),
           ]),
-      body: Column(
-        children: [
-          Datetime(),
-          const Divider(
-            height: 20,
-            thickness: 1,
-            color: Colors.black26,
-          ),
-          const SizedBox(height: 15),
-          const Text(
-            'Imágen del pluviómetro',
-            style: TextStyle(
-              fontSize: 24,
-              fontFamily: 'FredokaOne',
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Datetime(),
+            const Divider(
+              height: 20,
+              thickness: 1,
+              color: Colors.white38,
             ),
-          ),
-          const SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MaterialButton(
-                color: AppColors.green1,
-                child: Text("Desde la Galería 🖼️",
-                    style: TextStyle(
-                        fontFamily: 'poppins',
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold)),
-                onPressed: () {
-                  pickImage();
-                }),
-            MaterialButton(
-                color: AppColors.green1,
-                child: Text("Desde la Cámara 📷",
-                    style: TextStyle(
-                        fontFamily: 'poppins',
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold)),
-                onPressed: () {
-                  pickImageC();
-                }),
-              ],
+            const SizedBox(height: 15),
+            const Text(
+              'Imágen del pluviómetro',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 24,
+                fontFamily: 'FredokaOne',
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          image != null
-              ? Image.file(image!)
-              : Center(child: Text("No ha seleccionado ninguna imágen")),
-          SizedBox(
-            height: 30,
-          ),
-          const Divider(
-            height: 20,
-            thickness: 1,
-            color: Colors.black26,
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MaterialButton(
+                      child: Text("🖼️ Desde la Galería",
+                          style: TextStyle(
+                              fontFamily: 'poppins',
+                              color: Colors.white,
+                              fontSize: 16)),
+                      onPressed: () {
+                        pickImage();
+                      }),
+                  MaterialButton(
+                      // color: AppColors.green1,
+                      child: Text("📷 Desde la Cámara",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'poppins',
+                            color: Colors.white,
+                          )),
+                      onPressed: () {
+                        pickImageC();
+                      }),
+                ],
+              ),
+            ),
+            SizedBox(height: 15),
+            image != null
+                ? Padding(
+                   padding: const EdgeInsets.all(15.0),
+                  child: Image.file(image!))
+                : Text("⚠️ No ha seleccionado ninguna imágen ⚠️"),
+            SizedBox(
+              height: 30,
+            ),
+            const Divider(
+              height: 20,
+              thickness: 1,
+              color: Colors.white38,
+            ),
+          ],
+        ),
       ),
     );
   }
-  
 }
