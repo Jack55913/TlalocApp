@@ -47,6 +47,6 @@ app.*.map.json
 # Private files
 
 android/key.properties
-android/app/miyotl.jks
+tlaloc.jks
 android/app/google-services.json
-ios/Runner/GoogleService-Info.plist
+lib/api/sheets/user_sheets_api.dart

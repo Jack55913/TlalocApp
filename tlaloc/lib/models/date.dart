@@ -29,7 +29,6 @@ class _DatetimeState extends State<Datetime> {
             decoration: InputDecoration(
               icon: Icon(
                 Icons.cloud,
-                color: Colors.white,
               ),
               helperText: 'Recuerda tomar una fotografía',
               hintText: 'Precipitación en mm',
@@ -37,7 +36,7 @@ class _DatetimeState extends State<Datetime> {
             keyboardType: TextInputType.number, //Mostrara teclado numérico
           ),
           SizedBox(
-            height: 50,
+            height: 25,
           ),
           Text(
             'Registra la fecha de colecta',
@@ -51,11 +50,10 @@ class _DatetimeState extends State<Datetime> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton.icon(
-                icon: const Icon(Icons.calendar_month, color: Colors.white),
-                style: ElevatedButton.styleFrom(primary: Colors.transparent),
+                icon: const Icon(Icons.calendar_month),
                 label: Text(
-                    '${dateTime.year}/${dateTime.month}/${dateTime.day}',
-                    style: const TextStyle(color: Colors.white)),
+                  '${dateTime.year}/${dateTime.month}/${dateTime.day}',
+                ),
                 onPressed: () async {
                   final date = await pickDate();
                   if (date == null) return;
@@ -68,10 +66,11 @@ class _DatetimeState extends State<Datetime> {
               ),
               ElevatedButton.icon(
                 icon: const Icon(Icons.access_time, color: Colors.white),
-                style: ElevatedButton.styleFrom(primary: Colors.transparent),
+                // style: ElevatedButton.styleFrom(primary: Colors.transparent),
                 label: Text('$hours:$minutes',
                     style: const TextStyle(
-                        color: Colors.white, )),
+                      color: Colors.white,
+                    )),
                 onPressed: () async {
                   final time = await pickTime();
                   if (time == null) return;

@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
+// ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/api/sheets/user_sheets_api.dart';
-import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/date.dart';
 import 'package:tlaloc/models/user.dart';
 import 'package:tlaloc/widgets/button_widget.dart';
@@ -56,7 +55,6 @@ class _MyAddPageState extends State<MyAddPage> {
             icon: Icon(Icons.close),
             onPressed: () => Navigator.pop(context),
           ),
-          backgroundColor: AppColors.dark2,
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.all(11.0),
@@ -80,7 +78,6 @@ class _MyAddPageState extends State<MyAddPage> {
             const Divider(
               height: 20,
               thickness: 1,
-              color: Colors.white38,
             ),
             const SizedBox(height: 15),
             const Text(
@@ -91,40 +88,46 @@ class _MyAddPageState extends State<MyAddPage> {
                 fontFamily: 'FredokaOne',
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MaterialButton(
-                      child: Text("🖼️ Desde la Galería",
-                          style: TextStyle(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MaterialButton(
+                    child: Row(
+                      children: [
+                        Icon(Icons.image),
+                        Text(" Desde la Galería",
+                            style: TextStyle(
+                              fontSize: 16,
                               fontFamily: 'poppins',
-                              color: Colors.white,
-                              fontSize: 16)),
-                      onPressed: () {
-                        pickImage();
-                      }),
-                  MaterialButton(
-                      // color: AppColors.green1,
-                      child: Text("📷 Desde la Cámara",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'poppins',
-                            color: Colors.white,
-                          )),
-                      onPressed: () {
-                        pickImageC();
-                      }),
-                ],
-              ),
+                            )),
+                      ],
+                    ),
+                    onPressed: () {
+                      pickImage();
+                    }),
+                SizedBox(height: 15),
+                MaterialButton(
+                    child: Row(
+                      children: [
+                        Icon(Icons.camera_alt),
+                        Text(" Desde la Cámara",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'poppins',
+                            )),
+                      ],
+                    ),
+                    onPressed: () {
+                      pickImageC();
+                    }),
+              ],
             ),
             SizedBox(height: 15),
             image != null
                 ? Padding(
-                   padding: const EdgeInsets.all(15.0),
-                  child: Image.file(image!))
+                    padding: const EdgeInsets.all(15.0),
+                    child: Image.file(image!))
                 : Text("⚠️ No ha seleccionado ninguna imágen ⚠️"),
             SizedBox(
               height: 30,
@@ -132,7 +135,6 @@ class _MyAddPageState extends State<MyAddPage> {
             const Divider(
               height: 20,
               thickness: 1,
-              color: Colors.white38,
             ),
           ],
         ),

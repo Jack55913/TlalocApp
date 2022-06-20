@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/page/modify_registration.dart';
 import 'package:tlaloc/screens/navigation_bar.dart';
@@ -21,11 +22,15 @@ class DataScreen extends StatelessWidget {
               flexibleSpace: FlexibleSpaceBar(
                 title: Text('Diario',
                     style: TextStyle(
-                      color: Colors.white,
+                      // color: Colors.black,
                       fontFamily: 'FredokaOne',
                       fontSize: 24,
                       letterSpacing: 2,
                     )),
+                background: Image.network(
+                  'https://i0.wp.com/mas-mexico.com.mx/wp-content/uploads/2019/09/popurri-de-viajes.jpg?resize=770%2C330&ssl=1',
+                  fit: BoxFit.cover,
+                ),
               ),
               actions: <Widget>[
                 InfoButton(),
@@ -36,6 +41,16 @@ class DataScreen extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   RegisterWidget(),
+                  DataWidgetView(),
+                  DataWidgetView(),
+                  DataWidgetView(),
+                  RegisterWidget(),
+                  DataWidgetView(),
+                  DataWidgetView(),
+                  RegisterWidget(),
+                  DataWidgetView(),
+                  DataWidgetView(),
+                  DataWidgetView(),
                 ],
               ),
             ),
@@ -66,9 +81,7 @@ class RegisterWidget extends StatelessWidget {
           Divider(
             height: 20,
             thickness: 1,
-            color: Colors.white38,
           ),
-          DataWidgetView(),
         ],
       ),
     );
@@ -99,7 +112,7 @@ class DataWidgetView extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.timer,
-                      color: AppColors.green1,
+                      color: Colors.grey,
                       size: 14,
                     ),
                     Text(
@@ -107,12 +120,11 @@ class DataWidgetView extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: 'poppins',
-                        color: Colors.white,
+                        color: Colors.grey,
                       ),
                     ),
                   ],
                 ),
-                //Agregar espacio
                 SizedBox(height: 5),
                 Text(
                   '10 ml',
@@ -122,7 +134,7 @@ class DataWidgetView extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 5),
                 Text(
                   'Tequexquinahuac',
                   style: TextStyle(
@@ -140,9 +152,12 @@ class DataWidgetView extends StatelessWidget {
               // Crear círculo con una imágen de internet
               children: <Widget>[
                 CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://proyecto-miyotl.web.app/images/icon-full.png'),
+                  backgroundColor: AppColors.orange1,
                   radius: 25,
+                  child: Icon(
+                    FontAwesomeIcons.t,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),

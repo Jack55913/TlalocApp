@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
+import 'package:tlaloc/screens/navigation_bar.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
@@ -17,7 +18,7 @@ class ButtonWidget extends StatelessWidget {
           primary: AppColors.green1,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
-              // onPressed: onClicked,
+      // onPressed: onClicked,
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -30,8 +31,14 @@ class ButtonWidget extends StatelessWidget {
               child: const Text('Cancelar'),
             ),
             TextButton(
-              onPressed: onClicked,
               child: const Text('Enviar'),
+              onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (onClicked) => const BottomNavBar()),
+              );
+            },
+              // onPressed: () => Navigator.pop(context, 'Enviar'),
             ),
           ],
         ),

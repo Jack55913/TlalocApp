@@ -1,9 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:latlng/latlng.dart';
+// import 'package:latlong2/latlong.dart'; 
+import 'package:flutter_map/flutter_map.dart';
 
 class PhraseCard extends StatelessWidget {
   const PhraseCard({Key? key}) : super(key: key);
@@ -28,7 +31,7 @@ class PhraseCard extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: Column(
-            children: [
+            children: const [
               Text(
                   'La captación de agua de lluvia, es la solución caida del cielo. Ésto implica que debemos cuidar los bosques, porque son ellos los reguladores hidrológicos más importantes',
                   style: TextStyle(
@@ -63,13 +66,13 @@ class MeditionDataShow extends StatelessWidget {
         children: const [
           Text('Medición de datos',
               style: TextStyle(
-                color: Colors.white,
+                // color: Colors.white,
                 fontFamily: 'poppins',
                 fontSize: 15,
               )),
           Text('Revisa los errores comúnes al momento de medir',
               style: TextStyle(
-                color: Colors.white,
+                // color: Colors.white,
                 fontFamily: 'poppins',
                 fontSize: 15,
               )),
@@ -104,11 +107,30 @@ class DynamicTlalocMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Image.network(
-          'https://www.mexicodesconocido.com.mx/wp-content/uploads/2020/09/oto.jpg',
-          fit: BoxFit.cover,
-        ),
+        Center(
+      //     child: FlutterMap(
+      //   options: MapOptions(
+      //     // center: LatLng(19.4, -99.1),
+      //     zoom: 16.0,
+      //     minZoom: 10,
+      //   ),
+      //   layers: [
+      //     TileLayerOptions(
+      //       urlTemplate:
+      //           'https://api.mapbox.com/styles/v1/{user}/{style}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}',
+      //       additionalOptions: {
+      //         'accessToken': 'pk.eyJ1IjoibWl5b3RsIiwiYSI6ImNsMWNiZWZhazA2MzAzZW1wMnJ1Zjd3MGUifQ.c57DM17bhxFfxTYoLcu1_Q',
+      //       },
+      //     ),
+      //   ],
+      // ),
+          child: Image.network(
+            'https://www.mexicodesconocido.com.mx/wp-content/uploads/2020/09/oto.jpg',
+            fit: BoxFit.cover,
+          ),
+    ),
         SizedBox(height: 20),
         Text('Tláloc',
             style: TextStyle(
@@ -119,7 +141,7 @@ class DynamicTlalocMap extends StatelessWidget {
         AutoSizeText(
           'Tequexquinahuac',
           style: TextStyle(
-            color: Colors.white,
+            // color: Colors.white,
             fontFamily: 'FredokaOne',
             fontSize: 24,
           ),
@@ -128,7 +150,8 @@ class DynamicTlalocMap extends StatelessWidget {
         Text(
           'Índice Geográfico',
           style: TextStyle(
-            color: Colors.white,
+            
+            // color: Colors.white,
             fontFamily: 'poppins',
             fontSize: 14,
           ),
@@ -137,7 +160,7 @@ class DynamicTlalocMap extends StatelessWidget {
         Text(
           'Descripción completo del clima, comportamiento de la lluvia, temperatura, viento, radiación solar, etc...',
           style: TextStyle(
-            color: Colors.white,
+            // color: Colors.white,
             fontFamily: 'poppins',
             fontSize: 12,
           ),
@@ -146,3 +169,5 @@ class DynamicTlalocMap extends StatelessWidget {
     );
   }
 }
+
+

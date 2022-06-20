@@ -106,35 +106,41 @@ class CommonSelectPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.purple2,
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Column(
-              children: [
-                Text(
-                  'Selecciona un Ejido',
-                  style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'FredokaOne',
-                      color: Colors.white),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  '¿A qué ejido perteneces?',
-                  style: TextStyle(
-                      fontSize: 18,
-                      // fontWeight: FontWeight.bold,
-                      fontFamily: 'poppins',
-                      color: Colors.white),
-                ),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    CommonSelectWidget(),
-                  ],
-                ),
-              ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Column(
+                children: [
+                  Text(
+                    'Selecciona un Ejido',
+                    style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'FredokaOne',
+                        color: Colors.white),
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    '¿A qué ejido perteneces?',
+                    style: TextStyle(
+                        fontSize: 18,
+                        // fontWeight: FontWeight.bold,
+                        fontFamily: 'poppins',
+                        color: Colors.white),
+                  ),
+                  SizedBox(height: 16),
+                  Flex(
+                    direction: Axis.vertical,
+                    children: [
+                      CommonSelectWidget(),
+                      CommonSelectWidget(),
+                      CommonSelectWidget(),
+                      CommonSelectWidget(),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -151,50 +157,57 @@ class CommonSelectWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: InkWell(
-        onTap: () {
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute<void>(builder: (BuildContext context) {
-            return const BottomNavBar();
-          }), (Route<dynamic> route) => false);
-        },
-        child: Container(
-          color: Colors.white,
-          // decoration: BoxDecoration(
-          //   borderRadius: BorderRadius.circular(25),
-          // ),
-          child: Column(
-            children: [
-              // Insert circle image here:
-              CircleAvatar(
-                backgroundColor: AppColors.orange1,
-                radius: 50,
-                child: Icon(
-                  FontAwesomeIcons.a,
-                  color: Colors.white,
-                  size: 50,
-                ),
-              ),
-              Text(
+          onTap: () {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute<void>(builder: (BuildContext context) {
+              return const BottomNavBar();
+            }), (Route<dynamic> route) => false);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25.0),
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Column(
+                children: [
+                  // Insert circle image here:
+                  CircleAvatar(
+                    backgroundColor: AppColors.orange1,
+                    radius: 50,
+                    child: Icon(
+                      FontAwesomeIcons.t,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
                     'Tequexquinahuac',
                     style: TextStyle(
                       fontSize: 24,
-                      fontWeight: FontWeight.bold,
                       color: Colors.black,
                       fontFamily: 'FredokaOne',
                     ),
                   ),
+                  SizedBox(height: 10),
                   Text(
                     '1200 Ha',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
-                      fontFamily: 'FredokaOne',
+                      fontFamily: 'poppins',
                     ),
                   ),
-            ],
-          ),
-        )
-      ),
+                ],
+              ),
+            ),
+          )),
     );
   }
 }
+
+
+
+

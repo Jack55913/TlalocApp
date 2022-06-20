@@ -42,7 +42,6 @@ class ModifyRegistration extends StatelessWidget {
                 Divider(
                   height: 20,
                   thickness: 1,
-                  color: Colors.white38,
                 ),
                 SizedBox(height: 15),
                 Text('Datos generales',
@@ -63,7 +62,6 @@ class ModifyRegistration extends StatelessWidget {
                 Divider(
                   height: 20,
                   thickness: 1,
-                  color: Colors.white38,
                 ),
                 SizedBox(height: 15),
                 Text(

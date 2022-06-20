@@ -12,12 +12,13 @@ class SignUpWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.green1,
-        body: Padding(
-          padding: const EdgeInsets.all(40),
+    return Scaffold(
+      body: Container(
+        color: AppColors.green1,
+        child: Padding(
+          padding: EdgeInsets.all(40),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
@@ -31,7 +32,11 @@ class SignUpWidget extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              FlutterLogo(size: 120),
+              Image(
+                alignment: Alignment.center,
+                width: 300,
+                image: AssetImage('assets/images/img-1.png'),
+              ),
               Spacer(),
               Center(
                 child: Text(
@@ -80,10 +85,10 @@ class SignUpWidget extends StatelessWidget {
                 label: Text('Modo Incógnito'),
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CommonSelectPage()),
-                    );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CommonSelectPage()),
+                  );
                 },
               ),
               SizedBox(height: 40),
@@ -108,7 +113,8 @@ class SignUpWidget extends StatelessWidget {
               ),
               SizedBox(height: 8),
               Center(
-                child: Text('Al registratrse a Tlaloc App, aceptas nuestros términos y condiciones, políticas de privacidad y recibir correos electrónicos con actualizaciones sobre el proyecto',
+                child: Text(
+                  'Al registratrse a Tláloc App, aceptas nuestros términos y condiciones, políticas de privacidad y recibir correos electrónicos con actualizaciones sobre el proyecto',
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,

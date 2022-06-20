@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/onbording_cards.dart';
@@ -48,14 +46,15 @@ class Onboarding extends StatelessWidget {
       body: ConcentricPageView(
         onFinish: () {
           Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignUpWidget()),
-                    );
+            context,
+            MaterialPageRoute(builder: (context) => const SignUpWidget()),
+          );
         },
         colors: data.map((e) => e.backgroundColor).toList(),
         itemCount: data.length,
-        itemBuilder: (int index, double value) {
+        itemBuilder: (int index
+        // , double value
+        ){
           return CardPlanet(data: data[index]);
         },
       ),

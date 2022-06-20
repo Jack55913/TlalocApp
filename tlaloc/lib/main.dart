@@ -10,7 +10,9 @@ import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/onboarding/onbording.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_analytics/observer.dart';
+//import 'package:firebase_analytics/observer.dart';
+// import 'package:tlaloc/screens/navigation_bar.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(); //Para el inicio de sesión por google
@@ -28,25 +30,35 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context)=> GoogleSignInProvider(),
+      create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
         navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: analytics),
-      ],
-        title: 'Tláloc App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        darkTheme: ThemeData.dark(),
+          //FirebaseAnalyticsObserver(analytics: analytics),
+        ],
+        title: appName,
+        // theme: newLightTheme,
+        // .copyWith(
+        //       platform: settings.useIOSStyle
+        //           ? TargetPlatform.iOS
+        //           : TargetPlatform.android,
+        //     ),
+        theme: darkTheme,
+        // .copyWith(
+        //   platform: settings.useIOSStyle
+        //       ? TargetPlatform.iOS
+        //       : TargetPlatform.android,
+        // ),
         debugShowCheckedModeBanner: false,
         home: AnimatedSplashScreen(
+          animationDuration: Duration(seconds: 1),
+          backgroundColor: AppColors.dark1,
+          splashTransition: SplashTransition.fadeTransition,
           splash: Image.asset(
             'assets/images/tlaloc_logo.png',
             fit: BoxFit.cover,
           ),
           nextScreen: Onboarding(),
-          // nextScreen: BottomNavBar(),
-          splashTransition: SplashTransition.decoratedBoxTransition,
+          // nextScreen: const BottomNavBar(),
         ),
       ),
     );
