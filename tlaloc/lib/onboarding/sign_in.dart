@@ -74,7 +74,7 @@ class SignUpWidget extends StatelessWidget {
                     final provider = Provider.of<GoogleSignInProvider>(context,
                         listen: false);
                     await provider.googleLogin();
-                    if (provider.user != null) {
+                    if (provider.recentlySignedInUser != null) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(

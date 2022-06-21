@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tlaloc/models/constants.dart';
+import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/onboarding/logged_in_widget.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
 import 'package:tlaloc/screens/politics.dart';
@@ -23,69 +25,42 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          actions: [
-            IconButton(
-              icon: Icon(Icons.lightbulb),
-              tooltip: 'Cambiar de tema',
-              onPressed: () {},
-              // onPressed: () {
-              //         showDialog(
-              //           context: context,
-              //           builder: (context) => SimpleDialog(
-              //             title: Text('Tema'),
-              //             children: [
-              //               for (var value in ThemeMode.values)
-              //                 RadioListTile<ThemeMode>(
-              //                   title: Text('${value.string()}'),
-              //                   value: value,
-              //                   groupValue: settings.theme,
-              //                   onChanged: (value) {
-              //                     settings.theme = value;
-              //                     analytics.setUserProperty(
-              //                         name: 'theme',
-              //                         value: '${settings.theme}');
-              //                     Navigator.of(context).pop();
-              //                   },
-              //                 ),
-              //             ],
-              //           ),
-              //         );
-              //       },
-            ),
-          ],
           backgroundColor: AppColors.dark2,
-          title: Text('Ejido de:',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'FredokaOne',
-                fontSize: 24,
-                letterSpacing: 2,
-              )),
+          title: Consumer<GoogleSignInProvider>(
+            builder: (context, signIn, child) {
+              String name =
+                  signIn.user?.displayName?.split(' ')[0] ?? 'Incógnito';
+              return Text(
+                'Ejido de $name',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'FredokaOne',
+                  fontSize: 24,
+                  letterSpacing: 2,
+                ),
+              );
+            },
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 ListTile(
-                    leading: Icon(Icons.place),
-                    title: Text('Cambiar de Ejido'),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CommonSelectPage()),
-                      );
-                    }),
-                // ListTile(
-                //   leading: Icon(Icons.settings),
-                //   title: Text('Ajustes'),
-                // ),
+                  leading: Icon(Icons.place),
+                  title: Text('Cambiar de Ejido'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CommonSelectPage()),
+                    );
+                  },
+                ),
                 ListTile(
                   leading: Icon(Icons.share),
                   title: Text('Compartir aplicación'),
                   onTap: () {
-                    // analytics.logShare(
-                    //     contentType: 'invite', itemId: 'app', method: 'drawer');
                     Share.share(
                         '¡Próximamente podrás obtener varios datos de él!\n\nDescárgala en tlaloc.org',
                         subject:
@@ -96,8 +71,6 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                   leading: Icon(Icons.feedback),
                   title: Text('Enviar retroalimentación'),
                   onTap: () {
-                    // analytics
-                    //     .logEvent(name: 'contact', parameters: {'source': 'drawer'});
                     launchUrl(
                       Uri.parse(
                           'mailto:tlloc-app@googlegroups.com?subject=Retroalimentación sobre Tláloc App'),
@@ -110,7 +83,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PrivacyPage()),
+                        MaterialPageRoute(builder: (context) => PoliticPage()),
                       );
                     }),
                 ListTile(
@@ -119,7 +92,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PoliticPage()),
+                        MaterialPageRoute(builder: (context) => PrivacyPage()),
                       );
                     }),
                 ListTile(
@@ -185,7 +158,6 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                     );
                   },
                 ),
-
                 ListTile(
                     leading: Icon(Icons.logout),
                     title: Text('Cerrar sesión'),
@@ -195,7 +167,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                         MaterialPageRoute(
                             builder: (context) => LoggedInWidget()),
                       );
-                    })
+                    }),
               ]),
         ));
   }
