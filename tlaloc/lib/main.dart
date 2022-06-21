@@ -37,18 +37,7 @@ class MyApp extends StatelessWidget {
           //FirebaseAnalyticsObserver(analytics: analytics),
         ],
         title: appName,
-        // theme: newLightTheme,
-        // .copyWith(
-        //       platform: settings.useIOSStyle
-        //           ? TargetPlatform.iOS
-        //           : TargetPlatform.android,
-        //     ),
         theme: darkTheme,
-        // .copyWith(
-        //   platform: settings.useIOSStyle
-        //       ? TargetPlatform.iOS
-        //       : TargetPlatform.android,
-        // ),
         debugShowCheckedModeBanner: false,
         home: AnimatedSplashScreen(
           animationDuration: Duration(seconds: 1),

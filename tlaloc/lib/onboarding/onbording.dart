@@ -52,9 +52,7 @@ class Onboarding extends StatelessWidget {
         },
         colors: data.map((e) => e.backgroundColor).toList(),
         itemCount: data.length,
-        itemBuilder: (int index
-        // , double value
-        ){
+        itemBuilder: (int index) {
           return CardPlanet(data: data[index]);
         },
       ),
