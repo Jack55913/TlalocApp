@@ -97,6 +97,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/screens/navigation_bar.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
+
 
 class CommonSelectPage extends StatelessWidget {
   const CommonSelectPage({Key? key}) : super(key: key);
@@ -137,6 +140,7 @@ class CommonSelectPage extends StatelessWidget {
                       CommonSelectWidget(),
                       CommonSelectWidget(),
                       CommonSelectWidget(),
+                      QrSelectWidget(),
                     ],
                   ),
                 ],
@@ -208,6 +212,62 @@ class CommonSelectWidget extends StatelessWidget {
   }
 }
 
+class QrSelectWidget extends StatelessWidget {
+  const QrSelectWidget({Key? key}) : super(key: key);
 
 
+// String qrValue = "Codigo Qr";
 
+// void scanQr() async {
+//   String cameraScanResult = await scanner.scan();
+//   setState(() {
+//     qrValue = cameraScanResult;
+//   });
+// }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: InkWell(
+          // onPressed: () => scanQr(),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25.0),
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Column(
+                children: [
+                  // Insert circle image here:
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage('assets/images/qr_code.png'),
+                    radius: 50,
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    'QR',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.black,
+                      fontFamily: 'FredokaOne',
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Detecta tu pluviómetro automáticamente',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                      fontFamily: 'poppins',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )),
+    );
+  }
+}
