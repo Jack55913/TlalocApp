@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/api/sheets/user_sheets_api.dart';
+import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/onboarding/onbording.dart';
@@ -31,8 +32,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => GoogleSignInProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AppState>(create: (context) => AppState()),
+        ChangeNotifierProvider<GoogleSignInProvider>(
+            create: (context) => GoogleSignInProvider()),
+      ],
       child: MaterialApp(
         // navigatorObservers: [
         //   FirebaseAnalyticsObserver(analytics: analytics),

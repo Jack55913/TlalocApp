@@ -138,23 +138,34 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButton: Visibility(
           visible: isFabVisable,
-          child: FloatingActionButton(
-            tooltip: 'Agregar Medición',
-            highlightElevation: 1,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15.0))),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AddScreen()),
-              );
-            },
-            backgroundColor: AppColors.green1,
-            child: Icon(Icons.add,
-                color: Colors.white, semanticLabel: 'Agregar medición'),
-          ),
+          child: Fab(),
         ),
       ),
+    );
+  }
+}
+
+class Fab extends StatelessWidget {
+  const Fab({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      tooltip: 'Agregar Medición',
+      highlightElevation: 1,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AddScreen()),
+        );
+      },
+      backgroundColor: AppColors.green1,
+      child: Icon(Icons.add,
+          color: Colors.white, semanticLabel: 'Agregar medición'),
     );
   }
 }

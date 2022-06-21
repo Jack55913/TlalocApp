@@ -4,10 +4,13 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tlaloc/api/sheets/user_sheets_api.dart';
 import 'package:tlaloc/models/date.dart';
 import 'package:tlaloc/models/user.dart';
 import 'package:tlaloc/widgets/button_widget.dart';
+
+import 'app_state.dart';
 
 class MyAddPage extends StatefulWidget {
   const MyAddPage({Key? key}) : super(key: key);
@@ -18,6 +21,8 @@ class MyAddPage extends StatefulWidget {
 
 class _MyAddPageState extends State<MyAddPage> {
   File? image;
+  DateTime dateTime = DateTime.now();
+  int? precipitation;
 
   Future pickImage() async {
     try {
@@ -25,7 +30,7 @@ class _MyAddPageState extends State<MyAddPage> {
 
       if (image == null) return;
 
-      final imageTemp = File(image.path);
+      final File imageTemp = File(image.path);
 
       setState(() => this.image = imageTemp);
     } on PlatformException catch (e) {
@@ -51,30 +56,38 @@ class _MyAddPageState extends State<MyAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () => Navigator.pop(context),
-          ),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(11.0),
-              child: ButtonWidget(
-                text: 'Guardar',
-                onClicked: () async {
-                  final user = {
-                    UserFields.id: 1,
-                    UserFields.author: 'Emilio',
-                    UserFields.common: 'Tequexquinahuac',
-                  };
-                  await UserSheetsApi.insert([user]);
-                },
-              ),
+        leading: IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () => Navigator.pop(context),
+        ),
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(11.0),
+            child: ButtonWidget(
+              text: 'Guardar',
+              onClicked: () async {
+                final state = Provider.of<AppState>(context, listen: false);
+                state.addMeasurement(
+                  precipitation: precipitation!,
+                  time: dateTime,
+                );
+              },
             ),
-          ]),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Datetime(),
+            /// NOTE: Datetime includes the mm too, even if the name is confusing
+            Datetime(
+              updateDateTime: (value) {
+                dateTime = value;
+              },
+              updatePrecipitation: (value) {
+                precipitation = value;
+              },
+            ),
             const Divider(
               height: 20,
               thickness: 1,

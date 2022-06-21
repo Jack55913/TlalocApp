@@ -33,10 +33,9 @@ class ButtonWidget extends StatelessWidget {
             TextButton(
               child: const Text('Enviar'),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (onClicked) => const HomePage()),
-                );
+                onClicked();
+                Navigator.pop(context);
+                Navigator.pop(context);
               },
               // onPressed: () => Navigator.pop(context, 'Enviar'),
             ),

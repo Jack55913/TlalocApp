@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tlaloc/models/constants.dart';
+import 'package:tlaloc/page/home.dart';
 import 'package:tlaloc/page/modify_registration.dart';
 import 'package:tlaloc/screens/home.dart';
 
@@ -10,9 +11,9 @@ class DataScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: CustomScrollView(
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
               floating: true,

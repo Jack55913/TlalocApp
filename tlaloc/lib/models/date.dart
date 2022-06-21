@@ -3,14 +3,35 @@
 import 'package:flutter/material.dart';
 
 class Datetime extends StatefulWidget {
-  const Datetime({Key? key}) : super(key: key);
+  void Function(DateTime) updateDateTime;
+  void Function(int?) updatePrecipitation;
+  Datetime({
+    Key? key,
+    required this.updateDateTime,
+    required this.updatePrecipitation,
+  }) : super(key: key);
 
   @override
   State<Datetime> createState() => _DatetimeState();
 }
 
 class _DatetimeState extends State<Datetime> {
-  DateTime dateTime = DateTime.now();
+  DateTime _dateTime = DateTime.now();
+  int? _precipitation;
+
+  DateTime get dateTime => _dateTime;
+  int? get precipitation => _precipitation;
+
+  set dateTime(DateTime value) {
+    _dateTime = value;
+    widget.updateDateTime(value);
+  }
+
+  set precipitation(int? value) {
+    _precipitation = value;
+    widget.updatePrecipitation(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     final hours = dateTime.hour.toString().padLeft(2, '0');
@@ -33,6 +54,9 @@ class _DatetimeState extends State<Datetime> {
               helperText: 'Recuerda tomar una fotografía',
               hintText: 'Precipitación en mm',
             ),
+            onChanged: (value) {
+              precipitation = int.tryParse(value);
+            },
             keyboardType: TextInputType.number, //Mostrara teclado numérico
           ),
           SizedBox(
