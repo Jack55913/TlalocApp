@@ -11,6 +11,7 @@ import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/onboarding/onbording.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:tlaloc/page/conditional_onboarding_page.dart';
 //import 'package:firebase_analytics/observer.dart';
 // import 'package:tlaloc/screens/navigation_bar.dart';
 
@@ -33,23 +34,13 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        navigatorObservers: [
-          //FirebaseAnalyticsObserver(analytics: analytics),
-        ],
+        // navigatorObservers: [
+        //   FirebaseAnalyticsObserver(analytics: analytics),
+        // ],
         title: appName,
         theme: darkTheme,
         debugShowCheckedModeBanner: false,
-        home: AnimatedSplashScreen(
-          animationDuration: Duration(seconds: 1),
-          backgroundColor: AppColors.dark1,
-          splashTransition: SplashTransition.fadeTransition,
-          splash: Image.asset(
-            'assets/images/tlaloc_logo.png',
-            fit: BoxFit.cover,
-          ),
-          nextScreen: Onboarding(),
-          // nextScreen: const BottomNavBar(),
-        ),
+        home: ConditionalOnboardingPage(),
       ),
     );
   }

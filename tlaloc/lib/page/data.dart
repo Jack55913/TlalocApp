@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/page/modify_registration.dart';
-import 'package:tlaloc/screens/navigation_bar.dart';
+import 'package:tlaloc/screens/home.dart';
 
 class DataScreen extends StatelessWidget {
   const DataScreen({Key? key}) : super(key: key);

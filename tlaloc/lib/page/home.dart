@@ -6,10 +6,8 @@ import 'package:flutter/rendering.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/home_widget_classes.dart';
 import 'package:tlaloc/page/add.dart';
-import 'package:tlaloc/screens/navigation_bar.dart';
+import 'package:tlaloc/screens/home.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-
 
 Widget _buildItem(String textTitle, String textsubtitle, String url) {
   return ListTile(
@@ -34,8 +32,6 @@ Widget _buildItem(String textTitle, String textsubtitle, String url) {
   );
 }
 
-
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -44,8 +40,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
-    bool isFabVisable = true;
+  bool isFabVisable = true;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -154,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialPageRoute(builder: (context) => const AddScreen()),
               );
             },
-            backgroundColor: AppColors.green1, 
+            backgroundColor: AppColors.green1,
             child: Icon(Icons.add,
                 color: Colors.white, semanticLabel: 'Agregar medición'),
           ),

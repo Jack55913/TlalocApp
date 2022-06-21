@@ -8,31 +8,33 @@ import 'package:tlaloc/page/home.dart';
 import 'package:tlaloc/page/graphscreen.dart';
 import 'package:tlaloc/screens/settings.dart';
 
-class BottomNavBar extends StatefulWidget {
-   const BottomNavBar({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _BottomNavBarState createState() => _BottomNavBarState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class _HomePageState extends State<HomePage> {
   bool isFabVisable = true;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   int index = 0;
 
   final screns = [
-     HomeScreen(),
-     DataScreen(),
-     GraphsScreen(),
+    HomeScreen(),
+    DataScreen(),
+    GraphsScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    
     final items = <Widget>[
-       Icon(Icons.home, size: 30, ),
-       Icon(Icons.menu_book_rounded, size: 30),
-       Icon(Icons.bar_chart_rounded, size: 30),
+      Icon(
+        Icons.home,
+        size: 30,
+      ),
+      Icon(Icons.menu_book_rounded, size: 30),
+      Icon(Icons.bar_chart_rounded, size: 30),
     ];
 
     return Scaffold(
@@ -63,23 +65,23 @@ class _BottomNavBarState extends State<BottomNavBar> {
 }
 
 class InfoButton extends StatelessWidget {
-   InfoButton({Key? key}) : super(key: key);
+  InfoButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon:  Icon(Icons.info),
+      icon: Icon(Icons.info),
       tooltip: 'Mostrar información',
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title:  Text('Registra datos pluviales'),
-          content:  Text(
+          title: Text('Registra datos pluviales'),
+          content: Text(
               'Colabora con Tláloc App, en la obtención de datos para analizar los cambios en los patrones de lluvia a causa del cambio climático.'),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.pop(context, 'Siguiente'),
-              child:  Text('Siguiente'),
+              child: Text('Siguiente'),
             ),
           ],
         ),
@@ -89,7 +91,7 @@ class InfoButton extends StatelessWidget {
 }
 
 class ProfilePage extends StatelessWidget {
-   ProfilePage({Key? key}) : super(key: key);
+  ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +104,7 @@ class ProfilePage extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) =>  ConfigureScreen()),
+            MaterialPageRoute(builder: (context) => ConfigureScreen()),
           );
         },
       ),

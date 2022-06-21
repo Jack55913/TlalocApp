@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/screens/navigation_bar.dart';
+import 'package:tlaloc/screens/home.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
@@ -12,10 +13,10 @@ class CommonSelectPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.purple2,
-        body: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: AppColors.purple2,
+      body: SingleChildScrollView(
+        child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
@@ -42,11 +43,15 @@ class CommonSelectPage extends StatelessWidget {
                   Flex(
                     direction: Axis.vertical,
                     children: [
-                      CommonSelectWidget(),
-                      CommonSelectWidget(),
-                      CommonSelectWidget(),
-                      CommonSelectWidget(),
                       QrSelectWidget(),
+                      CommonSelectWidget(
+                        ejido: 'Tequexquinahuac',
+                        hectareas: 1200,
+                      ),
+                      CommonSelectWidget(
+                        ejido: 'San Dieguito',
+                        hectareas: 99999,
+                      ),
                     ],
                   ),
                 ],
@@ -60,20 +65,32 @@ class CommonSelectPage extends StatelessWidget {
 }
 
 class CommonSelectWidget extends StatelessWidget {
-  const CommonSelectWidget({Key? key}) : super(key: key);
+  final String ejido;
+  final int hectareas;
+
+  const CommonSelectWidget(
+      {Key? key, required this.ejido, required this.hectareas})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
+
+      /// TODO: el inkwell no muestra el efecto cuando lo tocas. creo que es un bug
+      /// demasiado menor para arreglar pero yo sí lo noto
       child: InkWell(
-          onTap: () {
+          onTap: () async {
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute<void>(builder: (BuildContext context) {
-              return const BottomNavBar();
+              return const HomePage();
             }), (Route<dynamic> route) => false);
+            var prefs = await SharedPreferences.getInstance();
+            prefs.setString('ejido', ejido);
+            prefs.setBool('hasFinishedOnboarding', true);
           },
           child: Container(
+            width: MediaQuery.of(context).size.width * 0.7,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25.0),
               color: Colors.white,
@@ -94,7 +111,7 @@ class CommonSelectWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Tequexquinahuac',
+                    ejido,
                     style: TextStyle(
                       fontSize: 24,
                       color: Colors.black,
@@ -103,7 +120,7 @@ class CommonSelectWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    '1200 Ha',
+                    '$hectareas Ha',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
@@ -137,6 +154,7 @@ class QrSelectWidget extends StatelessWidget {
       child: InkWell(
           // onPressed: () => scanQr(),
           child: Container(
+        width: MediaQuery.of(context).size.width * 0.7,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0),
           color: Colors.white,

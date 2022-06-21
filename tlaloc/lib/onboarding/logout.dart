@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:tlaloc/page/logged_in_widget.dart';
-import 'package:tlaloc/screens/navigation_bar.dart';
+import 'package:tlaloc/screens/home.dart';
 import 'package:tlaloc/onboarding/sign_in.dart';
 
 class LogOut extends StatelessWidget {
@@ -16,11 +16,10 @@ class LogOut extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
-            } else if(snapshot.hasData) {
-              return BottomNavBar();
+            } else if (snapshot.hasData) {
+              return HomePage();
               // return LoggedInWidget();
-            }
-            else if (snapshot.hasError) {
+            } else if (snapshot.hasError) {
               return Center(child: Text('¡Ocurrió un error!'));
             } else {
               return SignUpWidget();

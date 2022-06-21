@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/screens/navigation_bar.dart';
+import 'package:tlaloc/screens/home.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
@@ -33,11 +33,11 @@ class ButtonWidget extends StatelessWidget {
             TextButton(
               child: const Text('Enviar'),
               onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (onClicked) => const BottomNavBar()),
-              );
-            },
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (onClicked) => const HomePage()),
+                );
+              },
               // onPressed: () => Navigator.pop(context, 'Enviar'),
             ),
           ],
