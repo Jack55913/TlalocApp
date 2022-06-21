@@ -29,6 +29,7 @@ environment:
 dependencies:
   animated_splash_screen: ^1.2.0
   auto_size_text: ^3.0.0
+  cached_network_image: ^3.2.1
   charts_flutter: ^0.12.0
   cloud_firestore: ^2.5.0
   concentric_transition: ^1.0.1+1

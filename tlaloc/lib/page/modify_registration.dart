@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/page/add.dart';
 
 class ModifyRegistration extends StatelessWidget {
-  const ModifyRegistration({Key? key}) : super(key: key);
+  final Measurement measurement;
+  ModifyRegistration({Key? key, required this.measurement}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +22,9 @@ class ModifyRegistration extends StatelessWidget {
                   fontSize: 24,
                   letterSpacing: 2,
                 )),
-            actions: const <Widget>[
-              EditButton(),
-              ShareResults(),
+            actions: <Widget>[
+              const EditButton(),
+              ShareResults(measurement: measurement),
             ],
           ),
           body: Padding(
@@ -35,9 +38,12 @@ class ModifyRegistration extends StatelessWidget {
                       fontFamily: 'FredokaOne',
                     )),
                 SizedBox(height: 15),
-                _buildDataModify('Precipitación', '10 ml'),
+                _buildDataModify(
+                    'Precipitación', '${measurement.precipitation} mm'),
                 SizedBox(height: 15),
-                _buildDataModify('Domingo 23 de Enero', '12:00 Hrs'),
+                _buildDataModify(
+                    '${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.day}',
+                    '${measurement.dateTime!.hour}:${measurement.dateTime!.minute}'),
                 SizedBox(height: 5),
                 Divider(
                   height: 20,
@@ -51,13 +57,13 @@ class ModifyRegistration extends StatelessWidget {
                       fontFamily: 'FredokaOne',
                     )),
                 SizedBox(height: 15),
-                _buildDataModify('Autor:', 'Emilio Álvarez Herrera'),
+                _buildDataModify('Autor:', '${measurement.uploader}'),
                 SizedBox(height: 15),
-                _buildDataModify('Ejido:', 'Tequexquinahuac'),
-                SizedBox(height: 15),
-                _buildDataModify('Autor:', 'Emilio Álvarez Herrera'),
-                SizedBox(height: 15),
-                _buildDataModify('Ejido:', 'Tequexquinahuac'),
+                Consumer<AppState>(
+                  builder: (context, state, child) {
+                    return _buildDataModify('Ejido:', state.ejido);
+                  },
+                ),
                 SizedBox(height: 5),
                 Divider(
                   height: 20,
@@ -75,11 +81,10 @@ class ModifyRegistration extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Image.network(
-                      'https://contrapapel.mx/wp-content/uploads/2021/02/IMG_4587.jpg',
-                      fit: BoxFit.cover,
-                    ),
+                    'https://contrapapel.mx/wp-content/uploads/2021/02/IMG_4587.jpg',
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                
               ],
             ),
           )),
@@ -98,6 +103,8 @@ class EditButton extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
+
+          /// TODO: this takes you to the add screen, edit this to allow editing
           MaterialPageRoute(builder: (context) => const AddScreen()),
         );
       },
@@ -106,7 +113,9 @@ class EditButton extends StatelessWidget {
 }
 
 class ShareResults extends StatelessWidget {
-  const ShareResults({Key? key}) : super(key: key);
+  final Measurement measurement;
+
+  ShareResults({Key? key, required this.measurement}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,13 +124,7 @@ class ShareResults extends StatelessWidget {
       tooltip: 'Compartir registro de lluvia',
       onPressed: () {
         Share.share(
-            ''' ¡Mira! *hoy llovió 10 ml*. Ayúdame a medir, descargándo la app en tlaloc.web.app '''
-//                 '''*${entry.originalWord} (en ${state.language})*
-// ${entry.translatedWord}
-// (Fuente: ${source.author} de ${source.region})
-
-// Compartido desde Miyotl. Descárgalo en miyotl.org'''
-            );
+            '¡Mira! *${measurement.dateTime} llovió ${measurement.precipitation} mm*. Ayúdame a medir, descargándo la app en tlaloc.web.app');
       },
     );
   }
