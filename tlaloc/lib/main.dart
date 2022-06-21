@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+/// TODO: Es preferible usar const donde te lo pida, mejora el rendimiento
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
