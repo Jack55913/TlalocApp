@@ -50,3 +50,6 @@ android/key.properties
 tlaloc.jks
 android/app/google-services.json
 lib/api/sheets/user_sheets_api.dart
+ios/firebase_app_id_file.json
+macos/firebase_app_id_file.json
+lib/firebase_options.dart
