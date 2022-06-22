@@ -44,7 +44,7 @@ class ModifyRegistration extends StatelessWidget {
                 SizedBox(height: 15),
                 _buildDataModify(
                     '${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.day}',
-                    '${measurement.dateTime!.hour}:${measurement.dateTime!.minute}'),
+                    '${measurement.dateTime!.hour}:${measurement.dateTime!.minute.toString().padLeft(2, '0')}'),
                 SizedBox(height: 5),
                 Divider(
                   height: 20,
