@@ -70,6 +70,7 @@ class _MyAddPageState extends State<MyAddPage> {
                 state.addMeasurement(
                   precipitation: precipitation!,
                   time: dateTime,
+                  image: image,
                 );
               },
             ),

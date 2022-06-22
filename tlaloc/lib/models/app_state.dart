@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,8 +12,13 @@ class Measurement {
   final int? precipitation;
   final DateTime? dateTime;
   final String id;
+  final String? imageUrl;
   Measurement(
-      {this.uploader, this.precipitation, this.dateTime, required this.id});
+      {this.uploader,
+      this.precipitation,
+      this.dateTime,
+      required this.id,
+      this.imageUrl});
 
   factory Measurement.fromJson(Map<String, dynamic> json, String id) {
     Timestamp timestamp = json['time'];
@@ -23,6 +29,7 @@ class Measurement {
       precipitation: json['precipitation'],
       dateTime: dateTime,
       id: id,
+      imageUrl: json['image'],
     );
   }
 }
@@ -45,22 +52,35 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map<String, dynamic> _getMeasurementJson(
-      {required int precipitation, required DateTime time, File? image}) {
+  Future<Map<String, dynamic>> _getMeasurementJson(
+      {required int precipitation, required DateTime time, File? image}) async {
+    // Primero, subir imagen a Firebase Hosting
+    final auth = FirebaseAuth.instance;
+    String? fileUrl;
+    if (image != null) {
+      final storageRef = FirebaseStorage.instance.ref();
+      final String fileExtension = image.path.split('.').last;
+      final String fileName =
+          '${time.year}-${time.month}-${time.day} ${time.hour}:${time.minute}:${time.second} ${auth.currentUser?.email}';
+      final imageRef =
+          storageRef.child("measurements/$fileName.$fileExtension");
+      await imageRef.putFile(image);
+      fileUrl = await imageRef.getDownloadURL();
+    }
     return {
       'precipitation': precipitation,
-      'uploader_name': FirebaseAuth.instance.currentUser?.displayName,
-      'uploader_email': FirebaseAuth.instance.currentUser?.email,
-      'uploader_id': FirebaseAuth.instance.currentUser?.uid,
+      'uploader_name': auth.currentUser?.displayName,
+      'uploader_email': auth.currentUser?.email,
+      'uploader_id': auth.currentUser?.uid,
       'time': time,
+      'image': fileUrl,
     };
   }
 
   Future<void> addMeasurement(
       {required int precipitation, required DateTime time, File? image}) async {
-    /// TODO: imagen
     db.collection('ejidos').doc(ejido).collection('measurements').add(
-          _getMeasurementJson(
+          await _getMeasurementJson(
             precipitation: precipitation,
             time: time,
             image: image,
@@ -96,7 +116,7 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .doc(id)
         .update(
-          _getMeasurementJson(
+          await _getMeasurementJson(
             precipitation: precipitation,
             time: time,
             image: image,

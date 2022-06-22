@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -64,27 +65,29 @@ class ModifyRegistration extends StatelessWidget {
                     return _buildDataModify('Ejido:', state.ejido);
                   },
                 ),
-                SizedBox(height: 5),
-                Divider(
-                  height: 20,
-                  thickness: 1,
-                ),
-                SizedBox(height: 15),
-                Text(
-                  'Fotografía',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontFamily: 'FredokaOne',
+                if (measurement.imageUrl != null) ...[
+                  SizedBox(height: 5),
+                  Divider(
+                    height: 20,
+                    thickness: 1,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Image.network(
-                    'https://contrapapel.mx/wp-content/uploads/2021/02/IMG_4587.jpg',
-                    fit: BoxFit.cover,
+                  SizedBox(height: 15),
+                  Text(
+                    'Fotografía',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontFamily: 'FredokaOne',
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: CachedNetworkImage(
+                      imageUrl: measurement.imageUrl!,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ]
               ],
             ),
           )),
