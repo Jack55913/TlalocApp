@@ -53,11 +53,16 @@ class AppState extends ChangeNotifier {
   }
 
   Future<Map<String, dynamic>> _getMeasurementJson(
-      {required int precipitation, required DateTime time, File? image}) async {
+      {required int precipitation,
+      required DateTime time,
+      File? image,
+      String? oldImage}) async {
     // Primero, subir imagen a Firebase Hosting
     final auth = FirebaseAuth.instance;
     String? fileUrl;
-    if (image != null) {
+    if (oldImage != null) {
+      fileUrl = oldImage;
+    } else if (image != null) {
       final storageRef = FirebaseStorage.instance.ref();
       final String fileExtension = image.path.split('.').last;
       final String fileName =
@@ -109,6 +114,9 @@ class AppState extends ChangeNotifier {
     required int precipitation,
     required DateTime time,
     File? image,
+
+    /// En caso de que ya exista un URL de imagen (botón de editar, no crear)
+    String? oldImage,
   }) async {
     await db
         .collection('ejidos')
@@ -120,6 +128,7 @@ class AppState extends ChangeNotifier {
             precipitation: precipitation,
             time: time,
             image: image,
+            oldImage: oldImage,
           ),
         );
   }

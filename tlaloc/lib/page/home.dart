@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Center(
                         child: AutoSizeText(
-                          'Realiza éstos pasos',
+                          'Realiza estos pasos',
                           style: TextStyle(
                             color: Color.fromRGBO(0, 229, 131, 1),
                             fontFamily: 'FredokaOne',

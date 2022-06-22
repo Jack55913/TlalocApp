@@ -35,6 +35,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<GoogleSignInProvider>(
             create: (context) => GoogleSignInProvider()),
       ],
+
+      /// TODO: set language to Spanish so the date picker is in correct language
       child: MaterialApp(
         // navigatorObservers: [
         //   FirebaseAnalyticsObserver(analytics: analytics),

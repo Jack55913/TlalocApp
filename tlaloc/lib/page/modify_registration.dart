@@ -24,7 +24,7 @@ class ModifyRegistration extends StatelessWidget {
                   letterSpacing: 2,
                 )),
             actions: <Widget>[
-              const EditButton(),
+              EditButton(measurement: measurement),
               ShareResults(measurement: measurement),
             ],
           ),
@@ -96,7 +96,9 @@ class ModifyRegistration extends StatelessWidget {
 }
 
 class EditButton extends StatelessWidget {
-  const EditButton({Key? key}) : super(key: key);
+  final Measurement measurement;
+
+  const EditButton({Key? key, required this.measurement}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,9 +108,9 @@ class EditButton extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-
-          /// TODO: this takes you to the add screen, edit this to allow editing
-          MaterialPageRoute(builder: (context) => const AddScreen()),
+          MaterialPageRoute(
+            builder: (context) => AddScreen(measurement: measurement),
+          ),
         );
       },
     );

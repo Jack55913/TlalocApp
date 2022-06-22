@@ -60,6 +60,7 @@ dependencies:
   share: ^2.0.4
   share_plus: ^4.0.9
   shared_preferences: ^2.0.13
+  syncfusion_flutter_charts: ^20.1.61
   url_launcher: ^6.0.9
   video_player: ^2.1.14
 

@@ -1,14 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:tlaloc/models/app_state.dart';
 
 class Datetime extends StatefulWidget {
   void Function(DateTime) updateDateTime;
   void Function(int?) updatePrecipitation;
+  final Measurement? measurement;
   Datetime({
     Key? key,
     required this.updateDateTime,
     required this.updatePrecipitation,
+    this.measurement,
   }) : super(key: key);
 
   @override
@@ -34,6 +37,11 @@ class _DatetimeState extends State<Datetime> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.measurement != null) {
+      dateTime = widget.measurement!.dateTime!;
+      precipitation = widget.measurement!.precipitation;
+    }
+
     final hours = dateTime.hour.toString().padLeft(2, '0');
     final minutes = dateTime.minute.toString().padLeft(2, '0');
 
@@ -41,7 +49,8 @@ class _DatetimeState extends State<Datetime> {
       padding: EdgeInsets.all(8.0),
       child: Column(
         children: [
-          TextField(
+          TextFormField(
+            initialValue: precipitation?.toString() ?? '',
             style: TextStyle(
               fontSize: 24,
               fontFamily: 'FredokaOne',
