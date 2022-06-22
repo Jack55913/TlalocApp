@@ -48,8 +48,27 @@ class CommonSelectPage extends StatelessWidget {
                         ejido: 'Tequexquinahuac',
                         hectareas: 1200,
                       ),
+
+                      /// TODO: poner el número de hectáreas.
+                      /// Para agregar o quitar ejidos, basta con editar esto.
                       CommonSelectWidget(
-                        ejido: 'San Dieguito',
+                        ejido: 'San Dieguito Xuhimanca',
+                        hectareas: 99999,
+                      ),
+                      CommonSelectWidget(
+                        ejido: 'San Pablo Ixayoc',
+                        hectareas: 99999,
+                      ),
+                      CommonSelectWidget(
+                        ejido: 'San Juan Totolapan',
+                        hectareas: 99999,
+                      ),
+                      CommonSelectWidget(
+                        ejido: 'San Miguel Tlaixpan',
+                        hectareas: 99999,
+                      ),
+                      CommonSelectWidget(
+                        ejido: 'Nativitas',
                         hectareas: 99999,
                       ),
                     ],

@@ -39,7 +39,6 @@ class MyApp extends StatelessWidget {
             create: (context) => GoogleSignInProvider()),
       ],
 
-      /// TODO: set language to Spanish so the date picker is in correct language
       child: MaterialApp(
         localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
         supportedLocales: const [Locale('es', 'MX')],
