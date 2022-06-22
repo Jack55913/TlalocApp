@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -16,62 +17,65 @@ class DataScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<AppState>(
-        builder: (context, state, _) {
-          return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-            stream: state.getMeasurementsStream(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return EmptyState('Error ${snapshot.error}');
-              } else if (snapshot.hasData) {
-                final measurementsSnapshot = snapshot.data!;
-                final measurements =
-                    state.getMeasurementsFromSnapshot(measurementsSnapshot);
-                return CustomScrollView(
-                  slivers: <Widget>[
-                    SliverAppBar(
-                      floating: true,
-                      pinned: true,
-                      snap: false,
-                      expandedHeight: 150.0,
-                      flexibleSpace: FlexibleSpaceBar(
-                        title: Text('Diario',
-                            style: TextStyle(
-                              // color: Colors.black,
-                              fontFamily: 'FredokaOne',
-                              fontSize: 24,
-                              letterSpacing: 2,
-                            )),
-                        background: CachedNetworkImage(
-                          imageUrl:
-                              'https://i0.wp.com/mas-mexico.com.mx/wp-content/uploads/2019/09/popurri-de-viajes.jpg?resize=770%2C330&ssl=1',
-                          fit: BoxFit.cover,
+    return SafeArea(
+      child: Scaffold(
+        floatingActionButton: Fab(),
+        body: Consumer<AppState>(
+          builder: (context, state, _) {
+            return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: state.getMeasurementsStream(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return EmptyState('Error ${snapshot.error}');
+                } else if (snapshot.hasData) {
+                  final measurementsSnapshot = snapshot.data!;
+                  final measurements =
+                      state.getMeasurementsFromSnapshot(measurementsSnapshot);
+                  return CustomScrollView(
+                    slivers: <Widget>[
+                      SliverAppBar(
+                        floating: true,
+                        pinned: true,
+                        snap: false,
+                        expandedHeight: 150.0,
+                        flexibleSpace: FlexibleSpaceBar(
+                          title: Text('Diario',
+                              style: TextStyle(
+                                // color: Colors.black,
+                                fontFamily: 'FredokaOne',
+                                fontSize: 24,
+                                letterSpacing: 2,
+                              )),
+                          background: CachedNetworkImage(
+                            imageUrl:
+                                'https://i0.wp.com/mas-mexico.com.mx/wp-content/uploads/2019/09/popurri-de-viajes.jpg?resize=770%2C330&ssl=1',
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      actions: <Widget>[
-                        InfoButton(),
-                        ProfilePage(),
-                      ],
-                    ),
-                    SliverList(
-                      delegate: SliverChildListDelegate(
-                        [
-                          for (var measurement in measurements)
-                            DataWidgetView(measurement: measurement),
+                        actions: <Widget>[
+                          InfoButton(),
+                          ProfilePage(),
                         ],
                       ),
-                    ),
-                  ],
-                );
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-          );
-        },
+                      SliverList(
+                        delegate: SliverChildListDelegate(
+                          [
+                            for (var measurement in measurements)
+                              DataWidgetView(measurement: measurement),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            );
+          },
+        ),
       ),
     );
   }
@@ -172,16 +176,21 @@ class DataWidgetView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              // Crear círculo con una imágen de internet
               children: <Widget>[
-                CircleAvatar(
-                  backgroundColor: AppColors.orange1,
-                  radius: 25,
-                  child: Icon(
-                    FontAwesomeIcons.t,
-                    color: Colors.white,
+                if (measurement.uploader != null)
+                  CircleAvatar(
+                    backgroundColor: AppColors.orange1,
+                    radius: 25,
+                    child: AutoSizeText(
+                      // Iniciales del nombre de quien registró la medición
+                      measurement.uploader!.split(' ').map((e) => e[0]).join(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontFamily: 'FredokaOne',
+                      ),
+                    ),
                   ),
-                ),
               ],
             ),
           )

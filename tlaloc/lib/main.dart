@@ -10,6 +10,7 @@ import 'package:tlaloc/onboarding/onbording.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tlaloc/page/conditional_onboarding_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 //import 'package:firebase_analytics/observer.dart';
 // import 'package:tlaloc/screens/navigation_bar.dart';
 
@@ -40,6 +41,8 @@ class MyApp extends StatelessWidget {
 
       /// TODO: set language to Spanish so the date picker is in correct language
       child: MaterialApp(
+        localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
+        supportedLocales: const [Locale('es', 'MX')],
         // navigatorObservers: [
         //   FirebaseAnalyticsObserver(analytics: analytics),
         // ],
