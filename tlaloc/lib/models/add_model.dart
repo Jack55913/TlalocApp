@@ -94,7 +94,7 @@ class _MyAddPageState extends State<MyAddPage> {
             ),
             const SizedBox(height: 15),
             const Text(
-              'Imágen del pluviómetro',
+              'Imagen del pluviómetro',
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 24,

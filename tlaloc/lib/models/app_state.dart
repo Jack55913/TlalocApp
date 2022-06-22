@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -50,6 +51,7 @@ class AppState extends ChangeNotifier {
       'precipitation': precipitation,
       'uploader_name': FirebaseAuth.instance.currentUser?.displayName,
       'uploader_email': FirebaseAuth.instance.currentUser?.email,
+      'uploader_id': FirebaseAuth.instance.currentUser?.uid,
       'time': time,
     };
   }
