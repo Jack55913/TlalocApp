@@ -13,6 +13,8 @@ import 'package:tlaloc/page/conditional_onboarding_page.dart';
 //import 'package:firebase_analytics/observer.dart';
 // import 'package:tlaloc/screens/navigation_bar.dart';
 
+/// TODO: all exception handling
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(); //Para el inicio de sesión por google

@@ -1,3 +1,6 @@
+/// Estado de la app. Se conecta a la base de datos de Firebase
+/// Crédito: Gabriel Rodríguez
+
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -60,9 +63,7 @@ class AppState extends ChangeNotifier {
     // Primero, subir imagen a Firebase Hosting
     final auth = FirebaseAuth.instance;
     String? fileUrl;
-    if (oldImage != null) {
-      fileUrl = oldImage;
-    } else if (image != null) {
+    if (image != null) {
       final storageRef = FirebaseStorage.instance.ref();
       final String fileExtension = image.path.split('.').last;
       final String fileName =
@@ -71,6 +72,8 @@ class AppState extends ChangeNotifier {
           storageRef.child("measurements/$fileName.$fileExtension");
       await imageRef.putFile(image);
       fileUrl = await imageRef.getDownloadURL();
+    } else if (oldImage != null) {
+      fileUrl = oldImage;
     }
     return {
       'precipitation': precipitation,
@@ -93,20 +96,38 @@ class AppState extends ChangeNotifier {
         );
   }
 
-  Future<List<Measurement>> getMeasurements() async {
-    var event = await db
-        .collection('ejidos')
-        .doc(ejido)
-        .collection('measurements')
-        .get();
+  List<Measurement> _getListOfMeasurementsFromDocs(
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
     final List<Measurement> measurements = [];
-    for (var doc in event.docs) {
+    for (var doc in docs) {
       measurements.add(Measurement.fromJson(doc.data(), doc.id));
     }
     measurements.sort(
       (a, b) => b.dateTime!.difference(a.dateTime!).inSeconds,
     );
     return measurements;
+  }
+
+  Future<List<Measurement>> getMeasurements() async {
+    var event = await db
+        .collection('ejidos')
+        .doc(ejido)
+        .collection('measurements')
+        .get();
+    return _getListOfMeasurementsFromDocs(event.docs);
+  }
+
+  List<Measurement> getMeasurementsFromSnapshot(
+      QuerySnapshot<Map<String, dynamic>> snapshot) {
+    return _getListOfMeasurementsFromDocs(snapshot.docs);
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMeasurementsStream() {
+    return db
+        .collection('ejidos')
+        .doc(ejido)
+        .collection('measurements')
+        .snapshots();
   }
 
   Future<void> updateMeasurement({
@@ -131,5 +152,14 @@ class AppState extends ChangeNotifier {
             oldImage: oldImage,
           ),
         );
+  }
+
+  Future<void> deleteMeasurement({required String id}) async {
+    await db
+        .collection('ejidos')
+        .doc(ejido)
+        .collection('measurements')
+        .doc(id)
+        .delete();
   }
 }

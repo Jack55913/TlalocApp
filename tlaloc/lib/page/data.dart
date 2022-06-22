@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -18,13 +19,15 @@ class DataScreen extends StatelessWidget {
     return Scaffold(
       body: Consumer<AppState>(
         builder: (context, state, _) {
-          return FutureBuilder<List<Measurement>>(
-            future: state.getMeasurements(),
+          return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            stream: state.getMeasurementsStream(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return EmptyState('Error ${snapshot.error}');
               } else if (snapshot.hasData) {
-                final measurements = snapshot.data;
+                final measurementsSnapshot = snapshot.data!;
+                final measurements =
+                    state.getMeasurementsFromSnapshot(measurementsSnapshot);
                 return CustomScrollView(
                   slivers: <Widget>[
                     SliverAppBar(
@@ -54,7 +57,7 @@ class DataScreen extends StatelessWidget {
                     SliverList(
                       delegate: SliverChildListDelegate(
                         [
-                          for (var measurement in measurements!)
+                          for (var measurement in measurements)
                             DataWidgetView(measurement: measurement),
                         ],
                       ),

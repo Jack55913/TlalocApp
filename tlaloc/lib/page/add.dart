@@ -76,6 +76,8 @@ class _AddScreenState extends State<AddScreen> {
                     time: dateTime,
                     image: newImage,
                   );
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                 } else {
                   // Edita una medición ya existente
                   state.updateMeasurement(
@@ -85,6 +87,11 @@ class _AddScreenState extends State<AddScreen> {
                     image: newImage,
                     oldImage: widget.measurement!.imageUrl,
                   );
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+
+                  /// Works around the previous page being a stateful widget
+                  Navigator.pop(context);
                 }
               },
             ),
@@ -153,7 +160,8 @@ class _AddScreenState extends State<AddScreen> {
               ],
             ),
             SizedBox(height: 15),
-            if (widget.measurement != null &&
+            if (newImage == null &&
+                widget.measurement != null &&
                 widget.measurement!.imageUrl != null)
               Padding(
                 padding: const EdgeInsets.all(15.0),

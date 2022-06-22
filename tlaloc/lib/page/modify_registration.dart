@@ -24,7 +24,50 @@ class ModifyRegistration extends StatelessWidget {
                   letterSpacing: 2,
                 )),
             actions: <Widget>[
-              EditButton(measurement: measurement),
+              IconButton(
+                icon: const Icon(Icons.edit),
+                tooltip: 'Editar registro de lluvia',
+                onPressed: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddScreen(measurement: measurement),
+                    ),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.delete),
+                tooltip: 'Eliminar registro',
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text(
+                          '¿Estás seguro que quieres eliminar este registro?'),
+                      content: Text(
+                          'No podrás recuperarlo una vez que lo elimines.'),
+                      actions: [
+                        TextButton(
+                          child: Text('Cancelar'),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                        TextButton(
+                          child: Text('Eliminar'),
+                          onPressed: () {
+                            final state =
+                                Provider.of<AppState>(context, listen: false);
+                            state.deleteMeasurement(id: measurement.id);
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                    barrierDismissible: true,
+                  );
+                },
+              ),
               ShareResults(measurement: measurement),
             ],
           ),
@@ -91,28 +134,6 @@ class ModifyRegistration extends StatelessWidget {
               ],
             ),
           )),
-    );
-  }
-}
-
-class EditButton extends StatelessWidget {
-  final Measurement measurement;
-
-  const EditButton({Key? key, required this.measurement}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.edit),
-      tooltip: 'Editar registro de lluvia',
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => AddScreen(measurement: measurement),
-          ),
-        );
-      },
     );
   }
 }
