@@ -1,12 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:latlng/latlng.dart';
-// import 'package:latlong2/latlong.dart'; 
+// import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
+
+import 'app_state.dart';
 
 class PhraseCard extends StatelessWidget {
   const PhraseCard({Key? key}) : super(key: key);
@@ -110,27 +114,27 @@ class DynamicTlalocMap extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Center(
-      //     child: FlutterMap(
-      //   options: MapOptions(
-      //     // center: LatLng(19.4, -99.1),
-      //     zoom: 16.0,
-      //     minZoom: 10,
-      //   ),
-      //   layers: [
-      //     TileLayerOptions(
-      //       urlTemplate:
-      //           'https://api.mapbox.com/styles/v1/{user}/{style}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}',
-      //       additionalOptions: {
-      //         'accessToken': 'pk.eyJ1IjoibWl5b3RsIiwiYSI6ImNsMWNiZWZhazA2MzAzZW1wMnJ1Zjd3MGUifQ.c57DM17bhxFfxTYoLcu1_Q',
-      //       },
-      //     ),
-      //   ],
-      // ),
+          //     child: FlutterMap(
+          //   options: MapOptions(
+          //     // center: LatLng(19.4, -99.1),
+          //     zoom: 16.0,
+          //     minZoom: 10,
+          //   ),
+          //   layers: [
+          //     TileLayerOptions(
+          //       urlTemplate:
+          //           'https://api.mapbox.com/styles/v1/{user}/{style}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}',
+          //       additionalOptions: {
+          //         'accessToken': 'pk.eyJ1IjoibWl5b3RsIiwiYSI6ImNsMWNiZWZhazA2MzAzZW1wMnJ1Zjd3MGUifQ.c57DM17bhxFfxTYoLcu1_Q',
+          //       },
+          //     ),
+          //   ],
+          // ),
           child: Image.network(
             'https://www.mexicodesconocido.com.mx/wp-content/uploads/2020/09/oto.jpg',
             fit: BoxFit.cover,
           ),
-    ),
+        ),
         SizedBox(height: 20),
         Text('Tláloc',
             style: TextStyle(
@@ -148,26 +152,42 @@ class DynamicTlalocMap extends StatelessWidget {
         ),
         SizedBox(height: 20),
         Text(
-          'Índice Geográfico',
+          'Descripción', // Decía índice geográfico
           style: TextStyle(
-            
             // color: Colors.white,
             fontFamily: 'poppins',
             fontSize: 14,
           ),
         ),
         SizedBox(height: 10),
-        Text(
-          'Descripción completo del clima, comportamiento de la lluvia, temperatura, viento, radiación solar, etc...',
-          style: TextStyle(
-            // color: Colors.white,
-            fontFamily: 'poppins',
-            fontSize: 12,
+        Consumer<AppState>(
+          builder: (context, state, _) => FutureBuilder<Map<String, dynamic>>(
+            future: state.getCurrentEjidoData(),
+            builder: (context, snapshot) {
+              late String text;
+              if (snapshot.hasError) {
+                text = snapshot.error.toString();
+              } else if (snapshot.hasData) {
+                /// EMILIO: Así puedes guardar cualquier otro dato sobre el ejido, solo
+                /// tienes que cambair 'descripcion' por el campo que tu quieras.
+                /// Lo editas en https://console.firebase.google.com/u/0/project/tlaloc-3c65c/firestore/data/
+                text = snapshot.data?['descripcion'] ??
+                    'No hay descripción disponible...';
+              } else {
+                text = 'Cargando...';
+              }
+              return Text(
+                text,
+                style: TextStyle(
+                  // color: Colors.white,
+                  fontFamily: 'poppins',
+                  fontSize: 12,
+                ),
+              );
+            },
           ),
         ),
       ],
     );
   }
 }
-
-

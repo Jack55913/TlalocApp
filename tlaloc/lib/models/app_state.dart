@@ -55,6 +55,14 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// No voy a convertir esto en una clase para que te dé flexibilidad de guardar
+  /// lo que quieras en el mismo JSON
+  Future<Map<String, dynamic>> getCurrentEjidoData() async {
+    var ref = db.collection('ejidos').doc(ejido);
+    var snapshot = await ref.get();
+    return snapshot.data()!;
+  }
+
   Future<Map<String, dynamic>> _getMeasurementJson(
       {required int precipitation,
       required DateTime time,
