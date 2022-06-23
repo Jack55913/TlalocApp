@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/onboarding/logged_in_widget.dart';
@@ -49,6 +50,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                 ListTile(
                   leading: Icon(Icons.place),
                   title: Text('Cambiar de Ejido'),
+                  subtitle: Text(Provider.of<AppState>(context).ejido),
                   onTap: () {
                     Navigator.push(
                       context,

@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/screens/home.dart';
 
@@ -99,9 +101,8 @@ class CommonSelectWidget extends StatelessWidget {
                 MaterialPageRoute<void>(builder: (BuildContext context) {
               return const HomePage();
             }), (Route<dynamic> route) => false);
-            var prefs = await SharedPreferences.getInstance();
-            prefs.setString('ejido', ejido);
-            prefs.setBool('hasFinishedOnboarding', true);
+            final state = Provider.of<AppState>(context, listen: false);
+            state.changeEjido(ejido);
           },
           child: Container(
             width: MediaQuery.of(context).size.width * 0.7,

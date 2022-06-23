@@ -54,12 +54,20 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> changeEjido(String newEjido) async {
+    ejido = newEjido;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('ejido', newEjido);
+    prefs.setBool('hasFinishedOnboarding', true);
+  }
+
   /// No voy a convertir esto en una clase para que te dé flexibilidad de guardar
   /// lo que quieras en el mismo JSON
   Future<Map<String, dynamic>> getCurrentEjidoData() async {
     var ref = db.collection('ejidos').doc(ejido);
     var snapshot = await ref.get();
-    return snapshot.data()!;
+    return snapshot.data() ?? {};
   }
 
   Future<Map<String, dynamic>> _getMeasurementJson(

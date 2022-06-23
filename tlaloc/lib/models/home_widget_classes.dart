@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/constants.dart';
@@ -112,41 +113,20 @@ class DynamicTlalocMap extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Center(
-          //     child: FlutterMap(
-          //   options: MapOptions(
-          //     // center: LatLng(19.4, -99.1),
-          //     zoom: 16.0,
-          //     minZoom: 10,
-          //   ),
-          //   layers: [
-          //     TileLayerOptions(
-          //       urlTemplate:
-          //           'https://api.mapbox.com/styles/v1/{user}/{style}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}',
-          //       additionalOptions: {
-          //         'accessToken': 'pk.eyJ1IjoibWl5b3RsIiwiYSI6ImNsMWNiZWZhazA2MzAzZW1wMnJ1Zjd3MGUifQ.c57DM17bhxFfxTYoLcu1_Q',
-          //       },
-          //     ),
-          //   ],
-          // ),
-          child: Image.network(
-            'https://www.mexicodesconocido.com.mx/wp-content/uploads/2020/09/oto.jpg',
-            fit: BoxFit.cover,
-          ),
-        ),
-        SizedBox(height: 20),
         Text('Tláloc',
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'poppins',
               fontSize: 12,
             )),
-        AutoSizeText(
-          'Tequexquinahuac',
-          style: TextStyle(
-            // color: Colors.white,
-            fontFamily: 'FredokaOne',
-            fontSize: 24,
+        Consumer<AppState>(
+          builder: (context, state, child) => AutoSizeText(
+            state.ejido,
+            style: TextStyle(
+              // color: Colors.white,
+              fontFamily: 'FredokaOne',
+              fontSize: 24,
+            ),
           ),
         ),
         SizedBox(height: 20),
@@ -184,6 +164,30 @@ class DynamicTlalocMap extends StatelessWidget {
                 ),
               );
             },
+          ),
+        ),
+        SizedBox(height: 20),
+        Center(
+          //     child: FlutterMap(
+          //   options: MapOptions(
+          //     // center: LatLng(19.4, -99.1),
+          //     zoom: 16.0,
+          //     minZoom: 10,
+          //   ),
+          //   layers: [
+          //     TileLayerOptions(
+          //       urlTemplate:
+          //           'https://api.mapbox.com/styles/v1/{user}/{style}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}',
+          //       additionalOptions: {
+          //         'accessToken': 'pk.eyJ1IjoibWl5b3RsIiwiYSI6ImNsMWNiZWZhazA2MzAzZW1wMnJ1Zjd3MGUifQ.c57DM17bhxFfxTYoLcu1_Q',
+          //       },
+          //     ),
+          //   ],
+          // ),
+          child: CachedNetworkImage(
+            imageUrl:
+                'https://www.mexicodesconocido.com.mx/wp-content/uploads/2020/09/oto.jpg',
+            fit: BoxFit.cover,
           ),
         ),
       ],

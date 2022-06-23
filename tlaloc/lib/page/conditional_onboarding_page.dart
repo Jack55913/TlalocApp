@@ -1,6 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tlaloc/widgets/empty_state.dart';
 
@@ -16,7 +15,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      animationDuration: const Duration(seconds: 1),
+      duration: 500,
       backgroundColor: AppColors.dark1,
       splashTransition: SplashTransition.fadeTransition,
       splash: Image.asset(
@@ -51,9 +50,11 @@ class ConditionalOnboardingPage extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(
+              title: const Text(
                 'Ocurrió un error',
-                style: GoogleFonts.fredokaOne(),
+                style: TextStyle(
+                  fontFamily: 'FredokaOne',
+                ),
               ),
             ),
             body: EmptyState(

@@ -1,7 +1,6 @@
 /// De https://github.com/miyotl/miyotl/blob/master/lib/widgets/empty_state.dart
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class EmptyState extends StatelessWidget {
   final String text;
@@ -26,7 +25,8 @@ class EmptyState extends StatelessWidget {
             child: Text(
               text,
               textAlign: TextAlign.center,
-              style: GoogleFonts.fredokaOne(
+              style: const TextStyle(
+                fontFamily: 'FredokaOne',
                 fontSize: 24,
               ),
             ),

@@ -49,7 +49,7 @@ dependencies:
   # flutter_native_splash: ^2.1.1 # No estás usando este plugin
   font_awesome_flutter: ^10.0.0
   # google_api_availability: ^3.0.1 # No estás usando este plugin
-  google_fonts: ^2.3.1
+  # google_fonts: ^2.3.1 # No se está usando directamente, sino como asset
   google_sign_in: ^5.2.4
   # gsheets: ^0.3.2
   image_picker: ^0.8.5
