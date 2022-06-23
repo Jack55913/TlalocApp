@@ -114,9 +114,10 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           title: Text('Ver créditos'),
                           onTap: () {
                             // analytics.logEvent(name: 'view-credits');
-                            launch(
-                              'https://proyecto-tlaloc.web.app/acerca_de',
-                              forceWebView: true,
+                            launchUrl(
+                              Uri.parse(
+                                  'https://proyecto-tlaloc.web.app/acerca_de'),
+                              mode: LaunchMode.inAppWebView,
                             );
                           },
                         ),
@@ -125,8 +126,8 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           title: Text('Síguenos en Facebook'),
                           onTap: () {
                             // analytics.logEvent(name: 'view-facebook');
-                            launch(
-                                'https://www.facebook.com/colpos.cienciasagricolas');
+                            launchUrl(Uri.parse(
+                                'https://www.facebook.com/colpos.cienciasagricolas'));
                           },
                         ),
                         ListTile(
@@ -134,7 +135,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           title: Text('Síguenos en Twitter'),
                           onTap: () {
                             // analytics.logEvent(name: 'view-twitter');
-                            launch('https://twitter.com/colpos');
+                            launchUrl(Uri.parse('https://twitter.com/colpos'));
                           },
                         ),
                         ListTile(
@@ -143,7 +144,8 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           onTap: () {
                             // analytics.logEvent(
                             // name: 'contact', parameters: {'source': 'about'});
-                            launch('mailto:tlloc-app@googlegroups.com');
+                            launchUrl(
+                                Uri.parse('mailto:tlloc-app@googlegroups.com'));
                           },
                         ),
                         ListTile(
@@ -151,7 +153,8 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           title: Text('Colabora en GitHub'),
                           onTap: () {
                             // analytics.logEvent(name: 'view-github');
-                            launch('https://github.com/Jack55913/TlalocApp');
+                            launchUrl(Uri.parse(
+                                'https://github.com/Jack55913/TlalocApp'));
                           },
                         ),
                       ],

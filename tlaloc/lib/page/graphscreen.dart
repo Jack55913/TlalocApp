@@ -3,10 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:tlaloc/widgets/empty_state.dart';
 import '../models/app_state.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 /// Samples:
 /// https://google.github.io/charts/flutter/example/time_series_charts/simple.html

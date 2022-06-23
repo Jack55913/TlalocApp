@@ -3,7 +3,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
@@ -81,7 +80,6 @@ class DataScreen extends StatelessWidget {
   }
 }
 
-/// TODO: AGRUPAR por fecha. o quizá esté bien así
 class RegisterWidget extends StatelessWidget {
   const RegisterWidget({Key? key}) : super(key: key);
 

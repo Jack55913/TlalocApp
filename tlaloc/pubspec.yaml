@@ -35,10 +35,10 @@ dependencies:
   animated_splash_screen: ^1.2.0
   auto_size_text: ^3.0.0
   cached_network_image: ^3.2.1
-  charts_flutter: ^0.12.0
+  #charts_flutter: ^0.12.0
   cloud_firestore: ^2.5.0
   concentric_transition: ^1.0.1+1
-  cupertino_icons: ^1.0.2
+  # cupertino_icons: ^1.0.2 # No estás usando este plugin
   curved_navigation_bar: ^1.0.3
   firebase_auth: ^3.0.2
   firebase_core: ^1.5.0
@@ -46,27 +46,26 @@ dependencies:
   flutter_launcher_icons: ^0.9.2
   flutter_map: ^0.14.0
   flutter_markdown: ^0.6.9
-  flutter_native_splash: ^2.1.1
+  # flutter_native_splash: ^2.1.1 # No estás usando este plugin
   font_awesome_flutter: ^10.0.0
-  google_api_availability: ^3.0.1
+  # google_api_availability: ^3.0.1 # No estás usando este plugin
   google_fonts: ^2.3.1
   google_sign_in: ^5.2.4
-  gsheets: ^0.3.2
+  # gsheets: ^0.3.2
   image_picker: ^0.8.5
   ionicons: ^0.1.1
   latlng: ^0.1.0
   lottie: ^1.2.1
-  package_info: ^2.0.2
+  # package_info: ^2.0.2
   provider: ^6.0.2
-  qr_flutter: ^4.0.0
-  qrscan: ^0.3.2
-  share: ^2.0.4
   share_plus: ^4.0.9
   shared_preferences: ^2.0.13
   syncfusion_flutter_charts: ^20.1.61
   url_launcher: ^6.0.9
-  video_player: ^2.1.14
+  # video_player: ^2.1.14 # No estás usando este plugin
   intl: ^0.17.0
+  # firebase_dynamic_links: ^4.2.6 # No es necesario, sería para escanear el QR con cámara.
+  mobile_scanner: ^2.0.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0

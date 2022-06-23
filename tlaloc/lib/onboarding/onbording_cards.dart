@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+
 class CardPlanetData {
   final String title;
   final String subtitle;
@@ -9,14 +10,15 @@ class CardPlanetData {
   final Color subtitleColor;
   final Widget? background;
 
-  CardPlanetData(
-      {required this.title,
-      required this.subtitle,
-      required this.image,
-      required this.backgroundColor,
-      required this.titleColor,
-      required this.subtitleColor,
-      this.background,});
+  CardPlanetData({
+    required this.title,
+    required this.subtitle,
+    required this.image,
+    required this.backgroundColor,
+    required this.titleColor,
+    required this.subtitleColor,
+    this.background,
+  });
 }
 
 class CardPlanet extends StatelessWidget {

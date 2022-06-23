@@ -27,7 +27,7 @@ Widget _buildItem(String textTitle, String textsubtitle, String url) {
           Icons.open_in_new,
         ),
         onPressed: () async {
-          launch(url);
+          launchUrl(Uri.parse(url));
         }),
   );
 }

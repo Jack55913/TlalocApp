@@ -1,14 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:latlng/latlng.dart';
+// import 'package:latlng/latlng.dart';
 // import 'package:latlong2/latlong.dart';
-import 'package:flutter_map/flutter_map.dart';
+// import 'package:flutter_map/flutter_map.dart';
 
 import 'app_state.dart';
 
@@ -95,7 +94,7 @@ class ContactUsButton extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         onPressed: () {
-          launch('mailto:tlloc-app@googlegroups.com');
+          launchUrl(Uri.parse('mailto:tlloc-app@googlegroups.com'));
         },
         child: const Text(
           '¡Contáctanos!',

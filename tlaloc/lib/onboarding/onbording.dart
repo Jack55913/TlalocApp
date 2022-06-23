@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/models/onbording_cards.dart';
+import 'package:tlaloc/onboarding/onbording_cards.dart';
 import 'package:concentric_transition/concentric_transition.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:tlaloc/screens/navigation_bar.dart';

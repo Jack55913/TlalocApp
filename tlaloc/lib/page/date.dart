@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:tlaloc/models/app_state.dart';
 
 class Datetime extends StatefulWidget {
-  void Function(DateTime) updateDateTime;
-  void Function(int?) updatePrecipitation;
+  final void Function(DateTime) updateDateTime;
+  final void Function(int?) updatePrecipitation;
   final Measurement? measurement;
-  Datetime({
+  const Datetime({
     Key? key,
     required this.updateDateTime,
     required this.updatePrecipitation,

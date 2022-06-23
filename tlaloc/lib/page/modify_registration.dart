@@ -9,7 +9,8 @@ import 'package:tlaloc/page/add.dart';
 
 class ModifyRegistration extends StatelessWidget {
   final Measurement measurement;
-  ModifyRegistration({Key? key, required this.measurement}) : super(key: key);
+  const ModifyRegistration({Key? key, required this.measurement})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +142,7 @@ class ModifyRegistration extends StatelessWidget {
 class ShareResults extends StatelessWidget {
   final Measurement measurement;
 
-  ShareResults({Key? key, required this.measurement}) : super(key: key);
+  const ShareResults({Key? key, required this.measurement}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

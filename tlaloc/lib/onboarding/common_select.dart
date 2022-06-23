@@ -5,8 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/screens/home.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
 
 class CommonSelectPage extends StatelessWidget {
   const CommonSelectPage({Key? key}) : super(key: key);
@@ -95,9 +93,6 @@ class CommonSelectWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-
-      /// TODO: el inkwell no muestra el efecto cuando lo tocas. creo que es un bug
-      /// demasiado menor para arreglar pero yo sí lo noto
       child: InkWell(
           onTap: () async {
             Navigator.of(context).pushAndRemoveUntil(

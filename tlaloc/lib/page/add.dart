@@ -6,9 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tlaloc/api/sheets/user_sheets_api.dart';
-import 'package:tlaloc/models/date.dart';
-import 'package:tlaloc/models/user.dart';
+import 'package:tlaloc/page/date.dart';
 import 'package:tlaloc/widgets/button_widget.dart';
 import 'package:tlaloc/models/app_state.dart';
 
@@ -34,7 +32,7 @@ class _AddScreenState extends State<AddScreen> {
 
       final File imageTemp = File(image.path);
 
-      setState(() => this.newImage = imageTemp);
+      setState(() => newImage = imageTemp);
     } on PlatformException catch (e) {
       print('Falló al obtener la imágen: $e');
     }
@@ -48,7 +46,7 @@ class _AddScreenState extends State<AddScreen> {
 
       final imageTemp = File(image.path);
 
-      setState(() => this.newImage = imageTemp);
+      setState(() => newImage = imageTemp);
     } on PlatformException catch (e) {
       print('Falló al obtener la imágen: $e');
     }
