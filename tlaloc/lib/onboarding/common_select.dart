@@ -179,11 +179,15 @@ class QrSelectWidget extends StatelessWidget {
                   .replaceAll('_', ' ')
                   .replaceAll('%20', ' ');
             }
-            if (ejido == null || ejido == '') {
+            if (ejido == null || ejido == '' || !ejidos.containsKey(ejido)) {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text('El código QR no es válido'),
+                  title: Text('El código QR no es válido.'),
+                  content: (ejido == null || ejido == '')
+                      ? null
+                      : Text(
+                          'Tlaloc App no se encuentra disponible en tu ejido "$ejido".'),
                   actions: [
                     TextButton(
                       child: Text('De acuerdo'),
