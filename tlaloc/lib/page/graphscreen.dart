@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/widgets/empty_state.dart';
 import '../models/app_state.dart';
 // import 'package:intl/intl.dart';
@@ -12,49 +13,36 @@ import '../models/app_state.dart';
 /// https://www.syncfusion.com/kb/12289/how-to-render-flutter-time-series-chart-using-the-charts-widget-sfcartesianchart
 /// https://pub.dev/packages/syncfusion_flutter_charts/example
 
-class DatePickerButton extends StatefulWidget {
-  final DateTime initialDate;
+class DatePickerButton extends StatelessWidget {
+  final DateTime dateTime;
   final void Function(DateTime) onDateChanged;
 
   const DatePickerButton({
     Key? key,
-    required this.initialDate,
+    required this.dateTime,
     required this.onDateChanged,
   }) : super(key: key);
 
   @override
-  State<DatePickerButton> createState() => _DatePickerButtonState();
-}
-
-class _DatePickerButtonState extends State<DatePickerButton> {
-  DateTime? _dateTime;
-
-  DateTime get dateTime => _dateTime!;
-  set dateTime(value) => _dateTime = value;
-
-  @override
   Widget build(BuildContext context) {
-    _dateTime ??= widget.initialDate;
     return ElevatedButton.icon(
       icon: const Icon(Icons.calendar_month),
       label: Text(
-        '${dateTime.year}/${dateTime.month}/${dateTime.day}',
+        (dateTime == dateLongAgo || dateTime == dateInALongTime)
+            ? 'Seleccionar'
+            : '${dateTime.year}/${dateTime.month}/${dateTime.day}',
       ),
       onPressed: () async {
         final date = await showDatePicker(
           context: context,
-          initialDate: (dateTime == DateTime(2000, 1, 1) ||
-                  dateTime == DateTime(3000, 12, 31))
+          initialDate: (dateTime == dateLongAgo || dateTime == dateInALongTime)
               ? DateTime.now()
               : dateTime,
-          firstDate: DateTime(2000, 1, 1),
-          lastDate: DateTime(3000, 12, 31),
+          firstDate: dateLongAgo,
+          lastDate: dateInALongTime,
         );
         if (date != null) {
-          setState(() {
-            dateTime = date;
-          });
-          widget.onDateChanged(date);
+          onDateChanged(date);
         }
       },
     );
@@ -68,9 +56,12 @@ class GraphsScreen extends StatefulWidget {
   State<GraphsScreen> createState() => _GraphsScreenState();
 }
 
+enum DateTimeMode { custom, week, month, year, always }
+
 class _GraphsScreenState extends State<GraphsScreen> {
-  DateTime initialDate = DateTime(2000, 1, 1);
-  DateTime finalDate = DateTime(3000, 12, 31);
+  DateTime initialDate = dateLongAgo;
+  DateTime finalDate = dateInALongTime;
+  DateTimeMode mode = DateTimeMode.always;
 
   @override
   Widget build(BuildContext context) {
@@ -88,26 +79,99 @@ class _GraphsScreenState extends State<GraphsScreen> {
         ),
         body: Column(
           children: [
-            Row(
-              children: [
-                const Text('Inicio: '),
-                DatePickerButton(
-                  initialDate: initialDate,
-                  onDateChanged: (date) {
-                    setState(() {
-                      initialDate = date;
-                    });
-                  },
-                ),
-                const Expanded(
-                  child: SizedBox(),
-                ),
-                const Text('Fin: '),
-                DatePickerButton(
-                  initialDate: finalDate,
-                  onDateChanged: (date) {
-                    setState(
-                      () {
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Wrap(
+                children: [
+                  ChoiceChip(
+                    selectedColor: AppColors.blue1,
+                    label: const Text('Esta semana'),
+                    selected: mode == DateTimeMode.week,
+                    onSelected: (val) {
+                      final now = DateTime.now();
+                      final today = DateTime(now.year, now.month, now.day);
+                      final monday =
+                          now.add(Duration(days: -today.weekday + 1));
+                      setState(() {
+                        mode = DateTimeMode.week;
+                        initialDate = monday;
+                        finalDate = monday.add(const Duration(
+                          days: 5,
+                          hours: 23,
+                          minutes: 59,
+                          seconds: 59,
+                        ));
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 4),
+                  ChoiceChip(
+                    selectedColor: AppColors.blue1,
+                    label: const Text('Este mes'),
+                    selected: mode == DateTimeMode.month,
+                    onSelected: (val) {
+                      final now = DateTime.now();
+                      setState(() {
+                        mode = DateTimeMode.month;
+                        initialDate = DateTime(now.year, now.month, 1);
+                        finalDate =
+                            DateTime(now.year, now.month + 1, 0, 23, 59, 59);
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 4),
+                  ChoiceChip(
+                    selectedColor: AppColors.blue1,
+                    label: const Text('Este año'),
+                    selected: mode == DateTimeMode.year,
+                    onSelected: (val) {
+                      final now = DateTime.now();
+                      setState(() {
+                        mode = DateTimeMode.year;
+                        initialDate = DateTime(now.year, 1, 1);
+                        finalDate = DateTime(now.year, 12, 31, 23, 59, 59);
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 4),
+                  ChoiceChip(
+                    selectedColor: AppColors.blue1,
+                    label: const Text('Siempre'),
+                    selected: mode == DateTimeMode.always,
+                    onSelected: (val) {
+                      setState(() {
+                        mode = DateTimeMode.always;
+                        initialDate = dateLongAgo;
+                        finalDate = dateInALongTime;
+                      });
+                    },
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  const Text('Inicio: '),
+                  DatePickerButton(
+                    dateTime: initialDate,
+                    onDateChanged: (date) {
+                      setState(() {
+                        mode = DateTimeMode.custom;
+                        initialDate = date;
+                      });
+                    },
+                  ),
+                  const Expanded(
+                    child: SizedBox(),
+                  ),
+                  const Text('Fin: '),
+                  DatePickerButton(
+                    dateTime: finalDate,
+                    onDateChanged: (date) {
+                      setState(() {
+                        mode = DateTimeMode.custom;
                         finalDate = DateTime(
                           date.year,
                           date.month,
@@ -116,11 +180,11 @@ class _GraphsScreenState extends State<GraphsScreen> {
                           59,
                           59,
                         );
-                      },
-                    );
-                  },
-                ),
-              ],
+                      });
+                    },
+                  ),
+                ],
+              ),
             ),
             Consumer<AppState>(
               builder: (context, state, _) {
@@ -144,8 +208,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
                           primaryXAxis: DateTimeAxis(
                             name: 'Fecha',
                             intervalType: DateTimeIntervalType.days,
-
-                            /// TODO: dateFormat para que esté en español
+                            // TODO: dateFormat para que esté en español
                           ),
                           primaryYAxis: NumericAxis(name: 'Precipitación (mm)'),
                           series: <ChartSeries<Measurement, DateTime>>[

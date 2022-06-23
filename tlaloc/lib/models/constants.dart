@@ -11,6 +11,9 @@ Map<String, num> ejidos = {
   'Nativitas': 99999,
 };
 
+final dateLongAgo = DateTime(2000, 1, 1);
+final dateInALongTime = DateTime(3000, 12, 31);
+
 String appName = 'Tláloc App';
 const meses = <String>[
   'ene',
