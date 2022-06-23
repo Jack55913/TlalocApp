@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -123,67 +124,83 @@ class _AddScreenState extends State<AddScreen> {
               height: 20,
               thickness: 1,
             ),
-            const SizedBox(height: 15),
-            const Text(
-              'Imagen del pluviómetro',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: 24,
-                fontFamily: 'FredokaOne',
-              ),
+            FutureBuilder<ConnectivityResult>(
+              future: Connectivity().checkConnectivity(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError ||
+                    (snapshot.hasData &&
+                        snapshot.data == ConnectivityResult.none)) {
+                  return Text(
+                      'No está soportado subir imágenes sin internet (aún).');
+                } else {
+                  return Column(
+                    children: [
+                      const SizedBox(height: 15),
+                      const Text(
+                        'Imagen del pluviómetro',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontFamily: 'FredokaOne',
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MaterialButton(
+                              child: Row(
+                                children: [
+                                  Icon(Icons.image),
+                                  Text(" Desde la Galería",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: 'poppins',
+                                      )),
+                                ],
+                              ),
+                              onPressed: () {
+                                pickImage();
+                              }),
+                          SizedBox(height: 15),
+                          MaterialButton(
+                              child: Row(
+                                children: [
+                                  Icon(Icons.camera_alt),
+                                  Text(" Desde la Cámara",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: 'poppins',
+                                      )),
+                                ],
+                              ),
+                              onPressed: () {
+                                pickImageC();
+                              }),
+                        ],
+                      ),
+                      SizedBox(height: 15),
+                      if (newImage == null &&
+                          widget.measurement != null &&
+                          widget.measurement!.imageUrl != null)
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: CachedNetworkImage(
+                            imageUrl: widget.measurement!.imageUrl!,
+                          ),
+                        )
+                      else
+                        newImage != null
+                            ? Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Image.file(newImage!),
+                              )
+                            : Text("⚠️ No ha seleccionado ninguna imágen ⚠️"),
+                    ],
+                  );
+                }
+              },
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MaterialButton(
-                    child: Row(
-                      children: [
-                        Icon(Icons.image),
-                        Text(" Desde la Galería",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: 'poppins',
-                            )),
-                      ],
-                    ),
-                    onPressed: () {
-                      pickImage();
-                    }),
-                SizedBox(height: 15),
-                MaterialButton(
-                    child: Row(
-                      children: [
-                        Icon(Icons.camera_alt),
-                        Text(" Desde la Cámara",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: 'poppins',
-                            )),
-                      ],
-                    ),
-                    onPressed: () {
-                      pickImageC();
-                    }),
-              ],
-            ),
-            SizedBox(height: 15),
-            if (newImage == null &&
-                widget.measurement != null &&
-                widget.measurement!.imageUrl != null)
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: CachedNetworkImage(
-                  imageUrl: widget.measurement!.imageUrl!,
-                ),
-              )
-            else
-              newImage != null
-                  ? Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Image.file(newImage!),
-                    )
-                  : Text("⚠️ No ha seleccionado ninguna imágen ⚠️"),
             SizedBox(
               height: 30,
             ),

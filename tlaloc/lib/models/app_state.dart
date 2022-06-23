@@ -3,6 +3,7 @@
 
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -82,11 +83,17 @@ class AppState extends ChangeNotifier {
       final storageRef = FirebaseStorage.instance.ref();
       final String fileExtension = image.path.split('.').last;
       final String fileName =
-          '${time.year}-${time.month}-${time.day} ${time.hour}:${time.minute}:${time.second} ${auth.currentUser?.email}';
-      final imageRef =
-          storageRef.child("measurements/$fileName.$fileExtension");
-      await imageRef.putFile(image);
-      fileUrl = await imageRef.getDownloadURL();
+          '${time.year}-${time.month}-${time.day} ${time.hour}:${time.minute}:${time.second} $precipitation ${auth.currentUser?.email}';
+      final connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult == ConnectionState.none) {
+        final imageString = await image.readAsString();
+        fileUrl = imageString;
+      } else {
+        final imageRef =
+            storageRef.child("measurements/$fileName.$fileExtension");
+        await imageRef.putFile(image);
+        fileUrl = await imageRef.getDownloadURL();
+      }
     } else if (oldImage != null) {
       fileUrl = oldImage;
     }

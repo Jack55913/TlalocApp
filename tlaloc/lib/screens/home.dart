@@ -1,6 +1,7 @@
 // ignore_for_file: prefer__literals_to_create_immutables, prefer__ructors, prefer_const_constructors_in_immutables, prefer_const_constructors
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/page/data.dart';
@@ -99,7 +100,10 @@ class ProfilePage extends StatelessWidget {
       padding: EdgeInsets.all(15.0),
       child: GestureDetector(
         child: CircleAvatar(
-          backgroundImage: ExactAssetImage("assets/images/img-1.png"),
+          foregroundImage: FirebaseAuth.instance.currentUser == null
+              ? NetworkImage(
+                  'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png')
+              : NetworkImage(FirebaseAuth.instance.currentUser!.photoURL!),
         ),
         onTap: () {
           Navigator.push(
