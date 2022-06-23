@@ -71,7 +71,7 @@ class AppState extends ChangeNotifier {
   }
 
   Future<Map<String, dynamic>> _getMeasurementJson(
-      {required int precipitation,
+      {required num precipitation,
       required DateTime time,
       File? image,
       String? oldImage}) async {
@@ -101,7 +101,7 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> addMeasurement(
-      {required int precipitation, required DateTime time, File? image}) async {
+      {required num precipitation, required DateTime time, File? image}) async {
     db.collection('ejidos').doc(ejido).collection('measurements').add(
           await _getMeasurementJson(
             precipitation: precipitation,
@@ -147,7 +147,7 @@ class AppState extends ChangeNotifier {
 
   Future<void> updateMeasurement({
     required String id,
-    required int precipitation,
+    required num precipitation,
     required DateTime time,
     File? image,
 
