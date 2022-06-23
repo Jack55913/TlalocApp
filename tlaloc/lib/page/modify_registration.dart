@@ -55,12 +55,22 @@ class ModifyRegistration extends StatelessWidget {
                         ),
                         TextButton(
                           child: Text('Eliminar'),
-                          onPressed: () {
-                            final state =
-                                Provider.of<AppState>(context, listen: false);
-                            state.deleteMeasurement(id: measurement.id);
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
+                          onPressed: () async {
+                            try {
+                              final state =
+                                  Provider.of<AppState>(context, listen: false);
+                              await state.deleteMeasurement(id: measurement.id);
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            } catch (e) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text('Ocurrió un error al eliminar'),
+                                  content: Text('$e'),
+                                ),
+                              );
+                            }
                           },
                         ),
                       ],

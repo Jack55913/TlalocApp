@@ -5,7 +5,7 @@ import 'package:tlaloc/models/app_state.dart';
 
 class Datetime extends StatefulWidget {
   final void Function(DateTime) updateDateTime;
-  final void Function(int?) updatePrecipitation;
+  final void Function(num?) updatePrecipitation;
   final Measurement? measurement;
   const Datetime({
     Key? key,
@@ -20,17 +20,17 @@ class Datetime extends StatefulWidget {
 
 class _DatetimeState extends State<Datetime> {
   DateTime _dateTime = DateTime.now();
-  int? _precipitation;
+  num? _precipitation;
 
   DateTime get dateTime => _dateTime;
-  int? get precipitation => _precipitation;
+  num? get precipitation => _precipitation;
 
   set dateTime(DateTime value) {
     _dateTime = value;
     widget.updateDateTime(value);
   }
 
-  set precipitation(int? value) {
+  set precipitation(num? value) {
     _precipitation = value;
     widget.updatePrecipitation(value);
   }
@@ -64,7 +64,7 @@ class _DatetimeState extends State<Datetime> {
               hintText: 'Precipitación en mm',
             ),
             onChanged: (value) {
-              precipitation = int.tryParse(value);
+              precipitation = num.tryParse(value);
             },
             keyboardType: TextInputType.number, //Mostrara teclado numérico
           ),

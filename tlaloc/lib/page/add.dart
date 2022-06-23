@@ -22,7 +22,7 @@ class AddScreen extends StatefulWidget {
 class _AddScreenState extends State<AddScreen> {
   File? newImage;
   DateTime dateTime = DateTime.now();
-  int? precipitation;
+  num? precipitation;
 
   Future pickImage() async {
     try {
@@ -66,30 +66,40 @@ class _AddScreenState extends State<AddScreen> {
             child: ButtonWidget(
               text: 'Guardar',
               onClicked: () async {
-                final state = Provider.of<AppState>(context, listen: false);
-                if (widget.measurement == null) {
-                  // Crear medición
-                  state.addMeasurement(
-                    precipitation: precipitation!,
-                    time: dateTime,
-                    image: newImage,
-                  );
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                } else {
-                  // Edita una medición ya existente
-                  state.updateMeasurement(
-                    id: widget.measurement!.id,
-                    precipitation: precipitation!,
-                    time: dateTime,
-                    image: newImage,
-                    oldImage: widget.measurement!.imageUrl,
-                  );
-                  Navigator.pop(context);
-                  Navigator.pop(context);
+                try {
+                  final state = Provider.of<AppState>(context, listen: false);
+                  if (widget.measurement == null) {
+                    // Crear medición
+                    state.addMeasurement(
+                      precipitation: precipitation!,
+                      time: dateTime,
+                      image: newImage,
+                    );
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  } else {
+                    // Edita una medición ya existente
+                    state.updateMeasurement(
+                      id: widget.measurement!.id,
+                      precipitation: precipitation!,
+                      time: dateTime,
+                      image: newImage,
+                      oldImage: widget.measurement!.imageUrl,
+                    );
+                    Navigator.pop(context);
+                    Navigator.pop(context);
 
-                  /// Works around the previous page being a stateful widget
-                  Navigator.pop(context);
+                    /// Works around the previous page being a stateful widget
+                    Navigator.pop(context);
+                  }
+                } catch (e) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Ocurrió un error al guardar'),
+                      content: Text('$e'),
+                    ),
+                  );
                 }
               },
             ),

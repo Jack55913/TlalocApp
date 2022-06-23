@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tlaloc/models/constants.dart';
@@ -208,7 +209,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
                           primaryXAxis: DateTimeAxis(
                             name: 'Fecha',
                             intervalType: DateTimeIntervalType.days,
-                            // TODO: dateFormat para que esté en español
+                            dateFormat: DateFormat.MMMd('es'),
                           ),
                           primaryYAxis: NumericAxis(name: 'Precipitación (mm)'),
                           series: <ChartSeries<Measurement, DateTime>>[

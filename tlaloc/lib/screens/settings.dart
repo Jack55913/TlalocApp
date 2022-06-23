@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -108,7 +109,8 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                         backgroundImage: AssetImage('assets/images/img-1.png'),
                         backgroundColor: Colors.white,
                       ),
-                      applicationLegalese: 'Con amor desde COLPOS ❤️',
+                      applicationLegalese:
+                          'Con amor desde COLPOS ❤️\nCréditos y programación: Emilio Álvarez\nColoborador programador: Gabriel Rodríguez',
                       applicationVersion: 'versión inicial (beta)',
                       children: [
                         ListTile(
@@ -118,7 +120,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                             // analytics.logEvent(name: 'view-credits');
                             launchUrl(
                               Uri.parse(
-                                  'https://proyecto-tlaloc.web.app/acerca_de'),
+                                  'https://tlaloc-3c65c.web.app/acerca_de'),
                               mode: LaunchMode.inAppWebView,
                             );
                           },
@@ -128,8 +130,11 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           title: Text('Síguenos en Facebook'),
                           onTap: () {
                             // analytics.logEvent(name: 'view-facebook');
-                            launchUrl(Uri.parse(
-                                'https://www.facebook.com/colpos.cienciasagricolas'));
+                            launchUrl(
+                              Uri.parse(
+                                  'https://www.facebook.com/colpos.cienciasagricolas'),
+                              mode: LaunchMode.externalApplication,
+                            );
                           },
                         ),
                         ListTile(
@@ -137,7 +142,10 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           title: Text('Síguenos en Twitter'),
                           onTap: () {
                             // analytics.logEvent(name: 'view-twitter');
-                            launchUrl(Uri.parse('https://twitter.com/colpos'));
+                            launchUrl(
+                              Uri.parse('https://twitter.com/colpos'),
+                              mode: LaunchMode.externalApplication,
+                            );
                           },
                         ),
                         ListTile(
@@ -155,15 +163,44 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           title: Text('Colabora en GitHub'),
                           onTap: () {
                             // analytics.logEvent(name: 'view-github');
-                            launchUrl(Uri.parse(
-                                'https://github.com/Jack55913/TlalocApp'));
+                            launchUrl(
+                              Uri.parse(
+                                  'https://github.com/Jack55913/TlalocApp'),
+                              mode: LaunchMode.externalApplication,
+                            );
                           },
                         ),
                       ],
                     );
                   },
                 ),
-                ListTile(
+                Consumer<GoogleSignInProvider>(
+                  builder: (context, signIn, child) {
+                    final name = FirebaseAuth.instance.currentUser?.displayName;
+                    return ListTile(
+                      leading: Icon(Icons.login),
+                      title: Text('Iniciar sesión'),
+                      subtitle: Text(name == null
+                          ? 'No has iniciado sesión'
+                          : 'Iniciaste sesión como $name'),
+                      onTap: () async {
+                        try {
+                          await signIn.googleLogin();
+                        } catch (e) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('Error al iniciar sesión'),
+                              content: Text('$e'),
+                            ),
+                          );
+                        }
+                      },
+                    );
+                  },
+                ),
+                if (FirebaseAuth.instance.currentUser != null)
+                  ListTile(
                     leading: Icon(Icons.logout),
                     title: Text('Cerrar sesión'),
                     onTap: () {
@@ -172,7 +209,8 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                         MaterialPageRoute(
                             builder: (context) => LoggedInWidget()),
                       );
-                    }),
+                    },
+                  ),
               ]),
         ));
   }

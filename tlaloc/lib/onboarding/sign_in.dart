@@ -72,7 +72,18 @@ class SignUpWidget extends StatelessWidget {
                   onPressed: () async {
                     final provider = Provider.of<GoogleSignInProvider>(context,
                         listen: false);
-                    await provider.googleLogin();
+
+                    try {
+                      await provider.googleLogin();
+                    } catch (e) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('Error al iniciar sesión'),
+                          content: Text('$e'),
+                        ),
+                      );
+                    }
                     if (provider.recentlySignedInUser != null) {
                       Navigator.push(
                         context,

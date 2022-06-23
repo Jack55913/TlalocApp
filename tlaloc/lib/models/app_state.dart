@@ -11,7 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Measurement {
   final String? uploader;
-  final int? precipitation;
+  final num? precipitation;
   final DateTime? dateTime;
   final String id;
   final String? imageUrl;
