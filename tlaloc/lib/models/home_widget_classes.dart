@@ -24,7 +24,7 @@ class PhraseCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           gradient: LinearGradient(
-            colors: [
+            colors: const [
               AppColors.blue1,
               AppColors.pruple1,
             ],

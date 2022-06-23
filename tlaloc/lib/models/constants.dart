@@ -1,10 +1,15 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-//import 'package:firebase_analytics/firebase_analytics.dart';
 
-//FirebaseAnalytics analytics = FirebaseAnalytics();
-// FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+/// Para agregar o quitar ejidos, basta con cambiar esta variable
+/// TODO: poner el número de hectáreas.
+Map<String, num> ejidos = {
+  'Tequexquinahuac': 1200,
+  'San Dieguito Xuhimanca': 99999,
+  'San Pablo Ixayoc': 99999,
+  'San Juan Totolapan': 99999,
+  'San Miguel Tlaixpan': 99999,
+  'Nativitas': 99999,
+};
 
 String appName = 'Tláloc App';
 const meses = <String>[
@@ -24,20 +29,20 @@ const meses = <String>[
 
 class AppColors {
   // From dark illustration
-  static Color dark1 = Color(0xFF121212);
-  static Color dark3 = Color(0xFF181818);
-  static Color dark2 = Color(0xFF212121);
-  static Color gray1 = Color(0xFF828690);
-  static Color blue1 = Color(0xFF00AEEF);
-  static Color green1 = Color(0xFF00E583);
-  static Color red1 = Color(0xFFB01235);
+  static const Color dark1 = Color(0xFF121212);
+  static const Color dark3 = Color(0xFF181818);
+  static const Color dark2 = Color(0xFF212121);
+  static const Color gray1 = Color(0xFF828690);
+  static const Color blue1 = Color(0xFF00AEEF);
+  static const Color green1 = Color(0xFF00E583);
+  static const Color red1 = Color(0xFFB01235);
 
   // From light illustration
-  static Color pruple1 = Color(0xFF2C2A6B);
-  static Color purple2 = Color(0xFF345E9D);
-  static Color orange1 = Color(0xFFE6473A);
-  static Color lightBlue = Color(0xFF50A8AE);
-  static Color blue3 = Color(0xFF081A30);
+  static const Color pruple1 = Color(0xFF2C2A6B);
+  static const Color purple2 = Color(0xFF345E9D);
+  static const Color orange1 = Color(0xFFE6473A);
+  static const Color lightBlue = Color(0xFF50A8AE);
+  static const Color blue3 = Color(0xFF081A30);
 }
 
 ThemeData darkTheme = ThemeData(
@@ -45,7 +50,7 @@ ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: AppColors.dark1,
   primarySwatch: Colors.blue,
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     backgroundColor: AppColors.dark3,
     iconTheme: IconThemeData(
       color: Colors.white,
@@ -58,7 +63,7 @@ ThemeData newLightTheme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   primarySwatch: Colors.pink,
   primaryColor: Colors.white,
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     elevation: 0,
     titleTextStyle: TextStyle(
       color: Colors.grey,

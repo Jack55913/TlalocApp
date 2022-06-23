@@ -2,8 +2,8 @@
 
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
@@ -46,33 +46,13 @@ class CommonSelectPage extends StatelessWidget {
                     direction: Axis.vertical,
                     children: [
                       QrSelectWidget(),
-                      CommonSelectWidget(
-                        ejido: 'Tequexquinahuac',
-                        hectareas: 1200,
-                      ),
 
-                      /// TODO: poner el número de hectáreas.
-                      /// Para agregar o quitar ejidos, basta con editar esto.
-                      CommonSelectWidget(
-                        ejido: 'San Dieguito Xuhimanca',
-                        hectareas: 99999,
-                      ),
-                      CommonSelectWidget(
-                        ejido: 'San Pablo Ixayoc',
-                        hectareas: 99999,
-                      ),
-                      CommonSelectWidget(
-                        ejido: 'San Juan Totolapan',
-                        hectareas: 99999,
-                      ),
-                      CommonSelectWidget(
-                        ejido: 'San Miguel Tlaixpan',
-                        hectareas: 99999,
-                      ),
-                      CommonSelectWidget(
-                        ejido: 'Nativitas',
-                        hectareas: 99999,
-                      ),
+                      /// Para agregar o quitar ejidos: constants.dart
+                      for (var ejido in ejidos.entries)
+                        CommonSelectWidget(
+                          ejido: ejido.key,
+                          hectareas: ejido.value,
+                        ),
                     ],
                   ),
                 ],
@@ -94,7 +74,7 @@ void _goHome(BuildContext context) {
 
 class CommonSelectWidget extends StatelessWidget {
   final String ejido;
-  final int hectareas;
+  final num hectareas;
 
   const CommonSelectWidget(
       {Key? key, required this.ejido, required this.hectareas})
@@ -124,10 +104,16 @@ class CommonSelectWidget extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: AppColors.orange1,
                   radius: 50,
-                  child: Icon(
-                    FontAwesomeIcons.t,
-                    color: Colors.white,
-                    size: 50,
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: AutoSizeText(
+                      ejido.split(' ').map((e) => e[0]).join(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'FredokaOne',
+                        fontSize: 100,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 5),
