@@ -28,15 +28,17 @@
       <h1>Pasos para usar Tlaloc App y este código QR</h1>
       <p>1. Instala la app desde Play Store (no disponible aún)</p>
       <a target="_blank" href="https://www.youtube.com/watch?v=mCdA4bJAGGk">Instalar aplicación</a>
-      <p>2. Cuando pregunte por el ejido, escanea el código QR, o selecciona <strong id="ejido"></strong></p>
+      <p>2. Abre la app por primera vez y cuando pregunte por el ejido, escanea el código QR desde la app, o selecciona <strong id="ejido"></strong></p>
+      <p>NOTA: Si ya has usado la app y quieres cambiar de ejido, toca el botón superior derecho y toca "Cambiar ejido".</p>
     </div>
 
     <script>
       var ejido = document.location.pathname.substring(1).replace('_', ' ');
       if (ejido == '') {
         window.location.replace('https://www.youtube.com/watch?v=mCdA4bJAGGk');
+      } else {
+        document.getElementById('ejido').textContent = ejido;
       }
-      document.getElementById('ejido').textContent = ejido;
     </script>
   </body>
 </html>
