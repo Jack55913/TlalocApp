@@ -35,7 +35,11 @@
     <script>
       var ejido = document.location.pathname.substring(1).replace('_', ' ');
       if (ejido == '') {
-        window.location.replace('https://www.youtube.com/watch?v=mCdA4bJAGGk');
+        if (navigator.userAgent.includes("Android")) {
+          window.location.replace('https://www.youtube.com/watch?v=mCdA4bJAGGk');
+        } else {
+          window.location.replace('/web/');
+        }
       } else {
         document.getElementById('ejido').textContent = ejido;
       }

@@ -43,7 +43,7 @@ class ConditionalOnboardingPage extends StatelessWidget {
         if (snapshot.hasData) {
           bool hasFinishedOnboarding = snapshot.data!;
           if (hasFinishedOnboarding) {
-            return const SplashScreen(nextScreen: HomePage());
+            return const HomePage();
           } else {
             return SplashScreen(nextScreen: Onboarding());
           }
