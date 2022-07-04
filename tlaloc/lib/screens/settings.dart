@@ -110,7 +110,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                         backgroundColor: Colors.white,
                       ),
                       applicationLegalese:
-                          'Con amor desde COLPOS ❤️\nCréditos y programación: Emilio Álvarez\nColoborador programador: Gabriel Rodríguez',
+                          'Con amor desde COLPOS ❤️\nCréditos y programación: Emilio Álvarez Herrera',
                       applicationVersion: 'versión inicial (beta)',
                       children: [
                         ListTile(
