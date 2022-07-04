@@ -115,7 +115,7 @@ class SignUpWidget extends StatelessWidget {
                 SizedBox(height: 8),
                 Center(
                   child: Text(
-                    'Al registratrse a Tláloc App, aceptas nuestros términos y condiciones y políticas de privacidad',
+                    'Al registratrse a Tláloc App, aceptas nuestros términos y condiciones y políticas de privacidad; al iniciar sesión en modo incógnito podrás ver los datos pero no podrás subirlos',
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,

@@ -72,9 +72,19 @@ class _DatetimeState extends State<Datetime> {
             height: 25,
           ),
           Text(
-            'Registra la fecha de colecta',
+            'Revisa la fecha de colecta',
             style: TextStyle(
               fontSize: 24,
+              fontFamily: 'FredokaOne',
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Text(
+            'Si no es correcta, edítala:',
+            style: TextStyle(
+              fontSize: 16,
               fontFamily: 'FredokaOne',
             ),
           ),

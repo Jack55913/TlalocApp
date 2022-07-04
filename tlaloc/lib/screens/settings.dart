@@ -132,7 +132,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                             // analytics.logEvent(name: 'view-facebook');
                             launchUrl(
                               Uri.parse(
-                                  'https://www.facebook.com/colpos.cienciasagricolas'),
+                                  'https://www.facebook.com/Ciencia-Ciudadana-para-el-Monitoreo-de-Lluvia-100358326014423'),
                               mode: LaunchMode.externalApplication,
                             );
                           },

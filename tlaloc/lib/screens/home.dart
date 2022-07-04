@@ -4,6 +4,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
+import 'package:tlaloc/page/add.dart';
 import 'package:tlaloc/page/data.dart';
 import 'package:tlaloc/page/home.dart';
 import 'package:tlaloc/page/graphscreen.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   int index = 0;
 
   final screns = [
+    AddScreen(),
     HomeScreen(),
     DataScreen(),
     GraphsScreen(),
@@ -30,10 +32,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
-      Icon(
-        Icons.home,
-        size: 30,
-      ),
+      Icon(Icons.add, size: 30),
+      Icon(Icons.home, size: 30),
       Icon(Icons.menu_book_rounded, size: 30),
       Icon(Icons.bar_chart_rounded, size: 30),
     ];
@@ -76,9 +76,9 @@ class InfoButton extends StatelessWidget {
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text('Registra datos pluviales'),
+          title: Text('Registra datos de lluvia'),
           content: Text(
-              'Colabora con Tláloc App, en la obtención de datos para analizar los cambios en los patrones de lluvia a causa del cambio climático.'),
+              'Colabora con Tláloc App, en la obtención de datos para analizar los patrones de lluviaen el monte Tláloc. Tendremos tres campañas de monitoreo en los siguientes periodos: del 15 de Julio al 15 de Septiembre, del 21 de Octubre al 10 de Diciembre y del 4 de marzo al 29 de Abril'),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.pop(context, 'Siguiente'),

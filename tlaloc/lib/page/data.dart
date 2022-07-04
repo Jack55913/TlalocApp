@@ -38,7 +38,7 @@ class DataScreen extends StatelessWidget {
                         snap: false,
                         expandedHeight: 150.0,
                         flexibleSpace: FlexibleSpaceBar(
-                          title: Text('Diario',
+                          title: Text('Bitácora de mediciones',
                               style: TextStyle(
                                 // color: Colors.black,
                                 fontFamily: 'FredokaOne',
@@ -47,7 +47,7 @@ class DataScreen extends StatelessWidget {
                               )),
                           background: CachedNetworkImage(
                             imageUrl:
-                                'https://i0.wp.com/mas-mexico.com.mx/wp-content/uploads/2019/09/popurri-de-viajes.jpg?resize=770%2C330&ssl=1',
+                                'https://pbs.twimg.com/media/C2xxHNkUoAACeWT.jpg:large',
                             fit: BoxFit.cover,
                           ),
                         ),

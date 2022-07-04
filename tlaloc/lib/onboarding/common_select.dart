@@ -25,7 +25,7 @@ class CommonSelectPage extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Selecciona un Ejido',
+                    'Selecciona un Pluviómetro',
                     style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
@@ -34,7 +34,7 @@ class CommonSelectPage extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   Text(
-                    '¿A qué ejido perteneces?',
+                    '¿Qué pluviómetro estás observando?',
                     style: TextStyle(
                         fontSize: 18,
                         // fontWeight: FontWeight.bold,
@@ -46,7 +46,15 @@ class CommonSelectPage extends StatelessWidget {
                     direction: Axis.vertical,
                     children: [
                       QrSelectWidget(),
-
+                      Text(
+                    'Selecciona un Pluviómetro manualmente',
+                    style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'FredokaOne',
+                        color: Colors.white),
+                  ),
+                  SizedBox(height: 16),
                       /// Para agregar o quitar ejidos: constants.dart
                       for (var ejido in ejidos.entries)
                         CommonSelectWidget(

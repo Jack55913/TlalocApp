@@ -57,6 +57,7 @@ class _AddScreenState extends State<AddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Registra una medición'),
         leading: IconButton(
           icon: Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
@@ -137,7 +138,7 @@ class _AddScreenState extends State<AddScreen> {
                     children: [
                       const SizedBox(height: 15),
                       const Text(
-                        'Imagen del pluviómetro',
+                        'Sube la imagen del pluviómetro',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 24,
