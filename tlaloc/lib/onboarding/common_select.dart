@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:math';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -24,17 +23,19 @@ class CommonSelectPage extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  Text(
-                    'Selecciona un Pluviómetro',
-                    style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'FredokaOne',
-                        color: Colors.white),
+                  Center(
+                    child: Text(
+                      '¿Qué pluviómetro estás observando?',
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'FredokaOne',
+                          color: Colors.white),
+                    ),
                   ),
                   SizedBox(height: 16),
                   Text(
-                    '¿Qué pluviómetro estás observando?',
+                    'Selecciona el Pluviómetro automáticamente',
                     style: TextStyle(
                         fontSize: 18,
                         // fontWeight: FontWeight.bold,
@@ -44,22 +45,24 @@ class CommonSelectPage extends StatelessWidget {
                   SizedBox(height: 16),
                   Flex(
                     direction: Axis.vertical,
+
                     children: [
                       QrSelectWidget(),
                       Text(
-                    'Selecciona un Pluviómetro manualmente',
-                    style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'FredokaOne',
-                        color: Colors.white),
-                  ),
-                  SizedBox(height: 16),
-                      /// Para agregar o quitar ejidos: constants.dart
-                      for (var ejido in ejidos.entries)
+                        'Selecciona el Pluviómetro manualmente',
+                        style: TextStyle(
+                            fontSize: 18,
+                            // fontWeight: FontWeight.bold,
+                            fontFamily: 'poppins',
+                            color: Colors.white),
+                      ),
+                      SizedBox(height: 16),
+
+                      /// Para agregar o quitar parajes: constants.dart
+                      for (var paraje in parajes.entries)
                         CommonSelectWidget(
-                          ejido: ejido.key,
-                          hectareas: ejido.value,
+                          paraje: paraje.key,
+                          ejido: paraje.value,
                         ),
                     ],
                   ),
@@ -81,11 +84,11 @@ void _goHome(BuildContext context) {
 }
 
 class CommonSelectWidget extends StatelessWidget {
+  final String paraje;
   final String ejido;
-  final num hectareas;
 
   const CommonSelectWidget(
-      {Key? key, required this.ejido, required this.hectareas})
+      {Key? key, required this.paraje, required this.ejido})
       : super(key: key);
 
   @override
@@ -96,7 +99,7 @@ class CommonSelectWidget extends StatelessWidget {
         onTap: () async {
           _goHome(context);
           final state = Provider.of<AppState>(context, listen: false);
-          state.changeEjido(ejido);
+          state.changeParaje(paraje);
         },
         child: Container(
           width: MediaQuery.of(context).size.width * 0.7,
@@ -115,7 +118,7 @@ class CommonSelectWidget extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(16),
                     child: AutoSizeText(
-                      ejido.split(' ').map((e) => e[0]).join(),
+                      paraje.split(' ').map((e) => e[0]).join(),
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'FredokaOne',
@@ -126,7 +129,7 @@ class CommonSelectWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  ejido,
+                  paraje,
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.black,
@@ -135,9 +138,9 @@ class CommonSelectWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  '$hectareas Ha',
+                  'Ejido de $ejido',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     color: Colors.black,
                     fontFamily: 'poppins',
                   ),
@@ -179,23 +182,25 @@ class QrSelectWidget extends StatelessWidget {
             },
           );
           if (qrResult != null) {
-            String? ejido;
+            String? paraje;
             if (qrResult.contains('tlaloc.web.app')) {
-              ejido = qrResult
+              paraje = qrResult
                   .split('/')
                   .last
                   .replaceAll('_', ' ')
                   .replaceAll('%20', ' ');
             }
-            if (ejido == null || ejido == '' || !ejidos.containsKey(ejido)) {
+            if (paraje == null ||
+                paraje == '' ||
+                !parajes.containsKey(paraje)) {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
                   title: Text('El código QR no es válido.'),
-                  content: (ejido == null || ejido == '')
+                  content: (paraje == null || paraje == '')
                       ? null
                       : Text(
-                          'Tlaloc App no se encuentra disponible en tu ejido "$ejido".'),
+                          'Tlaloc App no se encuentra disponible en tu paraje "$paraje".'),
                   actions: [
                     TextButton(
                       child: Text('De acuerdo'),
@@ -208,7 +213,7 @@ class QrSelectWidget extends StatelessWidget {
             } else {
               _goHome(context);
               final state = Provider.of<AppState>(context, listen: false);
-              state.changeEjido(ejido);
+              state.changeParaje(paraje);
             }
           } else {
             showDialog(
@@ -216,7 +221,7 @@ class QrSelectWidget extends StatelessWidget {
               builder: (context) => AlertDialog(
                 title: Text('No escaneaste ningún código QR'),
                 content:
-                    Text('Intenta de nuevo o selecciona tu ejido manualmente'),
+                    Text('Intenta de nuevo o selecciona tu paraje manualmente'),
                 actions: [
                   TextButton(
                     child: Text('De acuerdo'),

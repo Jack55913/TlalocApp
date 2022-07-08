@@ -60,7 +60,7 @@ class _DatetimeState extends State<Datetime> {
               icon: Icon(
                 Icons.cloud,
               ),
-              helperText: 'Recuerda tomar una fotografía',
+              helperText: 'Recuerda ubicarte al nivel del agua para observar',
               hintText: 'Precipitación en mm',
             ),
             onChanged: (value) {
@@ -74,18 +74,18 @@ class _DatetimeState extends State<Datetime> {
           Text(
             'Revisa la fecha de colecta',
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 18,
               fontFamily: 'FredokaOne',
             ),
           ),
           SizedBox(
-            height: 25,
+            height: 10,
           ),
           Text(
-            'Si no es correcta, edítala:',
+            'Si no es correcta la hora, edítala:',
             style: TextStyle(
               fontSize: 16,
-              fontFamily: 'FredokaOne',
+              fontFamily: 'poppins',
             ),
           ),
           const SizedBox(height: 16),

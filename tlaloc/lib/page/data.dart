@@ -160,7 +160,7 @@ class DataWidgetView extends StatelessWidget {
                 SizedBox(height: 5),
                 Consumer<AppState>(
                   builder: (context, state, child) => Text(
-                    state.ejido,
+                    state.paraje,
                     style: TextStyle(
                       fontSize: 14,
                       fontFamily: 'poppins',

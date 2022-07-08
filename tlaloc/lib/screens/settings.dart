@@ -33,7 +33,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
               String name =
                   signIn.user?.displayName?.split(' ')[0] ?? 'Incógnito';
               return Text(
-                'Ejido de $name',
+                'Perfil de $name',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'FredokaOne',
@@ -50,8 +50,8 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
               children: <Widget>[
                 ListTile(
                   leading: Icon(Icons.place),
-                  title: Text('Cambiar de Ejido'),
-                  subtitle: Text(Provider.of<AppState>(context).ejido),
+                  title: Text('Elige un Paraje'),
+                  subtitle: Text(Provider.of<AppState>(context).paraje),
                   onTap: () {
                     Navigator.push(
                       context,

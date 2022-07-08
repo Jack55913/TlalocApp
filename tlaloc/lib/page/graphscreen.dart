@@ -70,7 +70,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const AutoSizeText(
-            'Gráfica',
+            'Gráficas y estadísticas',
             style: TextStyle(
               fontFamily: 'FredokaOne',
               fontSize: 24,

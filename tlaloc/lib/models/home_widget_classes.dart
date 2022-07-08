@@ -121,7 +121,7 @@ class DynamicTlalocMap extends StatelessWidget {
             )),
         Consumer<AppState>(
           builder: (context, state, child) => AutoSizeText(
-            state.ejido,
+            state.paraje,
             style: TextStyle(
               // color: Colors.white,
               fontFamily: 'FredokaOne',
@@ -141,13 +141,13 @@ class DynamicTlalocMap extends StatelessWidget {
         SizedBox(height: 10),
         Consumer<AppState>(
           builder: (context, state, _) => FutureBuilder<Map<String, dynamic>>(
-            future: state.getCurrentEjidoData(),
+            future: state.getCurrentParajeData(),
             builder: (context, snapshot) {
               late String text;
               if (snapshot.hasError) {
                 text = snapshot.error.toString();
               } else if (snapshot.hasData) {
-                /// EMILIO: Así puedes guardar cualquier otro dato sobre el ejido, solo
+                /// Así puedes guardar cualquier otro dato sobre el paraje, solo
                 /// tienes que cambair 'descripcion' por el campo que tu quieras.
                 /// Lo editas en https://console.firebase.google.com/u/0/project/tlaloc-3c65c/firestore/data/
                 text = snapshot.data?['descripcion'] ??

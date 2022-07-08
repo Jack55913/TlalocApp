@@ -38,7 +38,7 @@ class Measurement {
 }
 
 class AppState extends ChangeNotifier {
-  String ejido = 'Tequexquinahuac';
+  String paraje = 'Tequexquinahuac';
   bool loading = true;
   final db = FirebaseFirestore.instance;
 
@@ -50,23 +50,23 @@ class AppState extends ChangeNotifier {
     loading = true;
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
-    ejido = prefs.getString('ejido')!;
+    paraje = prefs.getString('paraje')!;
     loading = false;
     notifyListeners();
   }
 
-  Future<void> changeEjido(String newEjido) async {
-    ejido = newEjido;
+  Future<void> changeParaje(String newParaje) async {
+    paraje = newParaje;
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('ejido', newEjido);
+    prefs.setString('paraje', newParaje);
     prefs.setBool('hasFinishedOnboarding', true);
   }
 
   /// No voy a convertir esto en una clase para que te dé flexibilidad de guardar
   /// lo que quieras en el mismo JSON
-  Future<Map<String, dynamic>> getCurrentEjidoData() async {
-    var ref = db.collection('ejidos').doc(ejido);
+  Future<Map<String, dynamic>> getCurrentParajeData() async {
+    var ref = db.collection('parajes').doc(paraje);
     var snapshot = await ref.get();
     return snapshot.data() ?? {};
   }
@@ -109,7 +109,7 @@ class AppState extends ChangeNotifier {
 
   Future<void> addMeasurement(
       {required num precipitation, required DateTime time, File? image}) async {
-    db.collection('ejidos').doc(ejido).collection('measurements').add(
+    db.collection('parajes').doc(paraje).collection('measurements').add(
           await _getMeasurementJson(
             precipitation: precipitation,
             time: time,
@@ -132,8 +132,8 @@ class AppState extends ChangeNotifier {
 
   Future<List<Measurement>> getMeasurements() async {
     var event = await db
-        .collection('ejidos')
-        .doc(ejido)
+        .collection('parajes')
+        .doc(paraje)
         .collection('measurements')
         .get();
     return _getListOfMeasurementsFromDocs(event.docs);
@@ -146,8 +146,8 @@ class AppState extends ChangeNotifier {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getMeasurementsStream() {
     return db
-        .collection('ejidos')
-        .doc(ejido)
+        .collection('parajes')
+        .doc(paraje)
         .collection('measurements')
         .snapshots();
   }
@@ -162,8 +162,8 @@ class AppState extends ChangeNotifier {
     String? oldImage,
   }) async {
     await db
-        .collection('ejidos')
-        .doc(ejido)
+        .collection('parajes')
+        .doc(paraje)
         .collection('measurements')
         .doc(id)
         .update(
@@ -178,8 +178,8 @@ class AppState extends ChangeNotifier {
 
   Future<void> deleteMeasurement({required String id}) async {
     await db
-        .collection('ejidos')
-        .doc(ejido)
+        .collection('parajes')
+        .doc(paraje)
         .collection('measurements')
         .doc(id)
         .delete();

@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Center(
                         child: AutoSizeText(
-                          'Realiza estos pasos',
+                          'Tutoriales',
                           style: TextStyle(
                             color: Color.fromRGBO(0, 229, 131, 1),
                             fontFamily: 'FredokaOne',
@@ -92,21 +92,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(height: 10),
                       _buildItem(
+                          '📖 Medición de datos',
+                          'Revisa los errores más comúnes al momento de medir',
+                          'https://tlaloc.web.app/'),
+                      _buildItem(
+                          '🚀 Enviar las mediciones',
+                          '¿Cómo enviar los datos en la app?',
+                          'https://youtu.be/PattwuN6AlA'),
+                      _buildItem(
                           '🛠️ Realiza tu propio pluviómetro',
                           'Es un instrumento para la medición de lluvia',
                           'https://youtu.be/kDqaTwjJvME'),
                       _buildItem(
                           '⛰️ Instalación',
-                          'Coloca tu pluviómetro en un lugar estratégico',
+                          '¿Cómo instalar un pluviómetro?',
                           'https://youtu.be/qZx-Z3_n4t8'),
-                      _buildItem(
-                          '📖 Medición de datos',
-                          'Revisa los errores comúnes al momento de medir',
-                          'https://tlaloc.web.app/'),
-                      _buildItem(
-                          '🚀 Enviar las mediciones',
-                          'Sube los datos obtenidos en la App!',
-                          'https://tlaloc-web.web.app/'),
                     ],
                   ),
                 ),

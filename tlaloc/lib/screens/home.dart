@@ -78,7 +78,7 @@ class InfoButton extends StatelessWidget {
         builder: (BuildContext context) => AlertDialog(
           title: Text('Registra datos de lluvia'),
           content: Text(
-              'Colabora con Tláloc App, en la obtención de datos para analizar los patrones de lluviaen el monte Tláloc. Tendremos tres campañas de monitoreo en los siguientes periodos: del 15 de Julio al 15 de Septiembre, del 21 de Octubre al 10 de Diciembre y del 4 de marzo al 29 de Abril'),
+              'Colabora con Tláloc App, en la obtención de datos para analizar los patrones de lluvia en el monte Tláloc. Tendremos tres campañas de monitoreo en los siguientes periodos: del 15 de Julio al 15 de Septiembre, del 21 de Octubre al 10 de Diciembre y del 4 de marzo al 29 de Abril'),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.pop(context, 'Siguiente'),

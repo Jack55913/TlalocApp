@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/page/date.dart';
 import 'package:tlaloc/widgets/button_widget.dart';
 import 'package:tlaloc/models/app_state.dart';
@@ -57,56 +58,38 @@ class _AddScreenState extends State<AddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registra una medición'),
-        leading: IconButton(
-          icon: Icon(Icons.close),
-          onPressed: () => Navigator.pop(context),
-        ),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(11.0),
-            child: ButtonWidget(
-              text: 'Guardar',
-              onClicked: () async {
-                try {
-                  final state = Provider.of<AppState>(context, listen: false);
-                  if (widget.measurement == null) {
-                    // Crear medición
-                    state.addMeasurement(
-                      precipitation: precipitation!,
-                      time: dateTime,
-                      image: newImage,
-                    );
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  } else {
-                    // Edita una medición ya existente
-                    state.updateMeasurement(
-                      id: widget.measurement!.id,
-                      precipitation: precipitation!,
-                      time: dateTime,
-                      image: newImage,
-                      oldImage: widget.measurement!.imageUrl,
-                    );
-                    Navigator.pop(context);
-                    Navigator.pop(context);
+        // 
 
-                    /// Works around the previous page being a stateful widget
-                    Navigator.pop(context);
-                  }
-                } catch (e) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: Text('Ocurrió un error al guardar'),
-                      content: Text('$e'),
-                    ),
-                  );
-                }
-              },
-            ),
+        title: Consumer<GoogleSignInProvider>(
+            builder: (context, signIn, child) {
+              String place =
+                  Provider.of<AppState>(context).paraje;
+              return Text(
+                'Paraje de $place',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'FredokaOne',
+                  fontSize: 24,
+                  letterSpacing: 2,
+                ),
+              );
+            },
           ),
-        ],
+        
+        // AutoSizeText('Paraje de ',
+        //     style: TextStyle(fontFamily: 'FredokaOne')),
+        // leading: IconButton(
+        //   icon: Icon(Icons.close),
+        //   onPressed: () {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => const HomePage()),
+        //     );
+        //   },
+        // ),
+        // actions: <Widget>[
+            // Aquí estaba el botón de guardar en la parte superior
+        // ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -141,10 +124,11 @@ class _AddScreenState extends State<AddScreen> {
                         'Sube la imagen del pluviómetro',
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontFamily: 'FredokaOne',
                         ),
                       ),
+                      SizedBox(height: 15),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,6 +192,46 @@ class _AddScreenState extends State<AddScreen> {
             const Divider(
               height: 20,
               thickness: 1,
+            ),
+            ButtonWidget(
+              text: 'Guardar',
+              onClicked: () async {
+                try {
+                  final state = Provider.of<AppState>(context, listen: false);
+                  if (widget.measurement == null) {
+                    // Crear medición
+                    state.addMeasurement(
+                      precipitation: precipitation!,
+                      time: dateTime,
+                      image: newImage,
+                    );
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  } else {
+                    // Edita una medición ya existente
+                    state.updateMeasurement(
+                      id: widget.measurement!.id,
+                      precipitation: precipitation!,
+                      time: dateTime,
+                      image: newImage,
+                      oldImage: widget.measurement!.imageUrl,
+                    );
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+
+                    /// Works around the previous page being a stateful widget
+                    Navigator.pop(context);
+                  }
+                } catch (e) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Ocurrió un error al guardar'),
+                      content: Text('$e'),
+                    ),
+                  );
+                }
+              },
             ),
           ],
         ),
