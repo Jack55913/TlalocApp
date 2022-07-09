@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
+import 'package:tlaloc/onboarding/common_select.dart';
 
 class Datetime extends StatefulWidget {
   final void Function(DateTime) updateDateTime;
@@ -45,11 +47,10 @@ class _DatetimeState extends State<Datetime> {
     final hours = dateTime.hour.toString().padLeft(2, '0');
     final minutes = dateTime.minute.toString().padLeft(2, '0');
 
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          TextFormField(
+    return Column(
+      children: [
+        ListTile(
+          title: TextFormField(
             initialValue: precipitation?.toString() ?? '',
             style: TextStyle(
               fontSize: 24,
@@ -68,28 +69,52 @@ class _DatetimeState extends State<Datetime> {
             },
             keyboardType: TextInputType.number, //Mostrara teclado numérico
           ),
-          SizedBox(
-            height: 25,
+        ),
+        Divider(
+          height: 20,
+          thickness: 1,
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.place,
+            color: Colors.red,
           ),
-          Text(
-            'Revisa la fecha de colecta',
-            style: TextStyle(
-              fontSize: 18,
-              fontFamily: 'FredokaOne',
-            ),
+          title: Text('Elige un Paraje'),
+          subtitle: Text(Provider.of<AppState>(context).paraje),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CommonSelectPage()),
+            );
+          },
+        ),
+        Divider(
+          height: 20,
+          thickness: 1,
+        ),
+        Text(
+          'Revisa la fecha de colecta',
+          style: TextStyle(
+            fontSize: 18,
+            fontFamily: 'FredokaOne',
           ),
-          SizedBox(
-            height: 10,
+          textAlign: TextAlign.left,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          'Si no es correcta la hora, edítala:',
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 16,
+            fontFamily: 'poppins',
           ),
-          Text(
-            'Si no es correcta la hora, edítala:',
-            style: TextStyle(
-              fontSize: 16,
-              fontFamily: 'poppins',
-            ),
-          ),
-          const SizedBox(height: 16),
-          Row(
+        ),
+        const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton.icon(
@@ -129,8 +154,11 @@ class _DatetimeState extends State<Datetime> {
               ),
             ],
           ),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+      ],
     );
   }
 

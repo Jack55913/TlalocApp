@@ -31,6 +31,7 @@ class CommonSelectPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontFamily: 'FredokaOne',
                           color: Colors.white),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   SizedBox(height: 16),
@@ -45,7 +46,6 @@ class CommonSelectPage extends StatelessWidget {
                   SizedBox(height: 16),
                   Flex(
                     direction: Axis.vertical,
-
                     children: [
                       QrSelectWidget(),
                       Text(
@@ -117,7 +117,9 @@ class CommonSelectWidget extends StatelessWidget {
                   radius: 50,
                   child: Padding(
                     padding: EdgeInsets.all(16),
-                    child: AutoSizeText(
+                    child: 
+                    // INSERT AN IMAGE INSTEAD
+                    AutoSizeText(
                       paraje.split(' ').map((e) => e[0]).join(),
                       style: TextStyle(
                         color: Colors.white,
@@ -135,6 +137,7 @@ class CommonSelectWidget extends StatelessWidget {
                     color: Colors.black,
                     fontFamily: 'FredokaOne',
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(

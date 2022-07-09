@@ -32,12 +32,13 @@ class SignUpWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontFamily: 'FredokaOne',
                         color: Colors.white),
+                        textAlign: TextAlign.center,
                   ),
                 ),
                 Spacer(),
                 Image(
                   alignment: Alignment.center,
-                  width: 200,
+                  width: 300,
                   image: AssetImage('assets/images/img-1-4.png'),
                 ),
                 Spacer(),
@@ -105,7 +106,6 @@ class SignUpWidget extends StatelessWidget {
                     minimumSize: Size(double.infinity, 48),
                   ),
                   icon: Icon(Icons.person, color: Colors.black),
-                  // FaIcon(FontAwesomeIcons.person, color: Colors.black),
                   label: Text('Modo Incógnito'),
                   onPressed: () {
                     Navigator.push(
@@ -120,7 +120,9 @@ class SignUpWidget extends StatelessWidget {
                 Center(
                   child: RichText(
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.caption,
+                      style: TextStyle(
+                        color: Colors.white
+                      ),
                       children: [
                         const TextSpan(
                           text: 'Al iniciar sesión aceptas ',

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer__ructors, prefer__literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:html';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -7,6 +9,8 @@ import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/home_widget_classes.dart';
 import 'package:tlaloc/page/add.dart';
 import 'package:tlaloc/screens/home.dart';
+import 'package:tlaloc/widgets/facebook_button.dart';
+import 'package:tlaloc/widgets/personal_measures.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Widget _buildItem(String textTitle, String textsubtitle, String url) {
@@ -115,18 +119,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 20,
                 thickness: 1,
               ),
+              PersonalMeasures(),
+              Divider(
+                height: 20,
+                thickness: 1,
+              ),
               PhraseCard(),
               Divider(
                 height: 20,
                 thickness: 1,
               ),
               SizedBox(height: 20),
+              Text(
+                '¿Cómo llegar al pluviómetro?',
+                style: TextStyle(
+                  fontFamily: 'FredokaOne',
+                  fontSize: 24,
+                  letterSpacing: 2,
+                ),
+              ),
               DynamicTlalocMap(),
+              SizedBox(height: 20),
               Divider(
                 height: 20,
                 thickness: 1,
               ),
-              // SizedBox(height: 20),
+              SizedBox(height: 20),
+              FacebookButton(),
+              SizedBox(height: 20),
+              Divider(
+                height: 20,
+                thickness: 1,
+              ),
+              SizedBox(height: 20),
               ContactUsButton(),
               Divider(
                 height: 20,
