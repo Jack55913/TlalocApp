@@ -9,7 +9,7 @@ import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/onboarding/logged_in_widget.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
-import 'package:tlaloc/page/conditional_onboarding_page.dart';
+import 'package:tlaloc/onboarding/onbording.dart';
 import 'package:tlaloc/screens/politics.dart';
 import 'package:tlaloc/screens/privacy.dart';
 import 'package:ionicons/ionicons.dart';
@@ -219,7 +219,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ConditionalOnboardingPage()),
+                            builder: (context) => Onboarding()),
                       );
                     },
                   ),

@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
+import 'package:tlaloc/onboarding/common_select.dart';
 import 'package:tlaloc/onboarding/role.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,7 +33,7 @@ class SignUpWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontFamily: 'FredokaOne',
                         color: Colors.white),
-                        textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Spacer(),
@@ -111,7 +112,7 @@ class SignUpWidget extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const RoleSelection()),
+                          builder: (context) => CommonSelectPage()),
                     );
                   },
                 ),
@@ -120,9 +121,7 @@ class SignUpWidget extends StatelessWidget {
                 Center(
                   child: RichText(
                     text: TextSpan(
-                      style: TextStyle(
-                        color: Colors.white
-                      ),
+                      style: TextStyle(color: Colors.white),
                       children: [
                         const TextSpan(
                           text: 'Al iniciar sesión aceptas ',
@@ -137,8 +136,8 @@ class SignUpWidget extends StatelessWidget {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () => launchUrl(
                                   Uri.parse(
-                                    // TODO: Add privacy policy url
-                                      'https://tlaloc.web.app/web/#/'),
+                                      // TODO: Add privacy policy url
+                                      'https://tlaloc.web.app/web/privacidad/'),
                                   mode: LaunchMode.inAppWebView,
                                 ),
                         ),

@@ -39,7 +39,6 @@ class CommonSelectPage extends StatelessWidget {
                     'Selecciona el Pluviómetro automáticamente',
                     style: TextStyle(
                         fontSize: 18,
-                        // fontWeight: FontWeight.bold,
                         fontFamily: 'poppins',
                         color: Colors.white),
                   ),
@@ -52,7 +51,6 @@ class CommonSelectPage extends StatelessWidget {
                         'Selecciona el Pluviómetro manualmente',
                         style: TextStyle(
                             fontSize: 18,
-                            // fontWeight: FontWeight.bold,
                             fontFamily: 'poppins',
                             color: Colors.white),
                       ),
@@ -203,7 +201,7 @@ class QrSelectWidget extends StatelessWidget {
                   content: (paraje == null || paraje == '')
                       ? null
                       : Text(
-                          'Tlaloc App no se encuentra disponible en tu paraje "$paraje".'),
+                          'Tlaloc App no se encuentra disponible en el paraje "$paraje".'),
                   actions: [
                     TextButton(
                       child: Text('De acuerdo'),

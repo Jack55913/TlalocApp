@@ -12,25 +12,12 @@ Map<String, String> parajes = {
   'Agua de Chiqueros': 'Santa Catarina del Monte',
 };
 
+
+
 final dateLongAgo = DateTime(2022, 1, 1);
 final dateInALongTime = DateTime(3000, 12, 31);
 
 String appName = 'Tláloc App';
-const meses = <String>[
-  'ene',
-  'feb',
-  'mar',
-  'abr',
-  'may',
-  'jun',
-  'jul',
-  'ago',
-  'sep',
-  'oct',
-  'nov',
-  'dic'
-];
-
 class AppColors {
   // From dark illustration
   static const Color dark1 = Color(0xFF121212);
@@ -61,21 +48,4 @@ ThemeData darkTheme = ThemeData(
     ),
   ),
   scaffoldBackgroundColor: AppColors.dark1,
-);
-
-ThemeData newLightTheme = ThemeData(
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  primarySwatch: Colors.pink,
-  primaryColor: Colors.white,
-  appBarTheme: const AppBarTheme(
-    elevation: 0,
-    titleTextStyle: TextStyle(
-      color: Colors.grey,
-    ),
-    backgroundColor: Colors.white,
-    iconTheme: IconThemeData(
-      color: Colors.black,
-    ),
-  ),
-  selectedRowColor: AppColors.orange1,
 );
