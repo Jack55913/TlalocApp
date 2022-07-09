@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/widgets/personal_measures.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;

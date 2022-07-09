@@ -1,7 +1,6 @@
 // ignore_for_file: prefer__ructors, prefer__literals_to_create_immutables, prefer_const_constructors
 
-import 'dart:html';
-
+// import 'dart:html';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

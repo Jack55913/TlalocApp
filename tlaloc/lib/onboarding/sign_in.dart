@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
-import 'package:tlaloc/onboarding/common_select.dart';
+import 'package:tlaloc/onboarding/role.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignUpWidget extends StatelessWidget {
@@ -92,7 +92,7 @@ class SignUpWidget extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const CommonSelectPage(),
+                          builder: (context) => const RoleSelection(),
                         ),
                       );
                     }
@@ -111,7 +111,7 @@ class SignUpWidget extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CommonSelectPage()),
+                          builder: (context) => const RoleSelection()),
                     );
                   },
                 ),
