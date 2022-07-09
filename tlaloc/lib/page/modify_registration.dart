@@ -116,7 +116,7 @@ class ModifyRegistration extends StatelessWidget {
                 SizedBox(height: 15),
                 Consumer<AppState>(
                   builder: (context, state, child) {
-                    return _buildDataModify('Ejido:', state.ejido);
+                    return _buildDataModify('Paraje:', state.paraje);
                   },
                 ),
                 if (measurement.imageUrl != null) ...[

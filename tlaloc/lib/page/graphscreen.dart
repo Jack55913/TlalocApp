@@ -70,7 +70,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const AutoSizeText(
-            'Gráfica',
+            'Gráficas y estadísticas',
             style: TextStyle(
               fontFamily: 'FredokaOne',
               fontSize: 24,
@@ -187,6 +187,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
                 ],
               ),
             ),
+            const SizedBox(height: 20),
             Consumer<AppState>(
               builder: (context, state, _) {
                 return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(

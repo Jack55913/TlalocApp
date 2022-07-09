@@ -9,6 +9,8 @@ import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/onboarding/logged_in_widget.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
+import 'package:tlaloc/onboarding/onbording.dart';
+import 'package:tlaloc/screens/credits.dart';
 import 'package:tlaloc/screens/politics.dart';
 import 'package:tlaloc/screens/privacy.dart';
 import 'package:ionicons/ionicons.dart';
@@ -33,7 +35,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
               String name =
                   signIn.user?.displayName?.split(' ')[0] ?? 'Incógnito';
               return Text(
-                'Ejido de $name',
+                'Perfil de $name',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'FredokaOne',
@@ -50,8 +52,8 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
               children: <Widget>[
                 ListTile(
                   leading: Icon(Icons.place),
-                  title: Text('Cambiar de Ejido'),
-                  subtitle: Text(Provider.of<AppState>(context).ejido),
+                  title: Text('Elige un Paraje'),
+                  subtitle: Text(Provider.of<AppState>(context).paraje),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -110,20 +112,19 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                         backgroundColor: Colors.white,
                       ),
                       applicationLegalese:
-                          'Con amor desde COLPOS ❤️\nCréditos y programación: Emilio Álvarez\nColoborador programador: Gabriel Rodríguez',
+                          'Con amor desde COLPOS ❤️\nCréditos y programación: Emilio Álvarez Herrera',
                       applicationVersion: 'versión inicial (beta)',
                       children: [
                         ListTile(
                           leading: Icon(Icons.people),
                           title: Text('Ver créditos'),
                           onTap: () {
-                            // analytics.logEvent(name: 'view-credits');
-                            launchUrl(
-                              Uri.parse(
-                                  'https://tlaloc-3c65c.web.app/acerca_de'),
-                              mode: LaunchMode.inAppWebView,
-                            );
-                          },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CreditsPage()),
+                      );
+                    },
                         ),
                         ListTile(
                           leading: Icon(Ionicons.logo_facebook),
@@ -132,7 +133,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                             // analytics.logEvent(name: 'view-facebook');
                             launchUrl(
                               Uri.parse(
-                                  'https://www.facebook.com/colpos.cienciasagricolas'),
+                                  'https://www.facebook.com/Ciencia-Ciudadana-para-el-Monitoreo-de-Lluvia-100358326014423'),
                               mode: LaunchMode.externalApplication,
                             );
                           },
@@ -208,6 +209,17 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => LoggedInWidget()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.bug_report),
+                    title: Text('Abrir pantalla inicial'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Onboarding()),
                       );
                     },
                   ),

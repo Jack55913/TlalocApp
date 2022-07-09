@@ -1,5 +1,6 @@
 // ignore_for_file: prefer__ructors, prefer__literals_to_create_immutables, prefer_const_constructors
 
+// import 'dart:html';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -7,6 +8,8 @@ import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/home_widget_classes.dart';
 import 'package:tlaloc/page/add.dart';
 import 'package:tlaloc/screens/home.dart';
+import 'package:tlaloc/widgets/facebook_button.dart';
+import 'package:tlaloc/widgets/personal_measures.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Widget _buildItem(String textTitle, String textsubtitle, String url) {
@@ -81,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Center(
                         child: AutoSizeText(
-                          'Realiza estos pasos',
+                          'Tutoriales',
                           style: TextStyle(
                             color: Color.fromRGBO(0, 229, 131, 1),
                             fontFamily: 'FredokaOne',
@@ -92,25 +95,30 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(height: 10),
                       _buildItem(
+                          '📖 Medición de datos',
+                          'Revisa los errores más comúnes al momento de medir',
+                          'https://tlaloc.web.app/'),
+                      _buildItem(
+                          '🚀 Enviar las mediciones',
+                          '¿Cómo enviar los datos en la app?',
+                          'https://youtu.be/PattwuN6AlA'),
+                      _buildItem(
                           '🛠️ Realiza tu propio pluviómetro',
                           'Es un instrumento para la medición de lluvia',
                           'https://youtu.be/kDqaTwjJvME'),
                       _buildItem(
                           '⛰️ Instalación',
-                          'Coloca tu pluviómetro en un lugar estratégico',
+                          '¿Cómo instalar un pluviómetro?',
                           'https://youtu.be/qZx-Z3_n4t8'),
-                      _buildItem(
-                          '📖 Medición de datos',
-                          'Revisa los errores comúnes al momento de medir',
-                          'https://tlaloc.web.app/'),
-                      _buildItem(
-                          '🚀 Enviar las mediciones',
-                          'Sube los datos obtenidos en la App!',
-                          'https://tlaloc-web.web.app/'),
                     ],
                   ),
                 ),
               ),
+              Divider(
+                height: 20,
+                thickness: 1,
+              ),
+              PersonalMeasures(),
               Divider(
                 height: 20,
                 thickness: 1,
@@ -121,12 +129,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 thickness: 1,
               ),
               SizedBox(height: 20),
+              Center(
+                child: Text(
+                  '¿Cómo llegar al pluviómetro?',
+                  style: TextStyle(
+                    fontFamily: 'FredokaOne',
+                    fontSize: 24,
+                    letterSpacing: 2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
               DynamicTlalocMap(),
+              SizedBox(height: 20),
               Divider(
                 height: 20,
                 thickness: 1,
               ),
-              // SizedBox(height: 20),
+              SizedBox(height: 20),
+              FacebookButton(),
+              SizedBox(height: 20),
+              Divider(
+                height: 20,
+                thickness: 1,
+              ),
+              SizedBox(height: 20),
               ContactUsButton(),
               Divider(
                 height: 20,

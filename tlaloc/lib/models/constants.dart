@@ -1,35 +1,23 @@
 import 'package:flutter/material.dart';
 
-/// Para agregar o quitar ejidos, basta con cambiar esta variable
-/// TODO: poner el número de hectáreas.
-Map<String, num> ejidos = {
-  'Tequexquinahuac': 1200,
-  'San Dieguito Xuhimanca': 99999,
-  'San Pablo Ixayoc': 99999,
-  'San Juan Totolapan': 99999,
-  'San Miguel Tlaixpan': 99999,
-  'Nativitas': 99999,
+/// Para agregar o quitar parajes, basta con cambiar esta variable
+Map<String, String> parajes = {
+  'El Venturero': 'Nativitas',
+  'El Jardín': 'Nativitas',
+  'Cabaña': 'San Pablo Ixayoc',
+  'Cruz de Zacatenco': 'San Dieguito',
+  'Canoas altas': 'Tequexquinahuac',
+  'Los Manantiales': 'Tequexquinahuac',
+  'Terreno de Don Domingo': 'Santa Catarina del Monte',
+  'Agua de Chiqueros': 'Santa Catarina del Monte',
 };
 
-final dateLongAgo = DateTime(2000, 1, 1);
+
+
+final dateLongAgo = DateTime(2022, 1, 1);
 final dateInALongTime = DateTime(3000, 12, 31);
 
 String appName = 'Tláloc App';
-const meses = <String>[
-  'ene',
-  'feb',
-  'mar',
-  'abr',
-  'may',
-  'jun',
-  'jul',
-  'ago',
-  'sep',
-  'oct',
-  'nov',
-  'dic'
-];
-
 class AppColors {
   // From dark illustration
   static const Color dark1 = Color(0xFF121212);
@@ -60,21 +48,4 @@ ThemeData darkTheme = ThemeData(
     ),
   ),
   scaffoldBackgroundColor: AppColors.dark1,
-);
-
-ThemeData newLightTheme = ThemeData(
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  primarySwatch: Colors.pink,
-  primaryColor: Colors.white,
-  appBarTheme: const AppBarTheme(
-    elevation: 0,
-    titleTextStyle: TextStyle(
-      color: Colors.grey,
-    ),
-    backgroundColor: Colors.white,
-    iconTheme: IconThemeData(
-      color: Colors.black,
-    ),
-  ),
-  selectedRowColor: AppColors.orange1,
 );

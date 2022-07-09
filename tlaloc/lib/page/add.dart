@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'dart:io';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/page/date.dart';
 import 'package:tlaloc/widgets/button_widget.dart';
 import 'package:tlaloc/models/app_state.dart';
@@ -57,13 +59,24 @@ class _AddScreenState extends State<AddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.close),
-          onPressed: () => Navigator.pop(context),
+        title: Consumer<GoogleSignInProvider>(
+          builder: (context, signIn, child) {
+            String place = Provider.of<AppState>(context).paraje;
+            return AutoSizeText(
+              place,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'FredokaOne',
+                // fontSize: 24,
+                // letterSpacing: 2,
+              ),
+            );
+          },
         ),
+        
         actions: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(11.0),
+            padding: const EdgeInsets.all(10.0),
             child: ButtonWidget(
               text: 'Guardar',
               onClicked: () async {
@@ -121,7 +134,6 @@ class _AddScreenState extends State<AddScreen> {
               measurement: widget.measurement,
             ),
             const Divider(
-              height: 20,
               thickness: 1,
             ),
             FutureBuilder<ConnectivityResult>(
@@ -137,13 +149,14 @@ class _AddScreenState extends State<AddScreen> {
                     children: [
                       const SizedBox(height: 15),
                       const Text(
-                        'Imagen del pluviómetro',
+                        'Sube la imagen del pluviómetro',
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontFamily: 'FredokaOne',
                         ),
                       ),
+                      SizedBox(height: 15),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,6 +167,7 @@ class _AddScreenState extends State<AddScreen> {
                                   Icon(Icons.image),
                                   Text(" Desde la Galería",
                                       style: TextStyle(
+                                        // color: Colors.grey,
                                         fontSize: 16,
                                         fontFamily: 'poppins',
                                       )),
@@ -167,7 +181,7 @@ class _AddScreenState extends State<AddScreen> {
                               child: Row(
                                 children: [
                                   Icon(Icons.camera_alt),
-                                  Text(" Desde la Cámara",
+                                  Text(" Desde la cámara",
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontFamily: 'poppins',
@@ -179,7 +193,6 @@ class _AddScreenState extends State<AddScreen> {
                               }),
                         ],
                       ),
-                      SizedBox(height: 15),
                       if (newImage == null &&
                           widget.measurement != null &&
                           widget.measurement!.imageUrl != null)
@@ -200,9 +213,6 @@ class _AddScreenState extends State<AddScreen> {
                   );
                 }
               },
-            ),
-            SizedBox(
-              height: 30,
             ),
             const Divider(
               height: 20,

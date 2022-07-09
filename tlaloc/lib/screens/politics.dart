@@ -12,8 +12,8 @@ const String _markdownData = """
 
 Los sitios web de Tláloc (\"Sitios web\") y las aplicaciones
 móviles (\"Aplicaciones\") y los servicios relacionados (junto con los
-Sitios web, el \"Servicio\") son operados por PROYECTO Tláloc
-(\"Tláloc\", \"Tláloc\" o \"nosotros\"). El acceso y uso del
+Sitios web, el \"Servicio\") son operados por PROYECTO Ciencia Ciudadana para el Monitoreo de Lluvia y 
+(\"Tláloc App\", \"TlálocApp\" o \"nosotros\"). El acceso y uso del
 Servicio está sujeto a los siguientes Términos y Condiciones del
 Servicio (\"Términos y Condiciones\"). Al acceder o utilizar cualquier
 parte del Servicio, usted declara que ha leído, entendido y acepta estar
@@ -51,7 +51,7 @@ proporcionar información precisa, actual y completa sobre usted y/o su
 organización según lo solicitado por Tláloc; (ii) para mantener
 la confidencialidad de su contraseña y otra información relacionada con
 la seguridad de su cuenta; (iii) mantener y actualizar de inmediato
-cualquier información de registro que proporcione a Tláloc,
+cualquier información de registro que proporcione a Tláloc App,
 para mantener dicha información precisa, actualizada y completa; y (iv)
 ser totalmente responsable de todo el uso de su cuenta y de cualquier
 acción que tenga lugar a través de su cuenta.

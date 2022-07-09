@@ -10,7 +10,9 @@ const String _markdownData = """
 
 En tlaloc, nos preocupamos por sus datos personales, por lo que
 hemos preparado esta Política de privacidad para explicar cómo les
-recopilamos, usamos y compartimos.
+recopilamos, usamos y compartimos ES IMPORTANTE MENCIONAR que los 
+DATOS de NINGÚNA manera pueden ser utilizados sin el concentimiento 
+de los coordinadores del proyecto.
 
 Esta Política de privacidad (\"Política de privacidad\") detalla los
 datos personales que PROYECTO tlaloc (\"tlaloc\",
@@ -67,16 +69,6 @@ mensajes y de otra manera transmitiendo información a otros usuarios
 (\"Datos de actividad\"). También recopilamos datos técnicos sobre cómo
 interactúa con nuestros Servicios; Para obtener más información,
 consulte Cookies.
-
-## Practica de hablar en vivo
-
-Cuando tome una Lección de hablar en vivo, utilizaremos el micrófono de
-su dispositivo durante toda la lección para hablar con su tutor. También
-tiene la opción de usar su cámara para compartir su video con su tutor.
-tlaloc graba estas lecciones de audio y video y las retiene
-hasta que cierre su cuenta tlaloc. tlaloc utiliza
-estos datos para ayudar a mejorar la calidad de las lecciones y para
-fines de investigación interna.
 
 tlaloc no comparte ninguno de sus datos personales con su
 tutor. Usted es completamente anónimo para ellos de manera
