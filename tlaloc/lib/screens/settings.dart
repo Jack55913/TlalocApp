@@ -10,6 +10,7 @@ import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/onboarding/logged_in_widget.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
 import 'package:tlaloc/onboarding/onbording.dart';
+import 'package:tlaloc/screens/credits.dart';
 import 'package:tlaloc/screens/politics.dart';
 import 'package:tlaloc/screens/privacy.dart';
 import 'package:ionicons/ionicons.dart';
@@ -118,13 +119,12 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           leading: Icon(Icons.people),
                           title: Text('Ver créditos'),
                           onTap: () {
-                            // analytics.logEvent(name: 'view-credits');
-                            launchUrl(
-                              Uri.parse(
-                                  'https://tlaloc-3c65c.web.app/acerca_de'),
-                              mode: LaunchMode.inAppWebView,
-                            );
-                          },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CreditsPage()),
+                      );
+                    },
                         ),
                         ListTile(
                           leading: Icon(Ionicons.logo_facebook),

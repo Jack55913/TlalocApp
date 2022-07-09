@@ -129,12 +129,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 thickness: 1,
               ),
               SizedBox(height: 20),
-              Text(
-                '¿Cómo llegar al pluviómetro?',
-                style: TextStyle(
-                  fontFamily: 'FredokaOne',
-                  fontSize: 24,
-                  letterSpacing: 2,
+              Center(
+                child: Text(
+                  '¿Cómo llegar al pluviómetro?',
+                  style: TextStyle(
+                    fontFamily: 'FredokaOne',
+                    fontSize: 24,
+                    letterSpacing: 2,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               DynamicTlalocMap(),
