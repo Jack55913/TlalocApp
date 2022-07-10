@@ -2,6 +2,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
@@ -45,9 +46,8 @@ class DataScreen extends StatelessWidget {
                                 fontSize: 24,
                                 letterSpacing: 2,
                               )),
-                          background: CachedNetworkImage(
-                            imageUrl:
-                                'https://pbs.twimg.com/media/C2xxHNkUoAACeWT.jpg:large',
+                          background: Image.asset(
+                            'assets/images/img-7.jpg',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -177,17 +177,23 @@ class DataWidgetView extends StatelessWidget {
               children: <Widget>[
                 if (measurement.uploader != null)
                   CircleAvatar(
-                    backgroundColor: AppColors.orange1,
-                    radius: 25,
-                    child: AutoSizeText(
-                      // Iniciales del nombre de quien registró la medición
-                      measurement.uploader!.split(' ').map((e) => e[0]).join(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontFamily: 'FredokaOne',
-                      ),
-                    ),
+                    foregroundImage: FirebaseAuth.instance.currentUser == null
+                        ? NetworkImage(
+                            'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png')
+                        : NetworkImage(
+                            FirebaseAuth.instance.currentUser!.photoURL!),
+
+                    // backgroundColor: AppColors.orange1,
+                    // radius: 25,
+                    // child: AutoSizeText(
+                    //   // Iniciales del nombre de quien registró la medición
+                    //   measurement.uploader!.split(' ').map((e) => e[0]).join(),
+                    //   style: TextStyle(
+                    //     color: Colors.white,
+                    //     fontSize: 22,
+                    //     fontFamily: 'FredokaOne',
+                    //   ),
+                    // ),
                   ),
               ],
             ),

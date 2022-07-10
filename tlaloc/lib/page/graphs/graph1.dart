@@ -226,8 +226,6 @@ class _DispersionBarState extends State<DispersionBar> {
                                 ),
                               ],
                             ),
-                      // AQUÍ PUEDO AGREGAR LAS GRÁFICAS QUE QUIERA:
-
                       SfCircularChart(
                         // Circular chart
                         
