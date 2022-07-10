@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_types_as_parameter_names, non_constant_identifier_names
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -5,50 +7,12 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tlaloc/models/constants.dart';
+import 'package:tlaloc/page/graphs/graph1.dart';
+import 'package:tlaloc/page/graphs/graph2.dart';
+import 'package:tlaloc/page/home.dart';
+import 'package:tlaloc/screens/home.dart';
 import 'package:tlaloc/widgets/empty_state.dart';
 import '../models/app_state.dart';
-// import 'package:intl/intl.dart';
-
-/// Samples:
-/// https://google.github.io/charts/flutter/example/time_series_charts/simple.html
-/// https://www.syncfusion.com/kb/12289/how-to-render-flutter-time-series-chart-using-the-charts-widget-sfcartesianchart
-/// https://pub.dev/packages/syncfusion_flutter_charts/example
-
-class DatePickerButton extends StatelessWidget {
-  final DateTime dateTime;
-  final void Function(DateTime) onDateChanged;
-
-  const DatePickerButton({
-    Key? key,
-    required this.dateTime,
-    required this.onDateChanged,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      icon: const Icon(Icons.calendar_month),
-      label: Text(
-        (dateTime == dateLongAgo || dateTime == dateInALongTime)
-            ? 'Seleccionar'
-            : '${dateTime.year}/${dateTime.month}/${dateTime.day}',
-      ),
-      onPressed: () async {
-        final date = await showDatePicker(
-          context: context,
-          initialDate: (dateTime == dateLongAgo || dateTime == dateInALongTime)
-              ? DateTime.now()
-              : dateTime,
-          firstDate: dateLongAgo,
-          lastDate: dateInALongTime,
-        );
-        if (date != null) {
-          onDateChanged(date);
-        }
-      },
-    );
-  }
-}
 
 class GraphsScreen extends StatefulWidget {
   const GraphsScreen({Key? key}) : super(key: key);
@@ -57,13 +21,31 @@ class GraphsScreen extends StatefulWidget {
   State<GraphsScreen> createState() => _GraphsScreenState();
 }
 
-enum DateTimeMode { custom, week, month, year, always }
-
 class _GraphsScreenState extends State<GraphsScreen> {
-  DateTime initialDate = dateLongAgo;
-  DateTime finalDate = dateInALongTime;
-  DateTimeMode mode = DateTimeMode.always;
-
+  List<String> graphimages = [
+    "assets/images/img-2.png",
+    "assets/images/img-1.png",
+  ];
+  List<String> chartimages = [
+    "assets/images/img-3.png",
+    "assets/images/img-4.png",
+  ];
+  List<String> graphtitle = [
+    "De Dispersión",
+    "De Barras",
+  ];
+  List<String> charttitle = [
+    "De Tortas",
+    "De Pasteles",
+  ];
+  final graphscrens = [
+    DispersionBar(),
+    BarGraph(),
+  ];
+  final chartscrens = [
+    DispersionBar(),
+    BarGraph(),
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -77,166 +59,116 @@ class _GraphsScreenState extends State<GraphsScreen> {
               letterSpacing: 2,
             ),
           ),
+          actions: <Widget>[
+            InfoButton(),
+            ProfilePage(),
+          ],
         ),
         body: Column(
           children: [
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Wrap(
-                children: [
-                  ChoiceChip(
-                    selectedColor: AppColors.blue1,
-                    label: const Text('Esta semana'),
-                    selected: mode == DateTimeMode.week,
-                    onSelected: (val) {
-                      final now = DateTime.now();
-                      final today = DateTime(now.year, now.month, now.day);
-                      final monday =
-                          now.add(Duration(days: -today.weekday + 1));
-                      setState(() {
-                        mode = DateTimeMode.week;
-                        initialDate = monday;
-                        finalDate = monday.add(const Duration(
-                          days: 5,
-                          hours: 23,
-                          minutes: 59,
-                          seconds: 59,
-                        ));
-                      });
-                    },
+            Builder(builder: (context) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.dark2,
+                    borderRadius: BorderRadius.circular(25),
                   ),
-                  const SizedBox(width: 4),
-                  ChoiceChip(
-                    selectedColor: AppColors.blue1,
-                    label: const Text('Este mes'),
-                    selected: mode == DateTimeMode.month,
-                    onSelected: (val) {
-                      final now = DateTime.now();
-                      setState(() {
-                        mode = DateTimeMode.month;
-                        initialDate = DateTime(now.year, now.month, 1);
-                        finalDate =
-                            DateTime(now.year, now.month + 1, 0, 23, 59, 59);
-                      });
-                    },
-                  ),
-                  const SizedBox(width: 4),
-                  ChoiceChip(
-                    selectedColor: AppColors.blue1,
-                    label: const Text('Este año'),
-                    selected: mode == DateTimeMode.year,
-                    onSelected: (val) {
-                      final now = DateTime.now();
-                      setState(() {
-                        mode = DateTimeMode.year;
-                        initialDate = DateTime(now.year, 1, 1);
-                        finalDate = DateTime(now.year, 12, 31, 23, 59, 59);
-                      });
-                    },
-                  ),
-                  const SizedBox(width: 4),
-                  ChoiceChip(
-                    selectedColor: AppColors.blue1,
-                    label: const Text('Siempre'),
-                    selected: mode == DateTimeMode.always,
-                    onSelected: (val) {
-                      setState(() {
-                        mode = DateTimeMode.always;
-                        initialDate = dateLongAgo;
-                        finalDate = dateInALongTime;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                children: [
-                  const Text('Inicio: '),
-                  DatePickerButton(
-                    dateTime: initialDate,
-                    onDateChanged: (date) {
-                      setState(() {
-                        mode = DateTimeMode.custom;
-                        initialDate = date;
-                      });
-                    },
-                  ),
-                  const Expanded(
-                    child: SizedBox(),
-                  ),
-                  const Text('Fin: '),
-                  DatePickerButton(
-                    dateTime: finalDate,
-                    onDateChanged: (date) {
-                      setState(() {
-                        mode = DateTimeMode.custom;
-                        finalDate = DateTime(
-                          date.year,
-                          date.month,
-                          date.day,
-                          23,
-                          59,
-                          59,
-                        );
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Consumer<AppState>(
-              builder: (context, state, _) {
-                return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream:
-                      state.getMeasurementsStream(), // Just as on DataScreen
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return EmptyState('Error ${snapshot.error}');
-                    } else if (snapshot.hasData) {
-                      final measurementsSnapshot = snapshot.data!;
-                      final measurements = state
-                          .getMeasurementsFromSnapshot(measurementsSnapshot);
-                      final filteredMeasurements = measurements
-                          .where((measurement) =>
-                              (measurement.dateTime!.isAfter(initialDate) &&
-                                  measurement.dateTime!.isBefore(finalDate)))
-                          .toList();
-                      return Expanded(
-                        child: SfCartesianChart(
-                          primaryXAxis: DateTimeAxis(
-                            name: 'Fecha',
-                            intervalType: DateTimeIntervalType.days,
-                            dateFormat: DateFormat.MMMd('es'),
-                          ),
-                          primaryYAxis: NumericAxis(name: 'Precipitación (mm)'),
-                          series: <ChartSeries<Measurement, DateTime>>[
-                            LineSeries<Measurement, DateTime>(
-                              xValueMapper: (measurement, _) =>
-                                  measurement.dateTime,
-                              yValueMapper: (measurement, _) =>
-                                  measurement.precipitation,
-                              dataSource: filteredMeasurements,
-                            ),
-                          ],
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      Text('Gráficas',
+                          style: TextStyle(
+                            fontFamily: 'FredokaOne',
+                            fontSize: 24,
+                            letterSpacing: 2,
+                            color: AppColors.green1,
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView.builder(
+                          itemBuilder: (BuildContext, index) {
+                            return Card(
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: AssetImage(graphimages[index]),
+                                ),
+                                title: Text(graphtitle[index]),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => graphscrens[index],
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          itemCount: graphimages.length,
+                          shrinkWrap: true,
+                          padding: EdgeInsets.all(5),
+                          scrollDirection: Axis.vertical,
                         ),
-                      );
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                );
-              },
-            ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+            Builder(builder: (context) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.dark2,
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      Text('Tablas',
+                          style: TextStyle(
+                            fontFamily: 'FredokaOne',
+                            fontSize: 24,
+                            letterSpacing: 2,
+                            color: AppColors.green1,
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView.builder(
+                          itemBuilder: (BuildContext, index) {
+                            return Card(
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: AssetImage(chartimages[index]),
+                                ),
+                                title: Text(graphtitle[index]),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => chartscrens[index],
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          itemCount: chartimages.length,
+                          shrinkWrap: true,
+                          padding: EdgeInsets.all(5),
+                          scrollDirection: Axis.vertical,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
           ],
         ),
+        floatingActionButton: const Fab(),
       ),
     );
   }

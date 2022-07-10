@@ -31,10 +31,7 @@ class ButtonWidget extends StatelessWidget {
                   ),
                   TextButton(
                     child: const Text('Enviar'),
-                    onPressed: () => {
-                    // _incrementCounter,
-                    onClicked,
-                    }
+                    onPressed: onClicked,
                     // onPressed: () => Navigator.pop(context, 'Enviar'),
                   ),
                 ],

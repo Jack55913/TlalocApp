@@ -15,7 +15,7 @@ import 'package:tlaloc/models/app_state.dart';
 
 class AddScreen extends StatefulWidget {
   final Measurement? measurement;
-  
+
   const AddScreen({Key? key, this.measurement}) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class _AddScreenState extends State<AddScreen> {
   File? newImage;
   DateTime dateTime = DateTime.now();
   num? precipitation;
-  
+
   Future pickImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -54,10 +54,10 @@ class _AddScreenState extends State<AddScreen> {
       print('Falló al obtener la imágen: $e');
     }
   }
-final _counter = 0;
+
+// final _counter = 0;
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: Consumer<GoogleSignInProvider>(
@@ -74,7 +74,6 @@ final _counter = 0;
             );
           },
         ),
-        
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -84,8 +83,8 @@ final _counter = 0;
                 try {
                   final state = Provider.of<AppState>(context, listen: false);
                   if (widget.measurement == null) {
-                    // TODO: Crear contador en la hoja de personal_measures.dart para que sepa el ejidatario cuántas veces ha medido: 
-                    
+                    // TODO: Crear contador en la hoja de personal_measures.dart para que sepa el ejidatario cuántas veces ha medido:
+
                     // Crear medición
                     state.addMeasurement(
                       precipitation: precipitation!,

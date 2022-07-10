@@ -1,6 +1,6 @@
 // ignore_for_file: prefer__ructors, prefer__literals_to_create_immutables, prefer_const_constructors
 
-// import 'dart:html';
+import 'dart:html';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: AutoSizeText('Tláloc App',
+          title: AutoSizeText(appName,
               style: TextStyle(
                 fontFamily: 'FredokaOne',
                 fontSize: 24,
@@ -180,7 +180,7 @@ class Fab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return FloatingActionButton.extended(
       tooltip: 'Agregar Medición',
       highlightElevation: 1,
       shape: RoundedRectangleBorder(
@@ -192,8 +192,17 @@ class Fab extends StatelessWidget {
         );
       },
       backgroundColor: AppColors.green1,
-      child: Icon(Icons.add,
-          color: Colors.white, semanticLabel: 'Agregar medición'),
+      icon: const Icon(Icons.add, color: Colors.white),
+      mouseCursor: MaterialStateMouseCursor.clickable,
+      label: const Text(
+        'Agregar',
+        style: TextStyle(
+          fontFamily: 'poppins',
+          fontSize: 18,
+          letterSpacing: 2,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }

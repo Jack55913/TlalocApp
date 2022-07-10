@@ -11,7 +11,7 @@ class Onboarding extends StatelessWidget {
 
   final List<CardPlanetData> data = [
     CardPlanetData(
-      title: "Tláloc App",
+      title: appName,
       subtitle: "Ciencia para tí y para todos",
       image: const AssetImage("assets/images/tlaloc_logo.png"),
       backgroundColor: AppColors.blue1,

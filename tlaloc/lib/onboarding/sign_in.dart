@@ -45,7 +45,7 @@ class SignUpWidget extends StatelessWidget {
                 Spacer(),
                 Center(
                   child: Text(
-                    'Bienvenido a Tláloc App',
+                    'Bienvenido a $appName',
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
