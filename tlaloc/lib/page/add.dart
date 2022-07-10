@@ -84,7 +84,7 @@ class _AddScreenState extends State<AddScreen> {
                   final state = Provider.of<AppState>(context, listen: false);
                   if (widget.measurement == null) {
                     // TODO: Crear contador en la hoja de personal_measures.dart para que sepa el ejidatario cuántas veces ha medido:
-
+                    // TODO: al pulsar guardar. me lleve a home y salga conffeti
                     // Crear medición
                     state.addMeasurement(
                       precipitation: precipitation!,

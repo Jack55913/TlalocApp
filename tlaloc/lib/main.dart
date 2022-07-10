@@ -10,11 +10,7 @@ import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tlaloc/page/conditional_onboarding_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tlaloc/page/graphscreen.dart';
-import 'package:tlaloc/screens/home.dart';
 import 'package:url_strategy/url_strategy.dart';
-//import 'package:firebase_analytics/observer.dart';
-// import 'package:tlaloc/screens/navigation_bar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,9 +43,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
         supportedLocales: const [Locale('es', 'MX')],
-        // navigatorObservers: [
-        //   FirebaseAnalyticsObserver(analytics: analytics),
-        // ],
         title: appName,
         theme: darkTheme,
         debugShowCheckedModeBanner: false,
