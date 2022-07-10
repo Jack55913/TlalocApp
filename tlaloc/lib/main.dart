@@ -10,11 +10,13 @@ import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tlaloc/page/conditional_onboarding_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:url_strategy/url_strategy.dart';
 //import 'package:firebase_analytics/observer.dart';
 // import 'package:tlaloc/screens/navigation_bar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
   await Firebase.initializeApp(
       options: DefaultFirebaseOptions
           .currentPlatform); //Para el inicio de sesión por google

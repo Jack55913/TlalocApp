@@ -80,6 +80,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
         ),
         body: Column(
           children: [
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Wrap(
@@ -146,10 +147,11 @@ class _GraphsScreenState extends State<GraphsScreen> {
                         finalDate = dateInALongTime;
                       });
                     },
-                  )
+                  ),
                 ],
               ),
             ),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Row(

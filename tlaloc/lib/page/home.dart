@@ -140,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   textAlign: TextAlign.center,
                 ),
               ),
+              SizedBox(height: 20),
               DynamicTlalocMap(),
               SizedBox(height: 20),
               Divider(

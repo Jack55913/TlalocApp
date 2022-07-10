@@ -117,7 +117,6 @@ class DynamicTlalocMap extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
           Center(
             //     child: FlutterMap(
             //   options: MapOptions(

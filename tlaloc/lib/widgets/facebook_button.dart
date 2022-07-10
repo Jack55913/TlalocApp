@@ -16,12 +16,15 @@ class FacebookButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(25),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // Espacio entre ambas
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
+              const SizedBox(
+                width: 1,
+              ),
               Column(
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  const Text(
+                children: const [
+                  Text(
                     'Descúbre un grupo\npara preservar\nel monte Tláloc',
                     style: TextStyle(
                       fontFamily: 'poppins',
@@ -30,8 +33,8 @@ class FacebookButton extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  const Text(
+                  SizedBox(height: 30),
+                  Text(
                     'Explora las acciones y\núnan fuerzas ',
                     style: TextStyle(
                       color: Colors.white,
@@ -41,16 +44,17 @@ class FacebookButton extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(
+                width: 5,
+              ),
               Column(
-                // Alinear a la derecha:
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: const [
                   Image(
-                      image: AssetImage('assets/images/img-5.jpg'),
-                      fit: BoxFit.cover,
-                      width: 100,
-                      height: 150,
-                      ),
+                    image: AssetImage('assets/images/img-5.jpg'),
+                    fit: BoxFit.cover,
+                    width: 150,
+                    height: 150,
+                  ),
                 ],
               ),
             ],
