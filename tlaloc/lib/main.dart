@@ -53,8 +53,8 @@ class MyApp extends StatelessWidget {
         title: appName,
         theme: darkTheme,
         debugShowCheckedModeBanner: false,
-        home: const ConditionalOnboardingPage(),
-        // home:GraphsScreen(),
+        // home: const ConditionalOnboardingPage(),
+        home:GraphsScreen(),
       ),
     );
   }
