@@ -12,12 +12,6 @@ class PersonalMeasures extends StatefulWidget {
 }
 
 class _PersonalMeasuresState extends State<PersonalMeasures> {
-  int _counter = 0;
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +52,7 @@ class _PersonalMeasuresState extends State<PersonalMeasures> {
           Column(
             children: [
               Text(
-                '$_counter',
+                '1',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'poppins',

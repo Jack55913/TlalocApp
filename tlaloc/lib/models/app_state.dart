@@ -11,6 +11,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Measurement {
+
+
+  
   final String? uploader;
   final num? precipitation;
   final DateTime? dateTime;
@@ -38,7 +41,7 @@ class Measurement {
 }
 
 class AppState extends ChangeNotifier {
-  String paraje = 'Tequexquinahuac';
+  String paraje = 'El Venturero';
   bool loading = true;
   final db = FirebaseFirestore.instance;
 
