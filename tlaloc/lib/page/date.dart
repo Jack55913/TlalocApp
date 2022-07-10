@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
+
 // TODO: que sólo aparezca la fecha: 7/jul/2022 y la hora con minutos: 7/jul/2022 12:00
 class Datetime extends StatefulWidget {
   final void Function(DateTime) updateDateTime;
@@ -47,11 +49,25 @@ class _DatetimeState extends State<Datetime> {
     final hours = dateTime.hour.toString().padLeft(2, '0');
     final minutes = dateTime.minute.toString().padLeft(2, '0');
 
+    // double _level = 150;
+    // final double _minimumLevel = 0;
+    // final double _maximumLevel = 120;
+
     return Column(
       children: [
         ListTile(
           title: TextFormField(
+            keyboardType: TextInputType.number, //Mostrara teclado numérico
             initialValue: precipitation?.toString() ?? '',
+            // TODO: valores entre 0 a 120
+            
+            // validator: (value) {
+            //   final precipitation = int.tryParse(value);
+            //   if (precipitation != null && precipitation <= 120) {
+            //     return null;
+            //   }
+            //   return 'Ingrese un número entre 0 y 120';
+            // },
             style: TextStyle(
               fontSize: 24,
               fontFamily: 'FredokaOne',
@@ -67,7 +83,9 @@ class _DatetimeState extends State<Datetime> {
             onChanged: (value) {
               precipitation = num.tryParse(value);
             },
-            keyboardType: TextInputType.number, //Mostrara teclado numérico
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly
+            ],
           ),
         ),
         Divider(

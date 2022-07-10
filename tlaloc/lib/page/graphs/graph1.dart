@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/screens/home.dart';
 import 'package:tlaloc/widgets/empty_state.dart';
 
 /// Samples:

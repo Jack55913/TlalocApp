@@ -49,8 +49,7 @@ class _TableGraphsState extends State<TableGraphs> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
-                  itemBuilder: (BuildContext, index) {
-                    return Card(
+                  itemBuilder: (BuildContext, index) => Card(
                       child: ListTile(
                         leading: CircleAvatar(
                           backgroundImage: AssetImage(graphimages[index]),
@@ -65,8 +64,7 @@ class _TableGraphsState extends State<TableGraphs> {
                           );
                         },
                       ),
-                    );
-                  },
+                    ),
                   itemCount: graphimages.length,
                   shrinkWrap: true,
                   padding: EdgeInsets.all(5),

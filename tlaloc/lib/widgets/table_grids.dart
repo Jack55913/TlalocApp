@@ -41,8 +41,7 @@ class TableGrids extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListView.builder(
-                          itemBuilder: (BuildContext, index) {
-                            return Card(
+                          itemBuilder: (BuildContext, index) => Card(
                               child: ListTile(
                                 leading: CircleAvatar(
                                   backgroundImage: AssetImage(chartimages[index]),
@@ -57,8 +56,7 @@ class TableGrids extends StatelessWidget {
                                   );
                                 },
                               ),
-                            );
-                          },
+                            ),
                           itemCount: chartimages.length,
                           shrinkWrap: true,
                           padding: const EdgeInsets.all(5),
