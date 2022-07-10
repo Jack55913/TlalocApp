@@ -96,6 +96,7 @@ final _counter = 0;
                     Navigator.pop(context);
                   } else {
                     // Edita una medición ya existente
+                    // TODO: que el usuario sólo pueda modificar su propia medición y no la de los demás usuario
                     state.updateMeasurement(
                       id: widget.measurement!.id,
                       precipitation: precipitation!,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
-
+// TODO: que sólo aparezca la fecha: 7/jul/2022 y la hora con minutos: 7/jul/2022 12:00
 class Datetime extends StatefulWidget {
   final void Function(DateTime) updateDateTime;
   final void Function(num?) updatePrecipitation;

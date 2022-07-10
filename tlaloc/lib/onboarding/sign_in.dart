@@ -112,8 +112,9 @@ class SignUpWidget extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RoleSelection(),
-                        // CommonSelectPage(),
+                        builder: (context) =>
+                            // RoleSelection(),
+                            CommonSelectPage(),
                       ),
                     );
                   },
