@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/screens/home.dart';
@@ -84,9 +85,17 @@ void _goHome(BuildContext context) {
 class CommonSelectWidget extends StatelessWidget {
   final String paraje;
   final String ejido;
-
-  const CommonSelectWidget(
-      {Key? key, required this.paraje, required this.ejido})
+  final List<String> commonimages = [
+    "assets/images/1_venturero.png",
+    "assets/images/2_jardin.png",
+    "assets/images/3_cabana.png",
+    "assets/images/4_cruz.png",
+    "assets/images/5_canoas.png",
+    "assets/images/6_manantiales.png",
+    "assets/images/7_terreno.png",
+    "assets/images/8_chiqueros.png",
+  ];
+  CommonSelectWidget({Key? key, required this.paraje, required this.ejido})
       : super(key: key);
 
   @override
@@ -111,20 +120,12 @@ class CommonSelectWidget extends StatelessWidget {
               children: [
                 // Insert circle image here:
                 CircleAvatar(
-                  backgroundColor: AppColors.orange1,
+                  backgroundColor: Colors.transparent,
                   radius: 50,
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: 
-                    // INSERT AN IMAGE INSTEAD
-                    AutoSizeText(
-                      paraje.split(' ').map((e) => e[0]).join(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'FredokaOne',
-                        fontSize: 100,
-                      ),
-                    ),
+                  backgroundImage: AssetImage(
+                    // TODO: ORDENAR LAS IMAGENES POR PARAJE
+                    
+                    commonimages[Random().nextInt(commonimages.length)],
                   ),
                 ),
                 SizedBox(height: 5),

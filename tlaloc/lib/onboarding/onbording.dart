@@ -13,7 +13,7 @@ class Onboarding extends StatelessWidget {
     CardPlanetData(
       title: appName,
       subtitle: "Ciencia para tí y para todos",
-      image: const AssetImage("assets/images/tlaloc_logo.png"),
+      image: const AssetImage("assets/images/logo_fondo_gota.png"),
       backgroundColor: AppColors.blue1,
       titleColor: Colors.white,
       subtitleColor: Colors.white,
@@ -28,16 +28,6 @@ class Onboarding extends StatelessWidget {
       subtitleColor: const Color.fromRGBO(0, 10, 56, 1),
       background: LottieBuilder.asset("assets/animation/bg-2.json"),
     ),
-    // CardPlanetData(
-    //   title: "Mira los datos",
-    //   // +,
-    //   subtitle: "y envíalos con Tláloc App",
-    //   image: const AssetImage("assets/images/img1.png"),
-    //   backgroundColor: const Color.fromRGBO(8, 26, 48, 1),
-    //   titleColor: Colors.yellow,
-    //   subtitleColor: Colors.white,
-    //   background: LottieBuilder.asset("assets/animation/bg-3.json"),
-    // )
   ];
 
   @override

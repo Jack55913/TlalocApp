@@ -12,8 +12,6 @@ Map<String, String> parajes = {
   'Agua de Chiqueros': 'Santa Catarina del Monte',
 };
 
-
-
 final dateLongAgo = DateTime(2022, 1, 1);
 final dateInALongTime = DateTime(3000, 12, 31);
 

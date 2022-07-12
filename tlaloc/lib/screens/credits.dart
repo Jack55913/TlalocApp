@@ -28,6 +28,8 @@ const String _markdownData = """
 ## Colaboradores 🍺
 
 * **Gabriel Rodríguez** - *Programador* - [gabrc52](https://github.com/gabrc52)
+
+* **Andrea González Durán** - *Diseñadora* - [Liebre Con Fiebre](https://www.instagram.com/liebre.confiebre/)
 """;
 
 class CreditsPage extends StatelessWidget {
