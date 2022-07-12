@@ -1,4 +1,4 @@
-package io.fireship.tlalocapp
+package com.TlalocApps.tlaloc
 
 import io.flutter.embedding.android.FlutterActivity
 

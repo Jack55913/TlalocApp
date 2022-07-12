@@ -228,11 +228,6 @@ class _BarGraphState extends State<BarGraph> {
                               ],
                             ),
                       // AQUÍ PUEDO AGREGAR LAS GRÁFICAS QUE QUIERA:
-
-                      SfCircularChart(
-                        // Circular chart
-                        
-                      ),
                           ],
                         ),
                       );

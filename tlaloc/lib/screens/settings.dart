@@ -86,19 +86,13 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                     leading: Icon(Icons.description),
                     title: Text('Términos y condiciones'),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => PoliticPage()),
-                      );
+                      Navigator.pushNamed(context, '/privacy');
                     }),
                 ListTile(
                     leading: Icon(Icons.privacy_tip),
                     title: Text('Política de privacidad'),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => PrivacyPage()),
-                      );
+                      Navigator.pushNamed(context, '/politics');
                     }),
                 ListTile(
                   leading: Icon(Icons.info),
@@ -119,12 +113,12 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           leading: Icon(Icons.people),
                           title: Text('Ver créditos'),
                           onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CreditsPage()),
-                      );
-                    },
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CreditsPage()),
+                            );
+                          },
                         ),
                         ListTile(
                           leading: Icon(Ionicons.logo_facebook),
@@ -212,17 +206,16 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                       );
                     },
                   ),
-                  ListTile(
-                    leading: Icon(Icons.bug_report),
-                    title: Text('Abrir pantalla inicial'),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Onboarding()),
-                      );
-                    },
-                  ),
+                ListTile(
+                  leading: Icon(Icons.bug_report),
+                  title: Text('Abrir pantalla inicial'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Onboarding()),
+                    );
+                  },
+                ),
               ]),
         ));
   }

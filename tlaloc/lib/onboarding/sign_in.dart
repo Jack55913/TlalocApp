@@ -140,7 +140,7 @@ class SignUpWidget extends StatelessWidget {
                             ..onTap = () => launchUrl(
                                   Uri.parse(
                                       // TODO: Add privacy policy url
-                                      'https://tlaloc.web.app/web/privacidad/'),
+                                      'https://tlaloc.web.app/privacy/'),
                                   mode: LaunchMode.inAppWebView,
                                 ),
                         ),

@@ -14,7 +14,7 @@ class TableGraphs extends StatefulWidget {
 
 List<String> graphimages = [
   "assets/images/img-2.png",
-  "assets/images/img-1.png",
+  "assets/images/img-3.png",
 ];
 List<String> graphtitle = [
   "De Dispersión",

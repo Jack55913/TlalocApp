@@ -8,8 +8,12 @@ import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:tlaloc/onboarding/logged_in_widget.dart';
 import 'package:tlaloc/page/conditional_onboarding_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tlaloc/screens/credits.dart';
+import 'package:tlaloc/screens/politics.dart';
+import 'package:tlaloc/screens/privacy.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
@@ -46,7 +50,14 @@ class MyApp extends StatelessWidget {
         title: appName,
         theme: darkTheme,
         debugShowCheckedModeBanner: false,
-        home: const ConditionalOnboardingPage(),
+        // home: const ConditionalOnboardingPage(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const ConditionalOnboardingPage(),
+          '/credits': (context) => const CreditsPage(),
+          '/politics': (context) => const PoliticPage(),
+          '/privacy': (context) => const PrivacyPage(),
+        },
         // home:GraphsScreen(),
       ),
     );
