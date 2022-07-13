@@ -6,7 +6,7 @@ import 'package:tlaloc/page/graphs/graph1.dart';
 import 'package:tlaloc/page/graphs/graph2.dart';
 
 class TableGraphs extends StatefulWidget {
-  TableGraphs({Key? key}) : super(key: key);
+  const TableGraphs({Key? key}) : super(key: key);
 
   @override
   State<TableGraphs> createState() => _TableGraphsState();

@@ -1,12 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
-import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/page/home.dart';
 import 'package:tlaloc/page/modify_registration.dart';
 import 'package:tlaloc/screens/home.dart';

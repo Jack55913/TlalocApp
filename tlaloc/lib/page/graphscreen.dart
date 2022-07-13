@@ -35,7 +35,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
           ],
         ),
         body: Column(
-          children: [
+          children: const[
             TableGraphs(),
             TableGrids(),
           ],

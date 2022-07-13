@@ -1,10 +1,7 @@
 {
-  "functions": {
-    "source": "functions"
-  },
   "hosting": {
     "site": "tlaloc",
-    "public": "build/web",
+    "public": "firebase_hosting",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -12,7 +9,7 @@
     ],
     "rewrites": [
       {
-        "source": "**",
+        "source": "!/web/**",
         "destination": "/index.html"
       }
     ]

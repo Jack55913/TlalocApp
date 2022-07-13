@@ -1,11 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:math';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/screens/home.dart';
@@ -118,13 +116,11 @@ class CommonSelectWidget extends StatelessWidget {
             padding: const EdgeInsets.all(25.0),
             child: Column(
               children: [
-                // Insert circle image here:
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
                   radius: 50,
                   backgroundImage: AssetImage(
                     // TODO: ORDENAR LAS IMAGENES POR PARAJE
-                    
                     commonimages[Random().nextInt(commonimages.length)],
                   ),
                 ),

@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "tlaloc-3c65c"
+  },
+  "targets": {
+    "tlaloc-3c65c": {
+      "hosting": {
+        "tlaloc": [
+          "tlaloc"
+        ]
+      }
+    }
   }
 }

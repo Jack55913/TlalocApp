@@ -36,7 +36,7 @@ class CardPlanet extends StatelessWidget {
         children: [
           if (data.background != null) data.background!,
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 50),
+            padding: const EdgeInsets.all(50.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

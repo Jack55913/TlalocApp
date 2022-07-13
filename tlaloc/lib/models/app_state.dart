@@ -1,8 +1,6 @@
 /// Estado de la app. Se conecta a la base de datos de Firebase
-/// Crédito: Gabriel Rodríguez
 
 import 'dart:io';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,9 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Measurement {
-
-
-  
   final String? uploader;
   final num? precipitation;
   final DateTime? dateTime;
@@ -29,7 +24,7 @@ class Measurement {
   factory Measurement.fromJson(Map<String, dynamic> json, String id) {
     Timestamp timestamp = json['time'];
     var dateTime =
-        DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
+        DateTime.fromMicrosecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
     return Measurement(
       uploader: json['uploader_name'],
       precipitation: json['precipitation'],
@@ -128,7 +123,7 @@ class AppState extends ChangeNotifier {
       measurements.add(Measurement.fromJson(doc.data(), doc.id));
     }
     measurements.sort(
-      (a, b) => b.dateTime!.difference(a.dateTime!).inSeconds,
+      (a, b) => b.dateTime!.difference(a.dateTime!).inMinutes,
     );
     return measurements;
   }

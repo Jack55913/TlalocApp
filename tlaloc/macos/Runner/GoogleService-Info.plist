@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>228815382617-6befg3ke4p12a7ggddlu3evjisj9g0pt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.228815382617-6befg3ke4p12a7ggddlu3evjisj9g0pt</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>228815382617-3gie6629fq3its848ukg74o7gf9merda.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBTMk5qWvkMU8VpzXW-9JgxTXLuj1PEQvw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>228815382617</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.tlaloc</string>
+	<key>PROJECT_ID</key>
+	<string>tlaloc-3c65c</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tlaloc-3c65c.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:228815382617:ios:efb20394c7978b06da2948</string>
+	<key>DATABASE_URL</key>
+	<string>https://tlaloc-3c65c-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

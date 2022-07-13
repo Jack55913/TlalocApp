@@ -77,14 +77,13 @@ class SignUpWidget extends StatelessWidget {
                   onPressed: () async {
                     final provider = Provider.of<GoogleSignInProvider>(context,
                         listen: false);
-
-                    try {
+                    try { 
                       await provider.googleLogin();
                     } catch (e) {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: Text('Error al iniciar sesión'),
+                          title: Text('Error al iniciar sesión'), 
                           content: Text('$e'),
                         ),
                       );
@@ -139,7 +138,6 @@ class SignUpWidget extends StatelessWidget {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () => launchUrl(
                                   Uri.parse(
-                                      // TODO: Add privacy policy url
                                       'https://tlaloc.web.app/privacy/'),
                                   mode: LaunchMode.inAppWebView,
                                 ),

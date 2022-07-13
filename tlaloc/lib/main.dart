@@ -8,7 +8,7 @@ import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:tlaloc/onboarding/logged_in_widget.dart';
+import 'package:tlaloc/onboarding/sign_in.dart';
 import 'package:tlaloc/page/conditional_onboarding_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tlaloc/screens/credits.dart';
@@ -20,8 +20,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
   await Firebase.initializeApp(
-      options: DefaultFirebaseOptions
-          .currentPlatform); //Para el inicio de sesión por google
+      options: DefaultFirebaseOptions.currentPlatform
+      ); 
+      //Para el inicio de sesión por google
   // Modo sin conexión:
   FirebaseFirestore.instance.settings = const Settings(
     persistenceEnabled: true,
@@ -50,10 +51,10 @@ class MyApp extends StatelessWidget {
         title: appName,
         theme: darkTheme,
         debugShowCheckedModeBanner: false,
-        // home: const ConditionalOnboardingPage(),
         initialRoute: '/',
         routes: {
           '/': (context) => const ConditionalOnboardingPage(),
+          '/signup': (context) => const SignUpWidget(),
           '/credits': (context) => const CreditsPage(),
           '/politics': (context) => const PoliticPage(),
           '/privacy': (context) => const PrivacyPage(),

@@ -4,7 +4,6 @@ import 'package:tlaloc/onboarding/onbording_cards.dart';
 import 'package:concentric_transition/concentric_transition.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:tlaloc/screens/navigation_bar.dart';
-import 'package:tlaloc/onboarding/sign_in.dart';
 
 class Onboarding extends StatelessWidget {
   Onboarding({Key? key}) : super(key: key);
@@ -13,7 +12,7 @@ class Onboarding extends StatelessWidget {
     CardPlanetData(
       title: appName,
       subtitle: "Ciencia para tí y para todos",
-      image: const AssetImage("assets/images/logo_fondo_gota.png"),
+      image: const AssetImage("assets/images/img-1.png"),
       backgroundColor: AppColors.blue1,
       titleColor: Colors.white,
       subtitleColor: Colors.white,
@@ -35,10 +34,7 @@ class Onboarding extends StatelessWidget {
     return Scaffold(
       body: ConcentricPageView(
         onFinish: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const SignUpWidget()),
-          );
+          Navigator.pushNamed(context, '/signup');
         },
         colors: data.map((e) => e.backgroundColor).toList(),
         itemCount: data.length,

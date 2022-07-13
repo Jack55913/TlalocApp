@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 /// Para agregar o quitar parajes, basta con cambiar esta variable
+/// 
+/// 
 Map<String, String> parajes = {
   'El Venturero': 'Nativitas',
   'El Jardín': 'Nativitas',
@@ -8,8 +10,15 @@ Map<String, String> parajes = {
   'Cruz de Zacatenco': 'San Dieguito',
   'Canoas altas': 'Tequexquinahuac',
   'Los Manantiales': 'Tequexquinahuac',
-  'Terreno de Don Domingo': 'Santa Catarina del Monte',
+  'Tlaltlatlately': 'Santa Catarina del Monte',
   'Agua de Chiqueros': 'Santa Catarina del Monte',
+};
+
+
+
+Map<Widget, String> counts = {
+  const Icon(Icons.person_search, size: 30): 'Visitante',
+  const Icon(Icons.star, size: 30): 'Monitor',
 };
 
 final dateLongAgo = DateTime(2022, 1, 1);

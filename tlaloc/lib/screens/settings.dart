@@ -10,9 +10,8 @@ import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/onboarding/logged_in_widget.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
 import 'package:tlaloc/onboarding/onbording.dart';
+import 'package:tlaloc/onboarding/role.dart';
 import 'package:tlaloc/screens/credits.dart';
-import 'package:tlaloc/screens/politics.dart';
-import 'package:tlaloc/screens/privacy.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/constants.dart';
@@ -59,6 +58,18 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => CommonSelectPage()),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.work),
+                  title: Text('Elige un Rol'),
+                  subtitle: Text(Provider.of<AppState>(context).paraje),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RoleSelection()),
                     );
                   },
                 ),
