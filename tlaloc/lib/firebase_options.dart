@@ -24,8 +24,6 @@ class DefaultFirebaseOptions {
         return android;
       case TargetPlatform.iOS:
         return ios;
-      case TargetPlatform.macOS:
-        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -75,15 +73,4 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.tlaloc',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBTMk5qWvkMU8VpzXW-9JgxTXLuj1PEQvw',
-    appId: '1:228815382617:ios:efb20394c7978b06da2948',
-    messagingSenderId: '228815382617',
-    projectId: 'tlaloc-3c65c',
-    databaseURL: 'https://tlaloc-3c65c-default-rtdb.firebaseio.com',
-    storageBucket: 'tlaloc-3c65c.appspot.com',
-    androidClientId: '228815382617-3gie6629fq3its848ukg74o7gf9merda.apps.googleusercontent.com',
-    iosClientId: '228815382617-6befg3ke4p12a7ggddlu3evjisj9g0pt.apps.googleusercontent.com',
-    iosBundleId: 'com.example.tlaloc',
-  );
 }

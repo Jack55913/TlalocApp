@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Measurement {
-  final String? cuentas;
+  // final String? cuentas;
   final String? uploader;
   final num? precipitation;
   final DateTime? dateTime;
@@ -17,7 +17,7 @@ class Measurement {
   final String? imageUrl;
   Measurement(
       {
-      this.cuentas,
+      // this.cuentas,
       this.uploader,
       this.precipitation,
       this.dateTime,
@@ -40,7 +40,7 @@ class Measurement {
 
 class AppState extends ChangeNotifier {
   String paraje = 'El Venturero';
-  String cuentas = 'Visitante';
+  // String cuentas = 'Visitante';
   bool loading = true;
   final db = FirebaseFirestore.instance;
 
@@ -55,7 +55,7 @@ class AppState extends ChangeNotifier {
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     paraje = prefs.getString('paraje')!;
-    cuentas = prefs.getString('cuentas')!;
+    // cuentas = prefs.getString('cuentas')!;
     loading = false;
     notifyListeners();
   }
@@ -68,13 +68,13 @@ class AppState extends ChangeNotifier {
     prefs.setBool('hasFinishedOnboarding', true);
   }
 
-  Future<void> changeCuentas(String newCuentas) async {
-    cuentas = newCuentas;
-    notifyListeners();
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('cuentas:', newCuentas);
-    prefs.setBool('hasFinishedOnboarding', true);
-  }
+  // Future<void> changeCuentas(String newCuentas) async {
+  //   cuentas = newCuentas;
+  //   notifyListeners();
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.setString('cuentas:', newCuentas);
+  //   prefs.setBool('hasFinishedOnboarding', true);
+  // }
 
   /// No voy a convertir esto en una clase para que te dé flexibilidad de guardar
   /// lo que quieras en el mismo JSON
@@ -84,11 +84,11 @@ class AppState extends ChangeNotifier {
     return snapshot.data() ?? {};
   }
 
-Future<Map<String, dynamic>> getCurrentCuentasData() async {
-    var ref = db.collection('cuentas').doc(cuentas);
-    var snapshot = await ref.get();
-    return snapshot.data() ?? {};
-  }
+// Future<Map<String, dynamic>> getCurrentCuentasData() async {
+//     var ref = db.collection('cuentas').doc(cuentas);
+//     var snapshot = await ref.get();
+//     return snapshot.data() ?? {};
+//   }
 
   Future<Map<String, dynamic>> _getMeasurementJson(
       {required num precipitation,
@@ -152,8 +152,8 @@ Future<Map<String, dynamic>> getCurrentCuentasData() async {
   Future<List<Measurement>> getMeasurements() async {
     var event = await db
         .collection('cuentas')
-        .doc(cuentas)
-        .collection('parajes')
+        // .doc(cuentas)
+        // .collection('parajes')
         .doc(paraje)
         .collection('measurements')
         .get();
@@ -167,8 +167,8 @@ Future<Map<String, dynamic>> getCurrentCuentasData() async {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getMeasurementsStream() {
     return db
-        .collection('cuentas')
-        .doc(cuentas)
+        // .collection('cuentas')
+        // .doc(cuentas)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
@@ -185,8 +185,8 @@ Future<Map<String, dynamic>> getCurrentCuentasData() async {
     String? oldImage,
   }) async {
     await db
-        .collection('cuentas')
-        .doc(cuentas)
+        // .collection('cuentas')
+        // .doc(cuentas)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
@@ -203,8 +203,8 @@ Future<Map<String, dynamic>> getCurrentCuentasData() async {
 
   Future<void> deleteMeasurement({required String id}) async {
     await db
-        .collection('cuentas')
-        .doc(cuentas)
+        // .collection('cuentas')
+        // .doc(cuentas)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')

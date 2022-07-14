@@ -11,7 +11,7 @@ firebase-debug.*.log*
 .firebase/
 firebase_hosting
 build
-
+.dart_tool
 
 # Firebase config
 
