@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animated_splash_screen: ^1.2.0
+  audioplayers: ^1.0.1
   auto_size_text: ^3.0.0
   cached_network_image: ^3.2.1
   cloud_firestore: ^3.2.1
@@ -49,6 +50,7 @@ dependencies:
   flutter_markdown: ^0.6.9
   flutter_svg: ^1.1.1+1
   font_awesome_flutter: ^10.0.0
+  form_field_validator: ^1.1.0
   google_sign_in: ^5.2.4
   image_picker: ^0.8.5
   intl: ^0.17.0
@@ -81,6 +83,7 @@ flutter:
     - assets/images/.
     - assets/animation/.
     - assets/pdf/.
+    - assets/sounds/.
     - google_fonts/
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:

@@ -20,10 +20,11 @@ class Onboarding extends StatelessWidget {
     ),
     CardPlanetData(
       title: "Te damos la bienvenida",
-      subtitle: "Ya eres parte del proyecto ''Ciencia ciudadana para el monitoreo de la lluvia en el monte Tláloc'' ",
+      subtitle:
+          "Ya eres parte del proyecto ''Ciencia ciudadana para el monitoreo de la lluvia en el monte Tláloc'' ",
       image: const AssetImage("assets/images/img-2.png"),
       backgroundColor: Colors.white,
-      titleColor: Colors.purple,
+      titleColor: AppColors.green1,
       subtitleColor: const Color.fromRGBO(0, 10, 56, 1),
       background: LottieBuilder.asset("assets/animation/bg-2.json"),
     ),

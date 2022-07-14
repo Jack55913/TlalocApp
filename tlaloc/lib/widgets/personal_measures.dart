@@ -3,6 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
+import 'package:tlaloc/page/add.dart';
 
 class PersonalMeasures extends StatefulWidget {
   const PersonalMeasures({Key? key}) : super(key: key);
@@ -12,7 +13,6 @@ class PersonalMeasures extends StatefulWidget {
 }
 
 class _PersonalMeasuresState extends State<PersonalMeasures> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,14 +51,7 @@ class _PersonalMeasuresState extends State<PersonalMeasures> {
           ),
           Column(
             children: [
-              Text(
-                '1',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'poppins',
-                  fontSize: 16,
-                ),
-              ),
+              PersonalMeausreData(),
             ],
           ),
         ],

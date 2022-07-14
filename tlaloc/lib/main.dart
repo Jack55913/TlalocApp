@@ -9,9 +9,13 @@ import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tlaloc/onboarding/sign_in.dart';
+import 'package:tlaloc/page/add.dart';
 import 'package:tlaloc/page/conditional_onboarding_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tlaloc/page/data.dart';
+import 'package:tlaloc/page/graphscreen.dart';
 import 'package:tlaloc/screens/credits.dart';
+import 'package:tlaloc/screens/home.dart';
 import 'package:tlaloc/screens/politics.dart';
 import 'package:tlaloc/screens/privacy.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -54,6 +58,10 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const ConditionalOnboardingPage(),
+          '/add': (context) => const AddScreen(),
+          '/home': (context) => const HomePage(),
+          '/measures': (context) => const DataScreen(),
+          '/graphs': (context) => const GraphsScreen(),
           '/signup': (context) => const SignUpWidget(),
           '/credits': (context) => const CreditsPage(),
           '/politics': (context) => const PoliticPage(),

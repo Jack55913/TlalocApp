@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'dart:math';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:confetti/confetti.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -16,6 +17,9 @@ import 'package:tlaloc/screens/home.dart';
 import 'package:tlaloc/widgets/button_widget.dart';
 import 'package:tlaloc/models/app_state.dart';
 
+
+  // final player = AudioPlayer();
+
 class AddScreen extends StatefulWidget {
   final Measurement? measurement;
 
@@ -24,6 +28,7 @@ class AddScreen extends StatefulWidget {
   @override
   State<AddScreen> createState() => _AddScreenState();
 }
+  int _counter = 0-1;
 
 class _AddScreenState extends State<AddScreen> {
   late ConfettiController _controllerTopCenter;
@@ -59,12 +64,18 @@ class _AddScreenState extends State<AddScreen> {
     }
   }
 
-// final _counter = 0;
   @override
   void initState() {
+    _counter++;
     super.initState();
     _controllerTopCenter =
         ConfettiController(duration: const Duration(seconds: 5));
+  }
+
+  @override
+  void dispose() {
+    _controllerTopCenter.dispose();
+    super.dispose();
   }
 
   @override
@@ -86,61 +97,6 @@ class _AddScreenState extends State<AddScreen> {
                 );
               },
             ),
-            actions: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ButtonWidget(
-                  text: 'Guardar',
-                  onClicked: () async {
-                    try {
-                      final state =
-                          Provider.of<AppState>(context, listen: false);
-                      if (widget.measurement == null) {
-                        // TODO: Crear contador en la hoja de personal_measures.dart para que sepa el ejidatario cuántas veces ha medido:
-                        // TODO: al pulsar guardar. me lleve a home y salga conffeti
-                        // Crear medición
-                        state.addMeasurement(
-                          precipitation: precipitation!,
-                          time: dateTime,
-                          image: newImage,
-                        );
-                        Navigator.pop(context);
-                        _controllerTopCenter.play();
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute<void>(
-                                builder: (BuildContext context) {
-                          return const HomePage();
-                        }), (Route<dynamic> route) => false);
-
-                      } else {
-                        // Edita una medición ya existente
-                        // TODO: que el usuario sólo pueda modificar su propia medición y no la de los demás usuario
-                        state.updateMeasurement(
-                          id: widget.measurement!.id,
-                          precipitation: precipitation!,
-                          time: dateTime,
-                          image: newImage,
-                          oldImage: widget.measurement!.imageUrl,
-                        );
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-
-                        /// Works around the previous page being a stateful widget
-                        Navigator.pop(context);
-                      }
-                    } catch (e) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text('Ocurrió un error al guardar'),
-                          content: Text('$e'),
-                        ),
-                      );
-                    }
-                  },
-                ),
-              ),
-            ],
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -248,9 +204,76 @@ class _AddScreenState extends State<AddScreen> {
                   height: 20,
                   thickness: 1,
                 ),
+                ButtonWidget(
+                  onClicked: () async {
+                    try {
+                      final state =
+                          Provider.of<AppState>(context, listen: false);
+                      if (widget.measurement == null) {
+                        // Crear medición
+                        initState;
+                        state.addMeasurement(
+                          precipitation: precipitation!,
+                          time: dateTime,
+                          image: newImage,
+                        );
+                        Navigator.pop(context);
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute<void>(
+                                builder: (BuildContext context) {
+                          return const AddScreen();
+                        }), (Route<dynamic> route) => false);
+                        _controllerTopCenter.play();
+                        // player.setSource(AssetSource('sounds/correcto.mp3'));
+                      } else {
+                        // Edita una medición ya existente
+                        state.updateMeasurement(
+                          id: widget.measurement!.id,
+                          precipitation: precipitation!,
+                          time: dateTime,
+                          image: newImage,
+                          oldImage: widget.measurement!.imageUrl,
+                        );
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+
+                        /// Works around the previous page being a stateful widget
+                        Navigator.pop(context);
+                      }
+                    } catch (e) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('Ocurrió un error al guardar'),
+                          content: Text('$e'),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                const Divider(
+                  height: 20,
+                  thickness: 1,
+                ),
               ],
             ),
           ),
         ),
       ]);
+}
+
+class PersonalMeausreData extends StatelessWidget {
+  const PersonalMeausreData({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '$_counter',
+      style: TextStyle(
+        color: Colors.white,
+        fontFamily: 'poppins',
+        fontSize: 16,
+      ),
+    );
+  }
 }

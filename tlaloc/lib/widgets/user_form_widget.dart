@@ -18,7 +18,6 @@ class _UserFormWidgetState extends State<UserFormWidget> {
   );
 
   Widget buildSubmit() => ButtonWidget(
-        text: 'Guardar',
         onClicked: (){},
       );
 }

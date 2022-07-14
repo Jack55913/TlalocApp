@@ -60,6 +60,9 @@ class CommonSelectPage extends StatelessWidget {
                         CommonSelectWidget(
                           paraje: paraje.key,
                           ejido: paraje.value,
+                          // TODO: CADA WIDGET CON SU IMAGEN
+                          commonimage: commonimages[
+                              parajes.values.toList().indexOf(paraje.value)],
                         ),
                     ],
                   ),
@@ -83,17 +86,13 @@ void _goHome(BuildContext context) {
 class CommonSelectWidget extends StatelessWidget {
   final String paraje;
   final String ejido;
-  final List<String> commonimages = [
-    "assets/images/1_venturero.png",
-    "assets/images/2_jardin.png",
-    "assets/images/3_cabana.png",
-    "assets/images/4_cruz.png",
-    "assets/images/5_canoas.png",
-    "assets/images/6_manantiales.png",
-    "assets/images/7_terreno.png",
-    "assets/images/8_chiqueros.png",
-  ];
-  CommonSelectWidget({Key? key, required this.paraje, required this.ejido})
+  final String commonimage;
+
+  const CommonSelectWidget(
+      {Key? key,
+      required this.paraje,
+      required this.ejido,
+      required this.commonimage})
       : super(key: key);
 
   @override
@@ -120,8 +119,7 @@ class CommonSelectWidget extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   radius: 50,
                   backgroundImage: AssetImage(
-                    // TODO: ORDENAR LAS IMAGENES POR PARAJE
-                    commonimages[Random().nextInt(commonimages.length)],
+                    commonimage,
                   ),
                 ),
                 SizedBox(height: 5),

@@ -26,6 +26,48 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "audioplayers",
+      "rootUri": "file:///C:/Users/Emilio/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/audioplayers-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "audioplayers_android",
+      "rootUri": "file:///C:/Users/Emilio/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/audioplayers_android-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "audioplayers_darwin",
+      "rootUri": "file:///C:/Users/Emilio/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/audioplayers_darwin-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "audioplayers_linux",
+      "rootUri": "file:///C:/Users/Emilio/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/audioplayers_linux-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "audioplayers_platform_interface",
+      "rootUri": "file:///C:/Users/Emilio/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/audioplayers_platform_interface-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "audioplayers_web",
+      "rootUri": "file:///C:/Users/Emilio/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/audioplayers_web-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "audioplayers_windows",
+      "rootUri": "file:///C:/Users/Emilio/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/audioplayers_windows-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "auto_size_text",
       "rootUri": "file:///C:/Users/Emilio/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/auto_size_text-3.0.0",
       "packageUri": "lib/",
@@ -334,6 +376,12 @@
     {
       "name": "font_awesome_flutter",
       "rootUri": "file:///C:/Users/Emilio/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/font_awesome_flutter-10.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "form_field_validator",
+      "rootUri": "file:///C:/Users/Emilio/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/form_field_validator-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -974,7 +1022,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-07-14T00:57:15.937073Z",
+  "generated": "2022-07-14T07:45:07.687040Z",
   "generator": "pub",
   "generatorVersion": "2.17.6"
 }

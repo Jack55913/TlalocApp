@@ -14,7 +14,27 @@ Map<String, String> parajes = {
   'Agua de Chiqueros': 'Santa Catarina del Monte',
 };
 
+List<String> commonimages = [
+    "assets/images/1_venturero.png",
+    "assets/images/2_jardin.png",
+    "assets/images/3_cabana.png",
+    "assets/images/4_cruz.png",
+    "assets/images/5_canoas.png",
+    "assets/images/6_manantiales.png",
+    "assets/images/7_terreno.png",
+    "assets/images/8_chiqueros.png",
+];
 
+// Map<String, int> commonimages = {
+//   "assets/images/1_venturero.png": 0,
+//   "assets/images/2_jardin.png": 1,
+//   "assets/images/3_cabana.png": 2,
+//   "assets/images/4_cruz.png": 3,
+//   "assets/images/5_canoas.png": 4,
+//   "assets/images/6_manantiales.png": 5,
+//   "assets/images/7_terreno.png": 6,
+//   "assets/images/8_chiqueros.png": 7,
+// };
 
 Map<String,Widget> cuentas = {
   'Visitante':const Icon(Icons.person_search, size: 30), //Key

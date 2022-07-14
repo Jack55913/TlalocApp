@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
@@ -57,17 +58,13 @@ class _DatetimeState extends State<Datetime> {
       children: [
         ListTile(
           title: TextFormField(
-            keyboardType: TextInputType.number, //Mostrara teclado numérico
+            keyboardType: TextInputType.number,
             initialValue: precipitation?.toString() ?? '',
-            // TODO: valores entre 0 a 120
-            
-            // validator: (value) {
-            //   final precipitation = int.tryParse(value);
-            //   if (precipitation != null && precipitation <= 120) {
-            //     return null;
-            //   }
-            //   return 'Ingrese un número entre 0 y 120';
-            // },
+            validator: RangeValidator(
+              min: 0,
+              max: 120,
+              errorText: 'Debe ser entre 0 y 120',
+            ),
             style: TextStyle(
               fontSize: 24,
               fontFamily: 'FredokaOne',

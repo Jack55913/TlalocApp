@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
 
 class ButtonWidget extends StatelessWidget {
-  final String text;
   final VoidCallback onClicked;
   
 
-  const ButtonWidget({Key? key, required this.text, required this.onClicked})
-      : super(key: key);
+  const ButtonWidget({Key? key, required this.onClicked}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,7 @@ class ButtonWidget extends StatelessWidget {
                     'Usted está mandando el registro a la base de datos, puede eliminarla posteriormente.'),
                 actions: <Widget>[
                   TextButton(
-                    onPressed: () => Navigator.pop(context, 'Cancelar'),
+                    onPressed: () => Navigator.pop(context, 'Cancelar',),
                     child: const Text('Cancelar'),
                   ),
                   TextButton(
@@ -37,9 +35,15 @@ class ButtonWidget extends StatelessWidget {
                 ],
               ),
             ),
-        child: Text('Guardar',
-            style:
-                TextStyle(color: Colors.black, fontWeight: FontWeight.bold)));
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('    Enviar Medición    ',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'poppins',
+                fontSize: 28,
+              )),
+        ));
   }
 }
 

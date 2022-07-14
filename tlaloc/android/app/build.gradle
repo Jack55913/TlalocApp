@@ -91,7 +91,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-core:16.0.9'
-    implementation 'com.google.firebase:firebase-analytics' // Firebase analytics
+    // implementation 'com.google.firebase:firebase-analytics' // Firebase analytics
     implementation 'com.android.support:multidex:1.0.3' // Fix compile error after adding Firebase
 }
 apply plugin: 'com.google.gms.google-services'

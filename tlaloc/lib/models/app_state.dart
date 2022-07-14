@@ -1,6 +1,5 @@
-/// Estado de la app. Se conecta a la base de datos de Firebase
-
 import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -9,16 +8,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Measurement {
-  // final String? cuentas;
   final String? uploader;
   final num? precipitation;
   final DateTime? dateTime;
   final String id;
   final String? imageUrl;
   Measurement(
-      {
-      // this.cuentas,
-      this.uploader,
+      {this.uploader,
       this.precipitation,
       this.dateTime,
       required this.id,
@@ -27,7 +23,7 @@ class Measurement {
   factory Measurement.fromJson(Map<String, dynamic> json, String id) {
     Timestamp timestamp = json['time'];
     var dateTime =
-        DateTime.fromMicrosecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
+        DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
     return Measurement(
       uploader: json['uploader_name'],
       precipitation: json['precipitation'],
@@ -39,8 +35,7 @@ class Measurement {
 }
 
 class AppState extends ChangeNotifier {
-  String paraje = 'El Venturero';
-  // String cuentas = 'Visitante';
+  String paraje = 'Tequexquinahuac';
   bool loading = true;
   final db = FirebaseFirestore.instance;
 
@@ -48,14 +43,11 @@ class AppState extends ChangeNotifier {
     init();
   }
 
-
-
   Future<void> init() async {
     loading = true;
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     paraje = prefs.getString('paraje')!;
-    // cuentas = prefs.getString('cuentas')!;
     loading = false;
     notifyListeners();
   }
@@ -68,14 +60,6 @@ class AppState extends ChangeNotifier {
     prefs.setBool('hasFinishedOnboarding', true);
   }
 
-  // Future<void> changeCuentas(String newCuentas) async {
-  //   cuentas = newCuentas;
-  //   notifyListeners();
-  //   final prefs = await SharedPreferences.getInstance();
-  //   prefs.setString('cuentas:', newCuentas);
-  //   prefs.setBool('hasFinishedOnboarding', true);
-  // }
-
   /// No voy a convertir esto en una clase para que te dé flexibilidad de guardar
   /// lo que quieras en el mismo JSON
   Future<Map<String, dynamic>> getCurrentParajeData() async {
@@ -83,12 +67,6 @@ class AppState extends ChangeNotifier {
     var snapshot = await ref.get();
     return snapshot.data() ?? {};
   }
-
-// Future<Map<String, dynamic>> getCurrentCuentasData() async {
-//     var ref = db.collection('cuentas').doc(cuentas);
-//     var snapshot = await ref.get();
-//     return snapshot.data() ?? {};
-//   }
 
   Future<Map<String, dynamic>> _getMeasurementJson(
       {required num precipitation,
@@ -144,16 +122,14 @@ class AppState extends ChangeNotifier {
       measurements.add(Measurement.fromJson(doc.data(), doc.id));
     }
     measurements.sort(
-      (a, b) => b.dateTime!.difference(a.dateTime!).inMinutes,
+      (a, b) => b.dateTime!.difference(a.dateTime!).inSeconds,
     );
     return measurements;
   }
 
   Future<List<Measurement>> getMeasurements() async {
     var event = await db
-        .collection('cuentas')
-        // .doc(cuentas)
-        // .collection('parajes')
+        .collection('parajes')
         .doc(paraje)
         .collection('measurements')
         .get();
@@ -167,8 +143,6 @@ class AppState extends ChangeNotifier {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getMeasurementsStream() {
     return db
-        // .collection('cuentas')
-        // .doc(cuentas)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
@@ -185,8 +159,6 @@ class AppState extends ChangeNotifier {
     String? oldImage,
   }) async {
     await db
-        // .collection('cuentas')
-        // .doc(cuentas)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
@@ -203,8 +175,6 @@ class AppState extends ChangeNotifier {
 
   Future<void> deleteMeasurement({required String id}) async {
     await db
-        // .collection('cuentas')
-        // .doc(cuentas)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
