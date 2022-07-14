@@ -9,13 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Measurement {
+  final String? cuentas;
   final String? uploader;
   final num? precipitation;
   final DateTime? dateTime;
   final String id;
   final String? imageUrl;
   Measurement(
-      {this.uploader,
+      {
+      this.cuentas,
+      this.uploader,
       this.precipitation,
       this.dateTime,
       required this.id,
@@ -37,6 +40,7 @@ class Measurement {
 
 class AppState extends ChangeNotifier {
   String paraje = 'El Venturero';
+  String cuentas = 'Visitante';
   bool loading = true;
   final db = FirebaseFirestore.instance;
 
@@ -44,11 +48,14 @@ class AppState extends ChangeNotifier {
     init();
   }
 
+
+
   Future<void> init() async {
     loading = true;
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     paraje = prefs.getString('paraje')!;
+    cuentas = prefs.getString('cuentas')!;
     loading = false;
     notifyListeners();
   }
@@ -61,10 +68,24 @@ class AppState extends ChangeNotifier {
     prefs.setBool('hasFinishedOnboarding', true);
   }
 
+  Future<void> changeCuentas(String newCuentas) async {
+    cuentas = newCuentas;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('cuentas:', newCuentas);
+    prefs.setBool('hasFinishedOnboarding', true);
+  }
+
   /// No voy a convertir esto en una clase para que te dé flexibilidad de guardar
   /// lo que quieras en el mismo JSON
   Future<Map<String, dynamic>> getCurrentParajeData() async {
     var ref = db.collection('parajes').doc(paraje);
+    var snapshot = await ref.get();
+    return snapshot.data() ?? {};
+  }
+
+Future<Map<String, dynamic>> getCurrentCuentasData() async {
+    var ref = db.collection('cuentas').doc(cuentas);
     var snapshot = await ref.get();
     return snapshot.data() ?? {};
   }
@@ -130,6 +151,8 @@ class AppState extends ChangeNotifier {
 
   Future<List<Measurement>> getMeasurements() async {
     var event = await db
+        .collection('cuentas')
+        .doc(cuentas)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
@@ -144,6 +167,8 @@ class AppState extends ChangeNotifier {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getMeasurementsStream() {
     return db
+        .collection('cuentas')
+        .doc(cuentas)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
@@ -160,6 +185,8 @@ class AppState extends ChangeNotifier {
     String? oldImage,
   }) async {
     await db
+        .collection('cuentas')
+        .doc(cuentas)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
@@ -176,6 +203,8 @@ class AppState extends ChangeNotifier {
 
   Future<void> deleteMeasurement({required String id}) async {
     await db
+        .collection('cuentas')
+        .doc(cuentas)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')

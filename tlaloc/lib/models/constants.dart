@@ -16,9 +16,9 @@ Map<String, String> parajes = {
 
 
 
-Map<Widget, String> counts = {
-  const Icon(Icons.person_search, size: 30): 'Visitante',
-  const Icon(Icons.star, size: 30): 'Monitor',
+Map<String,Widget> cuentas = {
+  'Visitante':const Icon(Icons.person_search, size: 30), //Key
+  'Monitor': const Icon(Icons.star, size: 30), //value
 };
 
 final dateLongAgo = DateTime(2022, 1, 1);

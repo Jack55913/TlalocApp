@@ -1,0 +1,11 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.TlalocApps.tlaloc",
+        "sha256_cert_fingerprints":
+          ["C3:C8:E3:14:78:EF:2F:74:84:97:05:6C:F8:AD:B9:C7:D3:49:84:49:17:70:95:A8:34:32:1A:F9:5F:7B:3A:9E"]
+      }
+    }
+  ]

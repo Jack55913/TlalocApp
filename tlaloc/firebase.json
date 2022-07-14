@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "tlaloc",
-    "public": "firebase_hosting",
+    "public": "build/web",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -9,7 +9,7 @@
     ],
     "rewrites": [
       {
-        "source": "!/web/**",
+        "source": "**",
         "destination": "/index.html"
       }
     ]

@@ -61,6 +61,7 @@ dependencies:
   shared_preferences: ^2.0.13
   syncfusion_flutter_charts: ^20.1.61
   syncfusion_flutter_gauges: ^20.2.36
+  syncfusion_flutter_pdfviewer: ^20.2.38-beta
   url_launcher: ^6.0.9
   url_strategy: ^0.2.0
 
@@ -79,6 +80,7 @@ flutter:
   assets:
     - assets/images/.
     - assets/animation/.
+    - assets/pdf/.
     - google_fonts/
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:

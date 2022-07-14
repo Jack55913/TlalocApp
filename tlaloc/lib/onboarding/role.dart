@@ -19,7 +19,7 @@ class RoleSelection extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/images/img-3.png',
-                  fit: BoxFit.fitHeight,
+                  width: MediaQuery.of(context).size.width * 0.8,
                 ),
                 const Text(
                   'Selecciona una opción',
