@@ -2,20 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/firebase_options.dart';
+// import 'package:tlaloc/firebase_options.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:tlaloc/onboarding/common_select.dart';
+import 'package:tlaloc/onboarding/role.dart';
 import 'package:tlaloc/onboarding/sign_in.dart';
 import 'package:tlaloc/page/add.dart';
 import 'package:tlaloc/page/conditional_onboarding_page.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tlaloc/page/data.dart';
 import 'package:tlaloc/page/graphscreen.dart';
+import 'package:tlaloc/screens/community.dart';
 import 'package:tlaloc/screens/credits.dart';
 import 'package:tlaloc/screens/home.dart';
+import 'package:tlaloc/screens/info.dart';
 import 'package:tlaloc/screens/politics.dart';
 import 'package:tlaloc/screens/privacy.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -23,10 +29,8 @@ import 'package:url_strategy/url_strategy.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
-  await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform
-      ); 
-      //Para el inicio de sesión por google
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  //Para el inicio de sesión por google
   // Modo sin conexión:
   FirebaseFirestore.instance.settings = const Settings(
     persistenceEnabled: true,
@@ -63,9 +67,14 @@ class MyApp extends StatelessWidget {
           '/measures': (context) => const DataScreen(),
           '/graphs': (context) => const GraphsScreen(),
           '/signup': (context) => const SignUpWidget(),
+          '/role': (context) => const RoleSelection(),
+          '/common': (context) => const CommonSelectPage(),
           '/credits': (context) => const CreditsPage(),
           '/politics': (context) => const PoliticPage(),
           '/privacy': (context) => const PrivacyPage(),
+          '/info': (context) => const InfoProyectPage(),
+          '/community': (context) => const CommunityPage(),
+
         },
         // home:GraphsScreen(),
       ),

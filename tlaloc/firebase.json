@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "tlaloc",
-    "public": "build/web",
+    "public": "firebase_hosting",
     "ignore": [
       "firebase.json",
       "**/.*",

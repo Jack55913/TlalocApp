@@ -15,14 +15,13 @@ class GraphsScreen extends StatefulWidget {
 }
 
 class _GraphsScreenState extends State<GraphsScreen> {
- 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const AutoSizeText(
-            'Gráficas y Estadísticas',
+          title: AutoSizeText(
+            'Estadísticas',
             style: TextStyle(
               fontFamily: 'FredokaOne',
               fontSize: 24,
@@ -35,7 +34,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
           ],
         ),
         body: Column(
-          children: const[
+          children: const [
             TableGraphs(),
             TableGrids(),
           ],

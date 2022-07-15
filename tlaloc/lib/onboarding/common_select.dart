@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
@@ -60,9 +61,7 @@ class CommonSelectPage extends StatelessWidget {
                         CommonSelectWidget(
                           paraje: paraje.key,
                           ejido: paraje.value,
-                          // TODO: CADA WIDGET CON SU IMAGEN
-                          commonimage: commonimages[
-                              parajes.values.toList().indexOf(paraje.value)],
+                          commonimage: commonimages[commonimagesAgain[0]++],
                         ),
                     ],
                   ),
@@ -116,9 +115,9 @@ class CommonSelectWidget extends StatelessWidget {
             child: Column(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.transparent,
                   radius: 50,
-                  backgroundImage: AssetImage(
+                  backgroundColor: Colors.transparent,
+                  child: SvgPicture.asset(
                     commonimage,
                   ),
                 ),

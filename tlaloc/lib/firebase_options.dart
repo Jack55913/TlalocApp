@@ -24,6 +24,8 @@ class DefaultFirebaseOptions {
         return android;
       case TargetPlatform.iOS:
         return ios;
+      case TargetPlatform.macOS:
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -54,7 +56,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCUwkYNkdvsnappHUPiiVQcYpfFdZ8vDrs',
-    appId: '1:228815382617:android:31bfcfba094db7ffda2948',
+    appId: '228815382617-evr2gdane0kejbr700dunqfbq7c641n3.apps.googleusercontent.com',
     messagingSenderId: '228815382617',
     projectId: 'tlaloc-3c65c',
     databaseURL: 'https://tlaloc-3c65c-default-rtdb.firebaseio.com',
@@ -68,9 +70,20 @@ class DefaultFirebaseOptions {
     projectId: 'tlaloc-3c65c',
     databaseURL: 'https://tlaloc-3c65c-default-rtdb.firebaseio.com',
     storageBucket: 'tlaloc-3c65c.appspot.com',
-    androidClientId: '228815382617-3gie6629fq3its848ukg74o7gf9merda.apps.googleusercontent.com',
+    androidClientId: '228815382617-7ap23qdeu0g4v0i068cr6lor4l3a4air.apps.googleusercontent.com',
     iosClientId: '228815382617-6befg3ke4p12a7ggddlu3evjisj9g0pt.apps.googleusercontent.com',
     iosBundleId: 'com.example.tlaloc',
   );
 
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBTMk5qWvkMU8VpzXW-9JgxTXLuj1PEQvw',
+    appId: '1:228815382617:ios:efb20394c7978b06da2948',
+    messagingSenderId: '228815382617',
+    projectId: 'tlaloc-3c65c',
+    databaseURL: 'https://tlaloc-3c65c-default-rtdb.firebaseio.com',
+    storageBucket: 'tlaloc-3c65c.appspot.com',
+    androidClientId: '228815382617-7ap23qdeu0g4v0i068cr6lor4l3a4air.apps.googleusercontent.com',
+    iosClientId: '228815382617-6befg3ke4p12a7ggddlu3evjisj9g0pt.apps.googleusercontent.com',
+    iosBundleId: 'com.example.tlaloc',
+  );
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -18,40 +18,85 @@ class PhraseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          gradient: LinearGradient(
-            colors: const [
-              AppColors.blue1,
-              AppColors.pruple1,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+    return InkWell(
+      onTap: () {
+        // Go to InfoProyectPage
+        Navigator.pushNamed(context, '/info');
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            gradient: LinearGradient(
+              colors: const [
+                AppColors.blue1,
+                AppColors.pruple1,
+              ],
+            ),
           ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            children: const [
-              Text(
-                  'La captación de agua de lluvia, es la solución caida del cielo. Ésto implica que debemos cuidar los bosques, porque son ellos los reguladores hidrológicos más importantes',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'poppins',
-                    fontSize: 15,
-                  )),
-              SizedBox(height: 20),
-              Text('Emilio Álvarez Herrera',
-                  // textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'FredokaOne',
-                    fontSize: 18,
-                  )),
-            ],
+          child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      '💧💧 Precipitación:',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontFamily: 'FredokaOne',
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Text(
+                    'Es la caída de agua procedente de las nubes en estado líquido (lluvia y llovizna),  sólido (granizo) y semisólido (nieve). Es una parte importante de ciclo hidrológico, ya que sin la precipitación no habría agua en los ecosistemas, ni en los lugares en donde vivimos.',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'poppins',
+                      fontSize: 15,
+                    )),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'OMM (2008)',
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'FredokaOne',
+                        fontSize: 18,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Ver más',
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'FredokaOne',
+                            fontWeight: FontWeight.w100,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Icon(
+                          Icons.navigate_next,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -179,7 +224,8 @@ class DynamicTlalocMap extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Consumer<AppState>(
-              builder: (context, state, _) => FutureBuilder<Map<String, dynamic>>(
+              builder: (context, state, _) =>
+                  FutureBuilder<Map<String, dynamic>>(
                 future: state.getCurrentParajeData(),
                 builder: (context, snapshot) {
                   late String text;

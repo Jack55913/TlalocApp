@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class FacebookButton extends StatelessWidget {
   const FacebookButton({Key? key}) : super(key: key);
@@ -16,7 +15,6 @@ class FacebookButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(25),
           ),
           child: Row(
-            // Espacio entre ambas
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               const SizedBox(
@@ -62,12 +60,7 @@ class FacebookButton extends StatelessWidget {
         ),
       ),
       onTap: () {
-        // analytics.logEvent(name: 'view-facebook');
-        launchUrl(
-          Uri.parse(
-              'https://www.facebook.com/Ciencia-Ciudadana-para-el-Monitoreo-de-Lluvia-100358326014423'),
-          mode: LaunchMode.externalApplication,
-        );
+        Navigator.pushNamed(context, '/community');
       },
     );
   }

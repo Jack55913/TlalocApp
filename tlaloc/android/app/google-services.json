@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "228815382617-aiao2gqggk4vgu6dushpd1bsocn942s0.apps.googleusercontent.com",
+          "client_id": "228815382617-7ap23qdeu0g4v0i068cr6lor4l3a4air.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.TlalocApps.tlaloc",
-            "certificate_hash": "24f035fca033d2c25fef707cb8571f0e2288d5f0"
+            "certificate_hash": "d6657aca34a3188a7f590f0377f22847e08200a4"
           }
         },
         {
@@ -36,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "228815382617-98ljg943un48rj78n636ccggepr3evaa.apps.googleusercontent.com",
+              "client_id": "228815382617-2rtslpepg048j80iuls7ilrc8ff9sn4l.apps.googleusercontent.com",
               "client_type": 3
             },
             {

@@ -58,13 +58,13 @@ class _DatetimeState extends State<Datetime> {
       children: [
         ListTile(
           title: TextFormField(
-            keyboardType: TextInputType.number,
-            initialValue: precipitation?.toString() ?? '',
             validator: RangeValidator(
               min: 0,
               max: 120,
               errorText: 'Debe ser entre 0 y 120',
             ),
+            keyboardType: TextInputType.number,
+            initialValue: precipitation?.toString() ?? '',
             style: TextStyle(
               fontSize: 24,
               fontFamily: 'FredokaOne',

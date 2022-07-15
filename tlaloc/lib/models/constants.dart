@@ -1,43 +1,36 @@
 import 'package:flutter/material.dart';
 
 /// Para agregar o quitar parajes, basta con cambiar esta variable
-/// 
-/// 
+///
+///
 Map<String, String> parajes = {
   'El Venturero': 'Nativitas',
   'El Jardín': 'Nativitas',
   'Cabaña': 'San Pablo Ixayoc',
-  'Cruz de Zacatenco': 'San Dieguito',
-  'Canoas altas': 'Tequexquinahuac',
+  'Cruz de Atenco': 'San Dieguito',
+  'Canoas altas': 'San Dieguito',
   'Los Manantiales': 'Tequexquinahuac',
   'Tlaltlatlately': 'Santa Catarina del Monte',
   'Agua de Chiqueros': 'Santa Catarina del Monte',
 };
 
 List<String> commonimages = [
-    "assets/images/1_venturero.png",
-    "assets/images/2_jardin.png",
-    "assets/images/3_cabana.png",
-    "assets/images/4_cruz.png",
-    "assets/images/5_canoas.png",
-    "assets/images/6_manantiales.png",
-    "assets/images/7_terreno.png",
-    "assets/images/8_chiqueros.png",
+  "assets/images/1_venturero.svg",
+  "assets/images/2_jardin.svg",
+  "assets/images/3_cabana.svg",
+  "assets/images/4_cruz.svg",
+  "assets/images/5_canoas.svg",
+  "assets/images/6_manantiales.svg",
+  "assets/images/7_terreno.svg",
+  "assets/images/8_chiqueros.svg",
 ];
+final commonimagesMap = commonimages.asMap();
+final commonimagesAgain = commonimagesMap.keys.toList(growable: false);
 
-// Map<String, int> commonimages = {
-//   "assets/images/1_venturero.png": 0,
-//   "assets/images/2_jardin.png": 1,
-//   "assets/images/3_cabana.png": 2,
-//   "assets/images/4_cruz.png": 3,
-//   "assets/images/5_canoas.png": 4,
-//   "assets/images/6_manantiales.png": 5,
-//   "assets/images/7_terreno.png": 6,
-//   "assets/images/8_chiqueros.png": 7,
-// };
+// Iterator itr = commonimages.iterator;
 
-Map<String,Widget> cuentas = {
-  'Visitante':const Icon(Icons.person_search, size: 30), //Key
+Map<String, Widget> cuentas = {
+  'Visitante': const Icon(Icons.person_search, size: 30), //Key
   'Monitor': const Icon(Icons.star, size: 30), //value
 };
 
@@ -45,6 +38,7 @@ final dateLongAgo = DateTime(2022, 1, 1);
 final dateInALongTime = DateTime(3000, 12, 31);
 
 String appName = 'Tláloc App';
+
 class AppColors {
   // From dark illustration
   static const Color dark1 = Color(0xFF121212);

@@ -12,7 +12,8 @@ firebase-debug.*.log*
 firebase_hosting
 build
 .dart_tool
-
+key.properties
+app/tlaloc.jks
 # Firebase config
 
 # Uncomment this if you'd like others to create their own Firebase project.

@@ -3,59 +3,48 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/page/add.dart';
+import 'package:tlaloc/widgets/button_widget.dart';
 
-class PersonalMeasures extends StatefulWidget {
+class PersonalMeasures extends StatelessWidget {
   const PersonalMeasures({Key? key}) : super(key: key);
 
   @override
-  State<PersonalMeasures> createState() => _PersonalMeasuresState();
-}
-
-class _PersonalMeasuresState extends State<PersonalMeasures> {
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.dark2,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: AppColors.blue1, shape: BoxShape.circle),
-                child: Icon(
-                  Icons.check,
-                  color: Colors.white,
-                ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Column(
+          children: [
+            Container(
+              decoration:
+                  BoxDecoration(color: AppColors.blue1, shape: BoxShape.circle),
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
               ),
-            ],
-          ),
-          Column(
-            children: [
-              SizedBox(height: 20),
-              AutoSizeText(
-                'Mediciones completadas',
-                style: TextStyle(
-                  color: AppColors.blue1,
-                  fontFamily: 'poppins',
-                  fontSize: 16,
-                ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            SizedBox(height: 20),
+            AutoSizeText(
+              'Mediciones completadas',
+              style: TextStyle(
+                color: AppColors.blue1,
+                fontFamily: 'poppins',
+                fontSize: 16,
               ),
-              SizedBox(height: 20),
-            ],
-          ),
-          Column(
-            children: [
-              PersonalMeausreData(),
-            ],
-          ),
-        ],
-      ),
+            ),
+            SizedBox(height: 20),
+          ],
+        ),
+        Column(
+          children: [
+            PersonalMeausreData(),
+          ],
+        ),
+      ],
     );
   }
 }

@@ -179,18 +179,6 @@ class DataWidgetView extends StatelessWidget {
                             'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png')
                         : NetworkImage(
                             FirebaseAuth.instance.currentUser!.photoURL!),
-
-                    // backgroundColor: AppColors.orange1,
-                    // radius: 25,
-                    // child: AutoSizeText(
-                    //   // Iniciales del nombre de quien registró la medición
-                    //   measurement.uploader!.split(' ').map((e) => e[0]).join(),
-                    //   style: TextStyle(
-                    //     color: Colors.white,
-                    //     fontSize: 22,
-                    //     fontFamily: 'FredokaOne',
-                    //   ),
-                    // ),
                   ),
               ],
             ),
