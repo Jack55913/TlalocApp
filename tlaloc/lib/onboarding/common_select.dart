@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
@@ -117,7 +117,7 @@ class CommonSelectWidget extends StatelessWidget {
                 CircleAvatar(
                   radius: 50,
                   backgroundColor: Colors.transparent,
-                  child: SvgPicture.asset(
+                  backgroundImage: AssetImage(
                     commonimage,
                   ),
                 ),

@@ -15,14 +15,14 @@ Map<String, String> parajes = {
 };
 
 List<String> commonimages = [
-  "assets/images/1_venturero.svg",
-  "assets/images/2_jardin.svg",
-  "assets/images/3_cabana.svg",
-  "assets/images/4_cruz.svg",
-  "assets/images/5_canoas.svg",
-  "assets/images/6_manantiales.svg",
-  "assets/images/7_terreno.svg",
-  "assets/images/8_chiqueros.svg",
+  "assets/images/1_venturero.png",
+  "assets/images/2_jardin.png",
+  "assets/images/3_cabana.png",
+  "assets/images/4_cruz.png",
+  "assets/images/5_canoas.png",
+  "assets/images/6_manantiales.png",
+  "assets/images/7_terreno.png",
+  "assets/images/8_chiqueros.png",
 ];
 final commonimagesMap = commonimages.asMap();
 final commonimagesAgain = commonimagesMap.keys.toList(growable: false);
