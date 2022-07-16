@@ -1,9 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/onboarding/common_select.dart';
-
-// TODO: Que se separen de los demás, osease hay 8 graficas para los que eligieron monitores y 8 gráficas para los que eligieron visitante.
+import 'package:tlaloc/screens/home.dart';
 
 class RoleSelection extends StatelessWidget {
   const RoleSelection({Key? key}) : super(key: key);
@@ -40,13 +42,62 @@ class RoleSelection extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 30),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          child: Container(
+
+                      /// Para agregar o quitar parajes: constants.dart
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                      for (var rol in roles.entries)
+                                RolSelectWidget(
+                                  rol: rol.key,
+                                  icon: rol.value,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 50)
+                    ],
+                  ),
+                
+              ),
+            ),)
+          );
+  }
+}
+
+
+void _goHome(BuildContext context) {
+  Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute<void>(builder: (BuildContext context) {
+    return const HomePage();
+  }), (Route<dynamic> route) => false);
+}
+
+class RolSelectWidget extends StatelessWidget {
+  final String rol;
+  final Widget icon;
+
+  const RolSelectWidget(
+      {Key? key,
+      required this.rol,
+      required this.icon,
+      })
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: InkWell(
+        onTap: () async {
+          _goHome(context);
+          final state = Provider.of<AppState>(context, listen: false);
+          state.changeRol(rol);
+        },
+        child: Container(
                               height: 50,
                               width: MediaQuery.of(context).size.width * 0.35,
                               decoration: BoxDecoration(
@@ -55,62 +106,14 @@ class RoleSelection extends StatelessWidget {
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    Icons.person_search,
-                                    color: Colors.white,
-                                  ),
-                                  Text('Visitante'),
-                                ],
-                              )),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const CommonSelectPage(),
-                              ),
-                            );
-                          },
-                        ),
-                        InkWell(
-                          child: Container(
-                            height: 50,
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            decoration: BoxDecoration(
-                              color: AppColors.lightBlue,
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.white,
-                                ),
-                                Text('Monitor'),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const CommonSelectPage(),
-                              ),
-                            );
-                          },
-                        ),
-                        //
-                      ],
-                    ),
-                    const SizedBox(height: 50)
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+                                children: [
+                                  icon,
+                                  
+                                  Text(rol)])
+      ),),
     );
   }
 }
+
+
+

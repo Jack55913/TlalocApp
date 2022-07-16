@@ -6,6 +6,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
+import 'package:tlaloc/onboarding/role.dart';
 
 // TODO: que sólo aparezca la fecha: 7/jul/2022 y la hora con minutos: 7/jul/2022 12:00
 class Datetime extends StatefulWidget {
@@ -103,6 +104,23 @@ class _DatetimeState extends State<Datetime> {
             );
           },
         ),
+
+        Divider(
+          height: 20,
+          thickness: 1,
+        ),
+        ListTile(
+                  leading: Icon(Icons.work),
+                  title: Text('Elige un Rol'),
+                  subtitle: Text(Provider.of<AppState>(context).rol),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RoleSelection()),
+                    );
+                  },
+                ),
         Divider(
           height: 20,
           thickness: 1,

@@ -14,6 +14,11 @@ Map<String, String> parajes = {
   'Agua de Chiqueros': 'Santa Catarina del Monte',
 };
 
+Map<String, Widget> roles = {
+  'Visitante': const Icon(Icons.person_search),
+  'Monitor': const Icon(Icons.star),
+};
+
 List<String> commonimages = [
   "assets/images/1_venturero.png",
   "assets/images/2_jardin.png",
@@ -24,8 +29,28 @@ List<String> commonimages = [
   "assets/images/7_terreno.png",
   "assets/images/8_chiqueros.png",
 ];
-final commonimagesMap = commonimages.asMap();
-final commonimagesAgain = commonimagesMap.keys.toList(growable: false);
+
+List<String> parajecolection = [
+  'El Venturero',
+  'El Jardín',
+  'Cabaña',
+  'Cruz de Atenco',
+  'Canoas altas',
+  'Los Manantiales',
+  'Tlaltlatlately',
+  'Agua de Chiqueros'
+];
+
+List<String> ejidocolection = [
+  'Nativitas',
+  'Nativitas',
+  'San Pablo Ixayoc',
+  'San Dieguito',
+  'San Dieguito',
+  'Tequexquinahuac',
+  'Santa Catarina del Monte',
+  'Santa Catarina del Monte',
+];
 
 // Iterator itr = commonimages.iterator;
 

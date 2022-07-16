@@ -9,6 +9,12 @@ firebase-debug.*.log*
 
 # Firebase cache
 .firebase/
+build
+.vscode
+.idea
+.github
+.firebase
+.dart_tool
 
 # Firebase config
 

@@ -8,13 +8,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Measurement {
+  final String? rol;
   final String? uploader;
   final num? precipitation;
   final DateTime? dateTime;
   final String id;
   final String? imageUrl;
   Measurement(
-      {this.uploader,
+      {
+      this.rol,
+      this.uploader,
       this.precipitation,
       this.dateTime,
       required this.id,
@@ -25,6 +28,7 @@ class Measurement {
     var dateTime =
         DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
     return Measurement(
+      rol: json['rol'],
       uploader: json['uploader_name'],
       precipitation: json['precipitation'],
       dateTime: dateTime,
@@ -35,7 +39,8 @@ class Measurement {
 }
 
 class AppState extends ChangeNotifier {
-  String paraje = 'Tequexquinahuac';
+  String rol = 'Visitante';
+  String paraje = 'Cabaña';
   bool loading = true;
   final db = FirebaseFirestore.instance;
 
@@ -48,6 +53,7 @@ class AppState extends ChangeNotifier {
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     paraje = prefs.getString('paraje')!;
+    rol = prefs.getString('rol')!;
     loading = false;
     notifyListeners();
   }
@@ -60,10 +66,24 @@ class AppState extends ChangeNotifier {
     prefs.setBool('hasFinishedOnboarding', true);
   }
 
+  Future<void> changeRol(String newRol) async {
+    rol = newRol;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('rol', newRol);
+    prefs.setBool('hasFinishedOnboarding', true);
+  }
+
   /// No voy a convertir esto en una clase para que te dé flexibilidad de guardar
   /// lo que quieras en el mismo JSON
   Future<Map<String, dynamic>> getCurrentParajeData() async {
     var ref = db.collection('parajes').doc(paraje);
+    var snapshot = await ref.get();
+    return snapshot.data() ?? {};
+  }
+
+  Future<Map<String, dynamic>> getCurrentRolData() async {
+    var ref = db.collection('roles').doc(rol);
     var snapshot = await ref.get();
     return snapshot.data() ?? {};
   }
@@ -95,6 +115,7 @@ class AppState extends ChangeNotifier {
       fileUrl = oldImage;
     }
     return {
+      'rol': rol,
       'precipitation': precipitation,
       'uploader_name': auth.currentUser?.displayName,
       'uploader_email': auth.currentUser?.email,

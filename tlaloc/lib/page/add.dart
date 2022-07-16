@@ -98,7 +98,8 @@ class _AddScreenState extends State<AddScreen> {
                       if (snapshot.hasError ||
                           (snapshot.hasData &&
                               snapshot.data == ConnectivityResult.none)) {
-                        return Text(
+                        return 
+                        Text(
                             'No está soportado subir imágenes sin internet (aún).');
                       } else {
                         return Column(

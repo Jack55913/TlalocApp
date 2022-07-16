@@ -64,7 +64,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                 ListTile(
                   leading: Icon(Icons.work),
                   title: Text('Elige un Rol'),
-                  subtitle: Text(Provider.of<AppState>(context).paraje),
+                  subtitle: Text(Provider.of<AppState>(context).rol),
                   onTap: () {
                     Navigator.push(
                       context,

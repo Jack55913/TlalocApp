@@ -57,12 +57,11 @@ class CommonSelectPage extends StatelessWidget {
                       SizedBox(height: 16),
 
                       /// Para agregar o quitar parajes: constants.dart
-                      for (var paraje in parajes.entries)
+                      for (var i = 0; i < parajes.length; i++)
                         CommonSelectWidget(
-                          paraje: paraje.key,
-                          ejido: paraje.value,
-                          commonimage: commonimages[commonimagesAgain[0]++],
-                        ),
+                            paraje: parajecolection[i],
+                            ejido: ejidocolection[i],
+                            commonimage: commonimages[i]),
                     ],
                   ),
                 ],

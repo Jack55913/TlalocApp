@@ -33,6 +33,7 @@ void main() async {
   //Para el inicio de sesión por google
   // Modo sin conexión:
   FirebaseFirestore.instance.settings = const Settings(
+    cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
     persistenceEnabled: true,
   );
   runApp(const MyApp());
