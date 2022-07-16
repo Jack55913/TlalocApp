@@ -13,24 +13,24 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
 import 'package:tlaloc/onboarding/role.dart';
 import 'package:tlaloc/onboarding/sign_in.dart';
-import 'package:tlaloc/page/add.dart';
+import 'package:tlaloc/screens/home/add.dart';
 import 'package:tlaloc/page/conditional_onboarding_page.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tlaloc/page/data.dart';
-import 'package:tlaloc/page/graphscreen.dart';
+import 'package:tlaloc/screens/home/data.dart';
+import 'package:tlaloc/screens/home/graphscreen.dart';
 import 'package:tlaloc/screens/community.dart';
 import 'package:tlaloc/screens/credits.dart';
-import 'package:tlaloc/screens/home.dart';
-import 'package:tlaloc/screens/info.dart';
-import 'package:tlaloc/screens/politics.dart';
-import 'package:tlaloc/screens/privacy.dart';
+import 'package:tlaloc/screens/home/kernel.dart';
+import 'package:tlaloc/screens/settings/info.dart';
+import 'package:tlaloc/screens/settings/politics.dart';
+import 'package:tlaloc/screens/settings/privacy.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //Para el inicio de sesión por google
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // Modo sin conexión:
   FirebaseFirestore.instance.settings = const Settings(
     cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tlaloc/models/app_state.dart';
-import 'package:tlaloc/page/add.dart';
+import 'package:tlaloc/screens/home/add.dart';
 
 class ModifyRegistration extends StatelessWidget {
   final Measurement measurement;

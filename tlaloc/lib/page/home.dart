@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/home_widget_classes.dart';
-import 'package:tlaloc/page/add.dart';
-import 'package:tlaloc/screens/home.dart';
-import 'package:tlaloc/widgets/container.dart';
-import 'package:tlaloc/widgets/facebook_button.dart';
-import 'package:tlaloc/widgets/personal_measures.dart';
-import 'package:tlaloc/widgets/tutorials.dart';
+import 'package:tlaloc/page/drawer.dart';
+import 'package:tlaloc/screens/home/kernel.dart';
+import 'package:tlaloc/widgets/backgrounds/container.dart';
+import 'package:tlaloc/widgets/buttons/fab.dart';
+import 'package:tlaloc/widgets/cards/facebook_button.dart';
+import 'package:tlaloc/widgets/cards/personal_measures.dart';
+import 'package:tlaloc/widgets/cards/tutorials.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,6 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontSize: 24,
                 letterSpacing: 2,
               )),
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DrawerApp()),
+              );
+            },
+          ),
           actions: <Widget>[
             InfoButton(),
             ProfilePage(),
@@ -102,40 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: Visibility(
           visible: isFabVisable,
           child: Fab(),
-        ),
-      ),
-    );
-  }
-}
-
-class Fab extends StatelessWidget {
-  const Fab({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
-      tooltip: 'Agregar Medición',
-      highlightElevation: 1,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const AddScreen()),
-        );
-      },
-      backgroundColor: AppColors.green1,
-      icon: const Icon(Icons.add, color: Colors.white),
-      mouseCursor: MaterialStateMouseCursor.clickable,
-      label: const Text(
-        'Agregar',
-        style: TextStyle(
-          fontFamily: 'poppins',
-          fontSize: 18,
-          letterSpacing: 2,
-          color: Colors.white,
         ),
       ),
     );

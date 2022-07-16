@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/widgets/map.dart';
+import 'package:tlaloc/widgets/cards/map.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // import 'package:latlng/latlng.dart';
@@ -226,7 +226,7 @@ class DynamicTlalocMap extends StatelessWidget {
             Consumer<AppState>(
               builder: (context, state, _) =>
                   FutureBuilder<Map<String, dynamic>>(
-                future: state.getCurrentParajeData(),
+                future: state.getCurrentRolData(),
                 builder: (context, snapshot) {
                   late String text;
                   if (snapshot.hasError) {

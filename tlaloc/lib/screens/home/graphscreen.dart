@@ -2,10 +2,12 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:tlaloc/page/drawer.dart';
 import 'package:tlaloc/page/home.dart';
-import 'package:tlaloc/screens/home.dart';
-import 'package:tlaloc/widgets/table_graphs.dart';
-import 'package:tlaloc/widgets/table_grids.dart';
+import 'package:tlaloc/screens/home/kernel.dart';
+import 'package:tlaloc/widgets/buttons/fab.dart';
+import 'package:tlaloc/widgets/graphs/table_graphs.dart';
+import 'package:tlaloc/widgets/graphs/table_grids.dart';
 
 class GraphsScreen extends StatefulWidget {
   const GraphsScreen({Key? key}) : super(key: key);
@@ -27,6 +29,15 @@ class _GraphsScreenState extends State<GraphsScreen> {
               fontSize: 24,
               letterSpacing: 2,
             ),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DrawerApp()),
+              );
+            },
           ),
           actions: <Widget>[
             InfoButton(),

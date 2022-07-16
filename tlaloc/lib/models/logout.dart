@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:tlaloc/page/logged_in_widget.dart';
-import 'package:tlaloc/screens/home.dart';
+import 'package:tlaloc/screens/home/kernel.dart';
 import 'package:tlaloc/onboarding/sign_in.dart';
 
 class LogOut extends StatelessWidget {

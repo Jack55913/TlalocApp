@@ -62,6 +62,7 @@ dependencies:
   provider: ^6.0.2
   share_plus: ^4.0.9
   shared_preferences: ^2.0.13
+  sidebarx: ^0.6.0
   syncfusion_flutter_charts: ^20.1.61
   syncfusion_flutter_gauges: ^20.2.36
   syncfusion_flutter_pdfviewer: ^20.2.38-beta

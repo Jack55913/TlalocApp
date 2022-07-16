@@ -8,7 +8,6 @@ import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
 import 'package:tlaloc/onboarding/role.dart';
 
-// TODO: que sólo aparezca la fecha: 7/jul/2022 y la hora con minutos: 7/jul/2022 12:00
 class Datetime extends StatefulWidget {
   final void Function(DateTime) updateDateTime;
   final void Function(num?) updatePrecipitation;
@@ -51,10 +50,6 @@ class _DatetimeState extends State<Datetime> {
     final hours = dateTime.hour.toString().padLeft(2, '0');
     final minutes = dateTime.minute.toString().padLeft(2, '0');
 
-    // double _level = 150;
-    // final double _minimumLevel = 0;
-    // final double _maximumLevel = 120;
-
     return Column(
       children: [
         ListTile(
@@ -96,7 +91,8 @@ class _DatetimeState extends State<Datetime> {
             color: Colors.red,
           ),
           title: Text('Elige un Paraje'),
-          subtitle: Text(Provider.of<AppState>(context).paraje),
+          subtitle: Text(
+              'Estás ubicado en: "${Provider.of<AppState>(context).paraje}"'),
           onTap: () {
             Navigator.push(
               context,
@@ -104,23 +100,22 @@ class _DatetimeState extends State<Datetime> {
             );
           },
         ),
-
         Divider(
           height: 20,
           thickness: 1,
         ),
         ListTile(
-                  leading: Icon(Icons.work),
-                  title: Text('Elige un Rol'),
-                  subtitle: Text(Provider.of<AppState>(context).rol),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => RoleSelection()),
-                    );
-                  },
-                ),
+          leading: Icon(Icons.work, color: Colors.brown),
+          title: Text('Elige un Rol'),
+          subtitle:
+              Text('Estás en modo: ${Provider.of<AppState>(context).rol}'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RoleSelection()),
+            );
+          },
+        ),
         Divider(
           height: 20,
           thickness: 1,

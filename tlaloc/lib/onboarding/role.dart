@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/screens/home.dart';
+import 'package:tlaloc/screens/home/kernel.dart';
 
 class RoleSelection extends StatelessWidget {
   const RoleSelection({Key? key}) : super(key: key);

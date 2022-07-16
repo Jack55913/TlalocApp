@@ -4,10 +4,10 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/page/add.dart';
-import 'package:tlaloc/page/data.dart';
+import 'package:tlaloc/screens/home/add.dart';
+import 'package:tlaloc/screens/home/data.dart';
 import 'package:tlaloc/page/home.dart';
-import 'package:tlaloc/page/graphscreen.dart';
+import 'package:tlaloc/screens/home/graphscreen.dart';
 import 'package:tlaloc/screens/settings.dart';
 
 class HomePage extends StatefulWidget {

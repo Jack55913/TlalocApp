@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/page/date.dart';
-import 'package:tlaloc/screens/home.dart';
-import 'package:tlaloc/widgets/button_widget.dart';
+import 'package:tlaloc/page/drawer.dart';
+import 'package:tlaloc/screens/home/kernel.dart';
+import 'package:tlaloc/widgets/save_button.dart';
 import 'package:tlaloc/models/app_state.dart';
 
 class AddScreen extends StatefulWidget {
@@ -61,6 +62,19 @@ class _AddScreenState extends State<AddScreen> {
         SafeArea(
           child: Scaffold(
             appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.menu),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DrawerApp()),
+                  );
+                },
+              ),
+              actions: <Widget>[
+                InfoButton(),
+                ProfilePage(),
+              ],
               title: Consumer<GoogleSignInProvider>(
                 builder: (context, signIn, child) {
                   String place = Provider.of<AppState>(context).paraje;
@@ -69,8 +83,6 @@ class _AddScreenState extends State<AddScreen> {
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'FredokaOne',
-                      // fontSize: 24,
-                      // letterSpacing: 2,
                     ),
                   );
                 },
@@ -92,14 +104,14 @@ class _AddScreenState extends State<AddScreen> {
                   const Divider(
                     thickness: 1,
                   ),
+                  // TODO: QUE YA FUNCIONE SIN QUE JALE INTERNET
                   FutureBuilder<ConnectivityResult>(
                     future: Connectivity().checkConnectivity(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError ||
                           (snapshot.hasData &&
                               snapshot.data == ConnectivityResult.none)) {
-                        return 
-                        Text(
+                        return Text(
                             'No está soportado subir imágenes sin internet (aún).');
                       } else {
                         return Column(
@@ -116,7 +128,6 @@ class _AddScreenState extends State<AddScreen> {
                             SizedBox(height: 15),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 MaterialButton(
                                     child: Row(
@@ -181,14 +192,17 @@ class _AddScreenState extends State<AddScreen> {
                         final state =
                             Provider.of<AppState>(context, listen: false);
                         if (widget.measurement == null) {
+                          // Inicia el conffetti
+                          // initState;
                           // Crear medición
-                          initState;
                           state.addMeasurement(
                             precipitation: precipitation!,
                             time: dateTime,
                             image: newImage,
                           );
+                          // Ir hacia atrás
                           Navigator.pop(context);
+                          // Ir hacia atrás y no regresar a la pantalla anterior
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute<void>(
                                   builder: (BuildContext context) {
@@ -213,7 +227,8 @@ class _AddScreenState extends State<AddScreen> {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: Text('Ocurrió un error al guardar'),
+                            title: Text(
+                                '¡No ingresaste la medición del pluviómetro!'),
                             content: Text('$e'),
                           ),
                         );

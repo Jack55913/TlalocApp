@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/widgets/empty_state.dart';
+import 'package:tlaloc/widgets/backgrounds/empty_state.dart';
 
 /// Samples:
 /// https://google.github.io/charts/flutter/example/time_series_charts/simple.html

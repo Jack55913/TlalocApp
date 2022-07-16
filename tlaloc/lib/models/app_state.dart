@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -8,27 +7,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Measurement {
-  final String? rol;
   final String? uploader;
+  final String? avatarUrl;
   final num? precipitation;
   final DateTime? dateTime;
   final String id;
   final String? imageUrl;
   Measurement(
       {
-      this.rol,
+      this.avatarUrl,
       this.uploader,
       this.precipitation,
       this.dateTime,
+      // required this.formatTime,
       required this.id,
       this.imageUrl});
-
+// TODO: Aquí está el pan:
   factory Measurement.fromJson(Map<String, dynamic> json, String id) {
     Timestamp timestamp = json['time'];
     var dateTime =
         DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
+    // Timestamp formatTime = json['short_time'];
+    // String formattedDate = DateFormat('MM-dd-yyyy HH:mm').format(formatTime.toDate());
+
     return Measurement(
-      rol: json['rol'],
+      // formatTime: formattedDate,
+      avatarUrl: json['avatar_url'],
       uploader: json['uploader_name'],
       precipitation: json['precipitation'],
       dateTime: dateTime,
@@ -39,8 +43,9 @@ class Measurement {
 }
 
 class AppState extends ChangeNotifier {
-  String rol = 'Visitante';
-  String paraje = 'Cabaña';
+  String rol = 'Rol';
+  String paraje = 'Ejido';
+  // String formatTime = 'MM-dd-yyyy HH:mm';
   bool loading = true;
   final db = FirebaseFirestore.instance;
 
@@ -52,8 +57,8 @@ class AppState extends ChangeNotifier {
     loading = true;
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
-    paraje = prefs.getString('paraje')!;
     rol = prefs.getString('rol')!;
+    paraje = prefs.getString('paraje')!;
     loading = false;
     notifyListeners();
   }
@@ -73,17 +78,9 @@ class AppState extends ChangeNotifier {
     prefs.setString('rol', newRol);
     prefs.setBool('hasFinishedOnboarding', true);
   }
-
-  /// No voy a convertir esto en una clase para que te dé flexibilidad de guardar
-  /// lo que quieras en el mismo JSON
-  Future<Map<String, dynamic>> getCurrentParajeData() async {
-    var ref = db.collection('parajes').doc(paraje);
-    var snapshot = await ref.get();
-    return snapshot.data() ?? {};
-  }
-
+// KERNEL DEL PROYECTO: BASE DE DATOS EN ARCHIVO .Json EN FIREBASE / REFI APP
   Future<Map<String, dynamic>> getCurrentRolData() async {
-    var ref = db.collection('roles').doc(rol);
+    var ref = db.collection('rol').doc(rol);
     var snapshot = await ref.get();
     return snapshot.data() ?? {};
   }
@@ -106,6 +103,7 @@ class AppState extends ChangeNotifier {
         final imageString = await image.readAsString();
         fileUrl = imageString;
       } else {
+        // Se crea una carpeta con el nombre measurement:
         final imageRef =
             storageRef.child("measurements/$fileName.$fileExtension");
         await imageRef.putFile(image);
@@ -116,7 +114,9 @@ class AppState extends ChangeNotifier {
     }
     return {
       'rol': rol,
+      'paraje': paraje,
       'precipitation': precipitation,
+      'avatar_url': auth.currentUser?.photoURL,
       'uploader_name': auth.currentUser?.displayName,
       'uploader_email': auth.currentUser?.email,
       'uploader_id': auth.currentUser?.uid,
@@ -127,7 +127,13 @@ class AppState extends ChangeNotifier {
 
   Future<void> addMeasurement(
       {required num precipitation, required DateTime time, File? image}) async {
-    db.collection('parajes').doc(paraje).collection('measurements').add(
+    db
+        .collection('rol')
+        .doc(rol)
+        .collection('paraje')
+        .doc(paraje)
+        .collection('measurements')
+        .add(
           await _getMeasurementJson(
             precipitation: precipitation,
             time: time,
@@ -150,6 +156,8 @@ class AppState extends ChangeNotifier {
 
   Future<List<Measurement>> getMeasurements() async {
     var event = await db
+        .collection('rol')
+        .doc(rol)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
@@ -164,6 +172,8 @@ class AppState extends ChangeNotifier {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getMeasurementsStream() {
     return db
+        .collection('rol')
+        .doc(rol)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
@@ -180,6 +190,8 @@ class AppState extends ChangeNotifier {
     String? oldImage,
   }) async {
     await db
+        .collection('rol')
+        .doc(rol)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
@@ -196,6 +208,8 @@ class AppState extends ChangeNotifier {
 
   Future<void> deleteMeasurement({required String id}) async {
     await db
+        .collection('rol')
+        .doc(rol)
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
