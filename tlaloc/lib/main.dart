@@ -10,9 +10,6 @@ import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:tlaloc/onboarding/common_select.dart';
-import 'package:tlaloc/onboarding/role.dart';
-import 'package:tlaloc/onboarding/sign_in.dart';
 import 'package:tlaloc/screens/home/add.dart';
 import 'package:tlaloc/page/conditional_onboarding_page.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
@@ -67,15 +64,11 @@ class MyApp extends StatelessWidget {
           '/home': (context) => const HomePage(),
           '/measures': (context) => const DataScreen(),
           '/graphs': (context) => const GraphsScreen(),
-          '/signup': (context) => const SignUpWidget(),
-          '/role': (context) => const RoleSelection(),
-          '/common': (context) => const CommonSelectPage(),
           '/credits': (context) => const CreditsPage(),
           '/politics': (context) => const PoliticPage(),
           '/privacy': (context) => const PrivacyPage(),
           '/info': (context) => const InfoProyectPage(),
           '/community': (context) => const CommunityPage(),
-
         },
         // home:GraphsScreen(),
       ),

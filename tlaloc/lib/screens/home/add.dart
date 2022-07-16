@@ -202,12 +202,8 @@ class _AddScreenState extends State<AddScreen> {
                           );
                           // Ir hacia atrás
                           Navigator.pop(context);
-                          // Ir hacia atrás y no regresar a la pantalla anterior
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute<void>(
-                                  builder: (BuildContext context) {
-                            return const HomePage();
-                          }), (Route<dynamic> route) => false);
+                          Navigator.pop(context);
+
                         } else {
                           // Edita una medición ya existente
                           state.updateMeasurement(

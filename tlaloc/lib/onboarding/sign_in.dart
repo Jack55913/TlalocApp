@@ -6,6 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
+import 'package:tlaloc/onboarding/common_select.dart';
+import 'package:tlaloc/onboarding/role.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignUpWidget extends StatelessWidget {
@@ -84,7 +86,12 @@ class SignUpWidget extends StatelessWidget {
                     );
                   }
                   if (provider.recentlySignedInUser != null) {
-                    Navigator.pushNamed(context, '/role');
+                    
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RoleSelection()),
+                  );
+                
                   }
                 },
               ),
@@ -97,8 +104,11 @@ class SignUpWidget extends StatelessWidget {
                 ),
                 icon: Icon(Icons.person, color: Colors.black),
                 label: Text('Modo Incógnito'),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/common');
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CommonSelectPage()),
+                  );
                 },
               ),
               SizedBox(height: 40),

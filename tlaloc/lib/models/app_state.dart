@@ -43,8 +43,8 @@ class Measurement {
 }
 
 class AppState extends ChangeNotifier {
-  String rol = 'Rol';
-  String paraje = 'Ejido';
+  String rol = 'Visitante';
+  String paraje = 'Cabaña';
   // String formatTime = 'MM-dd-yyyy HH:mm';
   bool loading = true;
   final db = FirebaseFirestore.instance;
@@ -79,8 +79,14 @@ class AppState extends ChangeNotifier {
     prefs.setBool('hasFinishedOnboarding', true);
   }
 // KERNEL DEL PROYECTO: BASE DE DATOS EN ARCHIVO .Json EN FIREBASE / REFI APP
-  Future<Map<String, dynamic>> getCurrentRolData() async {
-    var ref = db.collection('rol').doc(rol);
+  // Future<Map<String, dynamic>> getCurrentRolData() async {
+  //   var ref = db.collection('rol').doc(rol);
+  //   var snapshot = await ref.get();
+  //   return snapshot.data() ?? {};
+  // }
+
+    Future<Map<String, dynamic>> getCurrentParajeData() async {
+    var ref = db.collection('parajes').doc(paraje);
     var snapshot = await ref.get();
     return snapshot.data() ?? {};
   }
@@ -216,4 +222,6 @@ class AppState extends ChangeNotifier {
         .doc(id)
         .delete();
   }
+
+  getCurrentRolData() {}
 }

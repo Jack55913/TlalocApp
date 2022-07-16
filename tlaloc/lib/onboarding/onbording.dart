@@ -3,6 +3,7 @@ import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/onbording_cards.dart';
 import 'package:concentric_transition/concentric_transition.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tlaloc/onboarding/sign_in.dart';
 // import 'package:tlaloc/screens/navigation_bar.dart';
 
 class Onboarding extends StatelessWidget {
@@ -35,8 +36,14 @@ class Onboarding extends StatelessWidget {
     return Scaffold(
       body: ConcentricPageView(
         onFinish: () {
-          Navigator.pushNamed(context, '/signup');
-        },
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignUpWidget()),
+                  );
+                },
+        // onFinish: () {
+        //   Navigator.pushNamed(context, '/signup');
+        // },
         colors: data.map((e) => e.backgroundColor).toList(),
         itemCount: data.length,
         itemBuilder: (int index) {

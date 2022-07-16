@@ -7,7 +7,7 @@ class UserFormWidget extends StatefulWidget {
   @override
   State<UserFormWidget> createState() => _UserFormWidgetState();
 }
-
+// Sirve para enviar las mediciones
 class _UserFormWidgetState extends State<UserFormWidget> {
   @override
   Widget build(BuildContext context) => Column(
