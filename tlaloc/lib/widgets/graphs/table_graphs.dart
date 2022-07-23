@@ -13,16 +13,16 @@ class TableGraphs extends StatefulWidget {
 }
 
 List<String> graphimages = [
-  "assets/images/img-2.png",
-  "assets/images/img-3.png",
+  "assets/images/g1.jpg",
+  // "assets/images/img-3.png",
 ];
 List<String> graphtitle = [
   "De Dispersión",
-  "De Barras",
+  // "De Barras",
 ];
 final graphscrens = [
   const DispersionBar(),
-  const BarGraph(),
+  // const BarGraph(),
 ];
 
 class _TableGraphsState extends State<TableGraphs> {
@@ -50,21 +50,21 @@ class _TableGraphsState extends State<TableGraphs> {
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
                   itemBuilder: (BuildContext, index) => Card(
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: AssetImage(graphimages[index]),
-                        ),
-                        title: Text(graphtitle[index]),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => graphscrens[index],
-                            ),
-                          );
-                        },
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: AssetImage(graphimages[index]),
                       ),
+                      title: Text(graphtitle[index]),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => graphscrens[index],
+                          ),
+                        );
+                      },
                     ),
+                  ),
                   itemCount: graphimages.length,
                   shrinkWrap: true,
                   padding: EdgeInsets.all(5),

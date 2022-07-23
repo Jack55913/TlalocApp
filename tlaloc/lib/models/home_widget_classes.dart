@@ -226,7 +226,7 @@ class DynamicTlalocMap extends StatelessWidget {
             Consumer<AppState>(
               builder: (context, state, _) =>
                   FutureBuilder<Map<String, dynamic>>(
-                future: state.getCurrentRolData(),
+                future: state.getCurrentParajeData(),
                 builder: (context, snapshot) {
                   late String text;
                   if (snapshot.hasError) {

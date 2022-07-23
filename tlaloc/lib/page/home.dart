@@ -34,20 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontSize: 24,
                 letterSpacing: 2,
               )),
-          leading: IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DrawerApp()),
-              );
-            },
-          ),
           actions: <Widget>[
             InfoButton(),
             ProfilePage(),
           ],
         ),
+        drawer: DrawerApp(),
         body: NotificationListener<UserScrollNotification>(
           onNotification: (notification) {
             if (notification.direction == ScrollDirection.forward) {

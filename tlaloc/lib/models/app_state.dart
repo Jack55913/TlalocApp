@@ -86,7 +86,7 @@ class AppState extends ChangeNotifier {
   // }
 
     Future<Map<String, dynamic>> getCurrentParajeData() async {
-    var ref = db.collection('parajes').doc(paraje);
+    var ref = db.collection('rol').doc(rol);
     var snapshot = await ref.get();
     return snapshot.data() ?? {};
   }
@@ -119,8 +119,6 @@ class AppState extends ChangeNotifier {
       fileUrl = oldImage;
     }
     return {
-      'rol': rol,
-      'paraje': paraje,
       'precipitation': precipitation,
       'avatar_url': auth.currentUser?.photoURL,
       'uploader_name': auth.currentUser?.displayName,
@@ -136,7 +134,7 @@ class AppState extends ChangeNotifier {
     db
         .collection('rol')
         .doc(rol)
-        .collection('paraje')
+        .collection('parajes')
         .doc(paraje)
         .collection('measurements')
         .add(
@@ -222,6 +220,4 @@ class AppState extends ChangeNotifier {
         .doc(id)
         .delete();
   }
-
-  getCurrentRolData() {}
 }

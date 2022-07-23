@@ -9,11 +9,11 @@ class TableGrids extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> chartimages = [
-      "assets/images/img-3.png",
+      // "assets/images/img-3.png",
       "assets/images/img-2.png",
     ];
     List<String> charttitle = [
-      "De Tortas",
+      // "De Tortas",
       "De Pasteles",
     ];
     final chartscrens = [

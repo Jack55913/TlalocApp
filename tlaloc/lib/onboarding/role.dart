@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
-import 'package:tlaloc/screens/home/kernel.dart';
+import 'package:tlaloc/onboarding/common_select.dart';
 
 class RoleSelection extends StatelessWidget {
   const RoleSelection({Key? key}) : super(key: key);
@@ -13,79 +13,76 @@ class RoleSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blue3,
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/images/img-3.png',
-                  width: MediaQuery.of(context).size.width * 0.8,
-                ),
-                const Text(
-                  'Selecciona una opción',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontFamily: 'FredokaOne',
-                    color: AppColors.lightBlue,
+        backgroundColor: AppColors.blue3,
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Center(
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/img-3.png',
+                    width: MediaQuery.of(context).size.width * 0.8,
                   ),
-                ),
-                const SizedBox(height: 20),
-                const AutoSizeText(
-                  'Si recibiste una capacitación por partedel equipo, entonces elige MONITOR:',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Poppins',
-                    color: Colors.white,
+                  const Text(
+                    'Selecciona una opción',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontFamily: 'FredokaOne',
+                      color: AppColors.lightBlue,
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 30),
+                  const SizedBox(height: 20),
+                  const AutoSizeText(
+                    'Si recibiste una capacitación por partedel equipo, entonces elige MONITOR:',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30),
 
-                      /// Para agregar o quitar parajes: constants.dart
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                      for (var rol in roles.entries)
-                                RolSelectWidget(
-                                  rol: rol.key,
-                                  icon: rol.value,
-                                ),
-                              ],
+                  /// Para agregar o quitar parajes: constants.dart
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          for (var rol in roles.entries)
+                            RolSelectWidget(
+                              rol: rol.key,
+                              icon: rol.value,
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 50)
+                        ],
+                      ),
                     ],
                   ),
-                
+                  const SizedBox(height: 50)
+                ],
               ),
-            ),)
-          );
+            ),
+          ),
+        ));
   }
 }
 
-
 void _goHome(BuildContext context) {
-  Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute<void>(builder: (BuildContext context) {
-    return const HomePage();
-  }), (Route<dynamic> route) => false);
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const CommonSelectPage()),
+  );
 }
 
 class RolSelectWidget extends StatelessWidget {
   final String rol;
   final Widget icon;
 
-  const RolSelectWidget(
-      {Key? key,
-      required this.rol,
-      required this.icon,
-      })
-      : super(key: key);
+  const RolSelectWidget({
+    Key? key,
+    required this.rol,
+    required this.icon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,22 +95,16 @@ class RolSelectWidget extends StatelessWidget {
           state.changeRol(rol);
         },
         child: Container(
-                              height: 50,
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              decoration: BoxDecoration(
-                                color: AppColors.lightBlue,
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  icon,
-                                  
-                                  Text(rol)])
-      ),),
+            height: 50,
+            width: MediaQuery.of(context).size.width * 0.35,
+            decoration: BoxDecoration(
+              color: AppColors.lightBlue,
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [icon, Text(rol)])),
+      ),
     );
   }
 }
-
-
-

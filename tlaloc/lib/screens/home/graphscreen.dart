@@ -30,24 +30,16 @@ class _GraphsScreenState extends State<GraphsScreen> {
               letterSpacing: 2,
             ),
           ),
-          leading: IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DrawerApp()),
-              );
-            },
-          ),
           actions: <Widget>[
             InfoButton(),
             ProfilePage(),
           ],
         ),
+        drawer: DrawerApp(),
         body: Column(
           children: const [
             TableGraphs(),
-            TableGrids(),
+            // TableGrids(),
           ],
         ),
         floatingActionButton: const Fab(),

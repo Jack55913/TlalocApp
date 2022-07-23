@@ -1,12 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tlaloc/models/app_state.dart';
-import 'package:tlaloc/models/google_sign_in.dart';
-import 'package:tlaloc/onboarding/logged_in_widget.dart';
+import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/onboarding/common_select.dart';
-import 'package:tlaloc/onboarding/onbording.dart';
 import 'package:tlaloc/onboarding/role.dart';
 import 'package:tlaloc/screens/credits.dart';
 import 'package:ionicons/ionicons.dart';
@@ -18,7 +17,35 @@ class DrawerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      elevation: 0.5,
+      backgroundColor: AppColors.dark2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(20),
+        ),
+      ),
+      semanticLabel: 'Menu',
       child: ListView(children: [
+        const DrawerHeader(
+          child: Text(
+            'Tláloc App',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontFamily: 'FredokaOne',
+            ),
+            textAlign: TextAlign.end,
+          ),
+          decoration: BoxDecoration(
+            color: AppColors.dark1,
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/images/Portada2.png",
+              ),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
         ListTile(
           leading: const Icon(Icons.place, color: Colors.red),
           title: const Text('Elige un Paraje'),
@@ -52,7 +79,7 @@ class DrawerApp extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: const Icon(Icons.feedback, color: Colors.green),
+          leading: const Icon(Icons.feedback, color: Colors.white),
           title: const Text('Enviar retroalimentación'),
           onTap: () {
             launchUrl(
@@ -62,19 +89,19 @@ class DrawerApp extends StatelessWidget {
           },
         ),
         ListTile(
-            leading: const Icon(Icons.description, color: Colors.blue),
+            leading: const Icon(Icons.description, color: Colors.white),
             title: const Text('Términos y condiciones'),
             onTap: () {
               Navigator.pushNamed(context, '/privacy');
             }),
         ListTile(
-            leading: const Icon(Icons.privacy_tip, color: Colors.blue),
+            leading: const Icon(Icons.privacy_tip, color: Colors.white),
             title: const Text('Política de privacidad'),
             onTap: () {
               Navigator.pushNamed(context, '/politics');
             }),
         ListTile(
-          leading: const Icon(Icons.info, color: Colors.blue),
+          leading: const Icon(Icons.info, color: Colors.white),
           title: const Text('Acerca de'),
           onTap: () {
             // analytics.logEvent(name: 'open-about');
@@ -144,52 +171,6 @@ class DrawerApp extends StatelessWidget {
                 ),
               ],
             );
-          },
-        ),
-        Consumer<GoogleSignInProvider>(
-          builder: (context, signIn, child) {
-            final name = FirebaseAuth.instance.currentUser?.displayName;
-            return ListTile(
-              leading: const Icon(Icons.login, color: Colors.green),
-              title: const Text('Iniciar sesión'),
-              subtitle: Text(name == null
-                  ? 'No has iniciado sesión'
-                  : 'Iniciaste sesión como $name'),
-              onTap: () async {
-                try {
-                  await signIn.googleLogin();
-                } catch (e) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Error al iniciar sesión'),
-                      content: Text('$e'),
-                    ),
-                  );
-                }
-              },
-            );
-          },
-        ),
-        if (FirebaseAuth.instance.currentUser != null)
-          ListTile(
-            leading: const Icon(Icons.logout, color: Colors.red),
-            title: const Text('Cerrar sesión'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoggedInWidget()),
-              );
-            },
-          ),
-        ListTile(
-          leading: const Icon(Icons.bug_report, color: Colors.yellow),
-          title: const Text('Abrir pantalla inicial'),
-          onTap: () {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute<void>(builder: (BuildContext context) {
-              return Onboarding();
-            }), (Route<dynamic> route) => false);
           },
         ),
       ]),

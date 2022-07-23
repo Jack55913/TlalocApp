@@ -62,15 +62,6 @@ class _AddScreenState extends State<AddScreen> {
         SafeArea(
           child: Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DrawerApp()),
-                  );
-                },
-              ),
               actions: <Widget>[
                 InfoButton(),
                 ProfilePage(),
@@ -88,6 +79,7 @@ class _AddScreenState extends State<AddScreen> {
                 },
               ),
             ),
+            drawer: DrawerApp(),
             body: SingleChildScrollView(
               child: Column(
                 children: [

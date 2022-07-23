@@ -3,17 +3,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:tlaloc/models/app_state.dart';
 import 'package:tlaloc/models/constants.dart';
 import 'package:tlaloc/models/google_sign_in.dart';
 import 'package:tlaloc/onboarding/logged_in_widget.dart';
-import 'package:tlaloc/onboarding/common_select.dart';
 import 'package:tlaloc/onboarding/onbording.dart';
-import 'package:tlaloc/onboarding/role.dart';
-import 'package:tlaloc/screens/credits.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../models/constants.dart';
 
 class ConfigureScreen extends StatefulWidget {
@@ -52,9 +45,10 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                 Consumer<GoogleSignInProvider>(
                   builder: (context, signIn, child) {
                     final name = FirebaseAuth.instance.currentUser?.displayName;
+
                     return ListTile(
-                      leading: Icon(Icons.login),
-                      title: Text('Iniciar sesión'),
+                      leading: const Icon(Icons.login, color: Colors.green),
+                      title: const Text('Iniciar sesión'),
                       subtitle: Text(name == null
                           ? 'No has iniciado sesión'
                           : 'Iniciaste sesión como $name'),
@@ -65,7 +59,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: Text('Error al iniciar sesión'),
+                              title: const Text('Error al iniciar sesión'),
                               content: Text('$e'),
                             ),
                           );
@@ -76,8 +70,8 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                 ),
                 if (FirebaseAuth.instance.currentUser != null)
                   ListTile(
-                    leading: Icon(Icons.logout),
-                    title: Text('Cerrar sesión'),
+                    leading: const Icon(Icons.logout, color: Colors.red),
+                    title: const Text('Cerrar sesión'),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -87,13 +81,14 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                     },
                   ),
                 ListTile(
-                  leading: Icon(Icons.bug_report),
-                  title: Text('Abrir pantalla inicial'),
+                  leading: const Icon(Icons.bug_report, color: Colors.blue),
+                  title: const Text('Abrir pantalla inicial'),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Onboarding()),
-                    );
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute<void>(
+                            builder: (BuildContext context) {
+                      return Onboarding();
+                    }), (Route<dynamic> route) => false);
                   },
                 ),
               ]),
