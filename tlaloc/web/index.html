@@ -55,8 +55,12 @@
   firebase.initializeApp(firebaseConfig);
 </script>
   <!-- Google sign in -->
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <div id="g_id_onload"
+         data-client_id="228815382617-98ljg943un48rj78n636ccggepr3evaa.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->

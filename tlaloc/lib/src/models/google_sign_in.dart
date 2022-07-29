@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
-  // static const String _webSign =
-  // '228815382617-2rtslpepg048j80iuls7ilrc8ff9sn4l.apps.googleusercontent.com';
+  static const String _webSign =
+      '228815382617-2rtslpepg048j80iuls7ilrc8ff9sn4l.apps.googleusercontent.com';
   static final googleSignIn = GoogleSignIn(
-      // clientId: _webSign,
-      );
+    clientId: _webSign,
+  );
 
   GoogleSignInAccount? _user;
 

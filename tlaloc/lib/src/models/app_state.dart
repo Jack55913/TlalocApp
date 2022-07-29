@@ -88,6 +88,8 @@ class AppState extends ChangeNotifier {
     return snapshot.data() ?? {};
   }
 
+// PARA GUARDAR LAS FOTOS EN FIREBASE STORAGE:
+
   Future<Map<String, dynamic>> _getMeasurementJson(
       {required num precipitation,
       required DateTime time,

@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   int index = 0;
 
   final screens = [
-    const AddScreen(),
+    AddScreen(),
     const HomeScreen(),
     const DataScreen(),
     const GraphsScreen(),

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -12,13 +13,14 @@ import 'package:tlaloc/src/models/google_sign_in.dart';
 import 'package:tlaloc/src/resources/page/date.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/profilepage.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/save_button.dart';
-
 import '../../widgets/appbar/infobutton.dart';
+
+String path = 'sounds/correcto.mp3';
+int _counter = 0;
 
 class AddScreen extends StatefulWidget {
   final Measurement? measurement;
-
-  const AddScreen({Key? key, this.measurement}) : super(key: key);
+  AddScreen({Key? key, this.measurement}) : super(key: key);
 
   @override
   State<AddScreen> createState() => _AddScreenState();
@@ -56,6 +58,7 @@ class _AddScreenState extends State<AddScreen> {
       print('Falló al obtener la imágen: $e');
     }
   }
+  final player = AudioPlayer(); //+
 
   @override
   Widget build(BuildContext context) =>
@@ -180,6 +183,7 @@ class _AddScreenState extends State<AddScreen> {
                     height: 20,
                     thickness: 1,
                   ),
+                  // TODO: QUE SE ENVÍE A LA BASE DE DATOS
                   ButtonWidget(
                     onClicked: () async {
                       try {
@@ -194,6 +198,7 @@ class _AddScreenState extends State<AddScreen> {
                             time: dateTime,
                             image: newImage,
                           );
+                          player.play(AssetSource(path));
                           // Ir hacia atrás
                           Navigator.pop(context);
                           Navigator.pop(context);
@@ -211,6 +216,9 @@ class _AddScreenState extends State<AddScreen> {
 
                           /// Works around the previous page being a stateful widget
                           Navigator.pop(context);
+
+                          // More and more:
+
                         }
                       } catch (e) {
                         showDialog(

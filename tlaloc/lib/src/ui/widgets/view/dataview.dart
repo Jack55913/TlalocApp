@@ -73,7 +73,7 @@ class DataWidgetView extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: <Widget>[
-                if (measurement.uploader != null)
+                if (measurement.avatarUrl != null)
                   CircleAvatar(
                     foregroundImage: FirebaseAuth.instance.currentUser == null
                         ? const NetworkImage(
