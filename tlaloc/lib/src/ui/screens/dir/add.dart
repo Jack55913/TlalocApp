@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
+import 'package:tlaloc/src/models/kernel.dart';
 import 'package:tlaloc/src/resources/page/date.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/profilepage.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/save_button.dart';
@@ -20,7 +21,7 @@ int _counter = 0;
 
 class AddScreen extends StatefulWidget {
   final Measurement? measurement;
-  AddScreen({Key? key, this.measurement}) : super(key: key);
+  const AddScreen({Key? key, this.measurement}) : super(key: key);
 
   @override
   State<AddScreen> createState() => _AddScreenState();
@@ -58,6 +59,7 @@ class _AddScreenState extends State<AddScreen> {
       print('Falló al obtener la imágen: $e');
     }
   }
+
   final player = AudioPlayer(); //+
 
   @override
@@ -125,33 +127,33 @@ class _AddScreenState extends State<AddScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                MaterialButton(
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.image),
-                                        Text(" Desde la Galería",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontFamily: 'poppins',
-                                            )),
-                                      ],
-                                    ),
-                                    onPressed: () {
+                                ListTile(
+                                    leading: CircleAvatar(
+                                        backgroundColor: Colors.purple[300],
+                                        child: Icon(Icons.image,
+                                            color: Colors.purple[900])),
+                                    title: Text(" Desde la Galería",
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 16,
+                                          fontFamily: 'poppins',
+                                        )),
+                                    onTap: () {
                                       pickImage();
                                     }),
-                                SizedBox(height: 20),
-                                MaterialButton(
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.camera_alt),
-                                        Text(" Desde la cámara",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontFamily: 'poppins',
-                                            )),
-                                      ],
-                                    ),
-                                    onPressed: () {
+                                SizedBox(height: 15),
+                                ListTile(
+                                    leading: CircleAvatar(
+                                        backgroundColor: Colors.purple[300],
+                                        child: Icon(Icons.camera_alt,
+                                            color: Colors.purple[900])),
+                                    title: Text("Desde la Cámara",
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 16,
+                                          fontFamily: 'poppins',
+                                        )),
+                                    onTap: () {
                                       pickImageC();
                                     }),
                                 SizedBox(height: 20),
@@ -183,7 +185,6 @@ class _AddScreenState extends State<AddScreen> {
                     height: 20,
                     thickness: 1,
                   ),
-                  // TODO: QUE SE ENVÍE A LA BASE DE DATOS
                   ButtonWidget(
                     onClicked: () async {
                       try {
@@ -198,10 +199,16 @@ class _AddScreenState extends State<AddScreen> {
                             time: dateTime,
                             image: newImage,
                           );
+                          _counter++;
                           player.play(AssetSource(path));
                           // Ir hacia atrás
                           Navigator.pop(context);
                           Navigator.pop(context);
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) {
+                            return const HomePage();
+                          }), (Route<dynamic> route) => false);
                         } else {
                           // Edita una medición ya existente
                           state.updateMeasurement(
@@ -211,14 +218,17 @@ class _AddScreenState extends State<AddScreen> {
                             image: newImage,
                             oldImage: widget.measurement!.imageUrl,
                           );
+                          player.play(AssetSource(path));
                           Navigator.pop(context);
                           Navigator.pop(context);
 
                           /// Works around the previous page being a stateful widget
                           Navigator.pop(context);
-
-                          // More and more:
-
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) {
+                            return const HomePage();
+                          }), (Route<dynamic> route) => false);
                         }
                       } catch (e) {
                         showDialog(
@@ -242,4 +252,20 @@ class _AddScreenState extends State<AddScreen> {
           ),
         ),
       ]);
+}
+
+class PersonalMeausreData extends StatelessWidget {
+  const PersonalMeausreData({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '$_counter',
+      style: const TextStyle(
+        color: Colors.white,
+        fontFamily: 'poppins',
+        fontSize: 16,
+      ),
+    );
+  }
 }

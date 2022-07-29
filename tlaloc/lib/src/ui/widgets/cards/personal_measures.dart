@@ -3,7 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
-import 'package:tlaloc/src/ui/widgets/buttons/save_button.dart';
+import 'package:tlaloc/src/ui/screens/dir/add.dart';
 
 class PersonalMeasures extends StatelessWidget {
   const PersonalMeasures({Key? key}) : super(key: key);
@@ -41,6 +41,7 @@ class PersonalMeasures extends StatelessWidget {
         ),
         Column(
           children: [
+            // TODO: Que se guarden en la base de datos
             PersonalMeausreData(),
           ],
         ),

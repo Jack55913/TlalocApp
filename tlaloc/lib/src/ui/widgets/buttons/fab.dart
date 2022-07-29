@@ -18,7 +18,7 @@ class Fab extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  AddScreen()),
+          MaterialPageRoute(builder: (context) =>  const AddScreen()),
         );
       },
       backgroundColor: AppColors.green1,

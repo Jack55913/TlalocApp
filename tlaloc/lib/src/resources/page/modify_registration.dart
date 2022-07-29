@@ -38,7 +38,7 @@ class ModifyRegistration extends StatelessWidget {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.delete),
+                icon: Icon(Icons.delete, color: Colors.red[300]),
                 tooltip: 'Eliminar registro',
                 onPressed: () {
                   showDialog(
@@ -94,11 +94,14 @@ class ModifyRegistration extends StatelessWidget {
                     )),
                 SizedBox(height: 15),
                 _buildDataModify(
-                    'Precipitación', '${measurement.precipitation} mm'),
+                    'Precipitación',
+                    '${measurement.precipitation} mm',
+                    Icon(Icons.cloud, color: Colors.grey)),
                 SizedBox(height: 15),
                 _buildDataModify(
                     '${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.day}',
-                    '${measurement.dateTime!.hour}:${measurement.dateTime!.minute.toString().padLeft(2, '0')}'),
+                    '${measurement.dateTime!.hour}:${measurement.dateTime!.minute.toString().padLeft(2, '0')}',
+                    Icon(Icons.timer, color: Colors.grey)),
                 SizedBox(height: 5),
                 Divider(
                   height: 20,
@@ -112,18 +115,37 @@ class ModifyRegistration extends StatelessWidget {
                       fontFamily: 'FredokaOne',
                     )),
                 SizedBox(height: 15),
-                _buildDataModify('Autor:', '${measurement.uploader}'),
+                _buildDataModify('Autor:', '${measurement.uploader}',
+                    Icon(Icons.person, color: Colors.grey)),
                 SizedBox(height: 15),
                 Consumer<AppState>(
                   builder: (context, state, child) {
-                    return _buildDataModify('Paraje:', state.paraje);
+                    return _buildDataModify('Paraje:', state.paraje,
+                        Icon(Icons.place, color: Colors.grey));
                   },
                 ),
                 SizedBox(height: 15),
                 Consumer<AppState>(
                   builder: (context, state, child) {
-                    return _buildDataModify('Rol:', state.rol);
+                    return _buildDataModify('Rol:', state.rol,
+                        Icon(Icons.rocket_launch, color: Colors.grey));
                   },
+                ),
+                Divider(
+                  height: 20,
+                  thickness: 1,
+                ),
+                SizedBox(height: 15),
+                Text('Fotografía',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontFamily: 'FredokaOne',
+                    )),
+                SizedBox(height: 15),
+                Divider(
+                  height: 20,
+                  thickness: 1,
                 ),
                 if (measurement.imageUrl != null) ...[
                   SizedBox(height: 5),
@@ -173,21 +195,30 @@ class ShareResults extends StatelessWidget {
   }
 }
 
-Widget _buildDataModify(String textTitle, String textsubtitle) {
+Widget _buildDataModify(String textTitle, String textsubtitle, Icon icon) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(textTitle,
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontSize: 18,
-            fontFamily: 'poppins',
-          )),
+      Row(
+        children: [
+          icon,
+          SizedBox(width: 10),
+          Text(textTitle,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 18,
+                fontFamily: 'poppins',
+                color: Colors.grey,
+              )),
+        ],
+      ),
       Text(textsubtitle,
           textAlign: TextAlign.left,
           style: TextStyle(
             fontSize: 18,
             fontFamily: 'poppins',
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
           )),
     ],
   );

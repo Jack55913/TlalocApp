@@ -48,6 +48,7 @@ class TutorialWidget extends StatelessWidget {
         _buildItem(
             '📖 Medición de datos',
             'Revisa los errores más comúnes al momento de medir',
+            // TODO: CAMBIAR LOS VIDEOS REALES:
             'https://tlaloc.web.app/'),
         _buildItem(
             '🚀 Enviar las mediciones',

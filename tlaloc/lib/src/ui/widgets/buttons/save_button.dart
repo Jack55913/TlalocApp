@@ -1,16 +1,16 @@
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
-import 'package:tlaloc/src/models/kernel.dart';
+// import 'package:tlaloc/src/models/kernel.dart';
 
-String path = 'sounds/correcto.mp3'; //+
-int _counter = 0; //+
+// String path = 'sounds/correcto.mp3'; //+
+// int _counter = 0; //+
 
 class ButtonWidget extends StatelessWidget {
-  final VoidCallback onClicked; //+
-  final player = AudioPlayer(); //+
+  final VoidCallback onClicked;
+  // final player = AudioPlayer(); //+
 
-  ButtonWidget({Key? key, required this.onClicked}) : super(key: key);
+  const ButtonWidget({Key? key, required this.onClicked}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,25 +54,9 @@ class ButtonWidget extends StatelessWidget {
         child: Text('    Enviar Medición    ',
             style: TextStyle(
               color: Colors.white,
-              fontFamily: 'poppins',
-              fontSize: 28,
+              fontFamily: 'FredokaOne',
+              fontSize: 24,
             )),
-      ),
-    );
-  }
-}
-
-class PersonalMeausreData extends StatelessWidget {
-  const PersonalMeausreData({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      '$_counter',
-      style: const TextStyle(
-        color: Colors.white,
-        fontFamily: 'poppins',
-        fontSize: 16,
       ),
     );
   }

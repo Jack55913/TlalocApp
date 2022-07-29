@@ -9,6 +9,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Quita el # de la url
   setPathUrlStrategy();
   //Para el inicio de sesión por google
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -23,5 +24,3 @@ void main() async {
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
 }
-
-

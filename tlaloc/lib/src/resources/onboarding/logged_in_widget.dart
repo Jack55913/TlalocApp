@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
+import 'package:tlaloc/src/resources/onboarding/onbording.dart';
 
 class LoggedInWidget extends StatefulWidget {
   LoggedInWidget({Key? key}) : super(key: key);
@@ -24,11 +25,16 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
             final provider =
                 Provider.of<GoogleSignInProvider>(context, listen: false);
             provider.logout();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Onboarding()),
+            );
           },
         ),
       ]),
       body: Container(
-        alignment: Alignment.center,
+        alignment: Alignment.topCenter,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

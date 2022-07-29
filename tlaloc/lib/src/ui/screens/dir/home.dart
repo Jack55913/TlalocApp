@@ -30,12 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: AutoSizeText(appName,
-              style: TextStyle(
-                fontFamily: 'FredokaOne',
-                fontSize: 24,
-                letterSpacing: 2,
-              )),
+          title: AutoSizeText(
+            appName,
+            style: TextStyle(
+              fontFamily: 'FredokaOne',
+              fontSize: 24,
+              letterSpacing: 2,
+            ),
+          ),
           actions: const <Widget>[
             InfoButton(),
             ProfilePage(),

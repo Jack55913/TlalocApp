@@ -11,7 +11,6 @@ import 'package:tlaloc/src/resources/onboarding/role.dart';
 import 'package:tlaloc/src/ui/screens/settings/credits.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class DrawerApp extends StatelessWidget {
   const DrawerApp({Key? key}) : super(key: key);
 
@@ -19,7 +18,7 @@ class DrawerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       elevation: 0.5,
-      backgroundColor: AppColors.dark2,
+      backgroundColor: AppColors.dark1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(20),

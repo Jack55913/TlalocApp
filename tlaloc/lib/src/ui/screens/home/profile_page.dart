@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
 import 'package:tlaloc/src/resources/onboarding/logged_in_widget.dart';
-import 'package:tlaloc/src/resources/onboarding/onbording.dart';
 
 class ConfigureScreen extends StatefulWidget {
   const ConfigureScreen({Key? key}) : super(key: key);
@@ -79,17 +78,6 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                       );
                     },
                   ),
-                ListTile(
-                  leading: const Icon(Icons.bug_report, color: Colors.blue),
-                  title: const Text('Abrir pantalla inicial'),
-                  onTap: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute<void>(
-                            builder: (BuildContext context) {
-                      return Onboarding();
-                    }), (Route<dynamic> route) => false);
-                  },
-                ),
               ]),
         ));
   }

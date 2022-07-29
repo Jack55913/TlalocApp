@@ -66,18 +66,19 @@ class _DatetimeState extends State<Datetime> {
             ),
             textAlign: TextAlign.left,
             decoration: InputDecoration(
-              icon: Icon(
-                Icons.cloud,
+              icon: CircleAvatar(
+                backgroundColor: Colors.blue[300],
+                child: Icon(
+                  Icons.cloud,
+                  color: Colors.blue[900],
+                ),
               ),
               helperText: 'Recuerda ubicarte al nivel del agua para observar',
-              hintText: 'Crea una medición',
+              hintText: 'Agregar medición',
             ),
             onChanged: (value) {
               precipitation = num.tryParse(value);
             },
-            // inputFormatters: <TextInputFormatter>[
-            //   FilteringTextInputFormatter.digitsOnly
-            // ],
           ),
         ),
         Divider(
@@ -85,9 +86,12 @@ class _DatetimeState extends State<Datetime> {
           thickness: 1,
         ),
         ListTile(
-          leading: Icon(
-            Icons.place,
-            color: Colors.red,
+          leading: CircleAvatar(
+            backgroundColor: Colors.red[300],
+            child: Icon(
+              Icons.place,
+              color: Colors.red[900],
+            ),
           ),
           title: Text('Elige un Paraje'),
           subtitle: Text(
@@ -104,8 +108,13 @@ class _DatetimeState extends State<Datetime> {
           thickness: 1,
         ),
         ListTile(
-          leading: Icon(Icons.work, color: Colors.brown),
-          title: Text('Elige un Rol'),
+          leading: CircleAvatar(
+              backgroundColor: Colors.brown[300],
+              child:
+                  Icon(Icons.rocket_launch_rounded, color: Colors.brown[900])),
+          title: Text(
+            'Elige un Rol',
+          ),
           subtitle:
               Text('Estás en modo: ${Provider.of<AppState>(context).rol}'),
           onTap: () {
@@ -119,25 +128,35 @@ class _DatetimeState extends State<Datetime> {
           height: 20,
           thickness: 1,
         ),
-        Text(
-          'Revisa la fecha de colecta',
-          style: TextStyle(
-            fontSize: 18,
-            fontFamily: 'FredokaOne',
+        ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            child: Icon(
+              Icons.access_time,
+              color: Colors.grey,
+            ),
           ),
-          textAlign: TextAlign.left,
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          'Si no es correcta la hora, edítala:',
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: 16,
-            fontFamily: 'poppins',
+          title: Text(
+            'Revisa la fecha de colecta',
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 18,
+              fontFamily: 'FredokaOne',
+            ),
+            textAlign: TextAlign.left,
           ),
         ),
+        // SizedBox(
+        //   height: 10,
+        // ),
+        // Text(
+        //   'Si no es correcta la hora, edítala:',
+        //   style: TextStyle(
+        //     color: Colors.grey,
+        //     fontSize: 16,
+        //     fontFamily: 'poppins',
+        //   ),
+        // ),
         const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),

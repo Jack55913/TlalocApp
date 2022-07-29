@@ -25,10 +25,9 @@ class FacebookButton extends StatelessWidget {
                   Text(
                     'Descúbre un grupo\npara preservar\nel monte Tláloc',
                     style: TextStyle(
-                      fontFamily: 'poppins',
+                      fontFamily: 'FredokaOne',
                       fontSize: 18,
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 30),

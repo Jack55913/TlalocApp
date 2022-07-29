@@ -14,13 +14,21 @@ class ContactUsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(20.0),
       child: ElevatedButton(
         onPressed: () {
           launchUrl(Uri.parse('mailto:tlloc-app@googlegroups.com'));
         },
-        child: const Text(
-          '¡Contáctanos!',
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: const Text(
+            '¡Contáctanos!',
+            style: TextStyle(
+              fontFamily: 'FredokaOne',
+              fontSize: 24,
+              letterSpacing: 2,
+            ),
+          ),
         ),
       ),
     );
@@ -47,27 +55,25 @@ class DynamicTlalocMap extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Center(
-              //     child: FlutterMap(
-              //   options: MapOptions(
-              //     // center: LatLng(19.4, -99.1),
-              //     zoom: 16.0,
-              //     minZoom: 10,
-              //   ),
-              //   layers: [
-              //     TileLayerOptions(
-              //       urlTemplate:
-              //           'https://api.mapbox.com/styles/v1/{user}/{style}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}',
-              //       additionalOptions: {
-              //         'accessToken': 'pk.eyJ1IjoibWl5b3RsIiwiYSI6ImNsMWNiZWZhazA2MzAzZW1wMnJ1Zjd3MGUifQ.c57DM17bhxFfxTYoLcu1_Q',
-              //       },
-              //     ),
-              //   ],
-              // ),
-              child: Image(
-                image: AssetImage('assets/images/img-6.png'),
-                fit: BoxFit.cover,
-              ),
+            //     child: FlutterMap(
+            //   options: MapOptions(
+            //     // center: LatLng(19.4, -99.1),
+            //     zoom: 16.0,
+            //     minZoom: 10,
+            //   ),
+            //   layers: [
+            //     TileLayerOptions(
+            //       urlTemplate:
+            //           'https://api.mapbox.com/styles/v1/{user}/{style}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}',
+            //       additionalOptions: {
+            //         'accessToken': 'pk.eyJ1IjoibWl5b3RsIiwiYSI6ImNsMWNiZWZhazA2MzAzZW1wMnJ1Zjd3MGUifQ.c57DM17bhxFfxTYoLcu1_Q',
+            //       },
+            //     ),
+            //   ],
+            // ),
+            Image(
+              image: AssetImage('assets/images/img-6.png'),
+              fit: BoxFit.cover,
             ),
             SizedBox(height: 20),
             Text(
@@ -77,7 +83,7 @@ class DynamicTlalocMap extends StatelessWidget {
                 fontFamily: 'poppins',
                 fontSize: 16,
               ),
-              textAlign: TextAlign.left,
+              textAlign: TextAlign.start,
             ),
             SizedBox(height: 20),
             Consumer<AppState>(

@@ -21,13 +21,12 @@ class Measurement {
     this.imageUrl,
     this.avatarUrl, //+
   });
-// TODO: Aquí está el pan:
   factory Measurement.fromJson(Map<String, dynamic> json, String id) {
     Timestamp timestamp = json['time'];
     var dateTime =
         DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
     // Timestamp formatTime = json['short_time'];
-    // String formattedDate = DateFormat('MM-dd-yyyy HH:mm').format(formatTime.toDate());
+    // var formattedDate = DateFormat('MM-dd-yyyy HH:mm').format(formatTime.toDate());
 
     return Measurement(
       // formatTime: formattedDate,
@@ -80,7 +79,7 @@ class AppState extends ChangeNotifier {
     prefs.setBool('hasFinishedOnboarding', true);
   }
 
-// KERNEL DEL PROYECTO: BASE DE DATOS EN ARCHIVO .Json EN FIREBASE / REFI APP
+// PARA OBTENER LOS DATOS DE "ÍNDICE GEOGRÁFICO":
 
   Future<Map<String, dynamic>> getCurrentParajeData() async {
     var ref = db.collection('roles').doc(rol).collection('parajes').doc(paraje);
