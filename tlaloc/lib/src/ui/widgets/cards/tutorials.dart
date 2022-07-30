@@ -37,7 +37,7 @@ class TutorialWidget extends StatelessWidget {
           child: AutoSizeText(
             'Tutoriales',
             style: TextStyle(
-              color: AppColors.green1,
+              color: AppColors.blue1,
               fontFamily: 'FredokaOne',
               fontSize: 24,
               letterSpacing: 2,

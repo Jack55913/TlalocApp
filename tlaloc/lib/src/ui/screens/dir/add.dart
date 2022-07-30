@@ -12,9 +12,8 @@ import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
 import 'package:tlaloc/src/models/kernel.dart';
 import 'package:tlaloc/src/resources/page/date.dart';
-import 'package:tlaloc/src/ui/widgets/appbar/profilepage.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/save_button.dart';
-import '../../widgets/appbar/infobutton.dart';
+import 'package:tlaloc/src/ui/widgets/objects/images.dart';
 
 String path = 'sounds/correcto.mp3';
 int _counter = 0;
@@ -32,34 +31,6 @@ class _AddScreenState extends State<AddScreen> {
   DateTime dateTime = DateTime.now();
   num? precipitation;
 
-  Future pickImage() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-      if (image == null) return;
-
-      final File imageTemp = File(image.path);
-
-      setState(() => newImage = imageTemp);
-    } on PlatformException catch (e) {
-      print('Falló al obtener la imágen: $e');
-    }
-  }
-
-  Future pickImageC() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.camera);
-
-      if (image == null) return;
-
-      final imageTemp = File(image.path);
-
-      setState(() => newImage = imageTemp);
-    } on PlatformException catch (e) {
-      print('Falló al obtener la imágen: $e');
-    }
-  }
-
   final player = AudioPlayer(); //+
 
   @override
@@ -68,16 +39,13 @@ class _AddScreenState extends State<AddScreen> {
         SafeArea(
           child: Scaffold(
             appBar: AppBar(
-              actions: <Widget>[
-                InfoButton(),
-                ProfilePage(),
-              ],
               title: Consumer<GoogleSignInProvider>(
                 builder: (context, signIn, child) {
                   String place = Provider.of<AppState>(context).paraje;
                   return AutoSizeText(
                     place,
                     style: TextStyle(
+                      fontSize: 24,
                       color: Colors.white,
                       fontFamily: 'FredokaOne',
                     ),
@@ -103,84 +71,7 @@ class _AddScreenState extends State<AddScreen> {
                     thickness: 1,
                   ),
                   // TODO: QUE YA FUNCIONE SIN QUE JALE INTERNET
-                  FutureBuilder<ConnectivityResult>(
-                    future: Connectivity().checkConnectivity(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError ||
-                          (snapshot.hasData &&
-                              snapshot.data == ConnectivityResult.none)) {
-                        return Text(
-                            'No está soportado subir imágenes sin internet (aún).');
-                      } else {
-                        return Column(
-                          children: [
-                            const SizedBox(height: 15),
-                            const Text(
-                              'Sube la imagen del pluviómetro',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontFamily: 'FredokaOne',
-                              ),
-                            ),
-                            SizedBox(height: 15),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                ListTile(
-                                    leading: CircleAvatar(
-                                        backgroundColor: Colors.purple[300],
-                                        child: Icon(Icons.image,
-                                            color: Colors.purple[900])),
-                                    title: Text(" Desde la Galería",
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 16,
-                                          fontFamily: 'poppins',
-                                        )),
-                                    onTap: () {
-                                      pickImage();
-                                    }),
-                                SizedBox(height: 15),
-                                ListTile(
-                                    leading: CircleAvatar(
-                                        backgroundColor: Colors.purple[300],
-                                        child: Icon(Icons.camera_alt,
-                                            color: Colors.purple[900])),
-                                    title: Text("Desde la Cámara",
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 16,
-                                          fontFamily: 'poppins',
-                                        )),
-                                    onTap: () {
-                                      pickImageC();
-                                    }),
-                                SizedBox(height: 20),
-                              ],
-                            ),
-                            if (newImage == null &&
-                                widget.measurement != null &&
-                                widget.measurement!.imageUrl != null)
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: CachedNetworkImage(
-                                  imageUrl: widget.measurement!.imageUrl!,
-                                ),
-                              )
-                            else
-                              newImage != null
-                                  ? Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Image.file(newImage!),
-                                    )
-                                  : Text(
-                                      "⚠️ No ha seleccionado ninguna imágen ⚠️"),
-                          ],
-                        );
-                      }
-                    },
-                  ),
+                  ImageUploaderWidget(),
                   const Divider(
                     height: 20,
                     thickness: 1,

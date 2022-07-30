@@ -7,10 +7,12 @@ import 'package:flutter/rendering.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
+import 'package:tlaloc/src/ui/widgets/buttons/adds.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
 import 'package:tlaloc/src/ui/widgets/cards/personal_measures.dart';
 import 'package:tlaloc/src/ui/widgets/cards/phrase.dart';
 import 'package:tlaloc/src/ui/widgets/cards/tutorials.dart';
+import 'package:tlaloc/src/ui/widgets/objects/quickadd.dart';
 import '../home/home_widget_classes.dart';
 import '../../widgets/appbar/infobutton.dart';
 import '../../widgets/appbar/profilepage.dart';
@@ -57,6 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.all(10),
             scrollDirection: Axis.vertical,
             children: [
+              QuickAddWidget(),
+              Divider(
+                thickness: 1,
+              ),
               DarkContainerWidget(
                 data: DarkContainer(
                   fill: TutorialWidget(),
@@ -86,11 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: 20),
               DynamicTlalocMap(),
-              SizedBox(height: 20),
-              Divider(
-                height: 20,
-                thickness: 1,
-              ),
+              SizedBox(height: 10),
               FacebookButton(),
               Divider(
                 height: 20,
@@ -102,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 thickness: 1,
               ),
               SizedBox(height: 20),
+              // GoogleAddWidget(),
             ],
           ),
         ),

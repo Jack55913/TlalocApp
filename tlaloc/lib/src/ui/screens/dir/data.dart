@@ -47,7 +47,7 @@ class DataScreen extends StatelessWidget {
                               )),
                           background: Image.asset(
                             'assets/images/img-7.jpg',
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fitWidth,
                           ),
                         ),
                         actions: <Widget>[
@@ -60,6 +60,9 @@ class DataScreen extends StatelessWidget {
                           [
                             for (var measurement in measurements)
                               DataWidgetView(measurement: measurement),
+                            const Divider(
+                              thickness: 1,
+                            ),
                           ],
                         ),
                       ),

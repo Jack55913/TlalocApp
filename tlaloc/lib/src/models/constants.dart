@@ -73,6 +73,7 @@ class AppColors {
   static const Color blue1 = Color(0xFF00AEEF);
   static const Color green1 = Color(0xFF00E583);
   static const Color red1 = Color(0xFFB01235);
+  static const Color whatsappgreen = Color(0xFF25D366);
 
   // From light illustration
   static const Color pruple1 = Color(0xFF2C2A6B);
@@ -88,10 +89,11 @@ ThemeData darkTheme = ThemeData(
   primaryColor: AppColors.dark1,
   primarySwatch: Colors.blue,
   appBarTheme: const AppBarTheme(
-    backgroundColor: AppColors.dark3,
+    elevation: 0,
+    backgroundColor: AppColors.dark2,
     iconTheme: IconThemeData(
       color: Colors.white,
     ),
   ),
-  scaffoldBackgroundColor: AppColors.dark3,
+  scaffoldBackgroundColor: AppColors.dark2,
 );

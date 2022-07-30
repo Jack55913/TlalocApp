@@ -33,5 +33,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+<!-- TODO: PONER EL CÖDIGO BIEN DE CA-APP-PUB Y TAMBIËN EN EL OTRO ARCHIVO .DART -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~33419835294" />
     </application>
 </manifest>

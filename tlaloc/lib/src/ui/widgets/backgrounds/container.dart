@@ -22,7 +22,7 @@ class DarkContainerWidget extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: AppColors.dark2,
+            color: AppColors.dark1,
             borderRadius: BorderRadius.circular(25),
           ),
           child: Column(

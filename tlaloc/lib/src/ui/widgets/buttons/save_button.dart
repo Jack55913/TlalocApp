@@ -1,14 +1,8 @@
-// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
-// import 'package:tlaloc/src/models/kernel.dart';
-
-// String path = 'sounds/correcto.mp3'; //+
-// int _counter = 0; //+
 
 class ButtonWidget extends StatelessWidget {
   final VoidCallback onClicked;
-  // final player = AudioPlayer(); //+
 
   const ButtonWidget({Key? key, required this.onClicked}) : super(key: key);
 
@@ -33,18 +27,6 @@ class ButtonWidget extends StatelessWidget {
             TextButton(
               child: const Text('Enviar'),
               onPressed: onClicked,
-              // onPressed: () => {
-              //       onClicked,
-              //       _counter++,
-              //       player.play(AssetSource(path)),
-              //       Navigator.pop(context),
-              //       // Ir hacia atrás y no regresar a la pantalla anterior
-              //       Navigator.of(context).pushAndRemoveUntil(
-              //           MaterialPageRoute<void>(
-              //               builder: (BuildContext context) {
-              //         return const HomePage();
-              //       }), (Route<dynamic> route) => false)
-              //     }
             ),
           ],
         ),

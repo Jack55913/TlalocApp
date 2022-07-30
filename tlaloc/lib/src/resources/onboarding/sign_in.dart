@@ -26,7 +26,7 @@ class SignUpWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Inicia sesión o crea una cuenta',
+                'Inicia sesión',
                 style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,

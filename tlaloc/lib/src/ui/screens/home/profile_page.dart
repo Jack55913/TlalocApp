@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
-import 'package:tlaloc/src/resources/onboarding/logged_in_widget.dart';
+import 'package:tlaloc/src/resources/onboarding/onbording.dart';
 
 class ConfigureScreen extends StatefulWidget {
   const ConfigureScreen({Key? key}) : super(key: key);
@@ -17,6 +17,7 @@ class ConfigureScreen extends StatefulWidget {
 class _ConfigureScreenState extends State<ConfigureScreen> {
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.dark2,
@@ -40,6 +41,25 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 40,
+                      backgroundImage: NetworkImage(user.photoURL!),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Nombre: ' + user.displayName!,
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Correo: ' + user.email!,
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ],
+                ),
                 Consumer<GoogleSignInProvider>(
                   builder: (context, signIn, child) {
                     final name = FirebaseAuth.instance.currentUser?.displayName;
@@ -71,12 +91,15 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                     leading: const Icon(Icons.logout, color: Colors.red),
                     title: const Text('Cerrar sesión'),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LoggedInWidget()),
-                      );
-                    },
+            final provider =
+                Provider.of<GoogleSignInProvider>(context, listen: false);
+            provider.logout();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Onboarding()),
+            );
+          },
                   ),
               ]),
         ));
