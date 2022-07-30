@@ -26,7 +26,9 @@ class GraphMenuWidget extends StatelessWidget {
             itemBuilder: (BuildContext, index) => Card(
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundImage: AssetImage(graphimages[index]),
+                  backgroundColor: grpahIconColor[index],
+                  // TODO: Change assetImage to Icon and color:
+                  child: graphIcons[index],
                 ),
                 title: Text(graphtitle[index]),
                 onTap: () {
@@ -39,7 +41,7 @@ class GraphMenuWidget extends StatelessWidget {
                 },
               ),
             ),
-            itemCount: graphimages.length,
+            itemCount: graphIcons.length,
             shrinkWrap: true,
             padding: const EdgeInsets.all(5),
             scrollDirection: Axis.vertical,

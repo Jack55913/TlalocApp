@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/resources/onboarding/common_select.dart';
 import 'package:tlaloc/src/resources/onboarding/role.dart';
+import 'package:tlaloc/src/ui/widgets/graphs/pluviometer.dart';
 
 class Datetime extends StatefulWidget {
   final void Function(DateTime) updateDateTime;
@@ -83,6 +84,7 @@ class _DatetimeState extends State<Datetime> {
             },
           ),
         ),
+        TlalocPluviometer(),
         Divider(
           height: 20,
           thickness: 1,

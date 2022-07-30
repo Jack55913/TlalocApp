@@ -9,6 +9,7 @@ import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
 import 'package:tlaloc/src/models/kernel.dart';
 import 'package:tlaloc/src/resources/page/date.dart';
+import 'package:tlaloc/src/ui/widgets/graphs/pluviometer.dart';
 import 'package:tlaloc/src/ui/widgets/measures/save_button.dart';
 import 'package:tlaloc/src/ui/widgets/measures/images.dart';
 
@@ -31,8 +32,7 @@ class _AddScreenState extends State<AddScreen> {
   final player = AudioPlayer(); //+
 
   @override
-  Widget build(BuildContext context) =>
-      SafeArea(
+  Widget build(BuildContext context) => SafeArea(
         child: Scaffold(
           appBar: AppBar(
             title: Consumer<GoogleSignInProvider>(
@@ -48,6 +48,22 @@ class _AddScreenState extends State<AddScreen> {
                 );
               },
             ),
+            actions: [
+              CircleAvatar(
+                backgroundColor: Colors.black,
+                child: IconButton(
+                  icon: Icon(Icons.water_drop_sharp, color: Colors.blue),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TlalocPluviometer(),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
           body: SingleChildScrollView(
             child: Column(

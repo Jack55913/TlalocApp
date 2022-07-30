@@ -8,11 +8,10 @@ class TableGrids extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> chartimages = [
-      // "assets/images/img-3.png",
       "assets/images/img-2.png",
+      // "assets/images/img-3.png",
     ];
     List<String> charttitle = [
-      // "De Tortas",
       "De Pasteles",
     ];
     final chartscrens = [
@@ -24,7 +23,7 @@ class TableGrids extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.dark2,
+            color: AppColors.dark3,
             borderRadius: BorderRadius.circular(25),
           ),
           child: Column(

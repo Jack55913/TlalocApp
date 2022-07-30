@@ -6,6 +6,7 @@ import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/profilepage.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
 import 'package:tlaloc/src/ui/widgets/graphs/table_graphs.dart';
+import 'package:tlaloc/src/ui/widgets/graphs/table_grids.dart';
 
 import '../../widgets/appbar/infobutton.dart';
 
@@ -36,11 +37,13 @@ class _GraphsScreenState extends State<GraphsScreen> {
           ],
         ),
         drawer: DrawerApp(),
-        body: Column(
-          children: const [
-            TableGraphs(),
-            // TableGrids(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: const [
+              TableGraphs(),
+              TableGrids(),
+            ],
+          ),
         ),
         floatingActionButton: const Fab(),
       ),
