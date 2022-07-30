@@ -53,6 +53,8 @@ class _DatetimeState extends State<Datetime> {
       children: [
         ListTile(
           title: TextFormField(
+            // TODO: Hacer que funcione de, "save_button.dart"
+            // controller: controller,
             validator: RangeValidator(
               min: 0,
               max: 120,
@@ -146,17 +148,6 @@ class _DatetimeState extends State<Datetime> {
             textAlign: TextAlign.left,
           ),
         ),
-        // SizedBox(
-        //   height: 10,
-        // ),
-        // Text(
-        //   'Si no es correcta la hora, edítala:',
-        //   style: TextStyle(
-        //     color: Colors.grey,
-        //     fontSize: 16,
-        //     fontFamily: 'poppins',
-        //   ),
-        // ),
         const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
@@ -180,7 +171,6 @@ class _DatetimeState extends State<Datetime> {
               ),
               ElevatedButton.icon(
                 icon: const Icon(Icons.access_time, color: Colors.white),
-                // style: ElevatedButton.styleFrom(primary: Colors.transparent),
                 label: Text('$hours:$minutes',
                     style: const TextStyle(
                       color: Colors.white,

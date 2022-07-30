@@ -49,16 +49,16 @@ class DatePickerButton extends StatelessWidget {
   }
 }
 
-class BarGraph extends StatefulWidget {
-  const BarGraph({Key? key}) : super(key: key);
+class BubbleGraph extends StatefulWidget {
+  const BubbleGraph({Key? key}) : super(key: key);
 
   @override
-  State<BarGraph> createState() => _BarGraphState();
+  State<BubbleGraph> createState() => _BubbleGraphState();
 }
 
 enum DateTimeMode { custom, week, month, year, always }
 
-class _BarGraphState extends State<BarGraph> {
+class _BubbleGraphState extends State<BubbleGraph> {
   DateTime initialDate = dateLongAgo;
   DateTime finalDate = dateInALongTime;
   DateTimeMode mode = DateTimeMode.always;
@@ -69,7 +69,7 @@ class _BarGraphState extends State<BarGraph> {
       child: Scaffold(
         appBar: AppBar(
           title: const AutoSizeText(
-            'Gráfica de Barras ',
+            'Gráfica de Volúmen ',
             style: TextStyle(
               fontFamily: 'FredokaOne',
               fontSize: 24,
@@ -209,7 +209,7 @@ class _BarGraphState extends State<BarGraph> {
                       return Expanded(
                         child: Column(
                           children: [
-                            // TODO: DO THE BARGRAPH
+                            // TODO: DO THE BubbleGraph
                             SfCartesianChart(
                               primaryXAxis: DateTimeAxis(
                                 name: 'Fecha',
@@ -219,7 +219,7 @@ class _BarGraphState extends State<BarGraph> {
                               primaryYAxis:
                                   NumericAxis(name: 'Precipitación (mm)'),
                               series: <ChartSeries<Measurement, DateTime>>[
-                                ColumnSeries<Measurement, DateTime>(
+                                BubbleSeries<Measurement, DateTime>(
                                   xValueMapper: (measurement, _) =>
                                       measurement.dateTime,
                                   yValueMapper: (measurement, _) =>

@@ -10,42 +10,42 @@ class GraphMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-            children: [
-              const SizedBox(height: 20),
-              const Text('Gráficas',
-                  style: TextStyle(
-                    fontFamily: 'FredokaOne',
-                    fontSize: 24,
-                    letterSpacing: 2,
-                    color: AppColors.green1,
-                  )),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView.builder(
-                  // ignore: non_constant_identifier_names
-                  itemBuilder: (BuildContext, index) => Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage(graphimages[index]),
-                      ),
-                      title: Text(graphtitle[index]),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => graphscrens[index],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  itemCount: graphimages.length,
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(5),
-                  scrollDirection: Axis.vertical,
+      children: [
+        const SizedBox(height: 20),
+        const Text('Gráficas',
+            style: TextStyle(
+              fontFamily: 'FredokaOne',
+              fontSize: 24,
+              letterSpacing: 2,
+              color: AppColors.blue1,
+            )),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView.builder(
+            // ignore: non_constant_identifier_names
+            itemBuilder: (BuildContext, index) => Card(
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage(graphimages[index]),
                 ),
+                title: Text(graphtitle[index]),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => graphscrens[index],
+                    ),
+                  );
+                },
               ),
-            ],
-          );
+            ),
+            itemCount: graphimages.length,
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(5),
+            scrollDirection: Axis.vertical,
+          ),
+        ),
+      ],
+    );
   }
 }

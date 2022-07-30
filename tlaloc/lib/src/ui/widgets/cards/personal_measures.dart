@@ -41,7 +41,7 @@ class PersonalMeasures extends StatelessWidget {
         ),
         Column(
           children: [
-            // TODO: Que se guarden en la base de datos
+            // TODO: Que se guarden en la base de datos el contador
             PersonalMeausreData(),
           ],
         ),

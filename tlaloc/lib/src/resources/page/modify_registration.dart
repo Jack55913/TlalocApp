@@ -26,7 +26,7 @@ class ModifyRegistration extends StatelessWidget {
                 )),
             actions: <Widget>[
               IconButton(
-                icon: const Icon(Icons.edit),
+                icon: const Icon(Icons.edit, color: Colors.blue),
                 tooltip: 'Editar registro de lluvia',
                 onPressed: () async {
                   Navigator.push(

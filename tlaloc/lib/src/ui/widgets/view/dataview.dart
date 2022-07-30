@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/resources/page/modify_registration.dart';

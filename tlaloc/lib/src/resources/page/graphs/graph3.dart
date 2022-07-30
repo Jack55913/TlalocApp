@@ -1,199 +1,248 @@
-// // Flutter package imports
-// // ignore_for_file: unused_element
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:tlaloc/src/models/app_state.dart';
+import 'package:tlaloc/src/models/constants.dart';
+import 'package:tlaloc/src/ui/widgets/backgrounds/empty_state.dart';
 
-// import 'package:flutter/material.dart';
+/// Samples:
+/// https://google.github.io/charts/flutter/example/time_series_charts/simple.html
+/// https://www.syncfusion.com/kb/12289/how-to-render-flutter-time-series-chart-using-the-charts-widget-sfcartesianchart
+/// https://pub.dev/packages/syncfusion_flutter_charts/example
 
-// /// Gauge imports
-// import 'package:syncfusion_flutter_gauges/gauges.dart';
+class DatePickerButton extends StatelessWidget {
+  final DateTime dateTime;
+  final void Function(DateTime) onDateChanged;
 
+  const DatePickerButton({
+    Key? key,
+    required this.dateTime,
+    required this.onDateChanged,
+  }) : super(key: key);
 
-// /// Renders the linear gauge water level indicator sample.
-// class WaterLevelIndicator extends SampleView {
-// //   /// Creates the linear gauge water level indicator sample.
-//   const WaterLevelIndicator(Key key) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      icon: const Icon(Icons.calendar_month),
+      label: Text(
+        (dateTime == dateLongAgo || dateTime == dateInALongTime)
+            ? 'Seleccionar'
+            : '${dateTime.year}/${dateTime.month}/${dateTime.day}',
+      ),
+      onPressed: () async {
+        final date = await showDatePicker(
+          context: context,
+          initialDate: (dateTime == dateLongAgo || dateTime == dateInALongTime)
+              ? DateTime.now()
+              : dateTime,
+          firstDate: dateLongAgo,
+          lastDate: dateInALongTime,
+        );
+        if (date != null) {
+          onDateChanged(date);
+        }
+      },
+    );
+  }
+}
 
-//   @override
-//   _WaterLevelIndicatorState createState() => _WaterLevelIndicatorState();
-// }
+class VolumenGraph extends StatefulWidget {
+  const VolumenGraph({Key? key}) : super(key: key);
 
-// class SampleView {
-// }
+  @override
+  State<VolumenGraph> createState() => _VolumenGraphState();
+}
 
-// /// State class of water indicator sample.
-// /// 
-// class _WaterLevelIndicatorState extends SampleViewState {
-//   _WaterLevelIndicatorState();
+enum DateTimeMode { custom, week, month, year, always }
 
-//   double _level = 150;
-//   final double _minimumLevel = 0;
-//   final double _maximumLevel = 120;
+class _VolumenGraphState extends State<VolumenGraph> {
+  DateTime initialDate = dateLongAgo;
+  DateTime finalDate = dateInALongTime;
+  DateTimeMode mode = DateTimeMode.always;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return 
-//     // isWebOrDesktop
-//     //     ? Container(
-//     //         alignment: Alignment.center,
-//     //         child: Container(
-//     //           alignment: Alignment.center,
-//     //           width: MediaQuery.of(context).size.width >= 1000 ? 550 : 440,
-//     //           height: 350,
-//     //           child: _buildWaterIndicator(context),
-//     //         ))
-//     //     : isCardView
-//     //         ? _buildWaterIndicator(context)
-//     //         : 
-//             Center(
-//                 child: SizedBox(
-//                 height: 300,
-//                 child: _buildWaterIndicator(context),
-//               ));
-//   }
-
-//   /// Returns the water indicator.
-//   Widget _buildWaterIndicator(BuildContext context) {
-//     final Brightness brightness = Theme.of(context).brightness;
-
-//     return Padding(
-//         padding: const EdgeInsets.all(10),
-//         child: SfLinearGauge(
-//           minimum: _minimumLevel,
-//           maximum: _maximumLevel,
-//           orientation: LinearGaugeOrientation.vertical,
-//           interval: 100,
-//           axisTrackStyle: const LinearAxisTrackStyle(
-//             thickness: 2,
-//           ),
-//           markerPointers: <LinearMarkerPointer>[
-//             LinearWidgetPointer(
-//               value: _level,
-//               enableAnimation: false,
-//               onChanged: (dynamic value) {
-//                 setState(() {
-//                   _level = value as double;
-//                 });
-//               },
-//               child: Material(
-//                 elevation: 4.0,
-//                 shape: const CircleBorder(),
-//                 clipBehavior: Clip.hardEdge,
-//                 color: Colors.blue,
-//                 child: Ink(
-//                   width: 32.0,
-//                   height: 32.0,
-//                   child: InkWell(
-//                     splashColor: Colors.grey,
-//                     hoverColor: Colors.blueAccent,
-//                     onTap: () {},
-//                     child: Center(
-//                       child: _level == _minimumLevel
-//                           ? Icon(Icons.keyboard_arrow_up_outlined,
-//                               color: Colors.white,
-//                               // size: isCardView ? 18.0 : 20.0
-//                               )
-//                           : _level == _maximumLevel
-//                               ? Icon(Icons.keyboard_arrow_down_outlined,
-//                                   color: Colors.white,
-//                                   // size: isCardView ? 18.0 : 20.0
-//                                   )
-//                               : RotatedBox(
-//                                   quarterTurns: 3,
-//                                   child: Icon(Icons.code_outlined,
-//                                       color: Colors.white,
-//                                       // size: isCardView ? 18.0 : 20.0
-//                                       ),),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             LinearWidgetPointer(
-//               value: _level,
-//               enableAnimation: false,
-//               markerAlignment: LinearMarkerAlignment.end,
-//               // offset: isCardView
-//               //     ? 67
-//               //     : isWebOrDesktop
-//               //         ? 120
-//               //         : 95,
-//               position: LinearElementPosition.outside,
-//               child: SizedBox(
-//                   width: 50,
-//                   height: 20,
-//                   child: Center(
-//                       child: Text(
-//                     _level.toStringAsFixed(0) + ' ml',
-//                     style: TextStyle(
-//                         color: brightness == Brightness.light
-//                             ? Colors.black
-//                             : Colors.white,
-//                         fontSize: 14,
-//                         fontWeight: FontWeight.bold),
-//                   ))),
-//             )
-//           ],
-//           barPointers: <LinearBarPointer>[
-//             LinearBarPointer(
-//               value: _maximumLevel,
-//               enableAnimation: false,
-              
-//               offset: 18,
-//               position: LinearElementPosition.outside,
-//               color: Colors.transparent,
-//               child: CustomPaint(
-//                   painter: _CustomPathPainter(
-//                       color: Colors.blue,
-//                       waterLevel: _level,
-//                       maximumPoint: _maximumLevel)),
-//             )
-//           ],
-//         ));
-//   }
-  
-//   void setState(Null Function() param0) {}
-// }
-
-// class SampleViewState {
-// }
-
-// class _CustomPathPainter extends CustomPainter {
-//   _CustomPathPainter(
-//       {required this.color,
-//       required this.waterLevel,
-//       required this.maximumPoint});
-//   final Color color;
-//   final double waterLevel;
-//   final double maximumPoint;
-
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final Path path = _buildTumblerPath(size.width, size.height);
-//     final double factor = size.height / maximumPoint;
-//     final double height = 2 * factor * waterLevel;
-//     final Paint strokePaint = Paint()
-//       ..color = Colors.grey
-//       ..style = PaintingStyle.stroke
-//       ..strokeWidth = 1;
-//     final Paint paint = Paint()..color = color;
-//     canvas.drawPath(path, strokePaint);
-//     final Rect clipper = Rect.fromCenter(
-//         center: Offset(size.width / 2, size.height),
-//         height: height,
-//         width: size.width);
-//     canvas.clipRect(clipper);
-//     canvas.drawPath(path, paint);
-//   }
-
-//   @override
-//   bool shouldRepaint(_CustomPathPainter oldDelegate) => true;
-// }
-
-// Path _buildTumblerPath(double width, double height) {
-//   return Path()
-//     ..lineTo(width, 0)
-//     ..lineTo(width * 0.75, height - 15)
-//     ..quadraticBezierTo(width * 0.74, height, width * 0.67, height)
-//     ..lineTo(width * 0.33, height)
-//     ..quadraticBezierTo(width * 0.26, height, width * 0.25, height - 15)
-//     ..close();
-// }
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const AutoSizeText(
+            'Gráfica de Volúmen ',
+            style: TextStyle(
+              fontFamily: 'FredokaOne',
+              fontSize: 24,
+              letterSpacing: 2,
+            ),
+          ),
+        ),
+        body: Column(
+          children: [
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Wrap(
+                children: [
+                  ChoiceChip(
+                    selectedColor: AppColors.blue1,
+                    label: const Text('Esta semana'),
+                    selected: mode == DateTimeMode.week,
+                    onSelected: (val) {
+                      final now = DateTime.now();
+                      final today = DateTime(now.year, now.month, now.day);
+                      final monday =
+                          now.add(Duration(days: -today.weekday + 1));
+                      setState(() {
+                        mode = DateTimeMode.week;
+                        initialDate = monday;
+                        finalDate = monday.add(const Duration(
+                          days: 5,
+                          hours: 23,
+                          minutes: 59,
+                          seconds: 59,
+                        ));
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 4),
+                  ChoiceChip(
+                    selectedColor: AppColors.blue1,
+                    label: const Text('Este mes'),
+                    selected: mode == DateTimeMode.month,
+                    onSelected: (val) {
+                      final now = DateTime.now();
+                      setState(() {
+                        mode = DateTimeMode.month;
+                        initialDate = DateTime(now.year, now.month, 1);
+                        finalDate =
+                            DateTime(now.year, now.month + 1, 0, 23, 59, 59);
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 4),
+                  ChoiceChip(
+                    selectedColor: AppColors.blue1,
+                    label: const Text('Este año'),
+                    selected: mode == DateTimeMode.year,
+                    onSelected: (val) {
+                      final now = DateTime.now();
+                      setState(() {
+                        mode = DateTimeMode.year;
+                        initialDate = DateTime(now.year, 1, 1);
+                        finalDate = DateTime(now.year, 12, 31, 23, 59, 59);
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 4),
+                  ChoiceChip(
+                    selectedColor: AppColors.blue1,
+                    label: const Text('Siempre'),
+                    selected: mode == DateTimeMode.always,
+                    onSelected: (val) {
+                      setState(() {
+                        mode = DateTimeMode.always;
+                        initialDate = dateLongAgo;
+                        finalDate = dateInALongTime;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  const Text('Inicio: '),
+                  DatePickerButton(
+                    dateTime: initialDate,
+                    onDateChanged: (date) {
+                      setState(() {
+                        mode = DateTimeMode.custom;
+                        initialDate = date;
+                      });
+                    },
+                  ),
+                  const Expanded(
+                    child: SizedBox(),
+                  ),
+                  const Text('Fin: '),
+                  DatePickerButton(
+                    dateTime: finalDate,
+                    onDateChanged: (date) {
+                      setState(() {
+                        mode = DateTimeMode.custom;
+                        finalDate = DateTime(
+                          date.year,
+                          date.month,
+                          date.day,
+                          23,
+                          59,
+                          59,
+                        );
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Consumer<AppState>(
+              builder: (context, state, _) {
+                return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  stream:
+                      state.getMeasurementsStream(), // Just as on DataScreen
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return EmptyState('Error ${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      final measurementsSnapshot = snapshot.data!;
+                      final measurements = state
+                          .getMeasurementsFromSnapshot(measurementsSnapshot);
+                      final filteredMeasurements = measurements
+                          .where((measurement) =>
+                              (measurement.dateTime!.isAfter(initialDate) &&
+                                  measurement.dateTime!.isBefore(finalDate)))
+                          .toList();
+                      return Expanded(
+                        child: Column(
+                          children: [
+                            // TODO: DO THE VolumenGraph
+                            SfCartesianChart(
+                              primaryXAxis: DateTimeAxis(
+                                name: 'Fecha',
+                                intervalType: DateTimeIntervalType.days,
+                                dateFormat: DateFormat.MMMd('es'),
+                              ),
+                              primaryYAxis:
+                                  NumericAxis(name: 'Precipitación (mm)'),
+                              series: <ChartSeries<Measurement, DateTime>>[
+                                AreaSeries<Measurement, DateTime>(
+                                  xValueMapper: (measurement, _) =>
+                                      measurement.dateTime,
+                                  yValueMapper: (measurement, _) =>
+                                      measurement.precipitation,
+                                  dataSource: filteredMeasurements,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
