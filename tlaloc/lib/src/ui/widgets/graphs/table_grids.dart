@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
-import 'package:tlaloc/src/resources/page/graphs/graph1.dart';
+import 'package:tlaloc/src/resources/page/charts/chart1.dart';
 
 class TableGrids extends StatelessWidget {
   const TableGrids({Key? key}) : super(key: key);
@@ -9,14 +9,12 @@ class TableGrids extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> chartimages = [
       "assets/images/img-2.png",
-      // "assets/images/img-3.png",
     ];
     List<String> charttitle = [
-      "De Pasteles",
+      "Marcador",
     ];
     final chartscrens = [
-      const DispersionBar(),
-      // const BarGraph(),
+      const TlalocChart(),
     ];
     return Builder(builder: (context) {
       return Padding(

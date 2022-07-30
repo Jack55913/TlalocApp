@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/resources/onboarding/common_select.dart';
 import 'package:tlaloc/src/resources/onboarding/role.dart';
 import 'package:tlaloc/src/ui/widgets/graphs/pluviometer.dart';
+
+double _level = 10;
 
 class Datetime extends StatefulWidget {
   final void Function(DateTime) updateDateTime;
@@ -54,13 +57,18 @@ class _DatetimeState extends State<Datetime> {
       children: [
         ListTile(
           title: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            autocorrect: true,
+            autofocus: true,
+            maxLength: 5,
             // TODO: Hacer que funcione de, "save_button.dart"
             // controller: controller,
             validator: RangeValidator(
-              min: 0,
-              max: 120,
-              errorText: 'Debe ser entre 0 y 120',
+              min: 0.0,
+              max: 160.0,
+              errorText: 'Debe ser entre 0 y 160',
             ),
+
             keyboardType: TextInputType.number,
             initialValue: precipitation?.toString() ?? '',
             style: TextStyle(
@@ -77,13 +85,15 @@ class _DatetimeState extends State<Datetime> {
                 ),
               ),
               helperText: 'Recuerda ubicarte al nivel del agua para observar',
-              hintText: 'Agregar medición',
+              hintText: 'Ingresar Medición',
+              // '$_level',
             ),
             onChanged: (value) {
               precipitation = num.tryParse(value);
             },
           ),
         ),
+        // PluviometerText(),
         TlalocPluviometer(),
         Divider(
           height: 20,

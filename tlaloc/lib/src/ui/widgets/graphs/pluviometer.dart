@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:tlaloc/src/models/customPathPainter.dart';
 
 double _level = 10;
 
@@ -83,10 +84,11 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
               offset: 67,
               position: LinearElementPosition.outside,
               child: SizedBox(
-                  width: 50,
-                  height: 20,
-                  child: Center(
-                      child: Text(
+                width: 50,
+                height: 20,
+                child: Center(
+                  child: Text(
+                    // TODO: connect the text field and the pluviometer
                     _level.toStringAsFixed(0) + ' mm',
                     style: TextStyle(
                         color: brightness == Brightness.light
@@ -94,7 +96,9 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
                             : Colors.white,
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
-                  ))),
+                  ),
+                ),
+              ),
             )
           ],
           barPointers: <LinearBarPointer>[
@@ -106,7 +110,7 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
               position: LinearElementPosition.outside,
               color: Colors.transparent,
               child: CustomPaint(
-                  painter: _CustomPathPainter(
+                  painter: CustomPathPainter(
                       color: Colors.blue,
                       waterLevel: _level,
                       maximumPoint: _maximumLevel)),
@@ -116,44 +120,16 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
   }
 }
 
-class _CustomPathPainter extends CustomPainter {
-  _CustomPathPainter(
-      {required this.color,
-      required this.waterLevel,
-      required this.maximumPoint});
-  final Color color;
-  final double waterLevel;
-  final double maximumPoint;
+// class PluviometerText extends StatelessWidget {
+//   const PluviometerText({Key? key}) : super(key: key);
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Path path = _buildTumblerPath(size.width, size.height);
-    final double factor = size.height / maximumPoint;
-    final double height = 2 * factor * waterLevel;
-    final Paint strokePaint = Paint()
-      ..color = Colors.grey
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-    final Paint paint = Paint()..color = color;
-    canvas.drawPath(path, strokePaint);
-    final Rect clipper = Rect.fromCenter(
-        center: Offset(size.width / 2, size.height),
-        height: height,
-        width: size.width);
-    canvas.clipRect(clipper);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(_CustomPathPainter oldDelegate) => true;
-}
-
-Path _buildTumblerPath(double width, double height) {
-  return Path()
-    ..lineTo(width, 0)
-    ..lineTo(width * 0.75, height - 15)
-    ..quadraticBezierTo(width * 0.74, height, width * 0.67, height)
-    ..lineTo(width * 0.33, height)
-    ..quadraticBezierTo(width * 0.26, height, width * 0.25, height - 15)
-    ..close();
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     value:
+//     _level;
+//     return Text(
+//       _level.toStringAsFixed(0),
+//       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+//     );
+//   }
+// }

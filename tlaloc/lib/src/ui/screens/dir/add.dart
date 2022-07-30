@@ -54,12 +54,12 @@ class _AddScreenState extends State<AddScreen> {
                 child: IconButton(
                   icon: Icon(Icons.water_drop_sharp, color: Colors.blue),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TlalocPluviometer(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => TlalocPluviometer(),
+                    //   ),
+                    // );
                   },
                 ),
               ),

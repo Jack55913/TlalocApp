@@ -69,7 +69,7 @@ class _CommonsLineGraphState extends State<CommonsLineGraph> {
       child: Scaffold(
         appBar: AppBar(
           title: const AutoSizeText(
-            'Gráfica de Volúmen ',
+            'Dispercion entre parajes ',
             style: TextStyle(
               fontFamily: 'FredokaOne',
               fontSize: 24,

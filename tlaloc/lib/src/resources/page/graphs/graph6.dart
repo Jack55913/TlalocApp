@@ -69,7 +69,7 @@ class _PieGraphState extends State<PieGraph> {
       child: Scaffold(
         appBar: AppBar(
           title: const AutoSizeText(
-            'Gráfica de Volúmen ',
+            'Gráfica de Pasteles',
             style: TextStyle(
               fontFamily: 'FredokaOne',
               fontSize: 24,

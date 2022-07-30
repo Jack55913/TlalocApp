@@ -69,7 +69,7 @@ class _BubbleGraphState extends State<BubbleGraph> {
       child: Scaffold(
         appBar: AppBar(
           title: const AutoSizeText(
-            'Gráfica de Volúmen ',
+            'Gráfica de Burbujas ',
             style: TextStyle(
               fontFamily: 'FredokaOne',
               fontSize: 24,
