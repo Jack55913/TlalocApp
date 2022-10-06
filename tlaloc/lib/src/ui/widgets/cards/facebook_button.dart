@@ -22,7 +22,7 @@ class FacebookButton extends StatelessWidget {
               ),
               Column(
                 children: const [
-                  Text(
+                  SelectableText(
                     'Quiénes suben a la montaña y\nquiénes pueden participar',
                     // 'Descúbre un grupo\npara preservar\nel monte Tláloc',
                     style: TextStyle(
@@ -32,7 +32,7 @@ class FacebookButton extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 30),
-                  Text(
+                  SelectableText(
                     'Explora las acciones y\núnan fuerzas ',
                     style: TextStyle(
                       color: Colors.white,

@@ -10,7 +10,6 @@ import 'package:tlaloc/src/ui/widgets/chips/chips.dart';
 
 // import '../../../models/datepicker.dart';
 
-
 class MultipleCommonSeries extends StatefulWidget {
   const MultipleCommonSeries({Key? key}) : super(key: key);
 
@@ -48,8 +47,8 @@ class _MultipleCommonSeriesState extends State<MultipleCommonSeries> {
         body: Column(
           children: [
             const SizedBox(height: 20),
-            
-            const TlalocChips(),Consumer<AppState>(
+            const TlalocChips(),
+            Consumer<AppState>(
               builder: (context, state, _) {
                 return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream:

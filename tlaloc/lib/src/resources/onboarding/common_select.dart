@@ -18,7 +18,7 @@ class CommonSelectPage extends StatelessWidget {
               child: Column(
                 children: [
                   const Center(
-                    child: Text(
+                    child: SelectableText(
                       '¿Qué pluviómetro estás observando?',
                       style: TextStyle(
                           fontSize: 32,
@@ -29,7 +29,7 @@ class CommonSelectPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Text(
+                  const SelectableText(
                     'Selecciona el Pluviómetro automáticamente',
                     style: TextStyle(
                         fontSize: 18,
@@ -41,7 +41,7 @@ class CommonSelectPage extends StatelessWidget {
                     direction: Axis.vertical,
                     children: [
                       const QrSelectWidget(),
-                      const Text(
+                      const SelectableText(
                         'Selecciona el Pluviómetro manualmente',
                         style: TextStyle(
                             fontSize: 18,

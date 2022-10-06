@@ -49,7 +49,7 @@ class ConditionalOnboardingPage extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text(
+              title: const SelectableText(
                 'Ocurrió un error',
                 style: TextStyle(
                   fontFamily: 'FredokaOne',

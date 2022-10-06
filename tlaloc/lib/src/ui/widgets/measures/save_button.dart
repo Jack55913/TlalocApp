@@ -46,16 +46,16 @@ class _ButtonWidgetState extends State<ButtonWidget> {
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
-                  title: const Text('¿Seguro(a) que desea enviar?'),
-                  content: const Text(
+                  title: const SelectableText('¿Seguro(a) que desea enviar?'),
+                  content: const SelectableText(
                       'Usted está mandando el registro a la base de datos, puede eliminarlo posteriormente.'),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () => Navigator.pop(context, 'Cancelar'),
-                      child: const Text('Cancelar'),
+                      child: const SelectableText('Cancelar'),
                     ),
                     TextButton(
-                      child: const Text('Enviar'),
+                      child: const SelectableText('Enviar'),
                       onPressed: widget.onClicked,
                     ),
                   ],
@@ -63,7 +63,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
               );
             }
           : null,
-      child: const Text('Guardar',
+      child: const SelectableText('Guardar',
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'FredokaOne',

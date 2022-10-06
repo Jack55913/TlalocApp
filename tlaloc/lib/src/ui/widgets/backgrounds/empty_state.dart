@@ -25,7 +25,7 @@ class EmptyState extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Column(
               children: [
-                Text(
+                SelectableText(
                   text,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
@@ -37,7 +37,7 @@ class EmptyState extends StatelessWidget {
                   'assets/images/ajolote-triste.png',
                   // width: MediaQuery.of(context).size.width * 0.8,
                 ),
-                const Text(
+                const SelectableText(
                   '¡Inicia sesión para poder crear, editar o eliminar mediciones a la base de datos de Tláloc App!.',
                   textAlign: TextAlign.center,
                   style: TextStyle(

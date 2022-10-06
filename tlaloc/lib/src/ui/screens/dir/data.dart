@@ -43,7 +43,7 @@ class DataScreen extends StatelessWidget {
                         snap: false,
                         expandedHeight: 150.0,
                         flexibleSpace: FlexibleSpaceBar(
-                          title: Text('Bitácora',
+                          title: SelectableText('Bitácora',
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontFamily: 'FredokaOne',
@@ -99,19 +99,21 @@ class DataScreen extends StatelessWidget {
                                           showDialog(
                                             context: context,
                                             builder: (context) => AlertDialog(
-                                              title: Text(
+                                              title: SelectableText(
                                                   '¿Estás seguro que quieres eliminar este registro?'),
-                                              content: Text(
+                                              content: SelectableText(
                                                   'No podrás recuperarlo una vez que lo elimines.'),
                                               actions: [
                                                 TextButton(
-                                                  child: Text('Cancelar'),
+                                                  child: SelectableText(
+                                                      'Cancelar'),
                                                   onPressed: () =>
                                                       Navigator.of(context)
                                                           .pop(),
                                                 ),
                                                 TextButton(
-                                                  child: Text('Eliminar'),
+                                                  child: SelectableText(
+                                                      'Eliminar'),
                                                   onPressed: () async {
                                                     try {
                                                       final state =
@@ -129,9 +131,11 @@ class DataScreen extends StatelessWidget {
                                                         context: context,
                                                         builder: (context) =>
                                                             AlertDialog(
-                                                          title: Text(
+                                                          title: SelectableText(
                                                               'Ocurrió un error al eliminar'),
-                                                          content: Text('$e'),
+                                                          content:
+                                                              SelectableText(
+                                                                  '$e'),
                                                         ),
                                                       );
                                                     }

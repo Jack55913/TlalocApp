@@ -9,7 +9,7 @@ class TlalocMap extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Rutas del Pluviómetro'),
+          title: const SelectableText('Rutas del Pluviómetro'),
         ),
         body: SfPdfViewer.asset(
           'assets/pdf/mapa.pdf',

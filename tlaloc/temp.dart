@@ -159,7 +159,7 @@
 //                 label: Container(
 //                   padding: const EdgeInsets.all(8.0),
 //                   alignment: Alignment.centerRight,
-//                   child: const Text(
+//                   child: const SelectableText(
 //                     'Product No',
 //                     overflow: TextOverflow.ellipsis,
 //                   ),
@@ -170,7 +170,7 @@
 //                 label: Container(
 //                   padding: const EdgeInsets.all(8.0),
 //                   alignment: Alignment.centerLeft,
-//                   child: const Text(
+//                   child: const SelectableText(
 //                     'Dealer Name',
 //                     overflow: TextOverflow.ellipsis,
 //                   ),
@@ -181,7 +181,7 @@
 //                 label: Container(
 //                   padding: const EdgeInsets.all(8.0),
 //                   alignment: Alignment.centerRight,
-//                   child: const Text(
+//                   child: const SelectableText(
 //                     'Shipped Date',
 //                     overflow: TextOverflow.ellipsis,
 //                   ),
@@ -192,7 +192,7 @@
 //                 label: Container(
 //                   padding: const EdgeInsets.all(8.0),
 //                   alignment: Alignment.centerLeft,
-//                   child: const Text(
+//                   child: const SelectableText(
 //                     'Ship Country',
 //                     overflow: TextOverflow.ellipsis,
 //                   ),
@@ -203,7 +203,7 @@
 //                 label: Container(
 //                   padding: const EdgeInsets.all(8.0),
 //                   alignment: Alignment.centerLeft,
-//                   child: const Text(
+//                   child: const SelectableText(
 //                     'Ship City',
 //                     overflow: TextOverflow.ellipsis,
 //                   ),
@@ -213,7 +213,7 @@
 //                 label: Container(
 //                   padding: const EdgeInsets.all(8.0),
 //                   alignment: Alignment.centerRight,
-//                   child: const Text(
+//                   child: const SelectableText(
 //                     'Price',
 //                     overflow: TextOverflow.ellipsis,
 //                   ),
@@ -245,7 +245,7 @@
 //                   color: Colors.white,
 //                 ),
 //               ),
-//               Text(buttonName, style: const TextStyle(color: Colors.white)),
+//               SelectableText(buttonName, style: const TextStyle(color: Colors.white)),
 //             ],
 //           ),
 //         ),

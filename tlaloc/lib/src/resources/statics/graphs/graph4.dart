@@ -9,7 +9,6 @@ import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/empty_state.dart';
 import 'package:tlaloc/src/ui/widgets/chips/chips.dart';
 
-
 class BubbleGraph extends StatefulWidget {
   const BubbleGraph({Key? key}) : super(key: key);
 
@@ -41,7 +40,8 @@ class _BubbleGraphState extends State<BubbleGraph> {
         body: Column(
           children: [
             const SizedBox(height: 20),
-            const TlalocChips(),Consumer<AppState>(
+            const TlalocChips(),
+            Consumer<AppState>(
               builder: (context, state, _) {
                 return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream:

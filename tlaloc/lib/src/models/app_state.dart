@@ -40,8 +40,8 @@ class Measurement {
 }
 
 class AppState extends ChangeNotifier {
-  String rol = 'Visitante';
-  String paraje = 'Cabaña'; //+
+  String rol = 'Monitor';
+  String paraje = 'El Venturero'; //+
   String videos = 'video';
   bool loading = true;
   final db = FirebaseFirestore.instance;
@@ -196,10 +196,11 @@ class AppState extends ChangeNotifier {
         .snapshots();
   }
 
+// TODO: Hacer que aparezcan Agua de Chiqueros, Cabaña Canoas altas Cruz de Atenco, El Jardín, El Venturero, Los Manantiales, Tlaltlatlately
   Stream<QuerySnapshot<Map<String, dynamic>>> getGeneralMeasurementsStream() {
     return db
         .collection('roles')
-        .doc(rol)
+        .doc('Monitor')
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')

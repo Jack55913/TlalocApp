@@ -2,6 +2,8 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:tlaloc/src/resources/statics/graphs/graph2.dart';
+import 'package:tlaloc/src/resources/statics/graphs/graph3.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/profilepage.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
@@ -36,15 +38,19 @@ class _GraphsScreenState extends State<GraphsScreen> {
           ],
         ),
         drawer: DrawerApp(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: const [
-              TableGraphs(),
-              // TODO: hacer un tabulador
-              // TableGrids(),
-            ],
-          ),
-        ),
+        body: BarGraph(),
+
+        // SingleChildScrollView(
+        //   child: Column(
+        //     children: const [
+
+        //       // TableGraphs(),
+        //       // TODO: hacer un tabulador
+        //       // TableGrids(),
+        //     ],
+        //   ),
+        // ),
+
         floatingActionButton: const Fab(),
       ),
     );

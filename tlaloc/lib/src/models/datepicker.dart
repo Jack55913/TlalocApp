@@ -15,7 +15,7 @@ class DatePickerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       icon: const Icon(Icons.calendar_month),
-      label: Text(
+      label: SelectableText(
         (dateTime == dateLongAgo || dateTime == dateInALongTime)
             ? 'Seleccionar'
             : '${dateTime.year}/${dateTime.month}/${dateTime.day}',

@@ -56,14 +56,14 @@ class QrSelectWidget extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: const Text('El código QR no es válido.'),
+                  title: const SelectableText('El código QR no es válido.'),
                   content: (paraje == null || paraje == '')
                       ? null
-                      : Text(
+                      : SelectableText(
                           'Tlaloc App no se encuentra disponible en el paraje "$paraje".'),
                   actions: [
                     TextButton(
-                      child: const Text('De acuerdo'),
+                      child: const SelectableText('De acuerdo'),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
@@ -79,12 +79,12 @@ class QrSelectWidget extends StatelessWidget {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: const Text('No escaneaste ningún código QR'),
-                content: const Text(
+                title: const SelectableText('No escaneaste ningún código QR'),
+                content: const SelectableText(
                     'Intenta de nuevo o selecciona tu paraje manualmente'),
                 actions: [
                   TextButton(
-                    child: const Text('De acuerdo'),
+                    child: const SelectableText('De acuerdo'),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                 ],
@@ -110,7 +110,7 @@ class QrSelectWidget extends StatelessWidget {
                   radius: 50,
                 ),
                 SizedBox(height: 5),
-                Text(
+                SelectableText(
                   'QR',
                   style: TextStyle(
                     fontSize: 24,
@@ -119,7 +119,7 @@ class QrSelectWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10),
-                Text(
+                SelectableText(
                   'Detecta tu pluviómetro automáticamente',
                   style: TextStyle(
                     fontSize: 12,

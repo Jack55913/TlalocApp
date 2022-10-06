@@ -16,7 +16,6 @@ class ConfigureScreen extends StatefulWidget {
 }
 
 class _ConfigureScreenState extends State<ConfigureScreen> {
-  // final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +25,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
             builder: (context, signIn, child) {
               String name =
                   signIn.user?.displayName?.split(' ')[0] ?? 'Incógnito';
-              return Text(
+              return SelectableText(
                 'Perfil de $name',
                 style: TextStyle(
                   color: Colors.white,
@@ -52,13 +51,13 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                             FirebaseAuth.instance.currentUser!.photoURL!),
                       ),
                       SizedBox(height: 8),
-                      Text(
+                      SelectableText(
                         'Nombre: ' +
                             FirebaseAuth.instance.currentUser!.displayName!,
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       SizedBox(height: 8),
-                      Text(
+                      SelectableText(
                         'Correo: ' + FirebaseAuth.instance.currentUser!.email!,
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
@@ -69,8 +68,8 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                     final name = FirebaseAuth.instance.currentUser?.displayName;
                     return ListTile(
                       leading: const Icon(Icons.login, color: Colors.green),
-                      title: const Text('Iniciar sesión'),
-                      subtitle: Text(name == null
+                      title: const SelectableText('Iniciar sesión'),
+                      subtitle: SelectableText(name == null
                           ? 'No has iniciado sesión'
                           : 'Iniciaste sesión como $name'),
                       onTap: () async {
@@ -87,8 +86,9 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: const Text('Error al iniciar sesión'),
-                              content: Text('$e'),
+                              title: const SelectableText(
+                                  'Error al iniciar sesión'),
+                              content: SelectableText('$e'),
                             ),
                           );
                         }
@@ -99,7 +99,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                 if (FirebaseAuth.instance.currentUser != null)
                   ListTile(
                     leading: const Icon(Icons.logout, color: Colors.red),
-                    title: const Text('Cerrar sesión'),
+                    title: const SelectableText('Cerrar sesión'),
                     onTap: () {
                       final provider = Provider.of<GoogleSignInProvider>(
                           context,

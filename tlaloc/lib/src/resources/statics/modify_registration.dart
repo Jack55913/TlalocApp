@@ -44,17 +44,17 @@ class ModifyRegistration extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text(
+                      title: SelectableText(
                           '¿Estás seguro que quieres eliminar este registro?'),
-                      content: Text(
+                      content: SelectableText(
                           'No podrás recuperarlo una vez que lo elimines.'),
                       actions: [
                         TextButton(
-                          child: Text('Cancelar'),
+                          child: SelectableText('Cancelar'),
                           onPressed: () => Navigator.of(context).pop(),
                         ),
                         TextButton(
-                          child: Text('Eliminar'),
+                          child: SelectableText('Eliminar'),
                           onPressed: () async {
                             try {
                               final state =
@@ -66,8 +66,9 @@ class ModifyRegistration extends StatelessWidget {
                               showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  title: Text('Ocurrió un error al eliminar'),
-                                  content: Text('$e'),
+                                  title: SelectableText(
+                                      'Ocurrió un error al eliminar'),
+                                  content: SelectableText('$e'),
                                 ),
                               );
                             }
@@ -86,7 +87,7 @@ class ModifyRegistration extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ListView(
               children: [
-                Text('Registro de Lluvia:',
+                SelectableText('Registro de Lluvia:',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 24,
@@ -113,7 +114,7 @@ class ModifyRegistration extends StatelessWidget {
                   thickness: 1,
                 ),
                 SizedBox(height: 15),
-                Text('Datos generales',
+                SelectableText('Datos generales',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 24,
@@ -141,7 +142,7 @@ class ModifyRegistration extends StatelessWidget {
                   thickness: 1,
                 ),
                 SizedBox(height: 15),
-                Text('Fotografía',
+                SelectableText('Fotografía',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 24,
@@ -159,7 +160,7 @@ class ModifyRegistration extends StatelessWidget {
                     thickness: 1,
                   ),
                   SizedBox(height: 15),
-                  Text(
+                  SelectableText(
                     'Fotografía',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -208,7 +209,7 @@ Widget _buildDataModify(String textTitle, String textsubtitle, Icon icon) {
         children: [
           icon,
           SizedBox(width: 10),
-          Text(textTitle,
+          SelectableText(textTitle,
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 18,
@@ -217,7 +218,7 @@ Widget _buildDataModify(String textTitle, String textsubtitle, Icon icon) {
               )),
         ],
       ),
-      Text(textsubtitle,
+      SelectableText(textsubtitle,
           textAlign: TextAlign.left,
           style: TextStyle(
             fontSize: 18,

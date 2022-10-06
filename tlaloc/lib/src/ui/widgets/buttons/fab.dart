@@ -18,13 +18,13 @@ class Fab extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  const AddScreen()),
+          MaterialPageRoute(builder: (context) => const AddScreen()),
         );
       },
       backgroundColor: AppColors.green1,
       icon: const Icon(Icons.add, color: Colors.white),
       mouseCursor: MaterialStateMouseCursor.clickable,
-      label: const Text(
+      label: const SelectableText(
         'Agregar',
         style: TextStyle(
           fontFamily: 'poppins',

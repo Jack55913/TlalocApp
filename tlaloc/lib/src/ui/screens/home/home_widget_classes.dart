@@ -33,7 +33,7 @@ class ContactUsButton extends StatelessWidget {
               SizedBox(
                 width: 25,
               ),
-              const Text(
+              const SelectableText(
                 '¡Contáctanos!',
                 style: TextStyle(
                   fontFamily: 'FredokaOne',

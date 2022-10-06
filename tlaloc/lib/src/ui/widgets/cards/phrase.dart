@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
 
-
 class PhraseCard extends StatelessWidget {
   const PhraseCard({Key? key}) : super(key: key);
 
@@ -29,8 +28,8 @@ class PhraseCard extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  children:const [
-                     Text(
+                  children: const [
+                    SelectableText(
                       '💧💧 Precipitación:',
                       style: TextStyle(
                         fontSize: 24,
@@ -43,7 +42,7 @@ class PhraseCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                const Text(
+                const SelectableText(
                     'Es la caída de agua procedente de las nubes en estado líquido (lluvia y llovizna),  sólido (granizo) y semisólido (nieve). Es una parte importante de ciclo hidrológico, ya que sin la precipitación no habría agua en los ecosistemas, ni en los lugares en donde vivimos.',
                     style: TextStyle(
                       color: Colors.white,
@@ -54,28 +53,28 @@ class PhraseCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    const SelectableText(
                       'OMM (2008)',
                       textAlign: TextAlign.end,
-                      style:  TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'FredokaOne',
                         fontSize: 18,
                       ),
                     ),
                     Row(
-                      children: const[
-                         Text(
+                      children: const [
+                        SelectableText(
                           'Ver más',
                           textAlign: TextAlign.end,
-                          style:  TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'FredokaOne',
                             fontWeight: FontWeight.w100,
                             fontSize: 14,
                           ),
                         ),
-                         Icon(
+                        Icon(
                           Icons.navigate_next,
                           color: Colors.white,
                           size: 20,

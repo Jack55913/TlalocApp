@@ -9,7 +9,7 @@ class GraphMenuWidget extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 20),
-        const Text('Gráficas',
+        const SelectableText('Gráficas',
             style: TextStyle(
               fontFamily: 'FredokaOne',
               fontSize: 24,
@@ -25,7 +25,7 @@ class GraphMenuWidget extends StatelessWidget {
                   backgroundColor: grpahIconColor[index],
                   child: graphIcons[index],
                 ),
-                title: Text(graphtitle[index]),
+                title: SelectableText(graphtitle[index]),
                 onTap: () {
                   Navigator.push(
                     context,

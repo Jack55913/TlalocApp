@@ -47,7 +47,8 @@ class _StackedColumnChartState extends State<StackedColumnChart> {
         body: Column(
           children: [
             const SizedBox(height: 20),
-            const TlalocChips(),Consumer<AppState>(
+            const TlalocChips(),
+            Consumer<AppState>(
               builder: (context, state, _) {
                 return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream:

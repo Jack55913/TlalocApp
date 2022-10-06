@@ -5,6 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 Widget _buildItem(String textTitle, String textsubtitle, String url) {
   return ListTile(
+    onTap: () async {
+      launchUrl(Uri.parse(url));
+    },
     title: Text(textTitle,
         style: const TextStyle(
           color: Colors.white,
@@ -19,9 +22,6 @@ Widget _buildItem(String textTitle, String textsubtitle, String url) {
       Icons.open_in_new,
       color: Colors.white,
     ),
-    onTap: () async {
-      launchUrl(Uri.parse(url));
-    },
   );
 }
 
@@ -48,7 +48,7 @@ class TutorialWidget extends StatelessWidget {
             '📖 Medición de datos',
             'Revisa los errores más comúnes al momento de medir',
             // TODO: CAMBIAR LOS VIDEOS REALES:
-            'https://tlaloc.web.app/'),
+            'https://youtu.be/PattwuN6AlA'),
         _buildItem(
             '🚀 Enviar las mediciones',
             '¿Cómo enviar los datos en la app?',

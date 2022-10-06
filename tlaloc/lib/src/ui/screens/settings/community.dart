@@ -22,7 +22,7 @@ class CommunityPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.dark2,
-        title: const Text('Comunidad Tláloc App'),
+        title: const SelectableText('Comunidad Tláloc App'),
       ),
       body: const SafeArea(
         child: Markdown(

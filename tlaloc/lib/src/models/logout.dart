@@ -18,7 +18,7 @@ class LogOut extends StatelessWidget {
             } else if (snapshot.hasData) {
               return const HomePage();
             } else if (snapshot.hasError) {
-              return Center(child: Text('¡Ocurrió un error!'));
+              return Center(child: SelectableText('¡Ocurrió un error!'));
             } else {
               return SignUpWidget();
             }

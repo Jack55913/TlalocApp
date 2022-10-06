@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
-import 'package:tlaloc/src/resources/onboarding/role.dart';
+// import 'package:tlaloc/src/resources/onboarding/role.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'common_select.dart';
@@ -25,7 +25,7 @@ class SignUpWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              SelectableText(
                 'Inicia sesión',
                 style: TextStyle(
                     fontSize: 32,
@@ -47,7 +47,7 @@ class SignUpWidget extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    Text(
+                    SelectableText(
                       'Bienvenido a $appName',
                       style: TextStyle(
                           fontSize: 24,
@@ -56,7 +56,7 @@ class SignUpWidget extends StatelessWidget {
                           color: Colors.white),
                     ),
                     SizedBox(height: 8),
-                    Text(
+                    SelectableText(
                       'Por favor ingresa tu cuenta para continuar',
                       style: TextStyle(
                           fontSize: 16,
@@ -76,7 +76,7 @@ class SignUpWidget extends StatelessWidget {
                   minimumSize: Size(double.infinity, 48),
                 ),
                 icon: FaIcon(FontAwesomeIcons.google, color: Colors.red),
-                label: Text('Iniciar sesión con Google'),
+                label: SelectableText('Iniciar sesión con Google'),
                 onPressed: () async {
                   final provider =
                       Provider.of<GoogleSignInProvider>(context, listen: false);
@@ -86,15 +86,19 @@ class SignUpWidget extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text('Error al iniciar sesión'),
-                        content: Text('$e'),
+                        title: SelectableText('Error al iniciar sesión'),
+                        content: SelectableText('$e'),
                       ),
                     );
                   }
                   if (provider.recentlySignedInUser != null) {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RoleSelection()),
+                      MaterialPageRoute(
+                        builder: (context) => CommonSelectPage(),
+                        // VOlver a los parajes:
+                        // RoleSelection()
+                      ),
                     );
                   }
                 },
@@ -107,7 +111,7 @@ class SignUpWidget extends StatelessWidget {
                   minimumSize: Size(double.infinity, 48),
                 ),
                 icon: Icon(Icons.person, color: Colors.black),
-                label: Text('Modo Incógnito'),
+                label: SelectableText('Modo Incógnito'),
                 onPressed: () {
                   Navigator.push(
                     context,

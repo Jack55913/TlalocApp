@@ -52,7 +52,7 @@ class CommonSelectWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 5),
-                Text(
+                SelectableText(
                   paraje,
                   style: TextStyle(
                     fontSize: 24,
@@ -62,7 +62,7 @@ class CommonSelectWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
-                Text(
+                SelectableText(
                   'Ejido de $ejido',
                   style: TextStyle(
                     fontSize: 14,

@@ -12,6 +12,7 @@ import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/date.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
 import 'package:tlaloc/src/models/kernel.dart';
+import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
 import 'package:tlaloc/src/ui/widgets/measures/save_button.dart';
 
 class AddScreen extends StatefulWidget {
@@ -133,9 +134,9 @@ class _AddScreenState extends State<AddScreen> {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: Text(
+                          title: SelectableText(
                               '¡No ingresaste la medición correctamente, inténtalo nuevamente!'),
-                          content: Text('$e'),
+                          content: SelectableText('$e'),
                         ),
                       );
                     }
@@ -168,19 +169,28 @@ class _AddScreenState extends State<AddScreen> {
                     if (snapshot.hasError ||
                         (snapshot.hasData &&
                             snapshot.data == ConnectivityResult.none)) {
-                      return const Text(
+                      return const SelectableText(
                           // TODO: AQUÏ VA LA FUNCIÖN PARA QUE NO TENGA INTERNET
                           'No se puede subir imágenes sin internet (aún).\n Súbelo más tarde desde la galeria');
                     } else {
                       return Column(
                         children: [
                           const SizedBox(height: 15),
-                          const Text(
-                            'Toma una foto y sube la imagen del\n pluviómetro cuando llegues a casa',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'FredokaOne',
+                          DarkContainerWidget(
+                            data: DarkContainer(
+                              fill: Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: SelectableText(
+                                    'Toma una foto y sube la imagen del\n pluviómetro cuando llegues a casa',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: 'FredokaOne',
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                           const SizedBox(height: 15),
@@ -192,7 +202,7 @@ class _AddScreenState extends State<AddScreen> {
                                       backgroundColor: Colors.purple[300],
                                       child: Icon(Icons.image,
                                           color: Colors.purple[900])),
-                                  title: const Text(
+                                  title: const SelectableText(
                                     " Desde la Galería",
                                     style: TextStyle(
                                       color: Colors.grey,
@@ -210,7 +220,7 @@ class _AddScreenState extends State<AddScreen> {
                               //         backgroundColor: Colors.purple[300],
                               //         child: Icon(Icons.camera_alt,
                               //             color: Colors.purple[900])),
-                              //     title: const Text("Desde la Cámara",
+                              //     title: const SelectableText("Desde la Cámara",
                               //         style: TextStyle(
                               //           color: Colors.grey,
                               //           fontSize: 16,
@@ -237,7 +247,7 @@ class _AddScreenState extends State<AddScreen> {
                                     padding: const EdgeInsets.all(15.0),
                                     child: Image.file(newImage!),
                                   )
-                                : const Text(
+                                : const SelectableText(
                                     "⚠️ No ha seleccionado ninguna imágen ⚠️",
                                     style: TextStyle(
                                       color: Colors.red,
@@ -269,7 +279,7 @@ class _AddScreenState extends State<AddScreen> {
   //       MaterialBanner(
   //         backgroundColor: AppColors.green1,
   //         leading: Icon(Icons.check),
-  //         content: Text(
+  //         content: SelectableText(
   //           '¡Has agregado una medición!',
   //           style: TextStyle(
   //             fontFamily: 'poppins',
@@ -281,7 +291,7 @@ class _AddScreenState extends State<AddScreen> {
   //             onPressed: () {
   //               ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
   //             },
-  //             child: Text(
+  //             child: SelectableText(
   //               'OK',
   //               style: TextStyle(
   //                 fontFamily: 'poppins',
@@ -296,7 +306,7 @@ class _AddScreenState extends State<AddScreen> {
   // void showBanner2() => ScaffoldMessenger.of(context).showMaterialBanner(
   //       MaterialBanner(
   //         leading: Icon(Icons.check),
-  //         content: Text(
+  //         content: SelectableText(
   //           '¡Listo, se ha modificado su medición!',
   //           style: TextStyle(
   //             fontFamily: 'poppins',
@@ -309,7 +319,7 @@ class _AddScreenState extends State<AddScreen> {
   //             onPressed: () {
   //               ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
   //             },
-  //             child: Text(
+  //             child: SelectableText(
   //               'OK',
   //               style: TextStyle(
   //                 fontFamily: 'poppins',
@@ -322,12 +332,33 @@ class _AddScreenState extends State<AddScreen> {
   //     );
 }
 
-class PersonalMeausreData extends StatelessWidget {
+// class PersonalMeausreData extends StatelessWidget {
+//   const PersonalMeausreData({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SelectableText(
+//       '$_counter',
+//       style: const TextStyle(
+//         color: Colors.white,
+//         fontFamily: 'poppins',
+//         fontSize: 16,
+//       ),
+//     );
+//   }
+// }
+
+class PersonalMeausreData extends StatefulWidget {
   const PersonalMeausreData({Key? key}) : super(key: key);
 
   @override
+  State<PersonalMeausreData> createState() => _PersonalMeausreDataState();
+}
+
+class _PersonalMeausreDataState extends State<PersonalMeausreData> {
+  @override
   Widget build(BuildContext context) {
-    return Text(
+    return SelectableText(
       '$_counter',
       style: const TextStyle(
         color: Colors.white,

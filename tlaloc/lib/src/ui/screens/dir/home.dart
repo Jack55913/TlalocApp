@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: 20),
               Center(
-                child: Text(
+                child: SelectableText(
                   '¿Cómo llegar al pluviómetro?',
                   style: TextStyle(
                     fontFamily: 'FredokaOne',

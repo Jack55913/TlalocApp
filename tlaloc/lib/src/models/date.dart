@@ -62,6 +62,28 @@ class _DatetimeState extends State<Datetime> {
     return Column(
       children: [
         ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Colors.red[300],
+            child: Icon(
+              Icons.place,
+              color: Colors.red[900],
+            ),
+          ),
+          title: SelectableText('Elige un Paraje'),
+          subtitle: SelectableText(
+              'Estás ubicado en: "${Provider.of<AppState>(context).paraje}"'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CommonSelectPage()),
+            );
+          },
+        ),
+        Divider(
+          height: 20,
+          thickness: 1,
+        ),
+        ListTile(
           title: TextFormField(
             initialValue: precipitation?.toString() ?? '',
             style: TextStyle(
@@ -99,71 +121,50 @@ class _DatetimeState extends State<Datetime> {
           ),
         ),
         TlalocPluviometer(),
+        // Divider(
+        //   height: 20,
+        //   thickness: 1,
+        // ),
+        // // TODO: Agregar el switch
+        // SwitchListTile(
+        //   title: SelectableText(
+        //     'Vaciar pluviómetro',
+        //   ),
+        //   value: _pluviometer,
+        //   secondary: CircleAvatar(
+        //       backgroundColor: Colors.teal[300],
+        //       child: Icon(Icons.water_drop, color: Colors.teal[900])),
+        //   subtitle: SelectableText('Hacer sólo si eres monitor'),
+        //   onChanged: (bool value) {
+        //     setState(() => _pluviometer = value);
+        //   },
+        // ),
+        // Divider(
+        //   height: 20,
+        //   thickness: 1,
+        // ),
+        // ListTile(
+        //   leading: CircleAvatar(
+        //       backgroundColor: Colors.yellow[300],
+        //       child:
+        //           Icon(Icons.rocket_launch_rounded, color: Colors.yellow[900])),
+        //   title: SelectableText(
+        //     'Elige un Rol',
+        //   ),
+        //   subtitle:
+        //       SelectableText('Estás en modo: ${Provider.of<AppState>(context).rol}'),
+        //   onTap: () {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => RoleSelection()),
+        //     );
+        //   },
+        // ),
         Divider(
           height: 20,
           thickness: 1,
         ),
-        // TODO: Agregar el switch
-        SwitchListTile(
-          title: Text(
-            'Vaciar pluviómetro',
-          ),
-          value: _pluviometer,
-          secondary: CircleAvatar(
-              backgroundColor: Colors.teal[300],
-              child: Icon(Icons.water_drop, color: Colors.teal[900])),
-          subtitle: Text('Hacer sólo si eres monitor'),
-          onChanged: (bool value) {
-            setState(() => _pluviometer = value);
-          },
-        ),
-        Divider(
-          height: 20,
-          thickness: 1,
-        ),
-        ListTile(
-          leading: CircleAvatar(
-              backgroundColor: Colors.yellow[300],
-              child:
-                  Icon(Icons.rocket_launch_rounded, color: Colors.yellow[900])),
-          title: Text(
-            'Elige un Rol',
-          ),
-          subtitle:
-              Text('Estás en modo: ${Provider.of<AppState>(context).rol}'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => RoleSelection()),
-            );
-          },
-        ),
-        Divider(
-          height: 20,
-          thickness: 1,
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Colors.red[300],
-            child: Icon(
-              Icons.place,
-              color: Colors.red[900],
-            ),
-          ),
-          title: Text('Elige un Paraje'),
-          subtitle: Text(
-              'Estás ubicado en: "${Provider.of<AppState>(context).paraje}"'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CommonSelectPage()),
-            );
-          },
-        ),
-        Divider(
-          height: 20,
-          thickness: 1,
-        ),
+
         ListTile(
           leading: CircleAvatar(
             backgroundColor: Colors.transparent,
@@ -172,7 +173,7 @@ class _DatetimeState extends State<Datetime> {
               color: Colors.grey,
             ),
           ),
-          title: Text(
+          title: SelectableText(
             'Revisa la fecha de colecta',
             style: TextStyle(
               color: Colors.grey,
@@ -190,7 +191,7 @@ class _DatetimeState extends State<Datetime> {
             children: [
               ElevatedButton.icon(
                 icon: const Icon(Icons.calendar_month),
-                label: Text(
+                label: SelectableText(
                   '${dateTime.day}/${dateTime.month}/${dateTime.year}',
                 ),
                 onPressed: () async {
@@ -203,7 +204,7 @@ class _DatetimeState extends State<Datetime> {
               ),
               ElevatedButton.icon(
                 icon: const Icon(Icons.access_time, color: Colors.white),
-                label: Text('$hours:$minutes',
+                label: SelectableText('$hours:$minutes',
                     style: const TextStyle(
                       color: Colors.white,
                     )),

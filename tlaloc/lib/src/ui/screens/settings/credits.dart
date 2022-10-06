@@ -45,7 +45,7 @@ class CreditsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.dark2,
-        title: const Text('Créditos'),
+        title: const SelectableText('Créditos ©️'),
       ),
       body: const SafeArea(
         child: Markdown(

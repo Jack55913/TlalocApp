@@ -16,8 +16,8 @@ class TableTlaloc extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text(
-            'Mediciones Generales',
+          child: SelectableText(
+            '📝 Mediciones Generales ',
             style: TextStyle(
               fontFamily: 'Fredoka One',
             ),
