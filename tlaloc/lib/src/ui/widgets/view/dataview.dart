@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
-import 'package:tlaloc/src/resources/page/modify_registration.dart';
+import 'package:tlaloc/src/resources/statics/modify_registration.dart';
 
 class DataWidgetView extends StatelessWidget {
   final Measurement measurement;
@@ -85,7 +85,7 @@ class DataWidgetView extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      '${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.day}',
+                      '${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.year}',
                       style: const TextStyle(
                         fontSize: 14,
                         fontFamily: 'poppins',

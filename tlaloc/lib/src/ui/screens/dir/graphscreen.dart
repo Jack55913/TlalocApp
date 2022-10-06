@@ -6,7 +6,6 @@ import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/profilepage.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
 import 'package:tlaloc/src/ui/widgets/graphs/table_graphs.dart';
-import 'package:tlaloc/src/ui/widgets/graphs/table_grids.dart';
 
 import '../../widgets/appbar/infobutton.dart';
 
@@ -41,7 +40,8 @@ class _GraphsScreenState extends State<GraphsScreen> {
           child: Column(
             children: const [
               TableGraphs(),
-              TableGrids(),
+              // TODO: hacer un tabulador
+              // TableGrids(),
             ],
           ),
         ),

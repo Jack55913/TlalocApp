@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
@@ -9,16 +8,16 @@ import 'package:tlaloc/src/resources/onboarding/common_select.dart';
 import 'package:tlaloc/src/resources/onboarding/role.dart';
 import 'package:tlaloc/src/ui/widgets/graphs/pluviometer.dart';
 
-double _level = 10;
-
 class Datetime extends StatefulWidget {
   final void Function(DateTime) updateDateTime;
   final void Function(num?) updatePrecipitation;
+  final void Function(bool?) updatePluviometer;
   final Measurement? measurement;
   const Datetime({
     Key? key,
     required this.updateDateTime,
     required this.updatePrecipitation,
+    required this.updatePluviometer,
     this.measurement,
   }) : super(key: key);
 
@@ -29,9 +28,11 @@ class Datetime extends StatefulWidget {
 class _DatetimeState extends State<Datetime> {
   DateTime _dateTime = DateTime.now();
   num? _precipitation;
+  bool _pluviometer = false;
 
   DateTime get dateTime => _dateTime;
   num? get precipitation => _precipitation;
+  bool get pluviometer => _pluviometer;
 
   set dateTime(DateTime value) {
     _dateTime = value;
@@ -43,13 +44,18 @@ class _DatetimeState extends State<Datetime> {
     widget.updatePrecipitation(value);
   }
 
+  set pluviometer(bool value) {
+    _pluviometer = value;
+    widget.updatePluviometer(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.measurement != null) {
       dateTime = widget.measurement!.dateTime!;
       precipitation = widget.measurement!.precipitation;
+      // pluviometer = widget.measurement!.pluviometer;
     }
-
     final hours = dateTime.hour.toString().padLeft(2, '0');
     final minutes = dateTime.minute.toString().padLeft(2, '0');
 
@@ -57,19 +63,6 @@ class _DatetimeState extends State<Datetime> {
       children: [
         ListTile(
           title: TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            autocorrect: true,
-            autofocus: true,
-            maxLength: 5,
-            // TODO: Hacer que funcione de, "save_button.dart"
-            // controller: controller,
-            validator: RangeValidator(
-              min: 0.0,
-              max: 160.0,
-              errorText: 'Debe ser entre 0 y 160',
-            ),
-
-            keyboardType: TextInputType.number,
             initialValue: precipitation?.toString() ?? '',
             style: TextStyle(
               fontSize: 24,
@@ -91,10 +84,60 @@ class _DatetimeState extends State<Datetime> {
             onChanged: (value) {
               precipitation = num.tryParse(value);
             },
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.number,
+            // autocorrect: true,
+            // autofocus: true,
+            maxLength: 5,
+            // TODO: Hacer que funcione , "save_button.dart"
+            // controller: controller,
+            validator: RangeValidator(
+              min: 0.0,
+              max: 160.0,
+              errorText: 'Debe ser entre 0 y 160',
+            ),
           ),
         ),
-        // PluviometerText(),
         TlalocPluviometer(),
+        Divider(
+          height: 20,
+          thickness: 1,
+        ),
+        // TODO: Agregar el switch
+        SwitchListTile(
+          title: Text(
+            'Vaciar pluviómetro',
+          ),
+          value: _pluviometer,
+          secondary: CircleAvatar(
+              backgroundColor: Colors.teal[300],
+              child: Icon(Icons.water_drop, color: Colors.teal[900])),
+          subtitle: Text('Hacer sólo si eres monitor'),
+          onChanged: (bool value) {
+            setState(() => _pluviometer = value);
+          },
+        ),
+        Divider(
+          height: 20,
+          thickness: 1,
+        ),
+        ListTile(
+          leading: CircleAvatar(
+              backgroundColor: Colors.yellow[300],
+              child:
+                  Icon(Icons.rocket_launch_rounded, color: Colors.yellow[900])),
+          title: Text(
+            'Elige un Rol',
+          ),
+          subtitle:
+              Text('Estás en modo: ${Provider.of<AppState>(context).rol}'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RoleSelection()),
+            );
+          },
+        ),
         Divider(
           height: 20,
           thickness: 1,
@@ -114,27 +157,6 @@ class _DatetimeState extends State<Datetime> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => CommonSelectPage()),
-            );
-          },
-        ),
-        Divider(
-          height: 20,
-          thickness: 1,
-        ),
-        ListTile(
-          leading: CircleAvatar(
-              backgroundColor: Colors.brown[300],
-              child:
-                  Icon(Icons.rocket_launch_rounded, color: Colors.brown[900])),
-          title: Text(
-            'Elige un Rol',
-          ),
-          subtitle:
-              Text('Estás en modo: ${Provider.of<AppState>(context).rol}'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => RoleSelection()),
             );
           },
         ),
@@ -169,15 +191,13 @@ class _DatetimeState extends State<Datetime> {
               ElevatedButton.icon(
                 icon: const Icon(Icons.calendar_month),
                 label: Text(
-                  '${dateTime.year}/${dateTime.month}/${dateTime.day}',
+                  '${dateTime.day}/${dateTime.month}/${dateTime.year}',
                 ),
                 onPressed: () async {
                   final date = await pickDate();
                   if (date == null) return;
-
                   final newDateTime = DateTime(date.year, date.month, date.day,
                       dateTime.hour, dateTime.minute);
-
                   setState(() => dateTime = newDateTime);
                 },
               ),

@@ -73,7 +73,7 @@ class DataScreen extends StatelessWidget {
                                           backgroundColor: Colors.white,
                                           onPressed: (context) {
                                             Share.share(
-                                                '¡Mira! *${measurement.dateTime} llovió ${measurement.precipitation} mm*. Ayúdame a medir, descargándo la app en tlaloc.web.app');
+                                                '¡Mira! el *${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.day} llovió ${measurement.precipitation} mm*. Ayúdame a medir, descargándo la app en tlaloc.web.app');
                                           },
                                           icon: Icons.share),
                                       SlidableAction(

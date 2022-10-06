@@ -13,7 +13,6 @@ class TlalocMap extends StatelessWidget {
         ),
         body: SfPdfViewer.asset(
           'assets/pdf/mapa.pdf',
-          // mapa.pdf
         ),
       ),
     );

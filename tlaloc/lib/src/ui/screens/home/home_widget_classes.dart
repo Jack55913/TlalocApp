@@ -6,6 +6,7 @@ import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
 import 'package:tlaloc/src/ui/widgets/cards/tlalocmap.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../widgets/cards/map.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ContactUsButton extends StatelessWidget {
   const ContactUsButton({Key? key}) : super(key: key);
@@ -15,21 +16,32 @@ class ContactUsButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ElevatedButton(
-        style:
-            ElevatedButton.styleFrom(surfaceTintColor: AppColors.whatsappgreen),
+        style: ElevatedButton.styleFrom(
+            primary: AppColors.whatsappgreen,
+            surfaceTintColor: AppColors.whatsappgreen),
         onPressed: () {
           launchUrl(
               Uri.parse('https://api.whatsapp.com/send?phone=5634577396'));
         },
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: const Text(
-            '¡Contáctanos!',
-            style: TextStyle(
-              fontFamily: 'FredokaOne',
-              fontSize: 24,
-              letterSpacing: 2,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white),
+              SizedBox(
+                width: 25,
+              ),
+              const Text(
+                '¡Contáctanos!',
+                style: TextStyle(
+                  fontFamily: 'FredokaOne',
+                  fontSize: 24,
+                  letterSpacing: 2,
+                ),
+              ),
+            ],
           ),
         ),
       ),

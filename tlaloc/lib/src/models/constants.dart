@@ -1,5 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:tlaloc/src/resources/statics/charts/chart3.dart';
+import 'package:tlaloc/src/resources/statics/charts/chart4.dart';
+import 'package:tlaloc/src/resources/statics/graphs/graph1.dart';
+import 'package:tlaloc/src/resources/statics/graphs/graph2.dart';
+import 'package:tlaloc/src/resources/statics/graphs/graph3.dart';
+import 'package:tlaloc/src/resources/statics/graphs/graph4.dart';
+import 'package:tlaloc/src/resources/statics/graphs/graph5.dart';
+import 'package:tlaloc/src/resources/statics/graphs/graph7.dart';
+import 'package:tlaloc/src/resources/statics/graphs/graph9.dart';
+import 'package:tlaloc/src/resources/statics/graphs/grpah8.dart';
 
+
+List<Icon> graphIcons = [
+  Icon(Icons.show_chart, color: Colors.blue[300]),
+  Icon(Icons.area_chart, color: Colors.green[300]),
+  Icon(Icons.bar_chart, color: Colors.red[300]),
+  Icon(Icons.bubble_chart_rounded, color: Colors.orange[300]),
+  Icon(Icons.pie_chart, color: Colors.purple[300]),
+  Icon(Icons.stacked_line_chart_rounded, color: Colors.pink[300]),
+  Icon(Icons.line_axis, color: Colors.amber[300]),
+  Icon(Icons.bar_chart, color: Colors.indigo[300]),
+  Icon(Icons.stacked_bar_chart_rounded, color: Colors.teal[300]),
+  Icon(Icons.area_chart_outlined, color: Colors.yellow[300]),
+];
+
+List<Color> grpahIconColor = [
+  const Color.fromARGB(255, 0, 43, 79),
+  const Color.fromARGB(255, 0, 66, 2),
+  const Color.fromARGB(255, 62, 4, 0),
+  const Color.fromARGB(255, 59, 36, 0),
+  const Color.fromARGB(255, 52, 0, 61),
+  const Color.fromARGB(255, 69, 0, 23),
+  const Color.fromARGB(255, 180, 160, 10),
+  const Color.fromARGB(255, 23, 3, 95),
+  const Color.fromARGB(255, 2, 134, 132),
+  const Color.fromARGB(255, 163, 155, 1),
+];
+
+List<String> graphtitle = [
+  "De Dispersión",
+  "De Volúmenes",
+  "De Barras",
+  "De Burbujas",
+  "De Pasteles",
+  "De Disperción (Comparación de Ejidos)",
+  "De Disperción interactivo (Comparación de Ejidos)",
+  "De Barras (Comparación de Ejidos por fecha)",
+  "De Barras (Comparación de Ejidos)",
+  "De Volúmenes (Comparación de Ejidos)"
+];
+final graphscrens = [
+  const DispersionBar(),
+  const VolumenGraph(),
+  const BarGraph(),
+  const BubbleGraph(),
+  const PieChartTooltip(
+    key: Key('pie_chart_tooltip'),
+  ),
+  const CommonsLineGraph(),
+  const TrackballGraph(),
+  const MultipleCommonSeries(),
+  const StackedColumnChart(),
+  const CommonAreaSeries(),
+];
 /// Para agregar o quitar parajes, basta con cambiar esta variable
 ///
 ///

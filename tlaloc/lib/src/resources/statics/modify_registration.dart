@@ -94,14 +94,19 @@ class ModifyRegistration extends StatelessWidget {
                     )),
                 SizedBox(height: 15),
                 _buildDataModify(
-                    'Precipitación',
+                    'Precipitación:',
                     '${measurement.precipitation} mm',
                     Icon(Icons.cloud, color: Colors.grey)),
                 SizedBox(height: 15),
                 _buildDataModify(
-                    '${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.day}',
+                    'Fecha: ${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.year}',
                     '${measurement.dateTime!.hour}:${measurement.dateTime!.minute.toString().padLeft(2, '0')}',
                     Icon(Icons.timer, color: Colors.grey)),
+                SizedBox(height: 15),
+                _buildDataModify(
+                    'Vació Pluviómetro:',
+                    '${measurement.pluviometer}',
+                    Icon(Icons.water_drop, color: Colors.grey)),
                 SizedBox(height: 5),
                 Divider(
                   height: 20,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
-import 'package:tlaloc/src/resources/page/charts/chart1.dart';
+import 'package:tlaloc/src/resources/statics/charts/chart1.dart';
 
 class TableGrids extends StatelessWidget {
   const TableGrids({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class TableGrids extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.dark3,
+            color: AppColors.dark1,
             borderRadius: BorderRadius.circular(25),
           ),
           child: Column(

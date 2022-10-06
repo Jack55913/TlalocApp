@@ -20,10 +20,6 @@ En este estudio se plantea una estrategia de Ciencia Ciudadana para superar la d
 
 El monitoreo de la lluvia consistirá en registro de los niveles del agua almacenada en pluviómetros de medición manual, colocados en parajes ubicados a distintas altitudes en el monte Tláloc. Para realizar los registros de la lluvia se va a contar con la participación activa de la mayoría de los ejidos pertenecientes a la Unión de Ejidos de la Montaña, quienes son dueños de las tierras donde se ubica el proyecto. También se espera contar con la participación varios grupos de personas que vistan la zona para realizar actividades recreativas, científicas y de gestión gubernamental. La frecuencia de los registros será variable, ya que algunos sitios de monitoreo estarán ubicados en lugares más accesibles y frecuentados que otros. 
 
-## Propósito 
-
-Lograr un trabajo colaborativo con distintos grupos de la sociedad para conocer la variación de la precipitación en un gradiente altitudinal del Monte Tláloc, Texcoco, Estado de México, bajo un esquema de ciencia ciudadana.
-
 ## Propósito
 
 Lograr un trabajo colaborativo con distintos grupos de la sociedad para conocer la variación de la precipitación en un gradiente altitudinal del Monte Tláloc, Texcoco, Estado de México, bajo un esquema de ciencia ciudadana.

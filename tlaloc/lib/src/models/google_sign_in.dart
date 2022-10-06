@@ -5,8 +5,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 class GoogleSignInProvider extends ChangeNotifier {
   static const String _webSign =
       '228815382617-2rtslpepg048j80iuls7ilrc8ff9sn4l.apps.googleusercontent.com';
+  // static const String _androidSign =
+  //     '228815382617-evr2gdane0kejbr700dunqfbq7c641n3.apps.googleusercontent.com';
   static final googleSignIn = GoogleSignIn(
-    clientId: _webSign,
+    // clientId: _androidSign,
+    clientId:
+        // Disponible para web o android
+        _webSign,
   );
 
   GoogleSignInAccount? _user;

@@ -8,6 +8,7 @@ import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
+import 'package:tlaloc/src/ui/widgets/buttons/notebook.dart';
 import 'package:tlaloc/src/ui/widgets/cards/personal_measures.dart';
 import 'package:tlaloc/src/ui/widgets/cards/phrase.dart';
 import 'package:tlaloc/src/ui/widgets/cards/tutorials.dart';
@@ -76,6 +77,12 @@ class _HomeScreenState extends State<HomeScreen> {
               Divider(
                 height: 20,
                 thickness: 1,
+              ),
+              // SizedBox(height: 20),
+              DarkContainerWidget(
+                data: DarkContainer(
+                  fill: TableButton(),
+                ),
               ),
               SizedBox(height: 20),
               Center(

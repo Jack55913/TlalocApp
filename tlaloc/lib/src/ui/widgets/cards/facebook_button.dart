@@ -23,7 +23,8 @@ class FacebookButton extends StatelessWidget {
               Column(
                 children: const [
                   Text(
-                    'Descúbre un grupo\npara preservar\nel monte Tláloc',
+                    'Quiénes suben a la montaña y\nquiénes pueden participar',
+                    // 'Descúbre un grupo\npara preservar\nel monte Tláloc',
                     style: TextStyle(
                       fontFamily: 'FredokaOne',
                       fontSize: 18,

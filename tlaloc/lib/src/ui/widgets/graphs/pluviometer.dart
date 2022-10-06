@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
-import 'package:tlaloc/src/models/customPathPainter.dart';
+import 'package:tlaloc/src/models/custompathpainter.dart';
 
-double _level = 10;
+double _level = 80;
 
 class TlalocPluviometer extends StatefulWidget {
   const TlalocPluviometer({Key? key}) : super(key: key);
@@ -119,17 +119,3 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
         ));
   }
 }
-
-// class PluviometerText extends StatelessWidget {
-//   const PluviometerText({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     value:
-//     _level;
-//     return Text(
-//       _level.toStringAsFixed(0),
-//       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-//     );
-//   }
-// }

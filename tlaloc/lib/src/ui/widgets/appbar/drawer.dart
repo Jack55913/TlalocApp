@@ -37,9 +37,10 @@ class DrawerApp extends StatelessWidget {
             textAlign: TextAlign.end,
           ),
           decoration: BoxDecoration(
-            color: AppColors.dark1,
+            color: AppColors.dark2,
             image: DecorationImage(
               image: AssetImage(
+                // TODO: PONER UNA IMAGEN CHIDA
                 "assets/images/Portada2.png",
               ),
               fit: BoxFit.fill,
@@ -112,7 +113,7 @@ class DrawerApp extends StatelessWidget {
                 backgroundColor: Colors.white,
               ),
               applicationLegalese:
-                  'Con amor desde COLPOS ❤️\nCréditos y programación: Emilio Álvarez Herrera',
+                  'Con amor desde COLPOS ❤️',
               applicationVersion: 'versión inicial (beta)',
               children: [
                 ListTile(

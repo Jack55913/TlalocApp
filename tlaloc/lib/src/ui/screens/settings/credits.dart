@@ -10,26 +10,27 @@ import 'package:tlaloc/src/models/constants.dart';
 const String _markdownData = """
 ## Creadores ✒️
 
-* **Teresa Gonzalez** - *Directora* - [Correo electrónico](https://github.com/villanuevand)
+* **CEO: Dra. Teresa M. Gonzalez Martinez** - *Posgrado en Ciencias Forestales - COLPOS* - [Correo electrónico](teresa.gonzalez@colpos.mx)
 
 <img width="300" height="300" src="https://play-lh.googleusercontent.com/EvAYTmW85yKTSDjbzUX0wjp41vd2FJPk9HfAY3Jv8LZJbgOcA6eSD1UNKtcDOgUfgVy0">
 </p>
 
-* **Emilio Álvarez Herrera** - *Programador y Tesista* - [emilio-ah.web.app](https://emilio-ah.web.app)
+* **CTO: Emilio Álvarez Herrera** - *Irrigación - UACh* - [emilio-ah.web.app](https://emilio-ah.web.app)
 
-* **Diana** - *Operadora y Tesista* - [gabrc52](https://github.com/gabrc52)
-
-* **Pedro** - *Mapas y Servicio Social* - [Gama](https://www.instagram.com/lagamitavella/)
+* **COO: Pedro Luis Díaz Lira** - *Irrigación - UACh*  
 
 ## Ejidos 🛠️
 
-* **Nativitas**
+* **Santa María Nativitas**
 * **San Pablo Ixayoc**
-* **San Dieguito**
+* **San Dieguito Xochimalca**
 * **Tequexquinahuac**
 * **Santa Catarina del Monte**
+* **San Miguel Tlaixpan**
 
 ## Colaboradores 🍺
+
+* **CCO: Diana Cerón Flores** - *Hidrobiología - UAM*
 
 * **Gabriel Rodríguez** - *Programador* - [gabrc52](https://github.com/gabrc52)
 

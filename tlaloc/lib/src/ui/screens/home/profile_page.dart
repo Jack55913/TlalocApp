@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
+import 'package:tlaloc/src/models/kernel.dart';
 import 'package:tlaloc/src/resources/onboarding/onbording.dart';
 
 class ConfigureScreen extends StatefulWidget {
@@ -15,9 +16,9 @@ class ConfigureScreen extends StatefulWidget {
 }
 
 class _ConfigureScreenState extends State<ConfigureScreen> {
+  // final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.dark2,
@@ -41,29 +42,31 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundImage: NetworkImage(user.photoURL!),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Nombre: ' + user.displayName!,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Correo: ' + user.email!,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ],
-                ),
+                if (FirebaseAuth.instance.currentUser != null)
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: NetworkImage(
+                            FirebaseAuth.instance.currentUser!.photoURL!),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Nombre: ' +
+                            FirebaseAuth.instance.currentUser!.displayName!,
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Correo: ' + FirebaseAuth.instance.currentUser!.email!,
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ],
+                  ),
                 Consumer<GoogleSignInProvider>(
                   builder: (context, signIn, child) {
                     final name = FirebaseAuth.instance.currentUser?.displayName;
-
                     return ListTile(
                       leading: const Icon(Icons.login, color: Colors.green),
                       title: const Text('Iniciar sesión'),
@@ -73,6 +76,13 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                       onTap: () async {
                         try {
                           await signIn.googleLogin();
+                          // Ir a AddScreen:
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ),
+                          );
                         } catch (e) {
                           showDialog(
                             context: context,
@@ -91,15 +101,15 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                     leading: const Icon(Icons.logout, color: Colors.red),
                     title: const Text('Cerrar sesión'),
                     onTap: () {
-            final provider =
-                Provider.of<GoogleSignInProvider>(context, listen: false);
-            provider.logout();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Onboarding()),
-            );
-          },
+                      final provider = Provider.of<GoogleSignInProvider>(
+                          context,
+                          listen: false);
+                      provider.logout();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Onboarding()),
+                      );
+                    },
                   ),
               ]),
         ));

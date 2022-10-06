@@ -15,14 +15,13 @@ Widget _buildItem(String textTitle, String textsubtitle, String url) {
       textsubtitle,
       style: const TextStyle(color: Colors.white70),
     ),
-    trailing: IconButton(
-        color: Colors.white,
-        icon: const Icon(
-          Icons.open_in_new,
-        ),
-        onPressed: () async {
-          launchUrl(Uri.parse(url));
-        }),
+    trailing: const Icon(
+      Icons.open_in_new,
+      color: Colors.white,
+    ),
+    onTap: () async {
+      launchUrl(Uri.parse(url));
+    },
   );
 }
 
@@ -35,7 +34,7 @@ class TutorialWidget extends StatelessWidget {
       children: [
         const Center(
           child: AutoSizeText(
-            'Tutoriales',
+            'Tutoriales 🎥 📼',
             style: TextStyle(
               color: AppColors.blue1,
               fontFamily: 'FredokaOne',

@@ -13,37 +13,36 @@ class Measurement {
   final String id;
   final String? imageUrl;
   final String? avatarUrl; //+
-  Measurement({
-    this.uploader,
-    this.precipitation,
-    this.dateTime,
-    required this.id,
-    this.imageUrl,
-    this.avatarUrl, //+
-  });
+  final bool? pluviometer;
+  Measurement(
+      {this.uploader,
+      this.precipitation,
+      this.dateTime,
+      required this.id,
+      this.imageUrl,
+      this.avatarUrl, //+
+      this.pluviometer});
   factory Measurement.fromJson(Map<String, dynamic> json, String id) {
     Timestamp timestamp = json['time'];
     var dateTime =
         DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
-    // Timestamp formatTime = json['short_time'];
-    // var formattedDate = DateFormat('MM-dd-yyyy HH:mm').format(formatTime.toDate());
 
     return Measurement(
-      // formatTime: formattedDate,
-      uploader: json['uploader_name'],
-      precipitation: json['precipitation'],
-      dateTime: dateTime,
-      id: id,
-      imageUrl: json['image'],
-      avatarUrl: json['avatar_url'], //+
-    );
+        // formatTime: formattedDate,
+        uploader: json['uploader_name'],
+        precipitation: json['precipitation'],
+        dateTime: dateTime,
+        id: id,
+        imageUrl: json['image'],
+        avatarUrl: json['avatar_url'], //+
+        pluviometer: json['pluviometer_state']);
   }
 }
 
 class AppState extends ChangeNotifier {
   String rol = 'Visitante';
   String paraje = 'Cabaña'; //+
-  // String formatTime = 'MM-dd-yyyy HH:mm';
+  String videos = 'video';
   bool loading = true;
   final db = FirebaseFirestore.instance;
 
@@ -55,7 +54,7 @@ class AppState extends ChangeNotifier {
     loading = true;
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
-    rol = prefs.getString('rol')!; //+
+    rol = prefs.getString('rol')!;
     paraje = prefs.getString('paraje')!;
     loading = false;
     notifyListeners();
@@ -87,13 +86,24 @@ class AppState extends ChangeNotifier {
     return snapshot.data() ?? {};
   }
 
+// TODO: Para agregar los videos tutoriales
+
+  // Future<Map<String, dynamic>> getCurrentVideoData() async {
+  //   var ref =
+  //       db.collection('tutoriales').doc(videos);
+  //   var snapshot = await ref.get();
+  //   return snapshot.data() ?? {};
+  // }
+
 // PARA GUARDAR LAS FOTOS EN FIREBASE STORAGE:
 
-  Future<Map<String, dynamic>> _getMeasurementJson(
-      {required num precipitation,
-      required DateTime time,
-      File? image,
-      String? oldImage}) async {
+  Future<Map<String, dynamic>> _getMeasurementJson({
+    required num precipitation,
+    required DateTime time,
+    File? image,
+    String? oldImage,
+    required bool pluviometer,
+  }) async {
     // Primero, subir imagen a Firebase Hosting
     final auth = FirebaseAuth.instance;
     String? fileUrl;
@@ -123,12 +133,16 @@ class AppState extends ChangeNotifier {
       'uploader_id': auth.currentUser?.uid,
       'time': time,
       'image': fileUrl,
-      'avatar_url': auth.currentUser?.photoURL,//+
+      'avatar_url': auth.currentUser?.photoURL, //+
+      'pluviometer_state': pluviometer,
     };
   }
 
   Future<void> addMeasurement(
-      {required num precipitation, required DateTime time, File? image}) async {
+      {required num precipitation,
+      required DateTime time,
+      File? image,
+      required bool pluviometer}) async {
     db
         .collection('roles')
         .doc(rol)
@@ -137,10 +151,10 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .add(
           await _getMeasurementJson(
-            precipitation: precipitation,
-            time: time,
-            image: image,
-          ),
+              precipitation: precipitation,
+              time: time,
+              image: image,
+              pluviometer: pluviometer),
         );
   }
 
@@ -182,11 +196,22 @@ class AppState extends ChangeNotifier {
         .snapshots();
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> getGeneralMeasurementsStream() {
+    return db
+        .collection('roles')
+        .doc(rol)
+        .collection('parajes')
+        .doc(paraje)
+        .collection('measurements')
+        .snapshots();
+  }
+
   Future<void> updateMeasurement({
     required String id,
     required num precipitation,
     required DateTime time,
     File? image,
+    required bool pluviometer,
 
     /// En caso de que ya exista un URL de imagen (botón de editar, no crear)
     String? oldImage,
@@ -204,6 +229,7 @@ class AppState extends ChangeNotifier {
             time: time,
             image: image,
             oldImage: oldImage,
+            pluviometer: pluviometer,
           ),
         );
   }

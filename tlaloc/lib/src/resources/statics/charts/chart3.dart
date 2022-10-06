@@ -1,67 +1,51 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+
 import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/empty_state.dart';
 
-/// Samples:
-/// https://google.github.io/charts/flutter/example/time_series_charts/simple.html
-/// https://www.syncfusion.com/kb/12289/how-to-render-flutter-time-series-chart-using-the-charts-widget-sfcartesianchart
-/// https://pub.dev/packages/syncfusion_flutter_charts/example
+import '../../../models/datepicker.dart';
+import '../graphs/graph1.dart';
 
-class DatePickerButton extends StatelessWidget {
-  final DateTime dateTime;
-  final void Function(DateTime) onDateChanged;
 
-  const DatePickerButton({
-    Key? key,
-    required this.dateTime,
-    required this.onDateChanged,
-  }) : super(key: key);
+
+class TrackballGraph extends StatefulWidget {
+  const TrackballGraph({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      icon: const Icon(Icons.calendar_month),
-      label: Text(
-        (dateTime == dateLongAgo || dateTime == dateInALongTime)
-            ? 'Seleccionar'
-            : '${dateTime.year}/${dateTime.month}/${dateTime.day}',
-      ),
-      onPressed: () async {
-        final date = await showDatePicker(
-          context: context,
-          initialDate: (dateTime == dateLongAgo || dateTime == dateInALongTime)
-              ? DateTime.now()
-              : dateTime,
-          firstDate: dateLongAgo,
-          lastDate: dateInALongTime,
-        );
-        if (date != null) {
-          onDateChanged(date);
-        }
-      },
-    );
-  }
+  State<TrackballGraph> createState() => _TrackballGraphState();
 }
 
-class VolumenGraph extends StatefulWidget {
-  const VolumenGraph({Key? key}) : super(key: key);
-
-  @override
-  State<VolumenGraph> createState() => _VolumenGraphState();
-}
-
-enum DateTimeMode { custom, week, month, year, always }
-
-class _VolumenGraphState extends State<VolumenGraph> {
+class _TrackballGraphState extends State<TrackballGraph> {
+  late TrackballBehavior _trackballBehavior;
+  final List<ChartData> data = <ChartData>[
+    ChartData('Jan', 15, 39, 60),
+    ChartData('Feb', 20, 30, 55),
+    ChartData('Mar', 25, 28, 48),
+    ChartData('Apr', 21, 35, 57),
+    ChartData('May', 13, 39, 62),
+    ChartData('Jun', 18, 41, 64),
+    ChartData('Jul', 24, 45, 57),
+    ChartData('Aug', 23, 48, 53),
+    ChartData('Sep', 19, 54, 63),
+    ChartData('Oct', 31, 55, 50),
+    ChartData('Nov', 39, 57, 66),
+    ChartData('Dec', 50, 60, 65),
+  ];
   DateTime initialDate = dateLongAgo;
   DateTime finalDate = dateInALongTime;
   DateTimeMode mode = DateTimeMode.always;
+
+  @override
+  void initState() {
+    _trackballBehavior = TrackballBehavior(
+        enable: true, tooltipDisplayMode: TrackballDisplayMode.groupAllPoints);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +53,7 @@ class _VolumenGraphState extends State<VolumenGraph> {
       child: Scaffold(
         appBar: AppBar(
           title: const AutoSizeText(
-            'Gráfica de Volúmen ',
+            'Dispercion entre parajes ',
             style: TextStyle(
               fontFamily: 'FredokaOne',
               fontSize: 24,
@@ -207,30 +191,38 @@ class _VolumenGraphState extends State<VolumenGraph> {
                                   measurement.dateTime!.isBefore(finalDate)))
                           .toList();
                       return Expanded(
-                        child: Column(
-                          children: [
-                            // TODO: DO THE VolumenGraph
-                            SfCartesianChart(
-                              primaryXAxis: DateTimeAxis(
-                                name: 'Fecha',
-                                intervalType: DateTimeIntervalType.days,
-                                dateFormat: DateFormat.MMMd('es'),
-                              ),
-                              primaryYAxis:
-                                  NumericAxis(name: 'Precipitación (mm)'),
-                              series: <ChartSeries<Measurement, DateTime>>[
-                                AreaSeries<Measurement, DateTime>(
-                                  xValueMapper: (measurement, _) =>
-                                      measurement.dateTime,
-                                  yValueMapper: (measurement, _) =>
-                                      measurement.precipitation,
-                                  dataSource: filteredMeasurements,
-                                ),
-                              ],
+                          child: SfCartesianChart(
+                              primaryXAxis: CategoryAxis(),
+                              trackballBehavior: _trackballBehavior,
+                              series: <LineSeries<ChartData, String>>[
+                            LineSeries<ChartData, String>(
+                              dataSource: data,
+                              markerSettings:
+                                  const MarkerSettings(isVisible: true),
+                              name: 'United States of America',
+                              xValueMapper: (ChartData sales, _) => sales.month,
+                              yValueMapper: (ChartData sales, _) =>
+                                  sales.firstSale,
                             ),
-                          ],
-                        ),
-                      );
+                            LineSeries<ChartData, String>(
+                              dataSource: data,
+                              markerSettings:
+                                  const MarkerSettings(isVisible: true),
+                              name: 'Germany',
+                              xValueMapper: (ChartData sales, _) => sales.month,
+                              yValueMapper: (ChartData sales, _) =>
+                                  sales.secondSale,
+                            ),
+                            LineSeries<ChartData, String>(
+                              dataSource: data,
+                              markerSettings:
+                                  const MarkerSettings(isVisible: true),
+                              name: 'United Kingdom',
+                              xValueMapper: (ChartData sales, _) => sales.month,
+                              yValueMapper: (ChartData sales, _) =>
+                                  sales.thirdSale,
+                            )
+                          ]));
                     } else {
                       return const Center(
                         child: CircularProgressIndicator(),
@@ -245,4 +237,13 @@ class _VolumenGraphState extends State<VolumenGraph> {
       ),
     );
   }
+}
+
+class ChartData {
+  ChartData(this.month, this.firstSale, this.secondSale, this.thirdSale);
+
+  final String month;
+  final double firstSale;
+  final double secondSale;
+  final double thirdSale;
 }

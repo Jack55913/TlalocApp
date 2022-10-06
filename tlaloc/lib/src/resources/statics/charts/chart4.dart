@@ -1,67 +1,39 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/empty_state.dart';
 
+import '../../../models/datepicker.dart';
+
 /// Samples:
 /// https://google.github.io/charts/flutter/example/time_series_charts/simple.html
 /// https://www.syncfusion.com/kb/12289/how-to-render-flutter-time-series-chart-using-the-charts-widget-sfcartesianchart
 /// https://pub.dev/packages/syncfusion_flutter_charts/example
 
-class DatePickerButton extends StatelessWidget {
-  final DateTime dateTime;
-  final void Function(DateTime) onDateChanged;
-
-  const DatePickerButton({
-    Key? key,
-    required this.dateTime,
-    required this.onDateChanged,
-  }) : super(key: key);
+class PieChartTooltip extends StatefulWidget {
+  const PieChartTooltip({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      icon: const Icon(Icons.calendar_month),
-      label: Text(
-        (dateTime == dateLongAgo || dateTime == dateInALongTime)
-            ? 'Seleccionar'
-            : '${dateTime.year}/${dateTime.month}/${dateTime.day}',
-      ),
-      onPressed: () async {
-        final date = await showDatePicker(
-          context: context,
-          initialDate: (dateTime == dateLongAgo || dateTime == dateInALongTime)
-              ? DateTime.now()
-              : dateTime,
-          firstDate: dateLongAgo,
-          lastDate: dateInALongTime,
-        );
-        if (date != null) {
-          onDateChanged(date);
-        }
-      },
-    );
-  }
-}
-
-class BarGraph extends StatefulWidget {
-  const BarGraph({Key? key}) : super(key: key);
-
-  @override
-  State<BarGraph> createState() => _BarGraphState();
+  State<PieChartTooltip> createState() => _PieChartTooltipState();
 }
 
 enum DateTimeMode { custom, week, month, year, always }
 
-class _BarGraphState extends State<BarGraph> {
+class _PieChartTooltipState extends State<PieChartTooltip> {
   DateTime initialDate = dateLongAgo;
   DateTime finalDate = dateInALongTime;
   DateTimeMode mode = DateTimeMode.always;
+  late TooltipBehavior _tooltipBehavior;
+
+  @override
+  void initState() {
+    _tooltipBehavior = TooltipBehavior(enable: true);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +41,7 @@ class _BarGraphState extends State<BarGraph> {
       child: Scaffold(
         appBar: AppBar(
           title: const AutoSizeText(
-            'Gráfica de Barras ',
+            'Gráfica de Burbujas ',
             style: TextStyle(
               fontFamily: 'FredokaOne',
               fontSize: 24,
@@ -207,28 +179,28 @@ class _BarGraphState extends State<BarGraph> {
                                   measurement.dateTime!.isBefore(finalDate)))
                           .toList();
                       return Expanded(
-                        child: Column(
-                          children: [
-                            // TODO: DO THE BARGRAPH
-                            SfCartesianChart(
-                              primaryXAxis: DateTimeAxis(
-                                name: 'Fecha',
-                                intervalType: DateTimeIntervalType.days,
-                                dateFormat: DateFormat.MMMd('es'),
-                              ),
-                              primaryYAxis:
-                                  NumericAxis(name: 'Precipitación (mm)'),
-                              series: <ChartSeries<Measurement, DateTime>>[
-                                ColumnSeries<Measurement, DateTime>(
-                                  xValueMapper: (measurement, _) =>
-                                      measurement.dateTime,
-                                  yValueMapper: (measurement, _) =>
-                                      measurement.precipitation,
-                                  dataSource: filteredMeasurements,
-                                ),
-                              ],
+                        child: Center(
+                          child: SfCircularChart(
+                            title: ChartTitle(
+                              text: 'Gráfica de Pasteles',
                             ),
-                          ],
+                            // legend: Legend(isVisible: true),
+                            tooltipBehavior: _tooltipBehavior,
+                            series: <CircularSeries>[
+                              PieSeries<Measurement, DateTime>(
+                                dataSource: filteredMeasurements,
+                                xValueMapper: (measurement, _) =>
+                                    // AJUSTAR EL FORMATO DE HORA
+                                    measurement.dateTime,
+                                yValueMapper: (measurement, _) =>
+                                    measurement.precipitation,
+                                name: 'Precipitación',
+                                legendIconType: LegendIconType.circle,
+                                dataLabelSettings:
+                                    const DataLabelSettings(isVisible: true),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     } else {

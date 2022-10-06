@@ -63,15 +63,12 @@ class _ButtonWidgetState extends State<ButtonWidget> {
               );
             }
           : null,
-      child: const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Text('    Enviar Medición    ',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'FredokaOne',
-              fontSize: 24,
-            )),
-      ),
+      child: const Text('Guardar',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'FredokaOne',
+            fontSize: 21,
+          )),
     );
   }
 }

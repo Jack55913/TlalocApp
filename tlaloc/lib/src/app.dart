@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/constants.dart';
-import 'package:tlaloc/src/models/kernel.dart';
 import 'package:tlaloc/src/models/conditional_onboarding_page.dart';
 import 'package:tlaloc/src/ui/screens/settings/community.dart';
 import 'package:tlaloc/src/ui/screens/settings/credits.dart';
@@ -32,14 +31,12 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const ConditionalOnboardingPage(),
-          '/home': (context) => const HomePage(),
           '/credits': (context) => const CreditsPage(),
           '/politics': (context) => const PoliticPage(),
           '/privacy': (context) => const PrivacyPage(),
           '/info': (context) => const InfoProyectPage(),
           '/community': (context) => const CommunityPage(),
         },
-        // home:GraphsScreen(),
       ),
     );
   }
