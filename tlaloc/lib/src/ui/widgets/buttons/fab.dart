@@ -24,7 +24,7 @@ class Fab extends StatelessWidget {
       backgroundColor: AppColors.green1,
       icon: const Icon(Icons.add, color: Colors.white),
       mouseCursor: MaterialStateMouseCursor.clickable,
-      label: const SelectableText(
+      label: const Text(
         'Agregar',
         style: TextStyle(
           fontFamily: 'poppins',

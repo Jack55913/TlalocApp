@@ -4,6 +4,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
+import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
@@ -87,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 20),
               Center(
                 child: SelectableText(
-                  '¿Cómo llegar al pluviómetro?',
+                  '¿Cómo llegar a ${Provider.of<AppState>(context).paraje}?',
                   style: TextStyle(
                     fontFamily: 'FredokaOne',
                     fontSize: 24,

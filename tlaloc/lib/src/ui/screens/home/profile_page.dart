@@ -52,8 +52,7 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                       ),
                       SizedBox(height: 8),
                       SelectableText(
-                        'Nombre: ' +
-                            FirebaseAuth.instance.currentUser!.displayName!,
+                        'Nombre: ' + FirebaseAuth.instance.currentUser!.displayName!,
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       SizedBox(height: 8),

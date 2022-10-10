@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:tlaloc/src/models/custompathpainter.dart';
 
-double _level = 80;
+num _level = 80;
 
 class TlalocPluviometer extends StatefulWidget {
   const TlalocPluviometer({Key? key}) : super(key: key);
@@ -14,8 +14,8 @@ class TlalocPluviometer extends StatefulWidget {
 class _TlalocPluviometerState extends State<TlalocPluviometer> {
   _TlalocPluviometerState();
 
-  final double _minimumLevel = 0;
-  final double _maximumLevel = 160;
+  final num _minimumLevel = 0;
+  final num _maximumLevel = 160;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -33,8 +33,8 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
     return Padding(
         padding: const EdgeInsets.all(10),
         child: SfLinearGauge(
-          minimum: _minimumLevel,
-          maximum: _maximumLevel,
+          minimum: _minimumLevel.toDouble(),
+          maximum: _maximumLevel.toDouble(),
           orientation: LinearGaugeOrientation.vertical,
           interval: 10,
           axisTrackStyle: const LinearAxisTrackStyle(
@@ -42,11 +42,11 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
           ),
           markerPointers: <LinearMarkerPointer>[
             LinearWidgetPointer(
-              value: _level,
+              value: _level.toDouble(),
               enableAnimation: false,
               onChanged: (dynamic value) {
                 setState(() {
-                  _level = value as double;
+                  _level = value as num;
                 });
               },
               child: Material(
@@ -78,7 +78,7 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
               ),
             ),
             LinearWidgetPointer(
-              value: _level,
+              value: _level.toDouble(),
               enableAnimation: false,
               markerAlignment: LinearMarkerAlignment.end,
               offset: 67,
@@ -103,7 +103,7 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
           ],
           barPointers: <LinearBarPointer>[
             LinearBarPointer(
-              value: _maximumLevel,
+              value: _maximumLevel.toDouble(),
               enableAnimation: false,
               thickness: 150,
               offset: 18,
@@ -112,8 +112,8 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
               child: CustomPaint(
                   painter: CustomPathPainter(
                       color: Colors.blue,
-                      waterLevel: _level,
-                      maximumPoint: _maximumLevel)),
+                      waterLevel: _level.toDouble(),
+                      maximumPoint: _maximumLevel.toDouble())),
             )
           ],
         ));

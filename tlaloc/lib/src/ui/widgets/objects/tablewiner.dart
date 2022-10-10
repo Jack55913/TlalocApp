@@ -51,7 +51,7 @@ class TableWinerWidget extends StatelessWidget {
                       const SizedBox(height: 5),
                       Consumer<AppState>(
                         builder: (context, state, child) => SelectableText(
-                          state.paraje,
+                          FirebaseAuth.instance.currentUser!.displayName!,
                           style: const TextStyle(
                             fontSize: 14,
                             fontFamily: 'poppins',

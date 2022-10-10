@@ -1,15 +1,16 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 import 'dart:io';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/date.dart';
+
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
 import 'package:tlaloc/src/models/kernel.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
@@ -17,6 +18,7 @@ import 'package:tlaloc/src/ui/widgets/measures/save_button.dart';
 
 class AddScreen extends StatefulWidget {
   final Measurement? measurement;
+
   const AddScreen({Key? key, this.measurement}) : super(key: key);
 
   @override
@@ -25,14 +27,16 @@ class AddScreen extends StatefulWidget {
 
 int _counter = 0;
 
+// TODO: IDEA: Usar la función lenght de la lista de measurements.precipitation
 class _AddScreenState extends State<AddScreen> {
   File? newImage;
   DateTime dateTime = DateTime.now();
   num? precipitation;
-  bool? pluviometer;
   String path = 'sounds/correcto.mp3';
+  bool? pluviometer;
 
-  final player = AudioPlayer(); //+
+  var player = AudioPlayer(); //+
+
   Future pickImage() async {
     try {
       //       uploadTask = mStorageRef.putFile(localFile),
@@ -120,7 +124,7 @@ class _AddScreenState extends State<AddScreen> {
                           time: dateTime,
                           image: newImage,
                           oldImage: widget.measurement!.imageUrl,
-                          pluviometer: false,
+                          pluviometer: pluviometer!,
                         );
                         player.play(AssetSource(path));
                         // showBanner2;
@@ -197,12 +201,13 @@ class _AddScreenState extends State<AddScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              // TODO: AQUÏ EsTÄ EL PAN
                               ListTile(
                                   leading: CircleAvatar(
                                       backgroundColor: Colors.purple[300],
                                       child: Icon(Icons.image,
                                           color: Colors.purple[900])),
-                                  title: const SelectableText(
+                                  title: const Text(
                                     " Desde la Galería",
                                     style: TextStyle(
                                       color: Colors.grey,
@@ -264,11 +269,6 @@ class _AddScreenState extends State<AddScreen> {
                   height: 20,
                   thickness: 1,
                 ),
-
-                // const Divider(
-                //   thickness: 1,
-                //   height: 20,
-                // ),
               ],
             ),
           ),

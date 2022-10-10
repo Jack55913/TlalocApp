@@ -35,20 +35,17 @@ class SignUpWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Spacer(),
-              Container(
+              Image(
                 width: 300,
                 alignment: Alignment.center,
-                // padding: EdgeInsets.all(20),
-                child: Image(
-                  image: AssetImage('assets/images/img-1-4.png'),
-                ),
+                image: AssetImage('assets/images/img-1-4.png'),
               ),
               Spacer(),
               Center(
                 child: Column(
                   children: [
                     SelectableText(
-                      'Bienvenido a $appName',
+                      '¡Bienvenidos a $appName!',
                       style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -57,7 +54,7 @@ class SignUpWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     SelectableText(
-                      'Por favor ingresa tu cuenta para continuar',
+                      'Por favor, ingresa tu cuenta para continuar',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -76,7 +73,7 @@ class SignUpWidget extends StatelessWidget {
                   minimumSize: Size(double.infinity, 48),
                 ),
                 icon: FaIcon(FontAwesomeIcons.google, color: Colors.red),
-                label: SelectableText('Iniciar sesión con Google'),
+                label: Text('Iniciar sesión con Google'),
                 onPressed: () async {
                   final provider =
                       Provider.of<GoogleSignInProvider>(context, listen: false);
@@ -111,7 +108,7 @@ class SignUpWidget extends StatelessWidget {
                   minimumSize: Size(double.infinity, 48),
                 ),
                 icon: Icon(Icons.person, color: Colors.black),
-                label: SelectableText('Modo Incógnito'),
+                label: Text('Modo Incógnito'),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -133,8 +130,8 @@ class SignUpWidget extends StatelessWidget {
                       TextSpan(
                         text:
                             'nuestros términos y condiciones y política de privacidad',
-                        style: const TextStyle(
-                          color: Colors.blue,
+                        style: TextStyle(
+                          color: Colors.blue[900],
                           fontWeight: FontWeight.bold,
                         ),
                         recognizer: TapGestureRecognizer()

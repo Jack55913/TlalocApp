@@ -25,7 +25,7 @@ class QuickAddWidget extends StatelessWidget {
             ),
             child: Row(
               children: const [
-                SelectableText(
+                Text(
                   'Sube una medición',
                   textAlign: TextAlign.start,
                   style: TextStyle(

@@ -51,7 +51,6 @@ class DataScreen extends StatelessWidget {
                                 letterSpacing: 2,
                               )),
                           background: Image.asset(
-                            // TODO: PONER UNA IMAGEN MÄS CHIDA
                             'assets/images/img-7.jpg',
                             fit: BoxFit.fitWidth,
                           ),
@@ -105,14 +104,14 @@ class DataScreen extends StatelessWidget {
                                                   'No podrás recuperarlo una vez que lo elimines.'),
                                               actions: [
                                                 TextButton(
-                                                  child: SelectableText(
+                                                  child: Text(
                                                       'Cancelar'),
                                                   onPressed: () =>
                                                       Navigator.of(context)
                                                           .pop(),
                                                 ),
                                                 TextButton(
-                                                  child: SelectableText(
+                                                  child: Text(
                                                       'Eliminar'),
                                                   onPressed: () async {
                                                     try {

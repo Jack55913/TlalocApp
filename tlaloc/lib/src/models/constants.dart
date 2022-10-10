@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tlaloc/src/resources/statics/charts/chart3.dart';
+// import 'package:tlaloc/src/resources/statics/charts/chart3.dart';
 import 'package:tlaloc/src/resources/statics/charts/chart4.dart';
 import 'package:tlaloc/src/resources/statics/graphs/graph1.dart';
 import 'package:tlaloc/src/resources/statics/graphs/graph2.dart';
 import 'package:tlaloc/src/resources/statics/graphs/graph3.dart';
 import 'package:tlaloc/src/resources/statics/graphs/graph4.dart';
-import 'package:tlaloc/src/resources/statics/graphs/graph5.dart';
-import 'package:tlaloc/src/resources/statics/graphs/graph7.dart';
-import 'package:tlaloc/src/resources/statics/graphs/graph9.dart';
-import 'package:tlaloc/src/resources/statics/graphs/grpah8.dart';
+// import 'package:tlaloc/src/resources/statics/graphs/graph5.dart';
+// import 'package:tlaloc/src/resources/statics/graphs/graph7.dart';
+// import 'package:tlaloc/src/resources/statics/graphs/graph9.dart';
+// import 'package:tlaloc/src/resources/statics/graphs/grpah8.dart';
 
 
 List<Icon> graphIcons = [
@@ -57,11 +57,11 @@ final graphscrens = [
   const PieChartTooltip(
     key: Key('pie_chart_tooltip'),
   ),
-  const CommonsLineGraph(),
-  const TrackballGraph(),
-  const MultipleCommonSeries(),
-  const StackedColumnChart(),
-  const CommonAreaSeries(),
+  // const CommonsLineGraph(),
+  // const TrackballGraph(),
+  // const MultipleCommonSeries(),
+  // const StackedColumnChart(),
+  // const CommonAreaSeries(),
 ];
 /// Para agregar o quitar parajes, basta con cambiar esta variable
 ///
@@ -91,6 +91,17 @@ List<String> commonimages = [
   "assets/images/6_manantiales.png",
   "assets/images/7_terreno.png",
   "assets/images/8_chiqueros.png",
+];
+
+List<String> commonurl = [
+  "https://goo.gl/maps/QTce9U2BsXXZsBTp8",
+  "https://goo.gl/maps/9eTXbdmHCFxVmTUX7",
+  "https://goo.gl/maps/juPjkikLeAS16dPh8",
+  "https://goo.gl/maps/hyRXM3A2UFXSAAys6",
+  "https://goo.gl/maps/QFXycULSkan1JK6c6",
+  "https://goo.gl/maps/vNSSgfQsofatUp7r7",
+  "https://goo.gl/maps/PNVAD8aFkkN84aoy5",
+  "https://goo.gl/maps/4xFZiqJSFhamPsmB8",
 ];
 
 List<String> parajecolection = [

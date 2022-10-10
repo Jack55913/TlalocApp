@@ -28,7 +28,6 @@ class Measurement {
         DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
 
     return Measurement(
-        // formatTime: formattedDate,
         uploader: json['uploader_name'],
         precipitation: json['precipitation'],
         dateTime: dateTime,
@@ -86,15 +85,6 @@ class AppState extends ChangeNotifier {
     return snapshot.data() ?? {};
   }
 
-// TODO: Para agregar los videos tutoriales
-
-  // Future<Map<String, dynamic>> getCurrentVideoData() async {
-  //   var ref =
-  //       db.collection('tutoriales').doc(videos);
-  //   var snapshot = await ref.get();
-  //   return snapshot.data() ?? {};
-  // }
-
 // PARA GUARDAR LAS FOTOS EN FIREBASE STORAGE:
 
   Future<Map<String, dynamic>> _getMeasurementJson({
@@ -102,7 +92,7 @@ class AppState extends ChangeNotifier {
     required DateTime time,
     File? image,
     String? oldImage,
-    required bool pluviometer,
+    bool? pluviometer,
   }) async {
     // Primero, subir imagen a Firebase Hosting
     final auth = FirebaseAuth.instance;
@@ -119,7 +109,7 @@ class AppState extends ChangeNotifier {
       } else {
         // Se crea una carpeta con el nombre measurement:
         final imageRef =
-            storageRef.child("measurements/$fileName.$fileExtension");
+            storageRef.child("photos/$fileName.$fileExtension");
         await imageRef.putFile(image);
         fileUrl = await imageRef.getDownloadURL();
       }
@@ -142,7 +132,7 @@ class AppState extends ChangeNotifier {
       {required num precipitation,
       required DateTime time,
       File? image,
-      required bool pluviometer}) async {
+      bool? pluviometer}) async {
     db
         .collection('roles')
         .doc(rol)
@@ -158,6 +148,7 @@ class AppState extends ChangeNotifier {
         );
   }
 
+// TODO: AQUÏ ESTÄ LA CLAVE PARA LA FUNCIÖN  IF(I=! 0){I-I_{i-1}} else return i==0
   List<Measurement> _getListOfMeasurementsFromDocs(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
     final List<Measurement> measurements = [];
@@ -195,14 +186,75 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .snapshots();
   }
-
-// TODO: Hacer que aparezcan Agua de Chiqueros, Cabaña Canoas altas Cruz de Atenco, El Jardín, El Venturero, Los Manantiales, Tlaltlatlately
-  Stream<QuerySnapshot<Map<String, dynamic>>> getGeneralMeasurementsStream() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAguadeChiquerosMeasurementsStream() {
     return db
         .collection('roles')
         .doc('Monitor')
         .collection('parajes')
-        .doc(paraje)
+        .doc('Agua de Chiqueros')
+        .collection('measurements')
+        .snapshots();
+  }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getCabanaMeasurementsStream() {
+    return db
+        .collection('roles')
+        .doc('Monitor')
+        .collection('parajes')
+        .doc('Cabaña')
+        .collection('measurements')
+        .snapshots();
+  }
+    Stream<QuerySnapshot<Map<String, dynamic>>> getCanoasaltasMeasurementsStream() {
+    return db
+        .collection('roles')
+        .doc('Monitor')
+        .collection('parajes')
+        .doc('Canoas altas')
+        .collection('measurements')
+        .snapshots();
+  }
+    Stream<QuerySnapshot<Map<String, dynamic>>> getCruzdeAtencoMeasurementsStream() {
+    return db
+        .collection('roles')
+        .doc('Monitor')
+        .collection('parajes')
+        .doc('Cruz de Atenco')
+        .collection('measurements')
+        .snapshots();
+  }
+    Stream<QuerySnapshot<Map<String, dynamic>>> getElJardinMeasurementsStream() {
+    return db
+        .collection('roles')
+        .doc('Monitor')
+        .collection('parajes')
+        .doc('El Jardín')
+        .collection('measurements')
+        .snapshots();
+  }
+    Stream<QuerySnapshot<Map<String, dynamic>>> getElVentureroMeasurementsStream() {
+    return db
+        .collection('roles')
+        .doc('Monitor')
+        .collection('parajes')
+        .doc('El Venturero')
+        .collection('measurements')
+        .snapshots();
+  }
+    Stream<QuerySnapshot<Map<String, dynamic>>> getLosManantialesMeasurementsStream() {
+    return db
+        .collection('roles')
+        .doc('Monitor')
+        .collection('parajes')
+        .doc('Los Manantiales')
+        .collection('measurements')
+        .snapshots();
+  }
+    Stream<QuerySnapshot<Map<String, dynamic>>> getTlaltlatlatelyMeasurementsStream() {
+    return db
+        .collection('roles')
+        .doc('Monitor')
+        .collection('parajes')
+        .doc('Tlaltlatlately')
         .collection('measurements')
         .snapshots();
   }
@@ -212,7 +264,7 @@ class AppState extends ChangeNotifier {
     required num precipitation,
     required DateTime time,
     File? image,
-    required bool pluviometer,
+    bool? pluviometer,
 
     /// En caso de que ya exista un URL de imagen (botón de editar, no crear)
     String? oldImage,

@@ -54,7 +54,6 @@ class TlalocMapData extends StatelessWidget {
                 /// Así puedes guardar cualquier otro dato sobre el paraje, solo
                 /// tienes que cambair 'descripcion' por el campo que tu quieras.
                 /// Lo editas en https://console.firebase.google.com/u/0/project/tlaloc-3c65c/firestore/data/
-                // TODO: ANALIZAR
                 text = snapshot.data?['descripcion'] ??
                     'No hay descripción disponible...';
               } else {
@@ -70,6 +69,7 @@ class TlalocMapData extends StatelessWidget {
             },
           ),
         ),
+        
         const SizedBox(height: 20),
       ],
     );

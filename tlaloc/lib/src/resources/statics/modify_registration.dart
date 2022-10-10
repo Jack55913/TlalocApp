@@ -50,11 +50,11 @@ class ModifyRegistration extends StatelessWidget {
                           'No podrás recuperarlo una vez que lo elimines.'),
                       actions: [
                         TextButton(
-                          child: SelectableText('Cancelar'),
+                          child: Text('Cancelar'),
                           onPressed: () => Navigator.of(context).pop(),
                         ),
                         TextButton(
-                          child: SelectableText('Eliminar'),
+                          child: Text('Eliminar'),
                           onPressed: () async {
                             try {
                               final state =

@@ -7,10 +7,10 @@ import 'package:ionicons/ionicons.dart';
 import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/resources/onboarding/common_select.dart';
-import 'package:tlaloc/src/resources/onboarding/role.dart';
 import 'package:tlaloc/src/ui/screens/settings/credits.dart';
 import 'package:tlaloc/src/ui/screens/settings/faq.dart';
 import 'package:url_launcher/url_launcher.dart';
+// import 'package:tlaloc/src/resources/onboarding/role.dart';
 
 class DrawerApp extends StatelessWidget {
   const DrawerApp({Key? key}) : super(key: key);

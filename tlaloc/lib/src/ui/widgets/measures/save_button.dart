@@ -63,7 +63,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
               );
             }
           : null,
-      child: const SelectableText('Guardar',
+      child: const Text('Guardar',
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'FredokaOne',

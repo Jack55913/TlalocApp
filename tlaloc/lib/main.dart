@@ -6,8 +6,8 @@ import 'package:tlaloc/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tlaloc/src/app.dart';
 import 'package:url_strategy/url_strategy.dart';
-// import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 void main() async {
   // Inician los comerciales (Falta hacer cuenta en ADMOB)
   // MobileAds.instance.initialize();
@@ -21,8 +21,8 @@ void main() async {
     // cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
     persistenceEnabled: true,
   );
-  await FirebaseFirestore.instance
-      .enablePersistence(const PersistenceSettings(synchronizeTabs: true));
+  // await FirebaseFirestore.instance
+  //     .enablePersistence(const PersistenceSettings(synchronizeTabs: true));
 
   runApp(const MyApp());
   LicenseRegistry.addLicense(() async* {
