@@ -108,8 +108,7 @@ class AppState extends ChangeNotifier {
         fileUrl = imageString;
       } else {
         // Se crea una carpeta con el nombre measurement:
-        final imageRef =
-            storageRef.child("photos/$fileName.$fileExtension");
+        final imageRef = storageRef.child("photos/$fileName.$fileExtension");
         await imageRef.putFile(image);
         fileUrl = await imageRef.getDownloadURL();
       }
@@ -186,7 +185,9 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .snapshots();
   }
-  Stream<QuerySnapshot<Map<String, dynamic>>> getAguadeChiquerosMeasurementsStream() {
+
+  Stream<QuerySnapshot<Map<String, dynamic>>>
+      getAguadeChiquerosMeasurementsStream() {
     return db
         .collection('roles')
         .doc('Monitor')
@@ -195,6 +196,7 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .snapshots();
   }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> getCabanaMeasurementsStream() {
     return db
         .collection('roles')
@@ -204,7 +206,9 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .snapshots();
   }
-    Stream<QuerySnapshot<Map<String, dynamic>>> getCanoasaltasMeasurementsStream() {
+
+  Stream<QuerySnapshot<Map<String, dynamic>>>
+      getCanoasaltasMeasurementsStream() {
     return db
         .collection('roles')
         .doc('Monitor')
@@ -213,7 +217,9 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .snapshots();
   }
-    Stream<QuerySnapshot<Map<String, dynamic>>> getCruzdeAtencoMeasurementsStream() {
+
+  Stream<QuerySnapshot<Map<String, dynamic>>>
+      getCruzdeAtencoMeasurementsStream() {
     return db
         .collection('roles')
         .doc('Monitor')
@@ -222,7 +228,8 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .snapshots();
   }
-    Stream<QuerySnapshot<Map<String, dynamic>>> getElJardinMeasurementsStream() {
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getElJardinMeasurementsStream() {
     return db
         .collection('roles')
         .doc('Monitor')
@@ -231,7 +238,9 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .snapshots();
   }
-    Stream<QuerySnapshot<Map<String, dynamic>>> getElVentureroMeasurementsStream() {
+
+  Stream<QuerySnapshot<Map<String, dynamic>>>
+      getElVentureroMeasurementsStream() {
     return db
         .collection('roles')
         .doc('Monitor')
@@ -240,7 +249,9 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .snapshots();
   }
-    Stream<QuerySnapshot<Map<String, dynamic>>> getLosManantialesMeasurementsStream() {
+
+  Stream<QuerySnapshot<Map<String, dynamic>>>
+      getLosManantialesMeasurementsStream() {
     return db
         .collection('roles')
         .doc('Monitor')
@@ -249,7 +260,9 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .snapshots();
   }
-    Stream<QuerySnapshot<Map<String, dynamic>>> getTlaltlatlatelyMeasurementsStream() {
+
+  Stream<QuerySnapshot<Map<String, dynamic>>>
+      getTlaltlatlatelyMeasurementsStream() {
     return db
         .collection('roles')
         .doc('Monitor')

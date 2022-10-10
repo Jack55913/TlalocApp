@@ -76,7 +76,7 @@ class DataWidgetView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SelectableText(
-                      '${measurement.dateTime!.hour}:${measurement.dateTime!.minute}',
+                      '${measurement.dateTime!.hour}:${measurement.dateTime!.minute.toString().padLeft(2, '0')}',
                       style: const TextStyle(
                         fontSize: 14,
                         fontFamily: 'poppins',

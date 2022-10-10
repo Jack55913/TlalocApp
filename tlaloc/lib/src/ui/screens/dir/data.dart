@@ -13,17 +13,27 @@ import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
 import 'package:tlaloc/src/ui/widgets/view/dataview.dart';
 import '../../widgets/appbar/profilepage.dart';
 
-class DataScreen extends StatelessWidget {
+class DataScreen extends StatefulWidget {
   const DataScreen({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<DataScreen> createState() => _DataScreenState();
+}
+
+class _DataScreenState extends State<DataScreen> {
+  bool isFabVisable = true;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         drawer: DrawerApp(),
-        floatingActionButton: Fab(),
+        floatingActionButton: Visibility(
+          visible: isFabVisable,
+          child: Fab(),
+        ),
         body: Consumer<AppState>(
           builder: (context, state, _) {
             return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -104,15 +114,13 @@ class DataScreen extends StatelessWidget {
                                                   'No podrás recuperarlo una vez que lo elimines.'),
                                               actions: [
                                                 TextButton(
-                                                  child: Text(
-                                                      'Cancelar'),
+                                                  child: Text('Cancelar'),
                                                   onPressed: () =>
                                                       Navigator.of(context)
                                                           .pop(),
                                                 ),
                                                 TextButton(
-                                                  child: Text(
-                                                      'Eliminar'),
+                                                  child: Text('Eliminar'),
                                                   onPressed: () async {
                                                     try {
                                                       final state =
@@ -123,6 +131,8 @@ class DataScreen extends StatelessWidget {
                                                           .deleteMeasurement(
                                                               id: measurement
                                                                   .id);
+                                                      // TODO: Cuando eliminamos una medición, también eliminarlo del contador
+                                                      // _decrementCounter;
                                                       Navigator.of(context)
                                                           .pop();
                                                     } catch (e) {

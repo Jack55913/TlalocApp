@@ -21,6 +21,7 @@ class FacebookButton extends StatelessWidget {
                 width: 1,
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
                   SelectableText(
                     'Quiénes suben a la montaña y\nquiénes pueden participar',
@@ -45,15 +46,11 @@ class FacebookButton extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              Column(
-                children: const [
-                  Image(
-                    image: AssetImage('assets/images/img-5.jpg'),
-                    fit: BoxFit.cover,
-                    width: 150,
-                    height: 150,
-                  ),
-                ],
+              const Image(
+                image: AssetImage('assets/images/img-5.jpg'),
+                fit: BoxFit.cover,
+                width: 170,
+                height: 150,
               ),
             ],
           ),

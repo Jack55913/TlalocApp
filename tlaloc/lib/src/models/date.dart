@@ -59,12 +59,9 @@ class _DatetimeState extends State<Datetime> {
     if (widget.measurement != null) {
       dateTime = widget.measurement!.dateTime!;
       precipitation = widget.measurement!.precipitation;
-      // TODO: FIX THIS
-      // pluviometer = widget.measurement!.pluviometer!;
     }
     final hours = dateTime.hour.toString().padLeft(2, '0');
     final minutes = dateTime.minute.toString().padLeft(2, '0');
-
     // PLUVIOMETER:
     final Brightness brightness = Theme.of(context).brightness;
 
@@ -79,7 +76,7 @@ class _DatetimeState extends State<Datetime> {
             ),
           ),
           title: Text('Elige un Paraje'),
-          subtitle: SelectableText(
+          subtitle: Text(
               'Estás ubicado en: "${Provider.of<AppState>(context).paraje}"'),
           onTap: () {
             Navigator.push(
@@ -94,7 +91,12 @@ class _DatetimeState extends State<Datetime> {
         ),
         ListTile(
           title: TextFormField(
-            initialValue: precipitation?.toString() ?? '',
+            // autofocus: true,
+            cursorColor: Colors.indigo,
+            // onEditingComplete: , Sirve para que el botón de enter en el teclado envíe la medición automáticamente
+            // onSaved: (newValue) => precipitation,
+            // focusNode: FocusNode(canRequestFocus: _pluviometer),
+            initialValue: precipitation?.toString(),
             style: TextStyle(
               fontSize: 24,
               fontFamily: 'FredokaOne',
@@ -109,11 +111,10 @@ class _DatetimeState extends State<Datetime> {
                 ),
               ),
               helperText: 'Recuerda ubicarte al nivel del agua para observar',
-              // TODO: AQUÏ VA Lo QuE sE CONECTA CON EL PLUVIÖMETRO CHANCE
               hintText: 'Ingresar Medición',
             ),
             onChanged: (value) {
-              precipitation!;
+              precipitation = num.tryParse(value);
             },
             autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.number,
@@ -131,114 +132,112 @@ class _DatetimeState extends State<Datetime> {
         ),
         // //////////////////////////////////////////
         // TlalocPluviometer(),
-        Padding(
-            padding: const EdgeInsets.all(10),
-            child: SfLinearGauge(
-              minimum: _minimumLevel.toDouble(),
-              maximum: _maximumLevel.toDouble(),
-              orientation: LinearGaugeOrientation.vertical,
-              interval: 10,
-              axisTrackStyle: const LinearAxisTrackStyle(
-                thickness: 2,
-              ),
-              markerPointers: <LinearMarkerPointer>[
-                LinearWidgetPointer(
-                  value: precipitation!.toDouble(),
-                  enableAnimation: true,
-                  onChanged: (dynamic value) {
-                    setState(() {
-                      precipitation = value as double;
-                    });
-                  },
-                  child: Material(
-                    elevation: 4.0,
-                    shape: const CircleBorder(),
-                    clipBehavior: Clip.hardEdge,
-                    color: Colors.blue,
-                    child: Ink(
-                      width: 32.0,
-                      height: 32.0,
-                      child: InkWell(
-                        splashColor: Colors.grey,
-                        hoverColor: Colors.blueAccent,
-                        onTap: () {},
-                        child: Center(
-                          child: precipitation == _minimumLevel
-                              ? const Icon(Icons.keyboard_arrow_up_outlined,
-                                  color: Colors.white, size: 18.0)
-                              : precipitation == _maximumLevel
-                                  ? const Icon(
-                                      Icons.keyboard_arrow_down_outlined,
-                                      color: Colors.white,
-                                      size: 18.0)
-                                  : const RotatedBox(
-                                      quarterTurns: 3,
-                                      child: Icon(Icons.code_outlined,
-                                          color: Colors.white, size: 18.0)),
-                        ),
+        SizedBox(
+          
+          height: 350,
+          child: SfLinearGauge(
+            minimum: _minimumLevel.toDouble(),
+            maximum: _maximumLevel.toDouble(),
+            orientation: LinearGaugeOrientation.vertical,
+            interval: 10,
+            axisTrackStyle: const LinearAxisTrackStyle(
+              thickness: 2,
+            ),
+            markerPointers: <LinearMarkerPointer>[
+              LinearWidgetPointer(
+                value: precipitation!.toDouble(),
+                enableAnimation: true,
+                onChanged: (dynamic value) {
+                  setState(() {
+                    precipitation = value as num;
+                  });
+                },
+                child: Material(
+                  elevation: 4.0,
+                  shape: const CircleBorder(),
+                  clipBehavior: Clip.hardEdge,
+                  color: Colors.blue,
+                  child: Ink(
+                    width: 32.0,
+                    height: 32.0,
+                    child: InkWell(
+                      splashColor: Colors.grey,
+                      hoverColor: Colors.blueAccent,
+                      onTap: () {},
+                      child: Center(
+                        child: precipitation == _minimumLevel
+                            ? const Icon(Icons.keyboard_arrow_up_outlined,
+                                color: Colors.white, size: 18.0)
+                            : precipitation == _maximumLevel
+                                ? const Icon(Icons.keyboard_arrow_down_outlined,
+                                    color: Colors.white, size: 18.0)
+                                : const RotatedBox(
+                                    quarterTurns: 3,
+                                    child: Icon(Icons.code_outlined,
+                                        color: Colors.white, size: 18.0)),
                       ),
                     ),
                   ),
                 ),
-                LinearWidgetPointer(
-                  value: precipitation!.toDouble(),
-                  enableAnimation: true,
-                  markerAlignment: LinearMarkerAlignment.end,
-                  offset: 67,
-                  position: LinearElementPosition.outside,
-                  child: SizedBox(
-                    width: 50,
-                    height: 20,
-                    child: Center(
-                      child: SelectableText(
-                        // TODO: connect the text field and the pluviometer
-                        precipitation!.toStringAsFixed(0) + ' mm',
-                        style: TextStyle(
-                            color: brightness == Brightness.light
-                                ? Colors.black
-                                : Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                      ),
+              ),
+              LinearWidgetPointer(
+                value: precipitation!.toDouble(),
+                enableAnimation: true,
+                markerAlignment: LinearMarkerAlignment.end,
+                offset: 67,
+                position: LinearElementPosition.outside,
+                child: SizedBox(
+                  width: 60,
+                  height: 20,
+                  child: Center(
+                    child: SelectableText(
+                      // TODO: connect the text field and the pluviometer
+                      precipitation!.toStringAsFixed(1) + ' mm',
+                      style: TextStyle(
+                          color: brightness == Brightness.light
+                              ? Colors.black
+                              : Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                )
-              ],
-              barPointers: <LinearBarPointer>[
-                LinearBarPointer(
-                  value: _maximumLevel.toDouble(),
-                  enableAnimation: true,
-                  thickness: 150,
-                  offset: 18,
-                  position: LinearElementPosition.outside,
-                  color: Colors.transparent,
-                  child: CustomPaint(
-                      painter: CustomPathPainter(
-                          color: Colors.blue,
-                          waterLevel: precipitation!.toDouble(),
-                          maximumPoint: _maximumLevel.toDouble())),
-                )
-              ],
-            )),
-
-        // // TODO: Agregar el switch
-        // Divider(
-        //   height: 20,
-        //   thickness: 1,
-        // ),
-        // SwitchListTile(
-        //   title: SelectableText(
-        //     'Vaciar pluviómetro',
-        //   ),
-        //   value: _pluviometer,
-        //   secondary: CircleAvatar(
-        //       backgroundColor: Colors.teal[300],
-        //       child: Icon(Icons.water_drop, color: Colors.teal[900])),
-        //   subtitle: SelectableText('Hacer sólo si eres monitor'),
-        //   onChanged: (bool value) {
-        //     setState(() => _pluviometer = value);
-        //   },
-        // ),
+                ),
+              )
+            ],
+            barPointers: <LinearBarPointer>[
+              LinearBarPointer(
+                value: _maximumLevel.toDouble(),
+                enableAnimation: true,
+                thickness: 150,
+                offset: 18,
+                position: LinearElementPosition.outside,
+                color: Colors.transparent,
+                child: CustomPaint(
+                    painter: CustomPathPainter(
+                        color: Colors.blue,
+                        waterLevel: precipitation!.toDouble(),
+                        maximumPoint: _maximumLevel.toDouble())),
+              )
+            ],
+          ),
+        ),
+        Divider(
+          height: 20,
+          thickness: 1,
+        ),
+        SwitchListTile(
+          title: Text(
+            'Vaciar pluviómetro',
+          ),
+          value: _pluviometer,
+          secondary: CircleAvatar(
+              backgroundColor: Colors.teal[300],
+              child: Icon(Icons.water_drop, color: Colors.teal[900])),
+          subtitle: Text('Hacer sólo si eres monitor'),
+          onChanged: (bool value) {
+            setState(() => pluviometer = value);
+          },
+        ),
         // Divider(
         //   height: 20,
         //   thickness: 1,
@@ -265,7 +264,6 @@ class _DatetimeState extends State<Datetime> {
           height: 20,
           thickness: 1,
         ),
-
         ListTile(
           leading: CircleAvatar(
             backgroundColor: Colors.transparent,
@@ -292,7 +290,7 @@ class _DatetimeState extends State<Datetime> {
             children: [
               ElevatedButton.icon(
                 icon: const Icon(Icons.calendar_month),
-                label: SelectableText(
+                label: Text(
                   '${dateTime.day}/${dateTime.month}/${dateTime.year}',
                 ),
                 onPressed: () async {
@@ -305,7 +303,7 @@ class _DatetimeState extends State<Datetime> {
               ),
               ElevatedButton.icon(
                 icon: const Icon(Icons.access_time, color: Colors.white),
-                label: SelectableText('$hours:$minutes',
+                label: Text('$hours:$minutes',
                     style: const TextStyle(
                       color: Colors.white,
                     )),

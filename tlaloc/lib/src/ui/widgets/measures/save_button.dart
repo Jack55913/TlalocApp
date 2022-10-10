@@ -52,10 +52,10 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                   actions: <Widget>[
                     TextButton(
                       onPressed: () => Navigator.pop(context, 'Cancelar'),
-                      child: const SelectableText('Cancelar'),
+                      child: const Text('Cancelar'),
                     ),
                     TextButton(
-                      child: const SelectableText('Enviar'),
+                      child: const Text('Enviar'),
                       onPressed: widget.onClicked,
                     ),
                   ],

@@ -7,8 +7,6 @@ import 'package:tlaloc/src/resources/statics/graphs/graph2.dart';
 // import 'package:tlaloc/src/ui/widgets/graphs/table_graphs.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/profilepage.dart';
-import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
-
 import '../../widgets/appbar/infobutton.dart';
 
 class GraphsScreen extends StatefulWidget {
@@ -49,7 +47,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
         //   ),
         // ),
 
-        floatingActionButton: const Fab(),
+        // floatingActionButton: const Fab(),
       ),
     );
   }

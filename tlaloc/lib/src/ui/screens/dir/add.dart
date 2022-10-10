@@ -1,4 +1,5 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -7,14 +8,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/date.dart';
+import 'package:tlaloc/src/ui/widgets/measures/save_button.dart';
+import 'package:tlaloc/src/models/app_state.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
 import 'package:tlaloc/src/models/kernel.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
-import 'package:tlaloc/src/ui/widgets/measures/save_button.dart';
 
 class AddScreen extends StatefulWidget {
   final Measurement? measurement;
@@ -25,15 +26,15 @@ class AddScreen extends StatefulWidget {
   State<AddScreen> createState() => _AddScreenState();
 }
 
-int _counter = 0;
 
-// TODO: IDEA: Usar la función lenght de la lista de measurements.precipitation
+// TODO: IDEA: Usar la función lenght de la lista de measurements.precipitation.length
+int _counter = 0;
 class _AddScreenState extends State<AddScreen> {
   File? newImage;
   DateTime dateTime = DateTime.now();
   num? precipitation;
   String path = 'sounds/correcto.mp3';
-  bool? pluviometer;
+  bool? pluviometer = false;
 
   var player = AudioPlayer(); //+
 
@@ -69,6 +70,18 @@ class _AddScreenState extends State<AddScreen> {
     }
   }
 
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  // void _decrementCounter() {
+  //   setState(() {
+  //     _counter--;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) => SafeArea(
         child: Scaffold(
@@ -78,7 +91,7 @@ class _AddScreenState extends State<AddScreen> {
                 String place = Provider.of<AppState>(context).paraje;
                 return AutoSizeText(
                   place,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24,
                     color: Colors.white,
                     fontFamily: 'FredokaOne',
@@ -100,17 +113,12 @@ class _AddScreenState extends State<AddScreen> {
                           precipitation: precipitation!,
                           time: dateTime,
                           image: newImage,
-                          pluviometer: false,
+                          pluviometer: pluviometer,
                         );
                         // TODO: QUE SE Muestra el banner
                         // showBanner;
-                        // Aumenta el contador
-                        _counter++;
-                        // Reproduce el sonido de enviado
+                        _incrementCounter;
                         player.play(AssetSource(path));
-                        // Ir hacia atrás
-                        // Navigator.pop(context);
-                        // Navigator.pop(context);
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute<void>(
                                 builder: (BuildContext context) {
@@ -130,7 +138,6 @@ class _AddScreenState extends State<AddScreen> {
                         // showBanner2;
                         Navigator.pop(context);
                         Navigator.pop(context);
-
                         // Works around the previous page being a stateful widget
                         // Navigator.pop(context);
                       }
@@ -138,7 +145,7 @@ class _AddScreenState extends State<AddScreen> {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: SelectableText(
+                          title: const SelectableText(
                               '¡No ingresaste la medición correctamente, inténtalo nuevamente!'),
                           content: SelectableText('$e'),
                         ),
@@ -179,16 +186,16 @@ class _AddScreenState extends State<AddScreen> {
                     } else {
                       return Column(
                         children: [
-                          const SizedBox(height: 15),
+                          // const SizedBox(height: 15),
                           DarkContainerWidget(
                             data: DarkContainer(
                               fill: Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(16.0),
                                   child: SelectableText(
                                     'Toma una foto y sube la imagen del\n pluviómetro cuando llegues a casa',
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 18,
                                       fontFamily: 'FredokaOne',
                                     ),

@@ -105,7 +105,7 @@ class ModifyRegistration extends StatelessWidget {
                     Icon(Icons.timer, color: Colors.grey)),
                 SizedBox(height: 15),
                 _buildDataModify(
-                    'Vació Pluviómetro:',
+                    'Vació el Pluviómetro:',
                     '${measurement.pluviometer}',
                     Icon(Icons.water_drop, color: Colors.grey)),
                 SizedBox(height: 5),
