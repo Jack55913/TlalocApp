@@ -39,7 +39,7 @@ class TlalocMapData extends StatelessWidget {
           'Descripción:', // Decía índice geográfico
           style: TextStyle(
             fontFamily: 'poppins',
-            fontSize: 14,
+            fontSize: 16,
           ),
         ),
         const SizedBox(height: 10),
@@ -63,13 +63,13 @@ class TlalocMapData extends StatelessWidget {
                 text,
                 style: const TextStyle(
                   fontFamily: 'poppins',
-                  fontSize: 12,
+                  fontSize: 14,
                 ),
               );
             },
           ),
         ),
-        
+
         const SizedBox(height: 20),
       ],
     );
