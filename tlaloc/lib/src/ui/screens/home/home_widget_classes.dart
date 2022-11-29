@@ -24,20 +24,35 @@ class ContactUsButton extends StatelessWidget {
               Uri.parse('https://api.whatsapp.com/send?phone=5634577396'));
         },
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
             children: [
-              FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white),
-              SizedBox(
-                width: 25,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white),
+                  SizedBox(
+                    width: 25,
+                  ),
+                  const Text(
+                    '¡Contáctanos!',
+                    style: TextStyle(
+                      fontFamily: 'FredokaOne',
+                      fontSize: 24,
+                      letterSpacing: 2,
+                    ),
+                  ),
+                ],
               ),
-              const SelectableText(
-                '¡Contáctanos!',
+              SizedBox(
+                height: 10,
+              ),
+              SelectableText(
+                '+52 5634577396',
                 style: TextStyle(
-                  fontFamily: 'FredokaOne',
-                  fontSize: 24,
+                  fontFamily: 'poppins',
+                  fontSize: 18,
                   letterSpacing: 2,
                 ),
               ),

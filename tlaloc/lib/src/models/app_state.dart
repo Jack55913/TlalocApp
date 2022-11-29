@@ -14,7 +14,9 @@ class Measurement {
   final String? imageUrl;
   final String? avatarUrl; //+
   final bool? pluviometer;
+  // final num precipitationReal;
   Measurement(
+    // this.precipitationReal, 
       {this.uploader,
       this.precipitation,
       this.dateTime,
@@ -34,14 +36,16 @@ class Measurement {
         id: id,
         imageUrl: json['image'],
         avatarUrl: json['avatar_url'], //+
-        pluviometer: json['pluviometer_state']);
+        pluviometer: json['pluviometer_state'],
+        // precipitationReal: json['precipitationReal']
+        );
   }
 }
 
 class AppState extends ChangeNotifier {
   String rol = 'Monitor';
   String paraje = 'El Venturero'; //+
-  String videos = 'video';
+  // String videos = 'video';
   bool loading = true;
   final db = FirebaseFirestore.instance;
 
@@ -159,6 +163,19 @@ class AppState extends ChangeNotifier {
     );
     return measurements;
   }
+
+  // List<Measurement> _getListOfMeasurementsFromDocs(
+  //     List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
+  //   final List<Measurement> measurements = [];
+  //   for (var doc in docs) {
+  //     measurements.add(Measurement.fromJson(doc.data(), doc.id));
+  //   }
+  //   measurements.sort(
+  //     (a, b) => b.dateTime!.difference(a.dateTime!).inSeconds,
+  //   );
+  //   return measurements;
+  // }
+
 
   Future<List<Measurement>> getMeasurements() async {
     var event = await db

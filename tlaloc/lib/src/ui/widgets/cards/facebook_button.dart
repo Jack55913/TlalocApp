@@ -34,7 +34,7 @@ class FacebookButton extends StatelessWidget {
                   ),
                   SizedBox(height: 30),
                   SelectableText(
-                    'Explora las acciones y\núnan fuerzas ',
+                    'Explora las acciones y únan fuerzas ',
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'poppins',

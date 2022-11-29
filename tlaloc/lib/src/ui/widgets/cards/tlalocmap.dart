@@ -37,6 +37,7 @@ class TlalocMapData extends StatelessWidget {
         const SizedBox(height: 20),
         const SelectableText(
           'Descripción:', // Decía índice geográfico
+          textAlign: TextAlign.left,
           style: TextStyle(
             fontFamily: 'poppins',
             fontSize: 16,

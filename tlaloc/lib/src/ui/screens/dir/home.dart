@@ -11,7 +11,6 @@ import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/notebook.dart';
-import 'package:tlaloc/src/ui/widgets/cards/personal_measures.dart';
 import 'package:tlaloc/src/ui/widgets/cards/phrase.dart';
 import 'package:tlaloc/src/ui/widgets/cards/tutorials.dart';
 import 'package:tlaloc/src/ui/widgets/objects/quickadd.dart';
@@ -70,26 +69,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   fill: TutorialWidget(),
                 ),
               ),
-              DarkContainerWidget(
-                data: DarkContainer(
-                  fill: PersonalMeasures(),
+              // DarkContainerWidget(
+              //   data: DarkContainer(
+              //     fill: PersonalMeasures(),
+              //   ),
+              // ),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    PhraseCard(),
+                    DarkContainerWidget(
+                      data: DarkContainer(
+                        fill: TableButton(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              PhraseCard(),
               Divider(
                 height: 20,
                 thickness: 1,
               ),
               // SizedBox(height: 20),
-              DarkContainerWidget(
-                data: DarkContainer(
-                  fill: TableButton(),
-                ),
-              ),
+
               SizedBox(height: 20),
               Center(
                 child: SelectableText(
-                  '¿Cómo llegar a ${Provider.of<AppState>(context).paraje}?',
+                  '📍¿Cómo llegar a "${Provider.of<AppState>(context).paraje}"?',
                   style: TextStyle(
                     fontFamily: 'FredokaOne',
                     fontSize: 24,

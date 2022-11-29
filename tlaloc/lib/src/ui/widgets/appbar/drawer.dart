@@ -138,7 +138,10 @@ class DrawerApp extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Ionicons.logo_facebook),
+                  leading: const Icon(
+                    Ionicons.logo_facebook,
+                    color: Colors.blue,
+                  ),
                   title: const SelectableText('Síguenos en Facebook'),
                   onTap: () {
                     // analytics.logEvent(name: 'view-facebook');
@@ -150,12 +153,13 @@ class DrawerApp extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Ionicons.logo_twitter),
-                  title: const SelectableText('Síguenos en Twitter'),
+                  leading: const Icon(Ionicons.logo_youtube, color: Colors.red),
+                  title: const SelectableText('Síguenos en YouTube'),
                   onTap: () {
                     // analytics.logEvent(name: 'view-twitter');
                     launchUrl(
-                      Uri.parse('https://twitter.com/colpos'),
+                      Uri.parse(
+                          'https://www.youtube.com/channel/UC2wNEwvGEvnQVAX1Uv3qztA'),
                       mode: LaunchMode.externalApplication,
                     );
                   },
