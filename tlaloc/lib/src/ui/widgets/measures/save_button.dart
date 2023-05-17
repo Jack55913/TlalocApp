@@ -35,8 +35,9 @@ class _ButtonWidgetState extends State<ButtonWidget> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          onSurface: AppColors.green1,
-          primary: AppColors.green1,
+          backgroundColor: AppColors.green1,
+          disabledForegroundColor: AppColors.green1.withOpacity(0.38),
+          disabledBackgroundColor: AppColors.green1.withOpacity(0.12),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
       onPressed: isButtonActive
@@ -46,8 +47,8 @@ class _ButtonWidgetState extends State<ButtonWidget> {
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
-                  title: const SelectableText('¿Seguro(a) que desea enviar?'),
-                  content: const SelectableText(
+                  title: const Text('¿Seguro(a) que desea enviar?'),
+                  content: const Text(
                       'Usted está mandando el registro a la base de datos, puede eliminarlo posteriormente.'),
                   actions: <Widget>[
                     TextButton(
@@ -55,8 +56,8 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                       child: const Text('Cancelar'),
                     ),
                     TextButton(
-                      child: const Text('Enviar'),
                       onPressed: widget.onClicked,
+                      child: const Text('Enviar'),
                     ),
                   ],
                 ),

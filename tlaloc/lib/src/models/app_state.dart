@@ -14,9 +14,7 @@ class Measurement {
   final String? imageUrl;
   final String? avatarUrl; //+
   final bool? pluviometer;
-  // final num precipitationReal;
   Measurement(
-    // this.precipitationReal, 
       {this.uploader,
       this.precipitation,
       this.dateTime,
@@ -30,22 +28,20 @@ class Measurement {
         DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
 
     return Measurement(
-        uploader: json['uploader_name'],
-        precipitation: json['precipitation'],
-        dateTime: dateTime,
-        id: id,
-        imageUrl: json['image'],
-        avatarUrl: json['avatar_url'], //+
-        pluviometer: json['pluviometer_state'],
-        // precipitationReal: json['precipitationReal']
-        );
+      uploader: json['uploader_name'],
+      precipitation: json['precipitation'],
+      dateTime: dateTime,
+      id: id,
+      imageUrl: json['image'],
+      avatarUrl: json['avatar_url'], //+
+      pluviometer: json['pluviometer_state'],
+    );
   }
 }
 
 class AppState extends ChangeNotifier {
   String rol = 'Monitor';
   String paraje = 'El Venturero'; //+
-  // String videos = 'video';
   bool loading = true;
   final db = FirebaseFirestore.instance;
 
@@ -94,6 +90,7 @@ class AppState extends ChangeNotifier {
   Future<Map<String, dynamic>> _getMeasurementJson({
     required num precipitation,
     required DateTime time,
+    String? uploader,
     File? image,
     String? oldImage,
     bool? pluviometer,
@@ -112,7 +109,8 @@ class AppState extends ChangeNotifier {
         fileUrl = imageString;
       } else {
         // Se crea una carpeta con el nombre measurement:
-        final imageRef = storageRef.child("photos/$fileName.$fileExtension");
+        final imageRef =
+            storageRef.child("measurements/$fileName.$fileExtension");
         await imageRef.putFile(image);
         fileUrl = await imageRef.getDownloadURL();
       }
@@ -121,7 +119,8 @@ class AppState extends ChangeNotifier {
     }
     return {
       'precipitation': precipitation,
-      'uploader_name': auth.currentUser?.displayName,
+      'uploader_name': uploader,
+      // 'uploader_name': auth.currentUser?.displayName,
       'uploader_email': auth.currentUser?.email,
       'uploader_id': auth.currentUser?.uid,
       'time': time,
@@ -134,6 +133,7 @@ class AppState extends ChangeNotifier {
   Future<void> addMeasurement(
       {required num precipitation,
       required DateTime time,
+      String? uploader,
       File? image,
       bool? pluviometer}) async {
     db
@@ -144,6 +144,7 @@ class AppState extends ChangeNotifier {
         .collection('measurements')
         .add(
           await _getMeasurementJson(
+              uploader: uploader,
               precipitation: precipitation,
               time: time,
               image: image,
@@ -151,7 +152,32 @@ class AppState extends ChangeNotifier {
         );
   }
 
-// TODO: AQUÏ ESTÄ LA CLAVE PARA LA FUNCIÖN  IF(I=! 0){I-I_{i-1}} else return i==0
+  Future<void> addRealMeasurement(
+      {required num precipitation,
+      required DateTime time,
+      num lastPrecipitation= 10,
+      String? uploader,
+      File? image,
+      bool? pluviometer}) async {
+    db
+        .collection('roles')
+        .doc(rol)
+        .collection('parajes')
+        .doc(paraje)
+        .collection('real_measurements')
+        .add(
+          await _getMeasurementJson(
+              // TODO: PUNTO 1 DEL CONTRATO + FIREBASE
+              uploader: uploader,
+              precipitation: precipitation-lastPrecipitation,
+              time: time,
+              image: image,
+              pluviometer: pluviometer
+              
+              ),
+        );
+  }
+
   List<Measurement> _getListOfMeasurementsFromDocs(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
     final List<Measurement> measurements = [];
@@ -164,18 +190,17 @@ class AppState extends ChangeNotifier {
     return measurements;
   }
 
-  // List<Measurement> _getListOfMeasurementsFromDocs(
-  //     List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
-  //   final List<Measurement> measurements = [];
-  //   for (var doc in docs) {
-  //     measurements.add(Measurement.fromJson(doc.data(), doc.id));
-  //   }
-  //   measurements.sort(
-  //     (a, b) => b.dateTime!.difference(a.dateTime!).inSeconds,
-  //   );
-  //   return measurements;
-  // }
-
+  List<Measurement> _getListOfRealMeasurementsFromDocs(
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
+    final List<Measurement> measurements = [];
+    for (var doc in docs) {
+      measurements.add(Measurement.fromJson(doc.data(), doc.id));
+    }
+    measurements.sort(
+      (a, b) => b.dateTime!.difference(a.dateTime!).inSeconds,
+    );
+    return measurements;
+  }
 
   Future<List<Measurement>> getMeasurements() async {
     var event = await db
@@ -188,9 +213,25 @@ class AppState extends ChangeNotifier {
     return _getListOfMeasurementsFromDocs(event.docs);
   }
 
+  Future<List<Measurement>> getRealMeasurements() async {
+    var event = await db
+        .collection('roles')
+        .doc(rol)
+        .collection('parajes')
+        .doc(paraje)
+        .collection('real_measurements')
+        .get();
+    return _getListOfRealMeasurementsFromDocs(event.docs);
+  }
+
   List<Measurement> getMeasurementsFromSnapshot(
       QuerySnapshot<Map<String, dynamic>> snapshot) {
     return _getListOfMeasurementsFromDocs(snapshot.docs);
+  }
+
+  List<Measurement> getRealMeasurementsFromSnapshot(
+      QuerySnapshot<Map<String, dynamic>> snapshot) {
+    return _getListOfRealMeasurementsFromDocs(snapshot.docs);
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getMeasurementsStream() {
@@ -200,6 +241,16 @@ class AppState extends ChangeNotifier {
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getRealMeasurementsStream() {
+    return db
+        .collection('roles')
+        .doc(rol)
+        .collection('parajes')
+        .doc(paraje)
+        .collection('real_measurements')
         .snapshots();
   }
 
@@ -289,10 +340,22 @@ class AppState extends ChangeNotifier {
         .snapshots();
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>>
+      getCaminoALasTrancasMeasurementsStream() {
+    return db
+        .collection('roles')
+        .doc('Monitor')
+        .collection('parajes')
+        .doc('Camino a las Trancas')
+        .collection('measurements')
+        .snapshots();
+  }
+
   Future<void> updateMeasurement({
     required String id,
     required num precipitation,
     required DateTime time,
+    String? uploader,
     File? image,
     bool? pluviometer,
 
@@ -308,6 +371,37 @@ class AppState extends ChangeNotifier {
         .doc(id)
         .update(
           await _getMeasurementJson(
+            uploader: uploader,
+            precipitation: precipitation,
+            time: time,
+            image: image,
+            oldImage: oldImage,
+            pluviometer: pluviometer,
+          ),
+        );
+  }
+
+  Future<void> updateRealMeasurement({
+    required String id,
+    required num precipitation,
+    required DateTime time,
+    String? uploader,
+    File? image,
+    bool? pluviometer,
+
+    /// En caso de que ya exista un URL de imagen (botón de editar, no crear)
+    String? oldImage,
+  }) async {
+    await db
+        .collection('roles')
+        .doc(rol)
+        .collection('parajes')
+        .doc(paraje)
+        .collection('real_measurements')
+        .doc(id)
+        .update(
+          await _getMeasurementJson(
+            uploader: uploader,
             precipitation: precipitation,
             time: time,
             image: image,
@@ -324,6 +418,17 @@ class AppState extends ChangeNotifier {
         .collection('parajes')
         .doc(paraje)
         .collection('measurements')
+        .doc(id)
+        .delete();
+  }
+
+  Future<void> deleteRealMeasurement({required String id}) async {
+    await db
+        .collection('roles')
+        .doc(rol)
+        .collection('parajes')
+        .doc(paraje)
+        .collection('real_measurements')
         .doc(id)
         .delete();
   }

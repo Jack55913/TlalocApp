@@ -49,7 +49,7 @@ class DataWidgetView extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SelectableText(
+                        Text(
                           '${measurement.precipitation} mm',
                           style: const TextStyle(
                             fontSize: 18,
@@ -59,8 +59,8 @@ class DataWidgetView extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Consumer<AppState>(
-                          builder: (context, state, child) => SelectableText(
-                            state.paraje,
+                          builder: (context, state, child) => Text(
+                            '${measurement.uploader}',
                             style: const TextStyle(
                               fontSize: 14,
                               fontFamily: 'poppins',
@@ -75,7 +75,7 @@ class DataWidgetView extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    SelectableText(
+                    Text(
                       '${measurement.dateTime!.hour}:${measurement.dateTime!.minute.toString().padLeft(2, '0')}',
                       style: const TextStyle(
                         fontSize: 14,
@@ -84,7 +84,7 @@ class DataWidgetView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 5),
-                    SelectableText(
+                    Text(
                       '${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.year}',
                       style: const TextStyle(
                         fontSize: 14,

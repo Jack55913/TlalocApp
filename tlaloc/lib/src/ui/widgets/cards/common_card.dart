@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
+import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/models/kernel.dart';
+import 'package:tlaloc/src/models/parallax.dart';
 
 void _goHome(BuildContext context) {
   Navigator.of(context).pushAndRemoveUntil(
@@ -13,67 +13,123 @@ void _goHome(BuildContext context) {
 }
 
 class CommonSelectWidget extends StatelessWidget {
+  const CommonSelectWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        for (var i = 0; i < parajes.length; i++)
+          LocationListItem(
+              paraje: parajecolection[i],
+              ejido: ejidocolection[i],
+              commonimage: commonimages[i]),
+      ],
+    );
+  }
+}
+
+class LocationListItem extends StatelessWidget {
+  LocationListItem({
+    super.key,
+    required this.commonimage,
+    required this.paraje,
+    required this.ejido,
+  });
+
+  final String commonimage;
   final String paraje;
   final String ejido;
-  final String commonimage;
-
-  const CommonSelectWidget(
-      {Key? key,
-      required this.paraje,
-      required this.ejido,
-      required this.commonimage})
-      : super(key: key);
+  final GlobalKey _backgroundImageKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: InkWell(
-        onTap: () async {
-          _goHome(context);
-          final state = Provider.of<AppState>(context, listen: false);
-          state.changeParaje(paraje);
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.7,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25.0),
-            color: Colors.white,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: Column(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      child: AspectRatio(
+        aspectRatio: 16 / 9,
+        child: InkWell(
+          onTap: () async {
+            _goHome(context);
+            final state = Provider.of<AppState>(context, listen: false);
+            state.changeParaje(paraje);
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Stack(
               children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: AssetImage(
-                    commonimage,
-                  ),
-                ),
-                SizedBox(height: 5),
-                SelectableText(
-                  paraje,
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.black,
-                    fontFamily: 'FredokaOne',
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 10),
-                SelectableText(
-                  'Ejido de $ejido',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                    fontFamily: 'poppins',
-                  ),
-                ),
+                _buildParallaxBackground(context),
+                _buildGradient(),
+                _buildTitleAndSubtitle(),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildParallaxBackground(BuildContext context) {
+    return Flow(
+      delegate: ParallaxFlowDelegate(
+        scrollable: Scrollable.of(context),
+        listItemContext: context,
+        backgroundImageKey: _backgroundImageKey,
+      ),
+      children: [
+        Image.asset(
+          commonimage,
+          key: _backgroundImageKey,
+          fit: BoxFit.cover,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGradient() {
+    return Positioned.fill(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0.6, 0.95],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTitleAndSubtitle() {
+    return Positioned(
+      left: 20,
+      bottom: 20,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            paraje,
+            style: const TextStyle(
+              fontFamily: 'FredokaOne',
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            ejido,
+            style: const TextStyle(
+              fontFamily: 'Poppins',
+              color: Colors.white,
+              
+              fontSize: 14,
+            ),
+          ),
+        ],
       ),
     );
   }

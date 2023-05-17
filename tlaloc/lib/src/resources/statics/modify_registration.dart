@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +44,9 @@ class ModifyRegistration extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: SelectableText(
+                      title: Text(
                           '¿Estás seguro que quieres eliminar este registro?'),
-                      content: SelectableText(
+                      content: Text(
                           'No podrás recuperarlo una vez que lo elimines.'),
                       actions: [
                         TextButton(
@@ -60,15 +60,15 @@ class ModifyRegistration extends StatelessWidget {
                               final state =
                                   Provider.of<AppState>(context, listen: false);
                               await state.deleteMeasurement(id: measurement.id);
+                              await state.deleteRealMeasurement(id: measurement.id);
                               Navigator.of(context).pop();
                               Navigator.of(context).pop();
                             } catch (e) {
                               showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  title: SelectableText(
-                                      'Ocurrió un error al eliminar'),
-                                  content: SelectableText('$e'),
+                                  title: Text('Ocurrió un error al eliminar'),
+                                  content: Text('$e'),
                                 ),
                               );
                             }
@@ -87,7 +87,7 @@ class ModifyRegistration extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ListView(
               children: [
-                SelectableText('Registro de Lluvia:',
+                Text('Registro de Lluvia:',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 24,
@@ -114,7 +114,7 @@ class ModifyRegistration extends StatelessWidget {
                   thickness: 1,
                 ),
                 SizedBox(height: 15),
-                SelectableText('Datos generales',
+                Text('Datos generales',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 24,
@@ -142,7 +142,7 @@ class ModifyRegistration extends StatelessWidget {
                   thickness: 1,
                 ),
                 SizedBox(height: 15),
-                SelectableText('Fotografía',
+                Text('Fotografía',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 24,
@@ -160,7 +160,7 @@ class ModifyRegistration extends StatelessWidget {
                     thickness: 1,
                   ),
                   SizedBox(height: 15),
-                  SelectableText(
+                  Text(
                     'Fotografía',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -209,7 +209,7 @@ Widget _buildDataModify(String textTitle, String textsubtitle, Icon icon) {
         children: [
           icon,
           SizedBox(width: 10),
-          SelectableText(textTitle,
+          Text(textTitle,
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 18,
@@ -218,7 +218,7 @@ Widget _buildDataModify(String textTitle, String textsubtitle, Icon icon) {
               )),
         ],
       ),
-      SelectableText(textsubtitle,
+      Text(textsubtitle,
           textAlign: TextAlign.left,
           style: TextStyle(
             fontSize: 18,

@@ -49,7 +49,7 @@ class InfoProyectPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.dark2,
-        title: const SelectableText('Acerca del proyecto'),
+        title: const Text('Acerca del proyecto'),
       ),
       body: const SafeArea(
         child: Markdown(

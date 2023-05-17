@@ -7,53 +7,56 @@ class FacebookButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppColors.orange1,
-            borderRadius: BorderRadius.circular(25),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              const SizedBox(
-                width: 1,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  SelectableText(
-                    'Quiénes suben a la montaña y\nquiénes pueden participar',
-                    // 'Descúbre un grupo\npara preservar\nel monte Tláloc',
-                    style: TextStyle(
-                      fontFamily: 'FredokaOne',
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.orange1,
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const SizedBox(
+              width: 1,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  'Todos podemos \nPARTICIPAR',
+                  // 'Descúbre un grupo\npara preservar\nel monte Tláloc',
+                  style: TextStyle(
+                    fontFamily: 'FredokaOne',
+                    fontSize: 18,
+                    color: Colors.white,
                   ),
-                  SizedBox(height: 30),
-                  SelectableText(
-                    'Explora las acciones y únan fuerzas ',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'poppins',
-                      fontSize: 16,
-                    ),
+                ),
+                SizedBox(height: 30),
+                Text(
+                  'Explora las acciones\n y unamos fuerzas\nMás información aquí',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'poppins',
+                    fontSize: 16,
                   ),
-                ],
+                ),
+              ],
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(25),
               ),
-              const SizedBox(
-                width: 5,
-              ),
-              const Image(
+              child: const Image(
                 image: AssetImage('assets/images/img-5.jpg'),
                 fit: BoxFit.cover,
                 width: 170,
                 height: 150,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       onTap: () {

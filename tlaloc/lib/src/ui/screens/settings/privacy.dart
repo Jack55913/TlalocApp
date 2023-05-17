@@ -124,7 +124,7 @@ class PrivacyPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.dark2,
-        title: const SelectableText('Términos y condiciones del servicio'),
+        title: const Text('Términos y condiciones del servicio'),
       ),
       body: const SafeArea(
         child: Markdown(

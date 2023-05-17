@@ -18,18 +18,17 @@ class CommonSelectPage extends StatelessWidget {
               child: Column(
                 children: [
                   const Center(
-                    child: SelectableText(
+                    child: Text(
                       '¿Qué pluviómetro estás observando?',
                       style: TextStyle(
                           fontSize: 32,
-                          fontWeight: FontWeight.bold,
                           fontFamily: 'FredokaOne',
                           color: Colors.white),
                       textAlign: TextAlign.center,
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const SelectableText(
+                  const Text(
                     'Selecciona el Pluviómetro automáticamente',
                     style: TextStyle(
                         fontSize: 18,
@@ -39,23 +38,17 @@ class CommonSelectPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   Flex(
                     direction: Axis.vertical,
-                    children: [
-                      const QrSelectWidget(),
-                      const SelectableText(
-                        'Selecciona el Pluviómetro manualmente',
+                    children: const [
+                      QrSelectWidget(),
+                      Text(
+                        'Selecciona el pluviómetro manualmente',
                         style: TextStyle(
                             fontSize: 18,
                             fontFamily: 'poppins',
                             color: Colors.white),
                       ),
-                      const SizedBox(height: 20),
-
-                      /// Para agregar o quitar parajes: constants.dart
-                      for (var i = 0; i < parajes.length; i++)
-                        CommonSelectWidget(
-                            paraje: parajecolection[i],
-                            ejido: ejidocolection[i],
-                            commonimage: commonimages[i]),
+                      SizedBox(height: 20),
+                      CommonSelectWidget(),
                     ],
                   ),
                 ],

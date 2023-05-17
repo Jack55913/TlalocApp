@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/resources/onboarding/common_select.dart';
 import 'package:tlaloc/src/ui/screens/settings/credits.dart';
 import 'package:tlaloc/src/ui/screens/settings/faq.dart';
-import 'package:url_launcher/url_launcher.dart';
 // import 'package:tlaloc/src/resources/onboarding/role.dart';
 
 class DrawerApp extends StatelessWidget {
@@ -28,15 +28,6 @@ class DrawerApp extends StatelessWidget {
       semanticLabel: 'Menu',
       child: ListView(children: [
         const DrawerHeader(
-          child: SelectableText(
-            'Tláloc App',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-              fontFamily: 'FredokaOne',
-            ),
-            textAlign: TextAlign.end,
-          ),
           decoration: BoxDecoration(
             color: AppColors.dark2,
             image: DecorationImage(
@@ -47,11 +38,20 @@ class DrawerApp extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
+          child: Text(
+            'Tláloc App',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontFamily: 'FredokaOne',
+            ),
+            textAlign: TextAlign.end,
+          ),
         ),
         ListTile(
           leading: const Icon(Icons.place, color: Colors.red),
-          title: const SelectableText('Elige un Paraje'),
-          subtitle: SelectableText(Provider.of<AppState>(context).paraje),
+          title: const Text('Elige un Paraje'),
+          subtitle: Text(Provider.of<AppState>(context).paraje),
           onTap: () {
             Navigator.push(
               context,
@@ -61,8 +61,8 @@ class DrawerApp extends StatelessWidget {
         ),
         // ListTile(
         //   leading: const Icon(Icons.work, color: Colors.brown),
-        //   title: const SelectableText('Elige un Rol'),
-        //   subtitle: SelectableText(Provider.of<AppState>(context).rol),
+        //   title: const Text('Elige un Rol'),
+        //   subtitle: Text(Provider.of<AppState>(context).rol),
         //   onTap: () {
         //     Navigator.push(
         //       context,
@@ -72,7 +72,7 @@ class DrawerApp extends StatelessWidget {
         // ),
         ListTile(
           leading: const Icon(Icons.share),
-          title: const SelectableText('Compartir aplicación'),
+          title: const Text('Compartir aplicación'),
           onTap: () {
             Share.share(
                 '¡Próximamente podrás obtener varios datos de él!\n\nDescárgala en tlaloc.org',
@@ -82,7 +82,7 @@ class DrawerApp extends StatelessWidget {
         ),
         ListTile(
           leading: const Icon(Icons.feedback, color: Colors.white),
-          title: const SelectableText('Enviar retroalimentación'),
+          title: const Text('Enviar retroalimentación'),
           onTap: () {
             launchUrl(
               Uri.parse(
@@ -92,19 +92,19 @@ class DrawerApp extends StatelessWidget {
         ),
         ListTile(
             leading: const Icon(Icons.description, color: Colors.white),
-            title: const SelectableText('Términos y condiciones'),
+            title: const Text('Términos y condiciones'),
             onTap: () {
               Navigator.pushNamed(context, '/privacy');
             }),
         ListTile(
             leading: const Icon(Icons.privacy_tip, color: Colors.white),
-            title: const SelectableText('Política de privacidad'),
+            title: const Text('Política de privacidad'),
             onTap: () {
               Navigator.pushNamed(context, '/politics');
             }),
         ListTile(
           leading: const Icon(Icons.info, color: Colors.white),
-          title: const SelectableText('Acerca de'),
+          title: const Text('Acerca de'),
           onTap: () {
             // analytics.logEvent(name: 'open-about');
             showAboutDialog(
@@ -118,7 +118,7 @@ class DrawerApp extends StatelessWidget {
               children: [
                 ListTile(
                   leading: const Icon(Icons.people),
-                  title: const SelectableText('Ver créditos'),
+                  title: const Text('Ver créditos'),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -129,7 +129,7 @@ class DrawerApp extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.question_mark_rounded),
-                  title: const SelectableText('Preguntas Frecuentes'),
+                  title: const Text('Preguntas Frecuentes'),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -142,7 +142,7 @@ class DrawerApp extends StatelessWidget {
                     Ionicons.logo_facebook,
                     color: Colors.blue,
                   ),
-                  title: const SelectableText('Síguenos en Facebook'),
+                  title: const Text('Síguenos en Facebook'),
                   onTap: () {
                     // analytics.logEvent(name: 'view-facebook');
                     launchUrl(
@@ -154,7 +154,7 @@ class DrawerApp extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Ionicons.logo_youtube, color: Colors.red),
-                  title: const SelectableText('Síguenos en YouTube'),
+                  title: const Text('Síguenos en YouTube'),
                   onTap: () {
                     // analytics.logEvent(name: 'view-twitter');
                     launchUrl(
@@ -166,7 +166,7 @@ class DrawerApp extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.email),
-                  title: const SelectableText('Mándanos un correo'),
+                  title: const Text('Mándanos un correo'),
                   onTap: () {
                     // analytics.logEvent(
                     // name: 'contact', parameters: {'source': 'about'});
@@ -175,7 +175,7 @@ class DrawerApp extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Ionicons.logo_github),
-                  title: const SelectableText('Colabora en GitHub'),
+                  title: const Text('Colabora en GitHub'),
                   onTap: () {
                     // analytics.logEvent(name: 'view-github');
                     launchUrl(

@@ -150,7 +150,7 @@ class PoliticPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.dark2,
-        title: const SelectableText('Políticas de Privacidad'),
+        title: const Text('Políticas de Privacidad'),
       ),
       body: const SafeArea(
         child: Markdown(

@@ -5,9 +5,9 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:tlaloc/src/models/constants.dart';
 
 const String _markdownData = """
-# ¿Quiénes pueden colaborar?
+# Todos podemos colaborar 
 
-Ejidatarios, trabajadores, senderistas, ciclistas, campistas, recolectores de hongos, 
+Ejidatarios, trabajadores, senderistas, ciclistas, campistas, recolectores de hongos, cientificos, estudiantes, etc.
 
 1.	Ejidatarios de la Unión de Ejidos de la Montaña. Son colaboradores muy activos en el proyecto. Generan registros a través de sus cuadrillas de trabajo que realizan actividades de aprovechamiento sustentable y manejo del bosque.
 2.	Visitantes externos. Personas que suben a la montaña que no provienen de los Ejidos de la Montaña. En este grupo se incluyen a ciclistas, senderistas, campistas, entre otros.
@@ -25,7 +25,7 @@ class CommunityPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.dark2,
-        title: const SelectableText('Comunidad Tláloc App'),
+        title: const Text('Comunidad Tláloc App'),
       ),
       body: const SafeArea(
         child: Markdown(

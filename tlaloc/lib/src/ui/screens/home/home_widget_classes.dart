@@ -1,27 +1,35 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
 import 'package:tlaloc/src/ui/widgets/cards/tlalocmap.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 import '../../widgets/cards/map.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ContactUsButton extends StatelessWidget {
-  const ContactUsButton({Key? key}) : super(key: key);
-
+  const ContactUsButton({
+    Key? key,
+    required this.title,
+    required this.message,
+  }) : super(key: key);
+  final String title;
+  final String message;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: AppColors.whatsappgreen,
+            backgroundColor: AppColors.whatsappgreen,
             surfaceTintColor: AppColors.whatsappgreen),
         onPressed: () {
-          launchUrl(
-              Uri.parse('https://api.whatsapp.com/send?phone=5634577396'));
+          launchUrl(Uri.parse(
+            message
+          ));
         },
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -35,8 +43,8 @@ class ContactUsButton extends StatelessWidget {
                   SizedBox(
                     width: 25,
                   ),
-                  const Text(
-                    '¡Contáctanos!',
+                  Text(
+                    title,
                     style: TextStyle(
                       fontFamily: 'FredokaOne',
                       fontSize: 24,
@@ -48,8 +56,8 @@ class ContactUsButton extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              SelectableText(
-                '+52 5634577396',
+              Text(
+                '+52 5630908507',
                 style: TextStyle(
                   fontFamily: 'poppins',
                   fontSize: 18,

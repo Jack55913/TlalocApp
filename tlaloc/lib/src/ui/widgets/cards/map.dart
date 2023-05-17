@@ -12,11 +12,10 @@ class TlalocMap extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: SelectableText(
-              'Ruta de "${Provider.of<AppState>(context).paraje}"'),
+          title: Text('Ruta de "${Provider.of<AppState>(context).paraje}"'),
           actions: <Widget>[
             InkWell(
-              child: const Icon(Icons.picture_as_pdf, color: Colors.blue),
+              child: const Icon(Icons.download, color: Colors.green),
               onTap: () {
                 launchUrl(
                   Uri.parse(
@@ -42,13 +41,23 @@ class TlalocMap extends StatelessWidget {
                           url =
                               'https://www.youtube.com/watch?v=GJuTIxwQw0k&list=RDGJuTIxwQw0k&start_radio=1';
                         }
-                        return InkWell(
-                          child: const Icon(Icons.place, color: Colors.red),
-                          onTap: () {
-                            launchUrl(
-                              Uri.parse(url),
-                            );
-                          },
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton.icon(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Colors.white)
+                            ),
+                            onPressed: () {
+                              launchUrl(
+                                Uri.parse(url),
+                              );
+                            },
+                            icon: const Icon(Icons.place, color: Colors.red),
+                            label: const Text(
+                              'Indicaciones',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
                         );
                       }),
             ),

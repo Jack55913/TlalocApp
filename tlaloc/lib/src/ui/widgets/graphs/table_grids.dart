@@ -27,7 +27,7 @@ class TableGrids extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              const SelectableText('Tablas',
+              const Text('Tablas',
                   style: TextStyle(
                     fontFamily: 'FredokaOne',
                     fontSize: 24,
@@ -42,7 +42,7 @@ class TableGrids extends StatelessWidget {
                       leading: CircleAvatar(
                         backgroundImage: AssetImage(chartimages[index]),
                       ),
-                      title: SelectableText(charttitle[index]),
+                      title: Text(charttitle[index]),
                       onTap: () {
                         Navigator.push(
                           context,

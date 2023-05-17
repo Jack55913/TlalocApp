@@ -87,9 +87,8 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
                 width: 50,
                 height: 20,
                 child: Center(
-                  child: SelectableText(
-                    // TODO: connect the text field and the pluviometer
-                    _level.toStringAsFixed(0) + ' mm',
+                  child: Text(
+                    '${_level.toStringAsFixed(0)} mm',
                     style: TextStyle(
                         color: brightness == Brightness.light
                             ? Colors.black

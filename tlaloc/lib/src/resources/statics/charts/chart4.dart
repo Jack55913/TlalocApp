@@ -58,7 +58,7 @@ class _PieChartTooltipState extends State<PieChartTooltip> {
                 children: [
                   ChoiceChip(
                     selectedColor: AppColors.blue1,
-                    label: const SelectableText('Esta semana'),
+                    label: const Text('Esta semana'),
                     selected: mode == DateTimeMode.week,
                     onSelected: (val) {
                       final now = DateTime.now();
@@ -80,7 +80,7 @@ class _PieChartTooltipState extends State<PieChartTooltip> {
                   const SizedBox(width: 4),
                   ChoiceChip(
                     selectedColor: AppColors.blue1,
-                    label: const SelectableText('Este mes'),
+                    label: const Text('Este mes'),
                     selected: mode == DateTimeMode.month,
                     onSelected: (val) {
                       final now = DateTime.now();
@@ -95,7 +95,7 @@ class _PieChartTooltipState extends State<PieChartTooltip> {
                   const SizedBox(width: 4),
                   ChoiceChip(
                     selectedColor: AppColors.blue1,
-                    label: const SelectableText('Este año'),
+                    label: const Text('Este año'),
                     selected: mode == DateTimeMode.year,
                     onSelected: (val) {
                       final now = DateTime.now();
@@ -109,7 +109,7 @@ class _PieChartTooltipState extends State<PieChartTooltip> {
                   const SizedBox(width: 4),
                   ChoiceChip(
                     selectedColor: AppColors.blue1,
-                    label: const SelectableText('Siempre'),
+                    label: const Text('Siempre'),
                     selected: mode == DateTimeMode.always,
                     onSelected: (val) {
                       setState(() {
@@ -127,7 +127,7 @@ class _PieChartTooltipState extends State<PieChartTooltip> {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Row(
                 children: [
-                  const SelectableText('Inicio: '),
+                  const Text('Inicio: '),
                   DatePickerButton(
                     dateTime: initialDate,
                     onDateChanged: (date) {
@@ -140,7 +140,7 @@ class _PieChartTooltipState extends State<PieChartTooltip> {
                   const Expanded(
                     child: SizedBox(),
                   ),
-                  const SelectableText('Fin: '),
+                  const Text('Fin: '),
                   DatePickerButton(
                     dateTime: finalDate,
                     onDateChanged: (date) {

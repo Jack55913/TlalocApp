@@ -14,7 +14,7 @@ class QuickAddWidget extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                elevation: 0, primary: Colors.transparent),
+                elevation: 0, backgroundColor: Colors.transparent),
             onPressed: () =>
                 // Ir a addscreen
                 Navigator.push(

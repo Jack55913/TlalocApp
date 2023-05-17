@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
 import 'package:tlaloc/src/models/kernel.dart';
@@ -24,8 +24,8 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
           title: Consumer<GoogleSignInProvider>(
             builder: (context, signIn, child) {
               String name =
-                  signIn.user?.displayName?.split(' ')[0] ?? 'Incógnito';
-              return SelectableText(
+                  signIn.user!.displayName!.split(' ')[0];
+              return Text(
                 'Perfil de $name',
                 style: TextStyle(
                   color: Colors.white,
@@ -51,13 +51,13 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                             FirebaseAuth.instance.currentUser!.photoURL!),
                       ),
                       SizedBox(height: 8),
-                      SelectableText(
-                        'Nombre: ' + FirebaseAuth.instance.currentUser!.displayName!,
+                      Text(
+                        'Nombre: ${FirebaseAuth.instance.currentUser!.displayName!}',
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       SizedBox(height: 8),
-                      SelectableText(
-                        'Correo: ' + FirebaseAuth.instance.currentUser!.email!,
+                      Text(
+                        'Correo: ${FirebaseAuth.instance.currentUser!.email!}',
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ],
@@ -65,40 +65,55 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
                 Consumer<GoogleSignInProvider>(
                   builder: (context, signIn, child) {
                     final name = FirebaseAuth.instance.currentUser?.displayName;
-                    return ListTile(
-                      leading: const Icon(Icons.login, color: Colors.green),
-                      title: const SelectableText('Iniciar sesión'),
-                      subtitle: SelectableText(name == null
-                          ? 'No has iniciado sesión'
-                          : 'Iniciaste sesión como $name'),
-                      onTap: () async {
-                        try {
-                          await signIn.googleLogin();
-                          // Ir a AddScreen:
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
-                        } catch (e) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const SelectableText(
-                                  'Error al iniciar sesión'),
-                              content: SelectableText('$e'),
-                            ),
-                          );
-                        }
-                      },
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: const Icon(Icons.login, color: Colors.green),
+                          title: const Text('Iniciar sesión'),
+                          subtitle: Text(name == null
+                              ? 'No has iniciado sesión'
+                              : 'Iniciaste sesión como $name'),
+                          onTap: () async {
+                            try {
+                              await signIn.googleLogin();
+                              // Ir a AddScreen:
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomePage(),
+                                ),
+                              );
+                            } catch (e) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Error al iniciar sesión'),
+                                  content: Text('$e'),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.home, color: Colors.white),
+                          title: const Text('Ir a la página inicial'),
+                          subtitle: Text('Pantalla de bienvenida'),
+                          onTap: () {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute<void>(
+                                    builder: (BuildContext context) {
+                              return Onboarding();
+                            }), (Route<dynamic> route) => false);
+                          },
+                        ),
+                      ],
                     );
                   },
                 ),
                 if (FirebaseAuth.instance.currentUser != null)
                   ListTile(
                     leading: const Icon(Icons.logout, color: Colors.red),
-                    title: const SelectableText('Cerrar sesión'),
+                    title: const Text('Cerrar sesión'),
                     onTap: () {
                       final provider = Provider.of<GoogleSignInProvider>(
                           context,

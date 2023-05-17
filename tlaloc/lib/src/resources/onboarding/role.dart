@@ -23,7 +23,7 @@ class RoleSelection extends StatelessWidget {
                     'assets/images/img-3.png',
                     width: MediaQuery.of(context).size.width * 0.8,
                   ),
-                  const SelectableText(
+                  const Text(
                     'Selecciona una opción',
                     style: TextStyle(
                       fontSize: 24,
@@ -103,7 +103,7 @@ class RolSelectWidget extends StatelessWidget {
             ),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [icon, SelectableText(rol)])),
+                children: [icon, Text(rol)])),
       ),
     );
   }

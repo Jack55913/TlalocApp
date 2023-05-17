@@ -16,7 +16,7 @@ class TlalocMapData extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         const SizedBox(height: 20),
-        // const SelectableText(
+        // const Text(
         //   'Tláloc',
         //   style: TextStyle(
         //     color: Colors.white,
@@ -35,7 +35,7 @@ class TlalocMapData extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        const SelectableText(
+        const Text(
           'Descripción:', // Decía índice geográfico
           textAlign: TextAlign.left,
           style: TextStyle(
@@ -60,7 +60,7 @@ class TlalocMapData extends StatelessWidget {
               } else {
                 text = 'Cargando...';
               }
-              return SelectableText(
+              return Text(
                 text,
                 style: const TextStyle(
                   fontFamily: 'poppins',

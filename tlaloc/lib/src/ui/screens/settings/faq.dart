@@ -33,7 +33,7 @@ class FaqPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.dark2,
-        title: const SelectableText('Preguntas Frecuentes ✒️'),
+        title: const Text('Preguntas Frecuentes ✒️'),
       ),
       body: const SafeArea(
         child: Markdown(

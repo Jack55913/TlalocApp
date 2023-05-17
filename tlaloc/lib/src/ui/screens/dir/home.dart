@@ -60,6 +60,23 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.all(10),
             scrollDirection: Axis.vertical,
             children: [
+              // Consumer<GoogleSignInProvider>(
+              //   builder: (context, signIn, child) {
+              //     String name = signIn.user!.displayName!.split(' ')[0];
+              //     return Text(
+              //       'Hola, $name',
+              //       style: TextStyle(
+              //         color: Colors.white,
+              //         fontFamily: 'FredokaOne',
+              //         fontSize: 24,
+              //         letterSpacing: 2,
+              //       ),
+              //     );
+              //   },
+              // ),
+              // SizedBox(
+              //   height: 25,
+              // ),
               QuickAddWidget(),
               Divider(
                 thickness: 1,
@@ -69,22 +86,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   fill: TutorialWidget(),
                 ),
               ),
+              // TODO: PUNTO 5 del contrato
               // DarkContainerWidget(
               //   data: DarkContainer(
               //     fill: PersonalMeasures(),
+              //   ),
+              // ),
+              // DarkContainerWidget(
+              //   data: DarkContainer(
+              //     fill: GeneralMeasures(),
               //   ),
               // ),
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: const [
                     PhraseCard(),
-                    DarkContainerWidget(
-                      data: DarkContainer(
-                        fill: TableButton(),
-                      ),
-                    ),
+                    TableButton(),
                   ],
                 ),
               ),
@@ -96,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               SizedBox(height: 20),
               Center(
-                child: SelectableText(
+                child: Text(
                   '📍¿Cómo llegar a "${Provider.of<AppState>(context).paraje}"?',
                   style: TextStyle(
                     fontFamily: 'FredokaOne',
@@ -114,7 +133,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 20,
                 thickness: 1,
               ),
-              ContactUsButton(),
+              ContactUsButton(
+                title: '¡Contáctanos!',
+                message: 'https://api.whatsapp.com/send?phone=5630908507',
+              ),
               Divider(
                 height: 20,
                 thickness: 1,

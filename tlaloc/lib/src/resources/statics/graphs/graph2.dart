@@ -124,7 +124,7 @@ class _BarGraphState extends State<BarGraph> {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Row(
                 children: [
-                  const SelectableText('Inicio: '),
+                  const Text('Inicio: '),
                   DatePickerButton(
                     dateTime: initialDate,
                     onDateChanged: (date) {
@@ -137,7 +137,7 @@ class _BarGraphState extends State<BarGraph> {
                   const Expanded(
                     child: SizedBox(),
                   ),
-                  const SelectableText('Fin: '),
+                  const Text('Fin: '),
                   DatePickerButton(
                     dateTime: finalDate,
                     onDateChanged: (date) {

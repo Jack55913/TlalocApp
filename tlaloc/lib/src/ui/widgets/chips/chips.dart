@@ -93,7 +93,7 @@ class _TlalocChipsState extends State<TlalocChips> {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
             children: [
-              const SelectableText('Inicio: '),
+              const Text('Inicio: '),
               DatePickerButton(
                 dateTime: initialDate,
                 onDateChanged: (date) {
@@ -106,7 +106,7 @@ class _TlalocChipsState extends State<TlalocChips> {
               const Expanded(
                 child: SizedBox(),
               ),
-              const SelectableText('Fin: '),
+              const Text('Fin: '),
               DatePickerButton(
                 dateTime: finalDate,
                 onDateChanged: (date) {

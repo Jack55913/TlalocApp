@@ -37,7 +37,7 @@ class _DatetimeState extends State<Datetime> {
               color: Colors.grey,
             ),
           ),
-          title: SelectableText(
+          title: Text(
             'Revisa la fecha de colecta',
             style: TextStyle(
               color: Colors.grey,
@@ -94,11 +94,11 @@ class _DatetimeState extends State<Datetime> {
         //       backgroundColor: Colors.yellow[300],
         //       child:
         //           Icon(Icons.rocket_launch_rounded, color: Colors.yellow[900])),
-        //   title: SelectableText(
+        //   title: Text(
         //     'Elige un Rol',
         //   ),
         //   subtitle:
-        //       SelectableText('Estás en modo: ${Provider.of<AppState>(context).rol}'),
+        //       Text('Estás en modo: ${Provider.of<AppState>(context).rol}'),
         //   onTap: () {
         //     Navigator.push(
         //       context,

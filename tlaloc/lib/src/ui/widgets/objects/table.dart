@@ -92,33 +92,6 @@ class TableTlaloc extends StatelessWidget {
                               const Divider(
                                 thickness: 1,
                               ),
-                            ],
-                          );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    );
-                  },
-                ),
-                // ////////////////////////////////////////////////////////////
-                Consumer<AppState>(
-                  builder: (context, state, _) {
-                    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: state.getCabanaMeasurementsStream(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return EmptyState('Error ${snapshot.error}');
-                        } else if (snapshot.hasData) {
-                          final measurementsSnapshot = snapshot.data!;
-                          final measurements =
-                              state.getMeasurementsFromSnapshot(
-                                  measurementsSnapshot);
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
                               const Text(
                                 'Cabaña',
                                 style: TextStyle(
@@ -131,33 +104,6 @@ class TableTlaloc extends StatelessWidget {
                               const Divider(
                                 thickness: 1,
                               ),
-                            ],
-                          );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    );
-                  },
-                ),
-                // ////////////////////////////////////////////////////////////
-                Consumer<AppState>(
-                  builder: (context, state, _) {
-                    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: state.getCruzdeAtencoMeasurementsStream(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return EmptyState('Error ${snapshot.error}');
-                        } else if (snapshot.hasData) {
-                          final measurementsSnapshot = snapshot.data!;
-                          final measurements =
-                              state.getMeasurementsFromSnapshot(
-                                  measurementsSnapshot);
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
                               const Text(
                                 'Cruz de Atenco',
                                 style: TextStyle(
@@ -170,33 +116,6 @@ class TableTlaloc extends StatelessWidget {
                               const Divider(
                                 thickness: 1,
                               ),
-                            ],
-                          );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    );
-                  },
-                ),
-                // ////////////////////////////////////////////////////////////
-                Consumer<AppState>(
-                  builder: (context, state, _) {
-                    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: state.getCanoasaltasMeasurementsStream(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return EmptyState('Error ${snapshot.error}');
-                        } else if (snapshot.hasData) {
-                          final measurementsSnapshot = snapshot.data!;
-                          final measurements =
-                              state.getMeasurementsFromSnapshot(
-                                  measurementsSnapshot);
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
                               const Text(
                                 'Canoas altas',
                                 style: TextStyle(
@@ -209,33 +128,6 @@ class TableTlaloc extends StatelessWidget {
                               const Divider(
                                 thickness: 1,
                               ),
-                            ],
-                          );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    );
-                  },
-                ),
-                // ////////////////////////////////////////////////////////////
-                Consumer<AppState>(
-                  builder: (context, state, _) {
-                    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: state.getLosManantialesMeasurementsStream(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return EmptyState('Error ${snapshot.error}');
-                        } else if (snapshot.hasData) {
-                          final measurementsSnapshot = snapshot.data!;
-                          final measurements =
-                              state.getMeasurementsFromSnapshot(
-                                  measurementsSnapshot);
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
                               const Text(
                                 'Los Manantiales',
                                 style: TextStyle(
@@ -248,32 +140,6 @@ class TableTlaloc extends StatelessWidget {
                               const Divider(
                                 thickness: 1,
                               ),
-                            ],
-                          );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    );
-                  },
-                ),
-                Consumer<AppState>(
-                  builder: (context, state, _) {
-                    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: state.getAguadeChiquerosMeasurementsStream(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return EmptyState('Error ${snapshot.error}');
-                        } else if (snapshot.hasData) {
-                          final measurementsSnapshot = snapshot.data!;
-                          final measurements =
-                              state.getMeasurementsFromSnapshot(
-                                  measurementsSnapshot);
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
                               const Text(
                                 'Agua de Chiqueros',
                                 style: TextStyle(
@@ -286,33 +152,6 @@ class TableTlaloc extends StatelessWidget {
                               const Divider(
                                 thickness: 1,
                               ),
-                            ],
-                          );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    );
-                  },
-                ),
-                // ////////////////////////////////////////////////////////////
-                Consumer<AppState>(
-                  builder: (context, state, _) {
-                    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: state.getTlaltlatlatelyMeasurementsStream(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return EmptyState('Error ${snapshot.error}');
-                        } else if (snapshot.hasData) {
-                          final measurementsSnapshot = snapshot.data!;
-                          final measurements =
-                              state.getMeasurementsFromSnapshot(
-                                  measurementsSnapshot);
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
                               const Text(
                                 'Tlaltlatlately',
                                 style: TextStyle(
@@ -325,6 +164,19 @@ class TableTlaloc extends StatelessWidget {
                               const Divider(
                                 thickness: 1,
                               ),
+                              
+                              for (var measurement in measurements)
+                                TableWinerWidget(measurement: measurement),
+                              const Divider(
+                                thickness: 1,
+                              ),
+                              const Text(
+                                'Camino a Trancas',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontFamily: 'FredokaOne',
+                                ),
+                              ),
                             ],
                           );
                         } else {
@@ -336,7 +188,6 @@ class TableTlaloc extends StatelessWidget {
                     );
                   },
                 ),
-                // ////////////////////////////////////////////////////////////
               ],
             ),
           ),

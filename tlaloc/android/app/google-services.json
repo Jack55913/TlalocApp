@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "228815382617-evr2gdane0kejbr700dunqfbq7c641n3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.TlalocApps.tlaloc",
+            "certificate_hash": "1395267fa2dff4766b0df3d490c04b18de23916e"
+          }
+        },
+        {
+          "client_id": "228815382617-m0gr01jj4vdlhflhqlk88gd2kcq8qdbk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.TlalocApps.tlaloc",
+            "certificate_hash": "26c34754a2d7031c3f6bb41eaefc5da58b58a6e6"
+          }
+        },
+        {
           "client_id": "228815382617-98ljg943un48rj78n636ccggepr3evaa.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class SignUpWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SelectableText(
+              Text(
                 'Inicia sesión',
                 style: TextStyle(
                     fontSize: 32,
@@ -44,7 +44,7 @@ class SignUpWidget extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    SelectableText(
+                    Text(
                       '¡Bienvenidos a $appName!',
                       style: TextStyle(
                           fontSize: 24,
@@ -53,7 +53,7 @@ class SignUpWidget extends StatelessWidget {
                           color: Colors.white),
                     ),
                     SizedBox(height: 8),
-                    SelectableText(
+                    Text(
                       'Por favor, ingresa tu cuenta para continuar',
                       style: TextStyle(
                           fontSize: 16,
@@ -68,8 +68,8 @@ class SignUpWidget extends StatelessWidget {
               SizedBox(height: 16),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
-                  onPrimary: Colors.black,
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.white,
                   minimumSize: Size(double.infinity, 48),
                 ),
                 icon: FaIcon(FontAwesomeIcons.google, color: Colors.red),
@@ -83,8 +83,8 @@ class SignUpWidget extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: SelectableText('Error al iniciar sesión'),
-                        content: SelectableText('$e'),
+                        title: Text('Error al iniciar sesión'),
+                        content: Text('$e'),
                       ),
                     );
                   }
@@ -103,8 +103,8 @@ class SignUpWidget extends StatelessWidget {
               SizedBox(height: 8),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
-                  onPrimary: Colors.black,
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.white,
                   minimumSize: Size(double.infinity, 48),
                 ),
                 icon: Icon(Icons.person, color: Colors.black),

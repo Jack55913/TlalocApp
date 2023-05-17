@@ -10,7 +10,45 @@ class PersonalMeasures extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Column(
+              children: [
+                Container(
+                  decoration:
+                      BoxDecoration(color: AppColors.blue1, shape: BoxShape.circle),
+                  child: Icon(
+                    Icons.check,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                SizedBox(height: 20),
+                AutoSizeText(
+                  'Mediciones completadas',
+                  style: TextStyle(
+                    color: AppColors.blue1,
+                    fontFamily: 'poppins',
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
+            Column(
+              children: [
+                PersonalMeausreData(),
+              ],
+            ),
+          ],
+        ),
+        Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Column(
@@ -29,7 +67,7 @@ class PersonalMeasures extends StatelessWidget {
           children: [
             SizedBox(height: 20),
             AutoSizeText(
-              'Mediciones completadas',
+              'Mediciones Totales',
               style: TextStyle(
                 color: AppColors.blue1,
                 fontFamily: 'poppins',
@@ -41,10 +79,96 @@ class PersonalMeasures extends StatelessWidget {
         ),
         Column(
           children: [
-            // TODO: Que se guarden en la base de datos el contador 
             PersonalMeausreData(),
           ],
         ),
+      ],
+    ),
+      ],
+    );
+  }
+}
+
+
+class GeneralMeasures extends StatelessWidget {
+  const GeneralMeasures({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Column(
+              children: [
+                Container(
+                  decoration:
+                      BoxDecoration(color: AppColors.blue1, shape: BoxShape.circle),
+                  child: Icon(
+                    Icons.check,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                SizedBox(height: 20),
+                AutoSizeText(
+                  'Mediciones del paraje',
+                  style: TextStyle(
+                    color: AppColors.blue1,
+                    fontFamily: 'poppins',
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
+            Column(
+              children: [
+                PersonalMeausreData(),
+              ],
+            ),
+          ],
+        ),
+        Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Column(
+          children: [
+            Container(
+              decoration:
+                  BoxDecoration(color: AppColors.blue1, shape: BoxShape.circle),
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            SizedBox(height: 20),
+            AutoSizeText(
+              'Mediciones en el Monte',
+              style: TextStyle(
+                color: AppColors.blue1,
+                fontFamily: 'poppins',
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 20),
+          ],
+        ),
+        Column(
+          children: [
+            PersonalMeausreData(),
+          ],
+        ),
+      ],
+    ),
       ],
     );
   }

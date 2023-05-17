@@ -35,11 +35,11 @@ class Onboarding extends StatelessWidget {
     return Scaffold(
       body: ConcentricPageView(
         onFinish: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SignUpWidget()),
-                  );
-                },
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SignUpWidget()),
+          );
+        },
         colors: data.map((e) => e.backgroundColor).toList(),
         itemCount: data.length,
         itemBuilder: (int index) {

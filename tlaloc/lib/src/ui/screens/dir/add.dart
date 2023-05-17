@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print, avoid_unnecessary_containers
-
 import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,40 +12,31 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:tlaloc/src/models/custompathpainter.dart';
 import 'package:tlaloc/src/models/date.dart';
 import 'package:tlaloc/src/resources/onboarding/common_select.dart';
+import 'package:tlaloc/src/ui/screens/home/home_widget_classes.dart';
 import 'package:tlaloc/src/ui/widgets/measures/save_button.dart';
 import 'package:tlaloc/src/models/app_state.dart';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
 import 'package:tlaloc/src/models/kernel.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
+import 'package:tlaloc/src/ui/widgets/objects/text_field.dart';
 
 class AddScreen extends StatefulWidget {
   final Measurement? measurement;
-  final num? updatePrecipitation;
-  final bool? updatePluviometer;
 
-  const AddScreen(
-      {Key? key,
-      this.measurement,
-      this.updatePluviometer,
-      this.updatePrecipitation})
-      : super(key: key);
+  const AddScreen({Key? key, this.measurement}) : super(key: key);
 
   @override
   State<AddScreen> createState() => _AddScreenState();
 }
 
-// TODO: IDEA: Usar la función lenght de la lista de measurements.precipitation.length
-int _counter = 0;
-bool pluviometer = false;
-
 class _AddScreenState extends State<AddScreen> {
+  bool pluviometer = false;
   File? newImage;
   DateTime dateTime = DateTime.now();
   num? precipitation = 0;
-
+  String? uploader = FirebaseAuth.instance.currentUser?.displayName;
   String path = 'sounds/correcto.mp3';
 
   var player = AudioPlayer(); //+
@@ -64,25 +55,25 @@ class _AddScreenState extends State<AddScreen> {
     }
   }
 
-  // Future pickImageC() async {
-  //   try {
-  //     final image = await ImagePicker().pickImage(source: ImageSource.camera);
+  Future pickImageC() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
 
-  //     if (image == null) return;
+      if (image == null) return;
 
-  //     final imageTemp = File(image.path);
+      final imageTemp = File(image.path);
 
-  //     setState(() => newImage = imageTemp);
-  //   } on PlatformException catch (e) {
-  //     print('Falló al obtener la imágen: $e');
-  //   }
-  // }
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+      setState(() => newImage = imageTemp);
+    } on PlatformException catch (e) {
+      print('Falló al obtener la imágen: $e');
+    }
   }
+
+  // void _incrementCounter() {
+  //   setState(() {
+  //     // _counter++;
+  //   });
+  // }
 
   // void _decrementCounter() {
   //   setState(() {
@@ -97,8 +88,9 @@ class _AddScreenState extends State<AddScreen> {
   @override
   Widget build(BuildContext context) {
     if (widget.measurement != null) {
-      dateTime = widget.measurement!.dateTime!;
       precipitation = widget.measurement!.precipitation;
+      uploader = widget.measurement!.uploader;
+      dateTime = widget.measurement!.dateTime!;
     }
     final Brightness brightness = Theme.of(context).brightness;
 
@@ -137,14 +129,19 @@ class _AddScreenState extends State<AddScreen> {
                     if (widget.measurement == null) {
                       // Crear medición
                       state.addMeasurement(
+                        uploader: uploader!,
                         precipitation: precipitation!,
                         time: dateTime,
                         image: newImage,
                         pluviometer: pluviometer,
                       );
-                      // TODO: QUE SE Muestra el banner
-                      // showBanner;
-                      _incrementCounter;
+                      state.addRealMeasurement(
+                        uploader: uploader!,
+                        precipitation: precipitation!,
+                        time: dateTime,
+                        image: newImage,
+                        pluviometer: pluviometer,
+                      );
                       player.play(AssetSource(path));
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute<void>(
@@ -155,6 +152,16 @@ class _AddScreenState extends State<AddScreen> {
                       // Edita una medición ya existente
                       state.updateMeasurement(
                         id: widget.measurement!.id,
+                        uploader: uploader!,
+                        precipitation: precipitation!,
+                        time: dateTime,
+                        image: newImage,
+                        oldImage: widget.measurement!.imageUrl,
+                        pluviometer: pluviometer,
+                      );
+                      state.updateRealMeasurement(
+                        id: widget.measurement!.id,
+                        uploader: uploader!,
                         precipitation: precipitation!,
                         time: dateTime,
                         image: newImage,
@@ -162,7 +169,6 @@ class _AddScreenState extends State<AddScreen> {
                         pluviometer: pluviometer,
                       );
                       player.play(AssetSource(path));
-                      // showBanner2;
                       Navigator.pop(context);
                       Navigator.pop(context);
                       // Works around the previous page being a stateful widget
@@ -172,9 +178,9 @@ class _AddScreenState extends State<AddScreen> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: const SelectableText(
+                        title: const Text(
                             '¡No ingresaste la medición correctamente, inténtalo nuevamente!'),
-                        content: SelectableText('$e'),
+                        content: Text('$e'),
                       ),
                     );
                   }
@@ -209,6 +215,32 @@ class _AddScreenState extends State<AddScreen> {
                 height: 20,
                 thickness: 1,
               ),
+              Consumer<GoogleSignInProvider>(builder: (context, signIn, child) {
+                final name = FirebaseAuth.instance.currentUser?.displayName;
+                if (name == null) {
+                  name == '';
+                }
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: MyTextFormField(
+                    initialValue: uploader ?? name,
+                    helperText: 'Nombre Completo',
+                    hintText: 'Nombre',
+                    icon: const Icon(
+                      Icons.person,
+                      color: Colors.green,
+                    ),
+                    onChanged: (String value) {
+                      setState(() => uploader = value);
+                    },
+                    textInputType: TextInputType.name,
+                  ),
+                );
+              }),
+              const Divider(
+                thickness: 1,
+              ),
+              // TODO: PUNTO 4 DEL CONTRATO
               ListTile(
                 title: TextFormField(
                   // autofocus: true,
@@ -230,7 +262,7 @@ class _AddScreenState extends State<AddScreen> {
                         color: Colors.blue[900],
                       ),
                     ),
-                    helperText: 'Ingresar Medición',
+                    helperText: 'Ingresar medición de lluvia',
                     hintText:
                         'Recuerda ubicarte al nivel del agua para observar',
                   ),
@@ -242,7 +274,6 @@ class _AddScreenState extends State<AddScreen> {
                   // autocorrect: true,
                   autofocus: true,
                   maxLength: 5,
-                  // TODO: Hacer que funcione , "save_button.dart"
                   // controller: controller,
                   validator: RangeValidator(
                     min: 0.0,
@@ -310,9 +341,8 @@ class _AddScreenState extends State<AddScreen> {
                         width: 60,
                         height: 20,
                         child: Center(
-                          child: SelectableText(
-                            // TODO: connect the text field and the pluviometer
-                            precipitation!.toStringAsFixed(1) + ' mm',
+                          child: Text(
+                            '${precipitation!.toStringAsFixed(1)} mm',
                             style: TextStyle(
                                 color: brightness == Brightness.light
                                     ? Colors.black
@@ -359,20 +389,15 @@ class _AddScreenState extends State<AddScreen> {
                   if (snapshot.hasError ||
                       (snapshot.hasData &&
                           snapshot.data == ConnectivityResult.none)) {
-                    return const SelectableText(
-                        // TODO: AQUÏ VA LA FUNCIÖN PARA QUE NO TENGA INTERNET
-                        'No se puede subir imágenes sin internet (aún).\n Súbelo más tarde desde la galeria');
-                  } else {
                     return Column(
                       children: [
-                        // const SizedBox(height: 15),
                         DarkContainerWidget(
                           data: DarkContainer(
                             fill: Container(
                               child: const Padding(
                                 padding: EdgeInsets.all(16.0),
-                                child: SelectableText(
-                                  'Toma una foto y sube la imagen del\n pluviómetro cuando llegues a casa',
+                                child: Text(
+                                  'No se puede subir imágenes sin internet (aún).\n Toma la fotografía, anota los datos y mándala vía WhatsApp:',
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                     fontSize: 18,
@@ -383,31 +408,60 @@ class _AddScreenState extends State<AddScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 15),
-                        ListTile(
-                            leading: CircleAvatar(
-                                backgroundColor: Colors.purple[300],
-                                child: Icon(Icons.image,
-                                    color: Colors.purple[900])),
-                            title: const Text(
-                              " Desde la Galería",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 16,
-                                fontFamily: 'poppins',
+                        // const Text(
+                        //     'No se puede subir imágenes sin internet (aún).\n Toma la fotografía, anota los datos y mándala vía WhatsApp:'),
+                        const ContactUsButton(
+                            title: 'Mandar fotografía',
+                            message:
+                                'https://api.whatsapp.com/send?phone=5630908507&text=%C2%A1Mira!%20en%20el%20paraje%20%22%20%22%20llovi%C3%B3%20%22%20%22mm,%20adjunto%20fotograf%C3%ADa%20del%20d%C3%ADa%20de%20hoy'),
+                      ],
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        DarkContainerWidget(
+                          data: DarkContainer(
+                            fill: Container(
+                              child: const Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: Text(
+                                  'Toma una foto del pluviómetro y mándala por whatsapp',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'FredokaOne',
+                                  ),
+                                ),
                               ),
                             ),
-                            onTap: () {
-                              pickImage();
-                            }),
-                        const SizedBox(height: 15),
-                        // TODO: hacer que sirva sin wifi!!! y luego activar esto
+                          ),
+                        ),
+                        // TODO: PUNTO 3 DEL CONTRATO
+                        // const SizedBox(height: 15),
+                        // ListTile(
+                        //     leading: CircleAvatar(
+                        //         backgroundColor: Colors.purple[300],
+                        //         child: Icon(Icons.image,
+                        //             color: Colors.purple[900])),
+                        //     title: const Text(
+                        //       " Desde la Galería",
+                        //       style: TextStyle(
+                        //         color: Colors.grey,
+                        //         fontSize: 16,
+                        //         fontFamily: 'poppins',
+                        //       ),
+                        //     ),
+                        //     onTap: () {
+                        //       pickImage();
+                        //     }),
+                        // const SizedBox(height: 15),
+                        // // TODO: PUNTO 3.1 DEL CONTRATO:  hacer que sirva sin wifi!!! y luego activar esto
                         // ListTile(
                         //     leading: CircleAvatar(
                         //         backgroundColor: Colors.purple[300],
                         //         child: Icon(Icons.camera_alt,
                         //             color: Colors.purple[900])),
-                        //     title: const SelectableText("Desde la Cámara",
+                        //     title: const Text("Desde la Cámara",
                         //         style: TextStyle(
                         //           color: Colors.grey,
                         //           fontSize: 16,
@@ -416,35 +470,39 @@ class _AddScreenState extends State<AddScreen> {
                         //     onTap: () {
                         //       pickImageC();
                         //     }),
-                        const SizedBox(height: 20),
-                        if (newImage == null &&
-                            widget.measurement != null &&
-                            widget.measurement!.imageUrl != null)
-                          Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: CachedNetworkImage(
-                              imageUrl: widget.measurement!.imageUrl!,
-                            ),
-                          )
-                        else
-                          newImage != null
-                              ? Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Image.file(newImage!),
-                                )
-                              : const SelectableText(
-                                  "⚠️ No ha seleccionado ninguna imágen ⚠️",
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 16,
-                                    fontFamily: 'poppins',
-                                  ),
-                                ),
+                        // const SizedBox(height: 20),
+                        // if (newImage == null &&
+                        //     widget.measurement != null &&
+                        //     widget.measurement!.imageUrl != null)
+                        //   Padding(
+                        //     padding: const EdgeInsets.all(15.0),
+                        //     child: CachedNetworkImage(
+                        //       imageUrl: widget.measurement!.imageUrl!,
+                        //     ),
+                        //   )
+                        // else
+                        //   newImage != null
+                        //       ? Padding(
+                        //           padding: const EdgeInsets.all(15.0),
+                        //           child: Image.file(newImage!),
+                        //         )
+                        //       : const Text(
+                        //           "⚠️ No ha seleccionado ninguna imágen ⚠️",
+                        //           style: TextStyle(
+                        //             color: Colors.red,
+                        //             fontSize: 16,
+                        //             fontFamily: 'poppins',
+                        //           ),
+                        //         ),
                       ],
                     );
                   }
                 },
               ),
+              const ContactUsButton(
+                  title: 'Mandar fotografía',
+                  message:
+                      'https://api.whatsapp.com/send?phone=5630908507&text=%C2%A1Mira!%20en%20el%20paraje%20%22%20%22%20llovi%C3%B3%20%22%20%22mm,%20adjunto%20fotograf%C3%ADa%20del%20d%C3%ADa%20de%20hoy'),
               const Divider(
                 height: 20,
                 thickness: 1,
@@ -471,80 +529,7 @@ class _AddScreenState extends State<AddScreen> {
         ),
       ),
     );
-    // TODO: Hacer que sirva el banner luego de enviar medición
-
-    // void showBanner() => ScaffoldMessenger.of(context).showMaterialBanner(
-    //       MaterialBanner(
-    //         backgroundColor: AppColors.green1,
-    //         leading: Icon(Icons.check),
-    //         content: SelectableText(
-    //           '¡Has agregado una medición!',
-    //           style: TextStyle(
-    //             fontFamily: 'poppins',
-    //             fontSize: 16,
-    //           ),
-    //         ),
-    //         actions: [
-    //           TextButton(
-    //             onPressed: () {
-    //               ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
-    //             },
-    //             child: SelectableText(
-    //               'OK',
-    //               style: TextStyle(
-    //                 fontFamily: 'poppins',
-    //                 fontSize: 16,
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     );
-
-    // void showBanner2() => ScaffoldMessenger.of(context).showMaterialBanner(
-    //       MaterialBanner(
-    //         leading: Icon(Icons.check),
-    //         content: SelectableText(
-    //           '¡Listo, se ha modificado su medición!',
-    //           style: TextStyle(
-    //             fontFamily: 'poppins',
-    //             fontSize: 16,
-    //           ),
-    //         ),
-    //         backgroundColor: AppColors.green1,
-    //         actions: [
-    //           TextButton(
-    //             onPressed: () {
-    //               ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
-    //             },
-    //             child: SelectableText(
-    //               'OK',
-    //               style: TextStyle(
-    //                 fontFamily: 'poppins',
-    //                 fontSize: 16,
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     );
   }
-
-// class PersonalMeausreData extends StatelessWidget {
-//   const PersonalMeausreData({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SelectableText(
-//       '$_counter',
-//       style: const TextStyle(
-//         color: Colors.white,
-//         fontFamily: 'poppins',
-//         fontSize: 16,
-//       ),
-//     );
-//   }
-// }
 }
 
 class PersonalMeausreData extends StatefulWidget {
@@ -554,12 +539,16 @@ class PersonalMeausreData extends StatefulWidget {
   State<PersonalMeausreData> createState() => _PersonalMeausreDataState();
 }
 
+late final Measurement measurement;
+
 class _PersonalMeausreDataState extends State<PersonalMeausreData> {
   @override
   Widget build(BuildContext context) {
-    return SelectableText(
-      '$_counter',
-      style: const TextStyle(
+    return const Text(
+      // TODO: PUNTO 4.1 DEL CONTRATO Transformar a número
+      // '${measurement.precipitation} mm',
+      '1',
+      style: TextStyle(
         color: Colors.white,
         fontFamily: 'poppins',
         fontSize: 16,

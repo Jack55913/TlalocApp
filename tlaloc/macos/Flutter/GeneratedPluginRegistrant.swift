@@ -7,14 +7,14 @@ import Foundation
 
 import audioplayers_darwin
 import cloud_firestore
-import connectivity_plus_macos
+import connectivity_plus
 import firebase_auth
 import firebase_core
 import firebase_storage
 import mobile_scanner
-import path_provider_macos
-import share_plus_macos
-import shared_preferences_macos
+import path_provider_foundation
+import share_plus
+import shared_preferences_foundation
 import sqflite
 import syncfusion_pdfviewer_macos
 import url_launcher_macos

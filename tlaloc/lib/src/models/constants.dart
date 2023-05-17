@@ -10,7 +10,6 @@ import 'package:tlaloc/src/resources/statics/graphs/graph4.dart';
 // import 'package:tlaloc/src/resources/statics/graphs/graph9.dart';
 // import 'package:tlaloc/src/resources/statics/graphs/grpah8.dart';
 
-
 List<Icon> graphIcons = [
   Icon(Icons.show_chart, color: Colors.blue[300]),
   Icon(Icons.area_chart, color: Colors.green[300]),
@@ -63,9 +62,10 @@ final graphscrens = [
   // const StackedColumnChart(),
   // const CommonAreaSeries(),
 ];
+
 /// Para agregar o quitar parajes, basta con cambiar esta variable
-///
-///
+
+
 Map<String, String> parajes = {
   'El Venturero': 'Nativitas',
   'El Jardín': 'Nativitas',
@@ -75,6 +75,7 @@ Map<String, String> parajes = {
   'Los Manantiales': 'Tequexquinahuac',
   'Tlaltlatlately': 'Santa Catarina del Monte',
   'Agua de Chiqueros': 'Santa Catarina del Monte',
+  'Camino a las Trancas': 'Nativitas',
 };
 
 Map<String, Widget> roles = {
@@ -91,6 +92,7 @@ List<String> commonimages = [
   "assets/images/6_manantiales.png",
   "assets/images/7_terreno.png",
   "assets/images/8_chiqueros.png",
+  "assets/images/9_trancas.png", // Cambiar**
 ];
 
 List<String> commonurl = [
@@ -102,6 +104,7 @@ List<String> commonurl = [
   "https://goo.gl/maps/vNSSgfQsofatUp7r7",
   "https://goo.gl/maps/PNVAD8aFkkN84aoy5",
   "https://goo.gl/maps/4xFZiqJSFhamPsmB8",
+  "https://goo.gl/maps/ropBszb46JPyiRx88", // Cambiar**
 ];
 
 List<String> parajecolection = [
@@ -112,7 +115,8 @@ List<String> parajecolection = [
   'Canoas altas',
   'Los Manantiales',
   'Tlaltlatlately',
-  'Agua de Chiqueros'
+  'Agua de Chiqueros',
+  'Camino a las Trancas'
 ];
 
 List<String> ejidocolection = [
@@ -124,6 +128,7 @@ List<String> ejidocolection = [
   'Tequexquinahuac',
   'Santa Catarina del Monte',
   'Santa Catarina del Monte',
+  'Nativitas',
 ];
 
 // Iterator itr = commonimages.iterator;

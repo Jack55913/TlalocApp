@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/constants.dart';
@@ -8,7 +9,7 @@ import 'package:tlaloc/src/ui/screens/settings/credits.dart';
 import 'package:tlaloc/src/ui/screens/settings/info.dart';
 import 'package:tlaloc/src/ui/screens/settings/politics.dart';
 import 'package:tlaloc/src/ui/screens/settings/privacy.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/google_sign_in.dart';
 
 class MyApp extends StatelessWidget {

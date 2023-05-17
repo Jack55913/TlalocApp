@@ -1,17 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:tlaloc/src/models/app_state.dart';
-import 'package:tlaloc/src/ui/screens/dir/add.dart';
-import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
+import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/infobutton.dart';
-import 'package:tlaloc/src/ui/widgets/backgrounds/empty_state.dart';
-import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
-import 'package:tlaloc/src/ui/widgets/view/dataview.dart';
-import '../../widgets/appbar/profilepage.dart';
+import 'package:tlaloc/src/ui/widgets/appbar/profilepage.dart';
+import 'package:tlaloc/src/ui/widgets/data_widget.dart';
 
 class DataScreen extends StatefulWidget {
   const DataScreen({
@@ -24,159 +15,56 @@ class DataScreen extends StatefulWidget {
 
 class _DataScreenState extends State<DataScreen> {
   bool isFabVisable = true;
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        drawer: DrawerApp(),
-        floatingActionButton: Visibility(
-          visible: isFabVisable,
-          child: Fab(),
-        ),
-        body: Consumer<AppState>(
-          builder: (context, state, _) {
-            return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream: state.getMeasurementsStream(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return EmptyState('Error ${snapshot.error}');
-                } else if (snapshot.hasData) {
-                  final measurementsSnapshot = snapshot.data!;
-                  final measurements =
-                      state.getMeasurementsFromSnapshot(measurementsSnapshot);
-                  return CustomScrollView(
-                    slivers: <Widget>[
-                      SliverAppBar(
-                        floating: true,
-                        pinned: true,
-                        snap: false,
-                        expandedHeight: 150.0,
-                        flexibleSpace: FlexibleSpaceBar(
-                          title: SelectableText('Bitácora',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontFamily: 'FredokaOne',
-                                fontSize: 24,
-                                letterSpacing: 2,
-                              )),
-                          background: Image.asset(
-                            'assets/images/img-7.jpg',
-                            fit: BoxFit.fitWidth,
-                          ),
-                        ),
-                        actions: <Widget>[
-                          InfoButton(),
-                          ProfilePage(),
-                        ],
-                      ),
-                      SliverList(
-                        delegate: SliverChildListDelegate(
-                          [
-                            for (var measurement in measurements)
-                              Slidable(
-                                  startActionPane: ActionPane(
-                                    motion: StretchMotion(),
-                                    children: [
-                                      SlidableAction(
-                                          backgroundColor: Colors.white,
-                                          onPressed: (context) {
-                                            Share.share(
-                                                '¡Mira! el *${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.day} llovió ${measurement.precipitation} mm*. Ayúdame a medir, descargándo la app en tlaloc.web.app');
-                                          },
-                                          icon: Icons.share),
-                                      SlidableAction(
-                                          backgroundColor: Colors.blue,
-                                          onPressed: (context) async {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => AddScreen(
-                                                    measurement: measurement),
-                                              ),
-                                            );
-                                          },
-                                          icon: Icons.edit),
-                                    ],
-                                  ),
-                                  endActionPane: ActionPane(
-                                    motion: StretchMotion(),
-                                    children: [
-                                      SlidableAction(
-                                        backgroundColor: Colors.red,
-                                        onPressed: (context) {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) => AlertDialog(
-                                              title: SelectableText(
-                                                  '¿Estás seguro que quieres eliminar este registro?'),
-                                              content: SelectableText(
-                                                  'No podrás recuperarlo una vez que lo elimines.'),
-                                              actions: [
-                                                TextButton(
-                                                  child: Text('Cancelar'),
-                                                  onPressed: () =>
-                                                      Navigator.of(context)
-                                                          .pop(),
-                                                ),
-                                                TextButton(
-                                                  child: Text('Eliminar'),
-                                                  onPressed: () async {
-                                                    try {
-                                                      final state =
-                                                          Provider.of<AppState>(
-                                                              context,
-                                                              listen: false);
-                                                      await state
-                                                          .deleteMeasurement(
-                                                              id: measurement
-                                                                  .id);
-                                                      // TODO: Cuando eliminamos una medición, también eliminarlo del contador
-                                                      // _decrementCounter;
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    } catch (e) {
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (context) =>
-                                                            AlertDialog(
-                                                          title: SelectableText(
-                                                              'Ocurrió un error al eliminar'),
-                                                          content:
-                                                              SelectableText(
-                                                                  '$e'),
-                                                        ),
-                                                      );
-                                                    }
-                                                  },
-                                                ),
-                                              ],
-                                            ),
-                                            barrierDismissible: true,
-                                          );
-                                        },
-                                        icon: Icons.delete,
-                                      ),
-                                    ],
-                                  ),
-                                  child:
-                                      DataWidgetView(measurement: measurement)),
-                            const Divider(
-                              thickness: 1,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            );
+      child: DefaultTabController(
+        initialIndex: 1,
+        length: 2,
+        child: NestedScrollView(
+          headerSliverBuilder: (context, value) {
+            return [
+              SliverAppBar(
+                title: const Text('Bitácora',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.dark1,
+                      fontFamily: 'FredokaOne',
+                      fontSize: 24,
+                      letterSpacing: 2,
+                    )),
+                floating: true,
+                pinned: true,
+                snap: false,
+                expandedHeight: 150.0,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Image.asset(
+                    'assets/images/img-7.jpg',
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                actions: const <Widget>[
+                  InfoButton(),
+                  ProfilePage(),
+                ],
+                bottom: const TabBar(
+                  tabs: <Widget>[
+                    Tab(
+                      text: 'Acumulados',
+                      icon: Icon(Icons.cloud_outlined),
+                    ),
+                    Tab(
+                      text: 'Reales',
+                      icon: Icon(Icons.cloud_done_outlined),
+                    ),
+                  ],
+                ),
+              ),
+            ];
           },
+          body: const TabBarView(
+            children: <Widget>[MyDataWidget(), MyRealDataWidget()],
+          ),
         ),
       ),
     );
