@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_const_constructors, avoid_types_as_parameter_names, non_constant_identifier_names
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
+import 'package:tlaloc/src/ui/widgets/appbar/infobutton2.dart';
 import 'package:tlaloc/src/ui/widgets/appbar/profilepage.dart';
-import '../../widgets/appbar/infobutton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -31,7 +29,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: AutoSizeText(
+          title: const AutoSizeText(
             'Estadísticas',
             style: TextStyle(
               fontFamily: 'FredokaOne',
@@ -40,11 +38,11 @@ class _GraphsScreenState extends State<GraphsScreen> {
             ),
           ),
           actions: const <Widget>[
-            InfoButton(),
+            InfoButton2(),
             ProfilePage(),
           ],
         ),
-        drawer: DrawerApp(),
+        drawer: const DrawerApp(),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -66,7 +64,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
                             mode = DateTimeMode.week;
                             initialDate = monday;
                             finalDate = monday.add(const Duration(
-                              days: 5,
+                              days: 6,
                               hours: 23,
                               minutes: 59,
                               seconds: 59,
@@ -170,7 +168,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
                         } else if (snapshot.hasData) {
                           final measurementsSnapshot = snapshot.data!;
                           final measurements =
-                              state.getMeasurementsFromSnapshot(
+                              state.getRealMeasurementsFromSnapshot(
                                   measurementsSnapshot);
                           final filteredMeasurements = measurements
                               .where((measurement) => (measurement.dateTime!

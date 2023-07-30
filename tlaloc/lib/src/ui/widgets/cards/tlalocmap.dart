@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TlalocMapData extends StatelessWidget {
   const TlalocMapData({Key? key}) : super(key: key);
@@ -12,7 +14,8 @@ class TlalocMapData extends StatelessWidget {
       // mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const Image(
-          image: AssetImage("assets/images/mapa2.png"),
+          // image: AssetImage("assets/images/mapa2.png"),
+          image: AssetImage("assets/images/mapa3.jpg"),
           fit: BoxFit.cover,
         ),
         const SizedBox(height: 20),
@@ -71,6 +74,69 @@ class TlalocMapData extends StatelessWidget {
           ),
         ),
 
+        const SizedBox(height: 20),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Consumer<AppState>(
+              builder: (context, state, _) =>
+                  FutureBuilder<Map<String, dynamic>>(
+                      future: state.getCurrentParajeData(),
+                      builder: (context, snapshot) {
+                        late String url;
+                        if (snapshot.hasError) {
+                          url = snapshot.error.toString();
+                        } else if (snapshot.hasData) {
+                          url = snapshot.data?['url'] ??
+                              'https://www.youtube.com/watch?v=GJuTIxwQw0k&list=RDGJuTIxwQw0k&start_radio=1';
+                        } else {
+                          url =
+                              'https://www.youtube.com/watch?v=GJuTIxwQw0k&list=RDGJuTIxwQw0k&start_radio=1';
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton.icon(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.white)),
+                            onPressed: () {
+                              launchUrl(
+                                Uri.parse(url),
+                              );
+                            },
+                            icon: const FaIcon(FontAwesomeIcons.mapPin,
+                                color: Colors.red),
+                            label: const Text(
+                              'Google Maps',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.black),
+                            ),
+                          ),
+                        );
+                      }),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton.icon(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white)),
+                onPressed: () {
+                  launchUrl(
+                    Uri.parse(
+                        'https://es.wikiloc.com/rutas-mountain-bike/monitoreo-de-la-lluvia-ruta-2-141098082'),
+                  );
+                },
+                icon: const FaIcon(FontAwesomeIcons.map, color: Colors.green),
+                label: const Text(
+                  'Wikiloc',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ),
+              ),
+            ),
+          ],
+        ),
         const SizedBox(height: 20),
       ],
     );

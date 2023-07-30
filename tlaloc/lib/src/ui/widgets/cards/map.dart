@@ -14,18 +14,6 @@ class TlalocMap extends StatelessWidget {
         appBar: AppBar(
           title: Text('Ruta de "${Provider.of<AppState>(context).paraje}"'),
           actions: <Widget>[
-            InkWell(
-              child: const Icon(Icons.download, color: Colors.green),
-              onTap: () {
-                launchUrl(
-                  Uri.parse(
-                      'https://drive.google.com/file/d/1FMi8epSV6S5G3lN6tDDD20oGPLAvADmq/view?usp=sharing'),
-                );
-              },
-            ),
-            const SizedBox(
-              width: 15,
-            ),
             Consumer<AppState>(
               builder: (context, state, _) =>
                   FutureBuilder<Map<String, dynamic>>(
@@ -45,8 +33,8 @@ class TlalocMap extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton.icon(
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Colors.white)
-                            ),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.white)),
                             onPressed: () {
                               launchUrl(
                                 Uri.parse(url),
@@ -60,6 +48,21 @@ class TlalocMap extends StatelessWidget {
                           ),
                         );
                       }),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            InkWell(
+              child: const Icon(Icons.download, color: Colors.green),
+              onTap: () {
+                launchUrl(
+                  Uri.parse(
+                      'https://drive.google.com/file/d/1FMi8epSV6S5G3lN6tDDD20oGPLAvADmq/view?usp=sharing'),
+                );
+              },
+            ),
+            const SizedBox(
+              width: 15,
             ),
           ],
         ),

@@ -8,8 +8,6 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
-import 'package:tlaloc/src/models/custompathpainter.dart';
 import 'package:tlaloc/src/models/date.dart';
 import 'package:tlaloc/src/resources/onboarding/common_select.dart';
 import 'package:tlaloc/src/ui/screens/home/home_widget_classes.dart';
@@ -282,95 +280,96 @@ class _AddScreenState extends State<AddScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 350,
-                child: SfLinearGauge(
-                  minimum: _minimumLevel.toDouble(),
-                  maximum: _maximumLevel.toDouble(),
-                  orientation: LinearGaugeOrientation.vertical,
-                  interval: 10,
-                  axisTrackStyle: const LinearAxisTrackStyle(
-                    thickness: 2,
-                  ),
-                  markerPointers: <LinearMarkerPointer>[
-                    LinearWidgetPointer(
-                      value: precipitation!.toDouble(),
-                      enableAnimation: true,
-                      onChanged: (dynamic value) {
-                        setState(() {
-                          precipitation = value as num;
-                        });
-                      },
-                      child: Material(
-                        elevation: 4.0,
-                        shape: const CircleBorder(),
-                        clipBehavior: Clip.hardEdge,
-                        color: Colors.blue,
-                        child: Ink(
-                          width: 32.0,
-                          height: 32.0,
-                          child: InkWell(
-                            splashColor: Colors.grey,
-                            hoverColor: Colors.blueAccent,
-                            onTap: () {},
-                            child: Center(
-                              child: precipitation == _minimumLevel
-                                  ? const Icon(Icons.keyboard_arrow_up_outlined,
-                                      color: Colors.white, size: 18.0)
-                                  : precipitation == _maximumLevel
-                                      ? const Icon(
-                                          Icons.keyboard_arrow_down_outlined,
-                                          color: Colors.white,
-                                          size: 18.0)
-                                      : const RotatedBox(
-                                          quarterTurns: 3,
-                                          child: Icon(Icons.code_outlined,
-                                              color: Colors.white, size: 18.0)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    LinearWidgetPointer(
-                      value: precipitation!.toDouble(),
-                      enableAnimation: true,
-                      markerAlignment: LinearMarkerAlignment.end,
-                      offset: 67,
-                      position: LinearElementPosition.outside,
-                      child: SizedBox(
-                        width: 60,
-                        height: 20,
-                        child: Center(
-                          child: Text(
-                            '${precipitation!.toStringAsFixed(1)} mm',
-                            style: TextStyle(
-                                color: brightness == Brightness.light
-                                    ? Colors.black
-                                    : Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                  barPointers: <LinearBarPointer>[
-                    LinearBarPointer(
-                      value: _maximumLevel.toDouble(),
-                      enableAnimation: true,
-                      thickness: 150,
-                      offset: 18,
-                      position: LinearElementPosition.outside,
-                      color: Colors.transparent,
-                      child: CustomPaint(
-                          painter: CustomPathPainter(
-                              color: Colors.blue,
-                              waterLevel: precipitation!.toDouble(),
-                              maximumPoint: _maximumLevel.toDouble())),
-                    )
-                  ],
-                ),
-              ),
+              // TODO: Que ya funcione
+              // SizedBox(
+              //   height: 350,
+              //   child: SfLinearGauge(
+              //     minimum: _minimumLevel.toDouble(),
+              //     maximum: _maximumLevel.toDouble(),
+              //     orientation: LinearGaugeOrientation.vertical,
+              //     interval: 10,
+              //     axisTrackStyle: const LinearAxisTrackStyle(
+              //       thickness: 2,
+              //     ),
+              //     markerPointers: <LinearMarkerPointer>[
+              //       LinearWidgetPointer(
+              //         value: precipitation!.toDouble(),
+              //         enableAnimation: true,
+              //         onChanged: (dynamic value) {
+              //           setState(() {
+              //             precipitation = value as num;
+              //           });
+              //         },
+              //         child: Material(
+              //           elevation: 4.0,
+              //           shape: const CircleBorder(),
+              //           clipBehavior: Clip.hardEdge,
+              //           color: Colors.blue,
+              //           child: Ink(
+              //             width: 32.0,
+              //             height: 32.0,
+              //             child: InkWell(
+              //               splashColor: Colors.grey,
+              //               hoverColor: Colors.blueAccent,
+              //               onTap: () {},
+              //               child: Center(
+              //                 child: precipitation == _minimumLevel
+              //                     ? const Icon(Icons.keyboard_arrow_up_outlined,
+              //                         color: Colors.white, size: 18.0)
+              //                     : precipitation == _maximumLevel
+              //                         ? const Icon(
+              //                             Icons.keyboard_arrow_down_outlined,
+              //                             color: Colors.white,
+              //                             size: 18.0)
+              //                         : const RotatedBox(
+              //                             quarterTurns: 3,
+              //                             child: Icon(Icons.code_outlined,
+              //                                 color: Colors.white, size: 18.0)),
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //       LinearWidgetPointer(
+              //         value: precipitation!.toDouble(),
+              //         enableAnimation: true,
+              //         markerAlignment: LinearMarkerAlignment.end,
+              //         offset: 67,
+              //         position: LinearElementPosition.outside,
+              //         child: SizedBox(
+              //           width: 60,
+              //           height: 20,
+              //           child: Center(
+              //             child: Text(
+              //               '${precipitation!.toStringAsFixed(1)} mm',
+              //               style: TextStyle(
+              //                   color: brightness == Brightness.light
+              //                       ? Colors.black
+              //                       : Colors.white,
+              //                   fontSize: 14,
+              //                   fontWeight: FontWeight.bold),
+              //             ),
+              //           ),
+              //         ),
+              //       )
+              //     ],
+              //     barPointers: <LinearBarPointer>[
+              //       LinearBarPointer(
+              //         value: _maximumLevel.toDouble(),
+              //         enableAnimation: true,
+              //         thickness: 150,
+              //         offset: 18,
+              //         position: LinearElementPosition.outside,
+              //         color: Colors.transparent,
+              //         child: CustomPaint(
+              //             painter: CustomPathPainter(
+              //                 color: Colors.blue,
+              //                 waterLevel: precipitation!.toDouble(),
+              //                 maximumPoint: _maximumLevel.toDouble())),
+              //       )
+              //     ],
+              //   ),
+              // ),
               const Divider(
                 height: 20,
                 thickness: 1,

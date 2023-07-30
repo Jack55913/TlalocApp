@@ -1,0 +1,17 @@
+{
+    "hosting": {
+      "site": "tlaloc",
+      "public": "firebase_hosting",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "!/web/**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  }

@@ -11,6 +11,7 @@ import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/notebook.dart';
+import 'package:tlaloc/src/ui/widgets/cards/communitybutton.dart';
 import 'package:tlaloc/src/ui/widgets/cards/phrase.dart';
 import 'package:tlaloc/src/ui/widgets/cards/tutorials.dart';
 import 'package:tlaloc/src/ui/widgets/objects/quickadd.dart';
@@ -128,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 20),
               DynamicTlalocMap(),
               SizedBox(height: 10),
-              FacebookButton(),
+              CommunityButton(),
               Divider(
                 height: 20,
                 thickness: 1,
@@ -136,6 +137,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ContactUsButton(
                 title: '¡Contáctanos!',
                 message: 'https://api.whatsapp.com/send?phone=5630908507',
+              ),
+              Divider(
+                height: 20,
+                thickness: 1,
+              ),
+              FacebookButton(
+                title: '¡Síguenos!',
+                message:
+                    'https://www.facebook.com/profile.php?id=100083233511805',
               ),
               Divider(
                 height: 20,

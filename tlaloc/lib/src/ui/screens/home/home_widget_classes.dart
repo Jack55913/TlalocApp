@@ -8,8 +8,6 @@ import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
 import 'package:tlaloc/src/ui/widgets/cards/tlalocmap.dart';
 
-import '../../widgets/cards/map.dart';
-
 class ContactUsButton extends StatelessWidget {
   const ContactUsButton({
     Key? key,
@@ -27,9 +25,7 @@ class ContactUsButton extends StatelessWidget {
             backgroundColor: AppColors.whatsappgreen,
             surfaceTintColor: AppColors.whatsappgreen),
         onPressed: () {
-          launchUrl(Uri.parse(
-            message
-          ));
+          launchUrl(Uri.parse(message));
         },
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -77,15 +73,28 @@ class DynamicTlalocMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const TlalocMap()),
-          );
-        },
-        child: DarkContainerWidget(
-          data: DarkContainer(fill: TlalocMapData()),
-        ));
+    return DarkContainerWidget(
+      data: DarkContainer(fill: TlalocMapData()),
+    );
   }
 }
+
+
+
+// class DynamicTlalocMap extends StatelessWidget {
+//   const DynamicTlalocMap({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return InkWell(
+//         onTap: () {
+//           Navigator.push(
+//             context,
+//             MaterialPageRoute(builder: (context) => const TlalocMap()),
+//           );
+//         },
+//         child: DarkContainerWidget(
+//           data: DarkContainer(fill: TlalocMapData()),
+//         ));
+//   }
+// }

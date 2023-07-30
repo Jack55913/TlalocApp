@@ -1,67 +1,68 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:tlaloc/src/models/constants.dart';
 
 class FacebookButton extends StatelessWidget {
-  const FacebookButton({Key? key}) : super(key: key);
-
+  const FacebookButton({
+    Key? key,
+    required this.title,
+    required this.message,
+  }) : super(key: key);
+  final String title;
+  final String message;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.orange1,
-          borderRadius: BorderRadius.circular(25),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            const SizedBox(
-              width: 1,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  'Todos podemos \nPARTICIPAR',
-                  // 'Descúbre un grupo\npara preservar\nel monte Tláloc',
-                  style: TextStyle(
-                    fontFamily: 'FredokaOne',
-                    fontSize: 18,
-                    color: Colors.white,
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.blue1,
+            surfaceTintColor: AppColors.blue1),
+        onPressed: () {
+          launchUrl(Uri.parse(message));
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  FaIcon(FontAwesomeIcons.facebook, color: Colors.white),
+                  SizedBox(
+                    width: 25,
                   ),
-                ),
-                SizedBox(height: 30),
-                Text(
-                  'Explora las acciones\n y unamos fuerzas\nMás información aquí',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'poppins',
-                    fontSize: 16,
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontFamily: 'FredokaOne',
+                      fontSize: 24,
+                      letterSpacing: 2,
+                    ),
                   ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Ciencia Ciudadana para el Monitoreo de Lluvia',
+                style: TextStyle(
+                  fontFamily: 'poppins',
+                  fontSize: 18,
+                  letterSpacing: 2,
                 ),
-              ],
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(25),
+                textAlign: TextAlign.center,
               ),
-              child: const Image(
-                image: AssetImage('assets/images/img-5.jpg'),
-                fit: BoxFit.cover,
-                width: 170,
-                height: 150,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-      onTap: () {
-        Navigator.pushNamed(context, '/community');
-      },
     );
   }
 }
