@@ -32,14 +32,14 @@ class DrawerApp extends StatelessWidget {
             color: AppColors.dark2,
             image: DecorationImage(
               image: AssetImage(
-                // TODO: PONER UNA IMAGEN CHIDA
-                "assets/images/Portada2.png",
+                "assets/images/img-1.png",
               ),
-              fit: BoxFit.fill,
+              alignment: Alignment.topLeft,
+              fit: BoxFit.fitHeight,
             ),
           ),
           child: Text(
-            'Tláloc App',
+            'Tláloc\nApp',
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,

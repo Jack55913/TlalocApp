@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: AutoSizeText(
             appName,
             style: TextStyle(
+              color: Colors.white,
               fontFamily: 'FredokaOne',
               fontSize: 24,
               letterSpacing: 2,

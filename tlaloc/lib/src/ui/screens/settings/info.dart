@@ -9,11 +9,11 @@ import 'package:tlaloc/src/ui/widgets/appbar/infobutton2.dart';
 // ignore_for_file: public_member_api_docs
 
 const String _markdownData = """
-# Ciencia ciudadana para el monitoreo participativo de la lluvia en un gradiente altitudinal del Monte Tláloc, Texcoco, Estado de México
+# Tláloc App
 ___
 
 ## ¿Qué es Tláloc app?
-Es una aplicación para el envío y consulta de datos de lluvia que se generan con la colaboración de las personas que suben al Monte Tláloc. Forma parte de un proyecto de ciencia ciudadana para el monitoreo participativo de lluvia.
+Es una aplicación para el envío y consulta de datos de lluvia que se generan con la colaboración de las personas que suben al Monte Tláloc. Forma parte de un proyecto de ciencia ciudadana para el monitoreo de lluvia.
 
 ## ¿Quiénes somos?
 Somos académicos del Postgrado en Ciencias Forestales del Colegio de Postgraduados campus Montecillo y estudiantes de distintas instituciones (Colpos, Uach, etc.). Se cuenta con el apoyo de la Unión de Ejidos de la Montaña (Texcoco). Coordinadora de proyecto: Dra. Teresa M. González Martínez.

@@ -19,9 +19,9 @@ class FacebookButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.blue1,
-            surfaceTintColor: AppColors.blue1),
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(AppColors.blue1),
+            surfaceTintColor:MaterialStateProperty.all(AppColors.blue1),),
         onPressed: () {
           launchUrl(Uri.parse(message));
         },

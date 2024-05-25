@@ -21,9 +21,11 @@ class ContactUsButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.whatsappgreen,
-            surfaceTintColor: AppColors.whatsappgreen),
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(AppColors.whatsappgreen),
+            surfaceTintColor: MaterialStateProperty.all(AppColors.whatsappgreen),
+            
+            ),
         onPressed: () {
           launchUrl(Uri.parse(message));
         },

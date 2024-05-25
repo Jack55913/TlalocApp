@@ -37,6 +37,7 @@ class MyDataWidget extends StatelessWidget {
                                 motion: const StretchMotion(),
                                 children: [
                                   SlidableAction(
+                                    foregroundColor: Colors.black,
                                       backgroundColor: Colors.white,
                                       onPressed: (context) {
                                         Share.share(
@@ -44,6 +45,7 @@ class MyDataWidget extends StatelessWidget {
                                       },
                                       icon: Icons.share),
                                   SlidableAction(
+                                    foregroundColor: Colors.white,
                                       backgroundColor: Colors.blue,
                                       onPressed: (context) async {
                                         Navigator.push(
@@ -61,6 +63,7 @@ class MyDataWidget extends StatelessWidget {
                                 motion: const StretchMotion(),
                                 children: [
                                   SlidableAction(
+                                    foregroundColor: Colors.white,
                                     backgroundColor: Colors.red,
                                     onPressed: (context) {
                                       showDialog(
@@ -157,10 +160,12 @@ class MyRealDataWidget extends StatelessWidget {
                       [
                         for (var measurement in measurements)
                           Slidable(
+                            
                               startActionPane: ActionPane(
                                 motion: const StretchMotion(),
                                 children: [
                                   SlidableAction(
+                                    foregroundColor: Colors.black,
                                       backgroundColor: Colors.white,
                                       onPressed: (context) {
                                         Share.share(
@@ -168,6 +173,7 @@ class MyRealDataWidget extends StatelessWidget {
                                       },
                                       icon: Icons.share),
                                   SlidableAction(
+                                    foregroundColor: Colors.white,
                                       backgroundColor: Colors.blue,
                                       onPressed: (context) async {
                                         Navigator.push(
@@ -185,6 +191,7 @@ class MyRealDataWidget extends StatelessWidget {
                                 motion: const StretchMotion(),
                                 children: [
                                   SlidableAction(
+                                    foregroundColor: Colors.white,
                                     backgroundColor: Colors.red,
                                     onPressed: (context) {
                                       showDialog(
@@ -236,8 +243,7 @@ class MyRealDataWidget extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              child: DataWidgetView(measurement: measurement)
-                              ),
+                              child: DataWidgetView(measurement: measurement)),
                         const Divider(
                           thickness: 1,
                         ),

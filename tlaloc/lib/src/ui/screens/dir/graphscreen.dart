@@ -42,7 +42,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
             ProfilePage(),
           ],
         ),
-        drawer: const DrawerApp(),
+        // drawer: const DrawerApp(),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -161,14 +161,14 @@ class _GraphsScreenState extends State<GraphsScreen> {
                   builder: (context, state, _) {
                     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                       stream: state
-                          .getRealMeasurementsStream(), // Just as on DataScreen
+                          .getMeasurementsStream(), // Just as on DataScreen
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           return EmptyState('Error ${snapshot.error}');
                         } else if (snapshot.hasData) {
                           final measurementsSnapshot = snapshot.data!;
                           final measurements =
-                              state.getRealMeasurementsFromSnapshot(
+                              state.getMeasurementsFromSnapshot(
                                   measurementsSnapshot);
                           final filteredMeasurements = measurements
                               .where((measurement) => (measurement.dateTime!

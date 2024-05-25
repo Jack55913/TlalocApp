@@ -13,8 +13,10 @@ class QuickAddWidget extends StatelessWidget {
       children: [
         Expanded(
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                elevation: 0, backgroundColor: Colors.transparent),
+            style: ButtonStyle(
+                // elevation: 0, 
+                backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                ),
             onPressed: () =>
                 // Ir a addscreen
                 Navigator.push(
@@ -24,7 +26,7 @@ class QuickAddWidget extends StatelessWidget {
               ),
             ),
             child: Row(
-              children: const [
+              children: [
                 Text(
                   'Sube una medición',
                   textAlign: TextAlign.start,
@@ -37,7 +39,7 @@ class QuickAddWidget extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 10),
+        SizedBox(width: 10),
         InkWell(
           // Ir a commonselect
           onTap: () => Navigator.push(
@@ -46,7 +48,7 @@ class QuickAddWidget extends StatelessWidget {
               builder: (context) => const CommonSelectPage(),
             ),
           ),
-          child: const CircleAvatar(
+          child: CircleAvatar(
             backgroundColor: AppColors.dark3,
             child: Icon(Icons.qr_code, color: AppColors.blue1),
           ),

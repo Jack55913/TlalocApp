@@ -22,12 +22,12 @@ class TableButton extends StatelessWidget {
             ],
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
+        child: const Padding(
+          padding: EdgeInsets.all(20.0),
           child: Column(
             children: [
               Row(
-                children: const [
+                children: [
                   Text(
                     'Mediciones\n Generales 📝',
                     style: TextStyle(
@@ -39,11 +39,11 @@ class TableButton extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
+                children: [
                   Text(
                     'Ver más',
                     textAlign: TextAlign.right,

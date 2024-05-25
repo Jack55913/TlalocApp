@@ -34,12 +34,17 @@ class _ButtonWidgetState extends State<ButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.green1,
-          disabledForegroundColor: AppColors.green1.withOpacity(0.38),
-          disabledBackgroundColor: AppColors.green1.withOpacity(0.12),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(AppColors.green1),
+          // TODO
+          
+          // disabledForegroundColor: MaterialStateProperty.all(AppColors.green1.withOpacity(0.38)),
+          // disabledBackgroundColor: MaterialStateProperty.all(AppColors.green1.withOpacity(0.12)),
+          
+          // shape:
+          //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))
+              
+              ),
       onPressed: isButtonActive
           ? () {
               setState(() => isButtonActive = false);

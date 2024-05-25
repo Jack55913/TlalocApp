@@ -19,7 +19,7 @@ class _DataScreenState extends State<DataScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: DefaultTabController(
-        initialIndex: 1,
+        // initialIndex: 1,
         length: 2,
         child: NestedScrollView(
           headerSliverBuilder: (context, value) {
@@ -53,17 +53,21 @@ class _DataScreenState extends State<DataScreen> {
                       text: 'Acumulados',
                       icon: Icon(Icons.cloud_outlined),
                     ),
-                    Tab(
-                      text: 'Reales',
-                      icon: Icon(Icons.cloud_done_outlined),
-                    ),
+                    // Tab(
+                    //   text: 'Reales',
+                    //   icon: Icon(Icons.cloud_done_outlined),
+                    // ),
                   ],
                 ),
               ),
             ];
           },
           body: const TabBarView(
-            children: <Widget>[MyDataWidget(), MyRealDataWidget()],
+            children: <Widget>[
+              // TODO: Quitar my real data
+              MyDataWidget(),
+              // MyRealDataWidget()
+            ],
           ),
         ),
       ),

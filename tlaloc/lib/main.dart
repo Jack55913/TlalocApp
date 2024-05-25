@@ -17,15 +17,12 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // Modo sin conexión:
   FirebaseFirestore.instance.settings = const Settings(
-    // cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
+    cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
     persistenceEnabled: true,
   );
-  // await FirebaseFirestore.instance
-  //     .enablePersistence(const PersistenceSettings(synchronizeTabs: true));
-
+FirebaseFirestore.instance.settings = const Settings(persistenceEnabled: true);
   runApp(const MyApp());
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('google_fonts/OFL.txt');
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
-  });
-}
+  });}

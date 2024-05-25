@@ -67,10 +67,11 @@ class SignUpWidget extends StatelessWidget {
               Spacer(),
               SizedBox(height: 16),
               ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  minimumSize: Size(double.infinity, 48),
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(Colors.black),
+                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                  // TODO:
+                  // minimumSize: Size(double.infinity, 48),
                 ),
                 icon: FaIcon(FontAwesomeIcons.google, color: Colors.red),
                 label: Text('Iniciar sesión con Google'),
@@ -102,10 +103,11 @@ class SignUpWidget extends StatelessWidget {
               ),
               SizedBox(height: 8),
               ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  minimumSize: Size(double.infinity, 48),
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(Colors.black),
+                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                  // TODO:
+                  // minimumSize: Size(double.infinity, 48),
                 ),
                 icon: Icon(Icons.person, color: Colors.black),
                 label: Text('Modo Incógnito'),

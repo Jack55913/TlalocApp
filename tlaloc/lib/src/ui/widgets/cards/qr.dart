@@ -103,13 +103,13 @@ class QrSelectWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(25.0),
               color: Colors.white,
             ),
-            child: Center(
+            child: const Center(
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
+                  children: [
                     CircleAvatar(
                       backgroundColor: Colors.white,
                       backgroundImage: AssetImage('assets/images/qr_code.png'),

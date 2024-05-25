@@ -80,8 +80,8 @@ class _AddScreenState extends State<AddScreen> {
   // }
 
 // PLUVIOMETER:
-  final num _minimumLevel = 0;
-  final num _maximumLevel = 160;
+  // final num _minimumLevel = 0;
+  // final num _maximumLevel = 160;
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class _AddScreenState extends State<AddScreen> {
       uploader = widget.measurement!.uploader;
       dateTime = widget.measurement!.dateTime!;
     }
-    final Brightness brightness = Theme.of(context).brightness;
+    // final Brightness brightness = Theme.of(context).brightness;
 
     return SafeArea(
       child: Scaffold(
@@ -241,7 +241,6 @@ class _AddScreenState extends State<AddScreen> {
               // TODO: PUNTO 4 DEL CONTRATO
               ListTile(
                 title: TextFormField(
-                  // autofocus: true,
                   cursorColor: Colors.indigo,
                   // onEditingComplete: , Sirve para que el botón de enter en el teclado envíe la medición automáticamente
                   // onSaved: (newValue) => precipitation,

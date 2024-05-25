@@ -7,6 +7,7 @@ import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/models/google_sign_in.dart';
 import 'package:tlaloc/src/models/kernel.dart';
 import 'package:tlaloc/src/resources/onboarding/onbording.dart';
+import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
 
 class ConfigureScreen extends StatefulWidget {
   const ConfigureScreen({Key? key}) : super(key: key);
@@ -20,11 +21,17 @@ class _ConfigureScreenState extends State<ConfigureScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          // actions: [
+          //   IconButton(
+          //       onPressed: () {
+          //         DrawerApp();
+          //       },
+          //       icon: Icon(Icons.menu))
+          // ],
           backgroundColor: AppColors.dark2,
           title: Consumer<GoogleSignInProvider>(
             builder: (context, signIn, child) {
-              String name =
-                  signIn.user!.displayName!.split(' ')[0];
+              String name = signIn.user!.displayName!.split(' ')[0];
               return Text(
                 'Perfil de $name',
                 style: TextStyle(

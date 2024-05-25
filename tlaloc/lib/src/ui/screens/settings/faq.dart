@@ -10,7 +10,7 @@ import 'package:tlaloc/src/models/constants.dart';
 const String _markdownData = """
 ## ¿Qué información puedo ver?
 
-En Tláloc App, puedes ver cuánto ha llovido diariamente en diferentes puntos del monte Tláloc, así como una gráfica de barras y las colaboraciones de todos los usuarios
+En Tláloc App, puedes ver cuánto ha llovido en diferentes puntos del monte Tláloc, así como una gráfica de barras y las colaboraciones de todos los usuarios
 
 ## ¿Puedo borrar mis datos o modificarlos?  
 

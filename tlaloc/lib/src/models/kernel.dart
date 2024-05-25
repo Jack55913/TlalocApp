@@ -7,6 +7,8 @@ import 'package:tlaloc/src/ui/screens/dir/add.dart';
 import 'package:tlaloc/src/ui/screens/dir/data.dart';
 import 'package:tlaloc/src/ui/screens/dir/graphscreen.dart';
 import 'package:tlaloc/src/ui/screens/dir/home.dart';
+import 'package:tlaloc/src/ui/screens/home/profile_page.dart';
+import 'package:tlaloc/src/ui/widgets/appbar/profilepage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,22 +20,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isFabVisable = true;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
-  int index = 0;
+  int index = 1;
 
   final screens = [
-    const AddScreen(),
     const HomeScreen(),
+    const AddScreen(),
     const DataScreen(),
-    const GraphsScreen(),
+    // const GraphsScreen(),
+    const ConfigureScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
-      const Icon(Icons.add, size: 30),
       const Icon(Icons.home, size: 30),
+      const Icon(Icons.add, size: 30),
       const Icon(Icons.menu_book_rounded, size: 30),
-      const Icon(Icons.bar_chart_rounded, size: 30),
+      // const Icon(Icons.bar_chart_rounded, size: 30),
+      const Icon(Icons.person, size: 30),
     ];
 
     return Scaffold(

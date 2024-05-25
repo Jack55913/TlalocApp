@@ -17,8 +17,6 @@ const String _markdownData = """
 
 * **CTO: Emilio Álvarez Herrera** - *Irrigación - UACh* - [emilio-ah.web.app](https://emilio-ah.web.app)
 
-* **COO: Pedro Luis Díaz Lira** - *Irrigación - UACh*  
-
 ## Ejidos 🛠️
 
 * **Santa María Nativitas**
@@ -30,11 +28,9 @@ const String _markdownData = """
 
 ## Colaboradores 🍺
 
-* **CCO: Diana Cerón Flores** - *Hidrobiología - UAM*
+* **Andrea González Durán** - *Diseñadora* - [Liebre Con Fiebre](https://www.instagram.com/liebre.confiebre/)
 
 * **Gabriel Rodríguez** - *Programador* - [gabrc52](https://github.com/gabrc52)
-
-* **Andrea González Durán** - *Diseñadora* - [Liebre Con Fiebre](https://www.instagram.com/liebre.confiebre/)
 """;
 
 class CreditsPage extends StatelessWidget {

@@ -104,6 +104,7 @@ class AppState extends ChangeNotifier {
       final String fileName =
           '${time.year}-${time.month}-${time.day} ${time.hour}:${time.minute}:${time.second} $precipitation ${auth.currentUser?.email}';
       final connectivityResult = await Connectivity().checkConnectivity();
+      // ignore: unrelated_type_equality_checks
       if (connectivityResult == ConnectionState.none) {
         final imageString = await image.readAsString();
         fileUrl = imageString;
@@ -155,7 +156,7 @@ class AppState extends ChangeNotifier {
   Future<void> addRealMeasurement(
       {required num precipitation,
       required DateTime time,
-      num lastPrecipitation= 10,
+      num lastPrecipitation = 0,
       String? uploader,
       File? image,
       bool? pluviometer}) async {
@@ -169,12 +170,10 @@ class AppState extends ChangeNotifier {
           await _getMeasurementJson(
               // TODO: PUNTO 1 DEL CONTRATO + FIREBASE
               uploader: uploader,
-              precipitation: precipitation-lastPrecipitation,
+              precipitation: precipitation - lastPrecipitation,
               time: time,
               image: image,
-              pluviometer: pluviometer
-              
-              ),
+              pluviometer: pluviometer),
         );
   }
 
@@ -432,4 +431,6 @@ class AppState extends ChangeNotifier {
         .doc(id)
         .delete();
   }
+
+// https://youtube.com/shorts/Nu16RLa2-7Y?si=Sc5iI1vOw4FN9ymy
 }

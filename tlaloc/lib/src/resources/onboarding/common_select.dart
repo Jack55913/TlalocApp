@@ -8,16 +8,16 @@ class CommonSelectPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: AppColors.purple2,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Center(
               child: Column(
                 children: [
-                  const Center(
+                  Center(
                     child: Text(
                       '¿Qué pluviómetro estás observando?',
                       style: TextStyle(
@@ -27,18 +27,18 @@ class CommonSelectPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  const Text(
+                  SizedBox(height: 20),
+                  Text(
                     'Selecciona el Pluviómetro automáticamente',
                     style: TextStyle(
                         fontSize: 18,
                         fontFamily: 'poppins',
                         color: Colors.white),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   Flex(
                     direction: Axis.vertical,
-                    children: const [
+                    children: [
                       QrSelectWidget(),
                       Text(
                         'Selecciona el pluviómetro manualmente',

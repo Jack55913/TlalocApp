@@ -45,6 +45,10 @@ class TutorialWidget extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         _buildItem(
+            '🚀 Bienvenida',
+            'Participa con nosotros en el\nMonitoreo de agua de lluvia en el Monte Tláloc',
+            'https://fb.watch/rWvSWd16SB/'),
+        _buildItem(
             '🛠️ Presentación del Proyecto',
             'Conoce más a fondo nuestras causas',
             'https://fb.watch/jCUYwEVpWq/'),
@@ -53,7 +57,7 @@ class TutorialWidget extends StatelessWidget {
             'Revisa los errores más comúnes al momento de medir',
             'https://youtu.be/V1Jj0qdJ_fQ'),
         _buildItem(
-            '🚀 Enviar las mediciones',
+            '📨 Enviar las mediciones',
             '¿Cómo enviar los datos en la app?',
             'https://youtu.be/4hyi5jvvLOs'),
         // _buildItem('⛰️ Instalación', '¿Cómo instalar un pluviómetro?',

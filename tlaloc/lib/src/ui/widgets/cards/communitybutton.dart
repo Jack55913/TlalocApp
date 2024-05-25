@@ -16,11 +16,11 @@ class CommunityButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Text(
                     'Todos podemos \nPARTICIPAR',
                     // 'Descúbre un grupo\npara preservar\nel monte Tláloc',
@@ -47,6 +47,7 @@ class CommunityButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25),
               ),
               child: const Image(
+                // TODO: CAMBIAR FOTO||
                 image: AssetImage('assets/images/img-5.jpg'),
                 fit: BoxFit.fill,
                 // width: 200,

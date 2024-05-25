@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
+import 'package:tlaloc/src/ui/widgets/cards/map.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TlalocMapData extends StatelessWidget {
@@ -19,15 +20,6 @@ class TlalocMapData extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         const SizedBox(height: 20),
-        // const Text(
-        //   'Tláloc',
-        //   style: TextStyle(
-        //     color: Colors.white,
-        //     fontFamily: 'poppins',
-        //     fontSize: 16,
-        //   ),
-        //   textAlign: TextAlign.start,
-        // ),
         Consumer<AppState>(
           builder: (context, state, child) => AutoSizeText(
             state.paraje,
@@ -73,9 +65,7 @@ class TlalocMapData extends StatelessWidget {
             },
           ),
         ),
-
         const SizedBox(height: 20),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,7 +99,7 @@ class TlalocMapData extends StatelessWidget {
                             icon: const FaIcon(FontAwesomeIcons.mapPin,
                                 color: Colors.red),
                             label: const Text(
-                              'Google Maps',
+                              'Google\nMaps',
                               style:
                                   TextStyle(fontSize: 16, color: Colors.black),
                             ),
@@ -130,7 +120,27 @@ class TlalocMapData extends StatelessWidget {
                 },
                 icon: const FaIcon(FontAwesomeIcons.map, color: Colors.green),
                 label: const Text(
-                  'Wikiloc',
+                  'Mapa en\nWikiloc',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton.icon(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white)),
+                onPressed: () {
+                  // TOOD AGREGAR DESCARGAR MAPA
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const TlalocMap()),
+                  );
+                },
+                icon:
+                    const FaIcon(FontAwesomeIcons.filePdf, color: Colors.black),
+                label: const Text(
+                  'Mapa\nen Pdf',
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
               ),

@@ -8,7 +8,7 @@
 // // ignore_for_file: public_member_api_docs
 
 // const String _markdownData = """
-// # Ciencia ciudadana para el monitoreo participativo de la lluvia en un gradiente altitudinal del Monte Tláloc, Texcoco, Estado de México
+// # 
 // ___
 
 // ## Propósito del proyecto

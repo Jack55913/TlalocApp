@@ -65,7 +65,6 @@ final graphscrens = [
 
 /// Para agregar o quitar parajes, basta con cambiar esta variable
 
-
 Map<String, String> parajes = {
   'El Venturero': 'Nativitas',
   'El Jardín': 'Nativitas',
@@ -96,7 +95,7 @@ List<String> commonimages = [
 ];
 
 List<String> commonurl = [
-  "https://goo.gl/maps/QTce9U2BsXXZsBTp8",
+  "https://goo.gl/maps/WAB9Jy6uvRyWa8kF9",
   "https://goo.gl/maps/9eTXbdmHCFxVmTUX7",
   "https://goo.gl/maps/juPjkikLeAS16dPh8",
   "https://goo.gl/maps/hyRXM3A2UFXSAAys6",
@@ -163,6 +162,7 @@ class AppColors {
 }
 
 ThemeData darkTheme = ThemeData(
+  
   visualDensity: VisualDensity.adaptivePlatformDensity,
   brightness: Brightness.dark,
   primaryColor: AppColors.dark1,

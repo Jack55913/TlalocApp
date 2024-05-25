@@ -60,7 +60,8 @@ class ModifyRegistration extends StatelessWidget {
                               final state =
                                   Provider.of<AppState>(context, listen: false);
                               await state.deleteMeasurement(id: measurement.id);
-                              await state.deleteRealMeasurement(id: measurement.id);
+                              await state.deleteRealMeasurement(
+                                  id: measurement.id);
                               Navigator.of(context).pop();
                               Navigator.of(context).pop();
                             } catch (e) {
