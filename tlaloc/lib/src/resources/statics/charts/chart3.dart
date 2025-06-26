@@ -12,7 +12,7 @@
 // import '../graphs/graph1.dart';
 
 // class TrackballGraph extends StatefulWidget {
-//   const TrackballGraph({Key? key}) : super(key: key);
+//   const TrackballGraph({super.key});
 
 //   @override
 //   State<TrackballGraph> createState() => _TrackballGraphState();
@@ -181,8 +181,8 @@
 //                       return EmptyState('Error ${snapshot.error}');
 //                     } else if (snapshot.hasData) {
 //                       final measurementsSnapshot = snapshot.data!;
-//                       final measurements = state
-//                           .getMeasurementsFromSnapshot(measurementsSnapshot);
+//                       final measurements =
+//     state.getMeasurementsFromDocs(snapshot.data!.docs);
 //                       final filteredMeasurements = measurements
 //                           .where((measurement) =>
 //                               (measurement.dateTime!.isAfter(initialDate) &&

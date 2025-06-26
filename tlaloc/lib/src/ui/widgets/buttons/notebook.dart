@@ -3,7 +3,7 @@ import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/ui/widgets/objects/table.dart';
 
 class TableButton extends StatelessWidget {
-  const TableButton({Key? key}) : super(key: key);
+  const TableButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,9 @@ class TableButton extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Mediciones\n Generales 📝',
+                    'Mediciones 📝',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 18,
                       color: Colors.white,
                       fontFamily: 'FredokaOne',
                     ),

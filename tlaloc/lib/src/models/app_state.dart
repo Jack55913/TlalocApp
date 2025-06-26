@@ -1,91 +1,167 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tlaloc/src/models/google_sign_in.dart';
 
 class Measurement {
   final String? uploader;
-  final num? precipitation;
+  final double? precipitation;
   final DateTime? dateTime;
   final String id;
   final String? imageUrl;
-  final String? avatarUrl; //+
+  final String? avatarUrl;
+  final String? uploaderId;
   final bool? pluviometer;
-  Measurement(
-      {this.uploader,
-      this.precipitation,
-      this.dateTime,
-      required this.id,
-      this.imageUrl,
-      this.avatarUrl, //+
-      this.pluviometer});
+
+  Measurement({
+    this.uploader,
+    this.uploaderId,
+    this.precipitation,
+    this.dateTime,
+    required this.id,
+    this.imageUrl,
+    this.avatarUrl,
+    this.pluviometer,
+  });
+
   factory Measurement.fromJson(Map<String, dynamic> json, String id) {
     Timestamp timestamp = json['time'];
-    var dateTime =
-        DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
-
     return Measurement(
       uploader: json['uploader_name'],
-      precipitation: json['precipitation'],
-      dateTime: dateTime,
+      uploaderId: json['uploader_id'] as String? ?? 'unknown',
+      precipitation: (json['precipitation'] as num?)?.toDouble(),
+
+      dateTime: timestamp.toDate(),
       id: id,
       imageUrl: json['image'],
-      avatarUrl: json['avatar_url'], //+
+      avatarUrl: json['avatar_url'],
       pluviometer: json['pluviometer_state'],
     );
   }
 }
 
 class AppState extends ChangeNotifier {
-  String rol = 'Monitor';
-  String paraje = 'El Venturero'; //+
-  bool loading = true;
+  Uint8List? _newWebImage;
+  Uint8List? get newWebImage => _newWebImage;
+  set newWebImage(Uint8List? value) {
+    _newWebImage = value;
+    notifyListeners(); // si quieres que se reconstruyan widgets
+  }
+
+  final GoogleSignInProvider _authProvider;
   final db = FirebaseFirestore.instance;
 
-  AppState() {
+  AppState(this._authProvider) {
     init();
   }
+
+  String rol = 'Monitor';
+  String paraje = 'El Venturero';
+  bool loading = true;
+  List<String> adminUIDs = [];
+  bool isAdmin = false;
+
+  User? get currentUser => _authProvider.currentUser;
+  String? get currentUID => currentUser?.uid;
+
+  DocumentReference get _parajeRef =>
+      db.collection('roles').doc(rol).collection('parajes').doc(paraje);
+  CollectionReference get _measurementsRef =>
+      _parajeRef.collection('measurements');
+  CollectionReference get _realMeasurementsRef =>
+      _parajeRef.collection('real_measurements');
 
   Future<void> init() async {
     loading = true;
     notifyListeners();
+
     final prefs = await SharedPreferences.getInstance();
-    rol = prefs.getString('rol')!;
-    paraje = prefs.getString('paraje')!;
+    rol = prefs.getString('rol') ?? 'Monitor';
+    paraje = prefs.getString('paraje') ?? 'El Venturero';
+
+    await _loadAdminUIDs();
+    _checkAdminStatus();
+
     loading = false;
     notifyListeners();
   }
 
-// Para cambiar de Rol y Paraje se realizan las siguientes dos funciones:
+  Future<void> _loadAdminUIDs() async {
+    try {
+      final doc = await db.collection('admins').doc('adminUsers').get();
+      if (doc.exists) {
+        adminUIDs = List<String>.from(doc.data()?['uids'] ?? []);
+      }
+    } catch (e) {
+      debugPrint("Error cargando admins: $e");
+    }
+  }
+
+  void _checkAdminStatus() {
+    isAdmin = currentUID != null && adminUIDs.contains(currentUID);
+  }
+
+  bool canEditMeasurement(String? uploaderId) =>
+      currentUID == uploaderId || isAdmin;
 
   Future<void> changeParaje(String newParaje) async {
     paraje = newParaje;
-    notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('paraje', newParaje);
     prefs.setBool('hasFinishedOnboarding', true);
+    notifyListeners();
   }
 
   Future<void> changeRol(String newRol) async {
     rol = newRol;
-    notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('rol', newRol);
     prefs.setBool('hasFinishedOnboarding', true);
+    notifyListeners();
   }
-
-// PARA OBTENER LOS DATOS DE "ÍNDICE GEOGRÁFICO":
 
   Future<Map<String, dynamic>> getCurrentParajeData() async {
-    var ref = db.collection('roles').doc(rol).collection('parajes').doc(paraje);
-    var snapshot = await ref.get();
-    return snapshot.data() ?? {};
+    var snapshot = await _parajeRef.get();
+    return (snapshot.data() as Map<String, dynamic>?) ?? {};
   }
 
-// PARA GUARDAR LAS FOTOS EN FIREBASE STORAGE:
+  Future<String?> _uploadImage(
+    String fileNameBase, {
+    File? image,
+    String? oldImage,
+  }) async {
+    final storageRef = FirebaseStorage.instance.ref();
+    final connectivityResult = await Connectivity().checkConnectivity();
+
+    if (kIsWeb && newWebImage != null) {
+      if (connectivityResult != ConnectivityResult.none) {
+        final imageRef = storageRef.child("measurements/$fileNameBase.png");
+        final metadata = SettableMetadata(contentType: 'image/png');
+        await imageRef.putData(newWebImage!, metadata);
+        return await imageRef.getDownloadURL();
+      } else {
+        return base64Encode(newWebImage!);
+      }
+    } else if (image != null) {
+      if (connectivityResult != ConnectivityResult.none) {
+        final extension = image.path.split('.').last;
+        final imageRef = storageRef.child(
+          "measurements/$fileNameBase.$extension",
+        );
+        await imageRef.putFile(image);
+        return await imageRef.getDownloadURL();
+      } else {
+        return await image.readAsString();
+      }
+    }
+
+    return oldImage;
+  }
 
   Future<Map<String, dynamic>> _getMeasurementJson({
     required num precipitation,
@@ -95,260 +171,158 @@ class AppState extends ChangeNotifier {
     String? oldImage,
     bool? pluviometer,
   }) async {
-    // Primero, subir imagen a Firebase Hosting
-    final auth = FirebaseAuth.instance;
-    String? fileUrl;
-    if (image != null) {
-      final storageRef = FirebaseStorage.instance.ref();
-      final String fileExtension = image.path.split('.').last;
-      final String fileName =
-          '${time.year}-${time.month}-${time.day} ${time.hour}:${time.minute}:${time.second} $precipitation ${auth.currentUser?.email}';
-      final connectivityResult = await Connectivity().checkConnectivity();
-      // ignore: unrelated_type_equality_checks
-      if (connectivityResult == ConnectionState.none) {
-        final imageString = await image.readAsString();
-        fileUrl = imageString;
-      } else {
-        // Se crea una carpeta con el nombre measurement:
-        final imageRef =
-            storageRef.child("measurements/$fileName.$fileExtension");
-        await imageRef.putFile(image);
-        fileUrl = await imageRef.getDownloadURL();
-      }
-    } else if (oldImage != null) {
-      fileUrl = oldImage;
-    }
+    final fileNameBase =
+        '${time.toIso8601String()}_$precipitation${currentUser?.email}';
+    final imageUrl = await _uploadImage(
+      fileNameBase,
+      image: image,
+      oldImage: oldImage,
+    );
+
     return {
+      'uploader_id': currentUID,
       'precipitation': precipitation,
       'uploader_name': uploader,
-      // 'uploader_name': auth.currentUser?.displayName,
-      'uploader_email': auth.currentUser?.email,
-      'uploader_id': auth.currentUser?.uid,
+      'uploader_email': currentUser?.email,
       'time': time,
-      'image': fileUrl,
-      'avatar_url': auth.currentUser?.photoURL, //+
+      'image': imageUrl,
+      'avatar_url': currentUser?.photoURL,
       'pluviometer_state': pluviometer,
     };
   }
 
-  Future<void> addMeasurement(
-      {required num precipitation,
-      required DateTime time,
-      String? uploader,
-      File? image,
-      bool? pluviometer}) async {
-    db
-        .collection('roles')
-        .doc(rol)
-        .collection('parajes')
-        .doc(paraje)
-        .collection('measurements')
-        .add(
-          await _getMeasurementJson(
-              uploader: uploader,
-              precipitation: precipitation,
-              time: time,
-              image: image,
-              pluviometer: pluviometer),
-        );
+  Future<void> _saveMeasurement(
+    String collectionName,
+    Map<String, dynamic> data,
+  ) async {
+    await _parajeRef.collection(collectionName).add(data);
   }
 
-  Future<void> addRealMeasurement(
-      {required num precipitation,
-      required DateTime time,
-      num lastPrecipitation = 0,
-      String? uploader,
-      File? image,
-      bool? pluviometer}) async {
-    db
-        .collection('roles')
-        .doc(rol)
-        .collection('parajes')
-        .doc(paraje)
-        .collection('real_measurements')
-        .add(
-          await _getMeasurementJson(
-              // TODO: PUNTO 1 DEL CONTRATO + FIREBASE
-              uploader: uploader,
-              precipitation: precipitation - lastPrecipitation,
-              time: time,
-              image: image,
-              pluviometer: pluviometer),
-        );
-  }
+  Future<num> _calculateRealValue(num current, bool? wasEmptied) async {
+    final lastSnapshot =
+        await _measurementsRef.orderBy('time', descending: true).limit(2).get();
 
-  List<Measurement> _getListOfMeasurementsFromDocs(
-      List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
-    final List<Measurement> measurements = [];
-    for (var doc in docs) {
-      measurements.add(Measurement.fromJson(doc.data(), doc.id));
+    if (lastSnapshot.docs.length < 2 || wasEmptied == true) {
+      return current;
+    } else {
+      final prevData = lastSnapshot.docs[1].data() as Map<String, dynamic>;
+      final prevPrecip = prevData['precipitation'] as num? ?? 0;
+      return current - prevPrecip;
     }
-    measurements.sort(
-      (a, b) => b.dateTime!.difference(a.dateTime!).inSeconds,
+  }
+
+  Future<void> updateGlobalCounter(int delta) async {
+    final counterRef = db.collection('notifications').doc('globalCounter');
+    await counterRef.set({
+      'count': FieldValue.increment(delta),
+      'timestamp': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
+  }
+
+  Future<void> addMeasurement({
+    required num precipitation,
+    required DateTime time,
+    String? uploader,
+    File? image,
+    bool? pluviometer,
+  }) async {
+    final data = await _getMeasurementJson(
+      uploader: uploader,
+      precipitation: precipitation,
+      time: time,
+      image: image,
+      pluviometer: pluviometer,
     );
+    await _saveMeasurement('measurements', data);
+
+    final realValue = await _calculateRealValue(precipitation, pluviometer);
+    final realData = await _getMeasurementJson(
+      uploader: uploader,
+      precipitation: realValue,
+      time: time,
+      image: image,
+      pluviometer: pluviometer,
+    );
+    await _saveMeasurement('real_measurements', realData);
+
+    await updateGlobalCounter(1);
+  }
+
+  Future<void> addRealMeasurement({
+    required num precipitation,
+    required DateTime time,
+    num lastPrecipitation = 0,
+    String? uploader,
+    File? image,
+    bool? pluviometer,
+  }) async {
+    final data = await _getMeasurementJson(
+      uploader: uploader,
+      precipitation: precipitation - lastPrecipitation,
+      time: time,
+      image: image,
+      pluviometer: pluviometer,
+    );
+    await _saveMeasurement('real_measurements', data);
+  }
+
+  List<Measurement> getMeasurementsFromDocs(
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> docs,
+  ) {
+    final measurements =
+        docs.map((doc) => Measurement.fromJson(doc.data(), doc.id)).toList();
+    measurements.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
     return measurements;
   }
 
-  List<Measurement> _getListOfRealMeasurementsFromDocs(
-      List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
-    final List<Measurement> measurements = [];
-    for (var doc in docs) {
-      measurements.add(Measurement.fromJson(doc.data(), doc.id));
-    }
-    measurements.sort(
-      (a, b) => b.dateTime!.difference(a.dateTime!).inSeconds,
-    );
-    return measurements;
-  }
+  Future<List<Measurement>> getMeasurements() async => getMeasurementsFromDocs(
+    (await _measurementsRef.get() as QuerySnapshot<Map<String, dynamic>>).docs,
+  );
 
-  Future<List<Measurement>> getMeasurements() async {
-    var event = await db
+  Future<List<Measurement>> getRealMeasurements() async =>
+      getMeasurementsFromDocs(
+        (await _realMeasurementsRef.get()
+                as QuerySnapshot<Map<String, dynamic>>)
+            .docs,
+      );
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> _measurementStream(
+    String collection, {
+    String? parajeOverride,
+  }) {
+    final ref = db
         .collection('roles')
-        .doc(rol)
+        .doc('Monitor')
         .collection('parajes')
-        .doc(paraje)
-        .collection('measurements')
-        .get();
-    return _getListOfMeasurementsFromDocs(event.docs);
+        .doc(parajeOverride ?? paraje)
+        .collection(collection);
+    return ref.orderBy('time', descending: false).snapshots();
   }
 
-  Future<List<Measurement>> getRealMeasurements() async {
-    var event = await db
-        .collection('roles')
-        .doc(rol)
-        .collection('parajes')
-        .doc(paraje)
-        .collection('real_measurements')
-        .get();
-    return _getListOfRealMeasurementsFromDocs(event.docs);
-  }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMeasurementsStream() =>
+      _measurementStream('measurements');
 
-  List<Measurement> getMeasurementsFromSnapshot(
-      QuerySnapshot<Map<String, dynamic>> snapshot) {
-    return _getListOfMeasurementsFromDocs(snapshot.docs);
-  }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getRealMeasurementsStream() =>
+      _measurementStream('real_measurements');
 
-  List<Measurement> getRealMeasurementsFromSnapshot(
-      QuerySnapshot<Map<String, dynamic>> snapshot) {
-    return _getListOfRealMeasurementsFromDocs(snapshot.docs);
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> getMeasurementsStream() {
-    return db
-        .collection('roles')
-        .doc(rol)
-        .collection('parajes')
-        .doc(paraje)
-        .collection('measurements')
-        .snapshots();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> getRealMeasurementsStream() {
-    return db
-        .collection('roles')
-        .doc(rol)
-        .collection('parajes')
-        .doc(paraje)
-        .collection('real_measurements')
-        .snapshots();
-  }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMeasurementsStreamForParaje(
+    String name,
+  ) => _measurementStream('measurements', parajeOverride: name);
 
   Stream<QuerySnapshot<Map<String, dynamic>>>
-      getAguadeChiquerosMeasurementsStream() {
+  getRealMeasurementsStreamForParaje(String name) =>
+      _measurementStream('real_measurements', parajeOverride: name);
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAllUserMeasurementsStream() {
+    if (currentUID == null) return const Stream.empty();
     return db
-        .collection('roles')
-        .doc('Monitor')
-        .collection('parajes')
-        .doc('Agua de Chiqueros')
-        .collection('measurements')
+        .collectionGroup('measurements')
+        .where('uploader_id', isEqualTo: currentUID)
         .snapshots();
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> getCabanaMeasurementsStream() {
-    return db
-        .collection('roles')
-        .doc('Monitor')
-        .collection('parajes')
-        .doc('Cabaña')
-        .collection('measurements')
-        .snapshots();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>>
-      getCanoasaltasMeasurementsStream() {
-    return db
-        .collection('roles')
-        .doc('Monitor')
-        .collection('parajes')
-        .doc('Canoas altas')
-        .collection('measurements')
-        .snapshots();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>>
-      getCruzdeAtencoMeasurementsStream() {
-    return db
-        .collection('roles')
-        .doc('Monitor')
-        .collection('parajes')
-        .doc('Cruz de Atenco')
-        .collection('measurements')
-        .snapshots();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> getElJardinMeasurementsStream() {
-    return db
-        .collection('roles')
-        .doc('Monitor')
-        .collection('parajes')
-        .doc('El Jardín')
-        .collection('measurements')
-        .snapshots();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>>
-      getElVentureroMeasurementsStream() {
-    return db
-        .collection('roles')
-        .doc('Monitor')
-        .collection('parajes')
-        .doc('El Venturero')
-        .collection('measurements')
-        .snapshots();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>>
-      getLosManantialesMeasurementsStream() {
-    return db
-        .collection('roles')
-        .doc('Monitor')
-        .collection('parajes')
-        .doc('Los Manantiales')
-        .collection('measurements')
-        .snapshots();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>>
-      getTlaltlatlatelyMeasurementsStream() {
-    return db
-        .collection('roles')
-        .doc('Monitor')
-        .collection('parajes')
-        .doc('Tlaltlatlately')
-        .collection('measurements')
-        .snapshots();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>>
-      getCaminoALasTrancasMeasurementsStream() {
-    return db
-        .collection('roles')
-        .doc('Monitor')
-        .collection('parajes')
-        .doc('Camino a las Trancas')
-        .collection('measurements')
-        .snapshots();
-  }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAllMeasurementsStream() =>
+      db.collectionGroup('measurements').snapshots();
 
   Future<void> updateMeasurement({
     required String id,
@@ -357,27 +331,21 @@ class AppState extends ChangeNotifier {
     String? uploader,
     File? image,
     bool? pluviometer,
-
-    /// En caso de que ya exista un URL de imagen (botón de editar, no crear)
     String? oldImage,
+    required String uploaderId,
   }) async {
-    await db
-        .collection('roles')
-        .doc(rol)
-        .collection('parajes')
-        .doc(paraje)
-        .collection('measurements')
-        .doc(id)
-        .update(
-          await _getMeasurementJson(
-            uploader: uploader,
-            precipitation: precipitation,
-            time: time,
-            image: image,
-            oldImage: oldImage,
-            pluviometer: pluviometer,
-          ),
-        );
+    if (!canEditMeasurement(uploaderId)) {
+      throw Exception("No tiene permisos para editar esta medición");
+    }
+    final data = await _getMeasurementJson(
+      uploader: uploader,
+      precipitation: precipitation,
+      time: time,
+      image: image,
+      oldImage: oldImage,
+      pluviometer: pluviometer,
+    );
+    await _measurementsRef.doc(id).update(data);
   }
 
   Future<void> updateRealMeasurement({
@@ -387,50 +355,88 @@ class AppState extends ChangeNotifier {
     String? uploader,
     File? image,
     bool? pluviometer,
-
-    /// En caso de que ya exista un URL de imagen (botón de editar, no crear)
     String? oldImage,
   }) async {
-    await db
-        .collection('roles')
-        .doc(rol)
-        .collection('parajes')
-        .doc(paraje)
-        .collection('real_measurements')
-        .doc(id)
-        .update(
-          await _getMeasurementJson(
-            uploader: uploader,
-            precipitation: precipitation,
-            time: time,
-            image: image,
-            oldImage: oldImage,
-            pluviometer: pluviometer,
-          ),
-        );
+    final data = await _getMeasurementJson(
+      uploader: uploader,
+      precipitation: precipitation,
+      time: time,
+      image: image,
+      oldImage: oldImage,
+      pluviometer: pluviometer,
+    );
+    await _realMeasurementsRef.doc(id).update(data);
   }
 
   Future<void> deleteMeasurement({required String id}) async {
-    await db
-        .collection('roles')
-        .doc(rol)
-        .collection('parajes')
-        .doc(paraje)
-        .collection('measurements')
-        .doc(id)
-        .delete();
+    try {
+      await _measurementsRef.doc(id).delete();
+      // await updateGlobalCounter(-1);
+    } catch (e) {
+      debugPrint("Error al borrar medición: $e");
+    }
   }
 
   Future<void> deleteRealMeasurement({required String id}) async {
-    await db
-        .collection('roles')
-        .doc(rol)
-        .collection('parajes')
-        .doc(paraje)
-        .collection('real_measurements')
-        .doc(id)
-        .delete();
+    try {
+      await _realMeasurementsRef.doc(id).delete();
+      // await updateGlobalCounter(-1);
+    } catch (e) {
+      debugPrint("Error al borrar medición real: $e");
+    }
   }
 
-// https://youtube.com/shorts/Nu16RLa2-7Y?si=Sc5iI1vOw4FN9ymy
+  Future<Map<String, dynamic>> getUserStats() async {
+    try {
+      if (currentUID == null) {
+        return {
+          'local': 0,
+          'global': 0,
+          'distinctParajes': 0,
+          'totalParajes': 0,
+        };
+      }
+
+      final localSnapshot = await _measurementsRef
+          .where('uploader_id', isEqualTo: currentUID)
+          .get(const GetOptions(source: Source.serverAndCache));
+
+      final globalSnapshot = await db
+          .collectionGroup('measurements')
+          .where('uploader_id', isEqualTo: currentUID)
+          .get(const GetOptions(source: Source.serverAndCache));
+
+      final parajesContribuidos = <String>{};
+      for (final doc in globalSnapshot.docs) {
+        final segments = doc.reference.path.split('/');
+        final parajeName =
+            segments.contains('parajes')
+                ? segments[segments.indexOf('parajes') + 1]
+                : null;
+        if (parajeName != null) parajesContribuidos.add(parajeName);
+      }
+
+      final totalParajesSnapshot = await db
+          .collection('roles')
+          .doc(rol)
+          .collection('parajes')
+          .get(const GetOptions(source: Source.serverAndCache));
+
+      return {
+        'local': localSnapshot.docs.length,
+        'global': globalSnapshot.docs.length,
+        'distinctParajes': parajesContribuidos.length,
+        'totalParajes': totalParajesSnapshot.docs.length,
+      };
+    } catch (e) {
+      debugPrint("Error en getUserStats: $e");
+      return {
+        'local': 0,
+        'global': 0,
+        'distinctParajes': 0,
+        'totalParajes': 0,
+        'error': e.toString(),
+      };
+    }
+  }
 }

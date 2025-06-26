@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
 import 'package:tlaloc/src/models/datepicker.dart';
-
-import '../../../resources/statics/graphs/graph1.dart';
+import 'package:tlaloc/src/resources/statics/graphs/graph1.dart';
+ 
 
 class TlalocChips extends StatefulWidget {
-  const TlalocChips({Key? key}) : super(key: key);
+  const TlalocChips({super.key});
 
   @override
   State<TlalocChips> createState() => _TlalocChipsState();

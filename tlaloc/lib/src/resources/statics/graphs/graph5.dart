@@ -9,7 +9,7 @@
 // import 'package:tlaloc/src/ui/widgets/chips/chips.dart';
 
 // class CommonsLineGraph extends StatefulWidget {
-//   const CommonsLineGraph({Key? key}) : super(key: key);
+//   const CommonsLineGraph({super.key});
 
 //   @override
 //   State<CommonsLineGraph> createState() => _CommonsLineGraphState();
@@ -50,8 +50,8 @@
 //                       return EmptyState('Error ${snapshot.error}');
 //                     } else if (snapshot.hasData) {
 //                       final measurementsSnapshot = snapshot.data!;
-//                       final measurements = state
-//                           .getMeasurementsFromSnapshot(measurementsSnapshot);
+//                       final measurements =
+//     state.getMeasurementsFromDocs(snapshot.data!.docs);
 //                       final filteredMeasurements = measurements
 //                           .where((measurement) =>
 //                               (measurement.dateTime!.isAfter(initialDate) &&
@@ -59,8 +59,7 @@
 //                           .toList();
 //                       return Expanded(
 //                         child: Column(
-//                           children: const [
-//                             // TODO: DO THE CommonsLineGraph
+//                           children: const [ 
 //                             LegendTitleLineal(),
 //                           ],
 //                         ),

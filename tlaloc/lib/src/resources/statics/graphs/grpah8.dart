@@ -11,7 +11,7 @@
 // // import '../../../models/datepicker.dart';
 
 // class CommonAreaSeries extends StatefulWidget {
-//   const CommonAreaSeries({Key? key}) : super(key: key);
+//   const CommonAreaSeries({super.key});
 
 //   @override
 //   State<CommonAreaSeries> createState() => _CommonAreaSeriesState();
@@ -63,8 +63,8 @@
 //                       return EmptyState('Error ${snapshot.error}');
 //                     } else if (snapshot.hasData) {
 //                       final measurementsSnapshot = snapshot.data!;
-//                       final measurements = state
-//                           .getMeasurementsFromSnapshot(measurementsSnapshot);
+//                       final measurements =
+//     state.getMeasurementsFromDocs(snapshot.data!.docs);
 //                       final filteredMeasurements = measurements
 //                           .where((measurement) =>
 //                               (measurement.dateTime!.isAfter(initialDate) &&
@@ -72,7 +72,7 @@
 //                           .toList();
 //                       return Expanded(
 //                           child: Center(
-//                               child: SfCartesianChart(series: <ChartSeries>[
+//                               child: SfCartesianChart(series: <CartesianSeries>[
 //                         SplineAreaSeries<ChartData, int>(
 //                             dataSource: chartData,
 //                             xValueMapper: (ChartData data, _) => data.x,

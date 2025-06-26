@@ -1,8 +1,6 @@
 // ignore_for_file: unnecessary_string_escapes
 
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:tlaloc/src/models/constants.dart';
 
 const String _markdownData = """
 # Todos podemos colaborar 
@@ -28,15 +26,13 @@ const String cinco = """
 """;
 
 class CommunityPage extends StatelessWidget {
-  const CommunityPage({Key? key}) : super(key: key);
+  const CommunityPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO CAMBIAR FONDO
       backgroundColor: Colors.white,
       appBar: AppBar(
-        // backgroundColor: Colors.white,
         title: const Text(
           'Comunidad Tláloc App',
           style: TextStyle(color: Colors.white),
@@ -49,10 +45,7 @@ class CommunityPage extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Text(
-                  _markdownData,
-                  style: TextStyle(color: Colors.black),
-                ),
+                Text(_markdownData, style: TextStyle(color: Colors.black)),
                 Image(
                   image: AssetImage('assets/images/unoeji.jpg'),
                   fit: BoxFit.fill,
@@ -66,7 +59,7 @@ class CommunityPage extends StatelessWidget {
                 ),
                 Image(
                   image: AssetImage('assets/images/dosvist.jpg'),
-                  
+
                   fit: BoxFit.fill,
                   // width: 200,
                   height: 250,
@@ -87,23 +80,24 @@ class CommunityPage extends StatelessWidget {
                   cuatro,
                   style: TextStyle(color: Colors.black),
                 ),
-                Image(
-                  image: AssetImage('assets/images/cuatroinst.jpg'),
-                  fit: BoxFit.fill,
-                  // width: 200,
-                  height: 250,
-                ),
+                // Image(
+                //   image: AssetImage('assets/images/cuatroinst.jpg'),
+                //   fit: BoxFit.fill,
+                //   // width: 200,
+                //   height: 250,
+                // ),
                 Text(
                   // selectable: true,
                   cinco,
                   style: TextStyle(color: Colors.black),
                 ),
-                Image(
-                  image: AssetImage('assets/images/cincoacad.jpg'),
-                  fit: BoxFit.fill,
-                  // width: 200,
-                  height: 250,
-                ),
+                // TODO: VER POR QUÉ NO LA QUIERE CARGAR
+                // Image(
+                //   image: AssetImage('assets/images/cincoacad.jpg'),
+                //   fit: BoxFit.fill,
+                //   // width: 200,
+                //   height: 250,
+                // ),
               ],
             ),
           ),

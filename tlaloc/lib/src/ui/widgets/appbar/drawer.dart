@@ -13,7 +13,7 @@ import 'package:tlaloc/src/ui/screens/settings/faq.dart';
 // import 'package:tlaloc/src/resources/onboarding/role.dart';
 
 class DrawerApp extends StatelessWidget {
-  const DrawerApp({Key? key}) : super(key: key);
+  const DrawerApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class DrawerApp extends StatelessWidget {
         ),
         ListTile(
           leading: const Icon(Icons.place, color: Colors.red),
-          title: const Text('Elige un Paraje'),
+          title: const Text('Elige el paraje correcto'),
           subtitle: Text(Provider.of<AppState>(context).paraje),
           onTap: () {
             Navigator.push(

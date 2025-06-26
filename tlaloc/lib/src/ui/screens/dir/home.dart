@@ -4,24 +4,26 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:provider/provider.dart';
-import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/constants.dart';
-import 'package:tlaloc/src/ui/widgets/appbar/drawer.dart';
+import 'package:tlaloc/src/ui/widgets/appbar/infobutton2.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/container.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/fab.dart';
 import 'package:tlaloc/src/ui/widgets/buttons/notebook.dart';
 import 'package:tlaloc/src/ui/widgets/cards/communitybutton.dart';
+import 'package:tlaloc/src/ui/widgets/cards/forms.dart';
+import 'package:tlaloc/src/ui/widgets/cards/personal_measures.dart';
 import 'package:tlaloc/src/ui/widgets/cards/phrase.dart';
+import 'package:tlaloc/src/ui/widgets/cards/tlalocmap.dart';
 import 'package:tlaloc/src/ui/widgets/cards/tutorials.dart';
+import 'package:tlaloc/src/ui/widgets/info/info_page.dart';
 import 'package:tlaloc/src/ui/widgets/objects/quickadd.dart';
-import '../home/home_widget_classes.dart';
-import '../../widgets/appbar/infobutton.dart';
-import '../../widgets/appbar/profilepage.dart';
-import '../../widgets/cards/facebook_button.dart';
+import 'package:tlaloc/src/ui/widgets/pluviometer/forecast.dart';
+import 'package:tlaloc/src/ui/widgets/pluviometer/header.dart';
+import 'package:tlaloc/src/ui/widgets/social/social_media.dart';
+// import '../home/home_widget_classes.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -34,133 +36,114 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: AutoSizeText(
-            appName,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'FredokaOne',
-              fontSize: 24,
-              letterSpacing: 2,
-            ),
-          ),
-          actions: const <Widget>[
-            InfoButton(),
-            ProfilePage(),
-          ],
-        ),
-        drawer: DrawerApp(),
-        body: NotificationListener<UserScrollNotification>(
-          onNotification: (notification) {
-            if (notification.direction == ScrollDirection.forward) {
-              if (!isFabVisable) setState(() => isFabVisable = true);
-            } else if (notification.direction == ScrollDirection.reverse) {
-              if (isFabVisable) setState(() => isFabVisable = false);
-            }
-            return true;
-          },
-          child: ListView(
-            padding: EdgeInsets.all(10),
-            scrollDirection: Axis.vertical,
+          title: Row(
             children: [
-              // Consumer<GoogleSignInProvider>(
-              //   builder: (context, signIn, child) {
-              //     String name = signIn.user!.displayName!.split(' ')[0];
-              //     return Text(
-              //       'Hola, $name',
-              //       style: TextStyle(
-              //         color: Colors.white,
-              //         fontFamily: 'FredokaOne',
-              //         fontSize: 24,
-              //         letterSpacing: 2,
-              //       ),
-              //     );
-              //   },
-              // ),
-              // SizedBox(
-              //   height: 25,
-              // ),
-              QuickAddWidget(),
-              Divider(
-                thickness: 1,
-              ),
-              DarkContainerWidget(
-                data: DarkContainer(
-                  fill: TutorialWidget(),
+              Image.asset('assets/images/tlaloc_logo.png', height: 32),
+              const SizedBox(width: 8),
+              AutoSizeText(
+                appName,
+                style: TextStyle(
+                  fontFamily: 'FredokaOne',
+                  fontSize: 24,
+                  letterSpacing: 2,
                 ),
               ),
-              // TODO: PUNTO 5 del contrato
-              // DarkContainerWidget(
-              //   data: DarkContainer(
-              //     fill: PersonalMeasures(),
-              //   ),
-              // ),
-              // DarkContainerWidget(
-              //   data: DarkContainer(
-              //     fill: GeneralMeasures(),
-              //   ),
-              // ),
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    PhraseCard(),
-                    TableButton(),
+            ],
+          ),
+          actions: const <Widget>[InfoButton2(), FluidDialogWidget()],
+        ),
+        // drawer: DrawerApp(),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            final isWide = constraints.maxWidth > 800;
+
+            final content = [
+              OneTimeGoogleButton(message: "Llena el formulario (1 min)"),
+              const SizedBox(height: 5),
+              QuickAddWidget(),
+              const Divider(height: 5, thickness: 4, color: Colors.black),
+
+              
+              const TodayWeatherStyleCard(),
+              const WeekRainMarker(),
+ 
+              GlassContainer(child: TutorialWidget()),
+              GlassContainer(
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Tabla de mediciones 📄',
+                        style: TextStyle(
+                          color: AppColors.blue1,
+                          fontFamily: 'FredokaOne',
+                          fontSize: 24,
+                          letterSpacing: 2,
+                        ),
+                      ),
+                    ),
+                    PersonalMeasures(),
+                    GeneralMeasures(),
                   ],
                 ),
               ),
-              Divider(
-                height: 20,
-                thickness: 1,
-              ),
-              // SizedBox(height: 20),
 
-              SizedBox(height: 20),
-              Center(
-                child: Text(
-                  '📍¿Cómo llegar a "${Provider.of<AppState>(context).paraje}"?',
-                  style: TextStyle(
-                    fontFamily: 'FredokaOne',
-                    fontSize: 24,
-                    letterSpacing: 2,
+              GlassContainer(child: TlalocMapData()),
+              Column(
+                children: [
+                  Center(
+                    child: Row(
+                      children: const [
+                        PhraseCard(),
+                        Spacer(), // Espacio entre tarjetas
+                        TableButton(),
+                      ],
+                    ),
                   ),
-                  textAlign: TextAlign.center,
+                  const Divider(height: 20, thickness: 4, color: Colors.black),
+                  CommunityButton(),
+                  const Divider(height: 20, thickness: 4, color: Colors.black),
+                  SocialLinksWidget(),
+                  const Divider(height: 20, thickness: 4, color: Colors.black),
+                ],
+              ),
+            ];
+
+            return NotificationListener<UserScrollNotification>(
+              onNotification: (notification) {
+                if (notification.direction == ScrollDirection.forward) {
+                  if (!isFabVisable) setState(() => isFabVisable = true);
+                } else if (notification.direction == ScrollDirection.reverse) {
+                  if (isFabVisable) setState(() => isFabVisable = false);
+                }
+                return true;
+              },
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Wrap(
+                  runSpacing: 20,
+                  spacing: 20,
+                  alignment: WrapAlignment.center,
+                  children:
+                      content.map((widget) {
+                        return ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth:
+                                isWide
+                                    ? (constraints.maxWidth / 2) - 30
+                                    : constraints.maxWidth,
+                          ),
+                          child: widget,
+                        );
+                      }).toList(),
                 ),
               ),
-              SizedBox(height: 20),
-              DynamicTlalocMap(),
-              SizedBox(height: 10),
-              CommunityButton(),
-              Divider(
-                height: 20,
-                thickness: 1,
-              ),
-              ContactUsButton(
-                title: '¡Contáctanos!',
-                message: 'https://api.whatsapp.com/send?phone=5630908507',
-              ),
-              Divider(
-                height: 20,
-                thickness: 1,
-              ),
-              FacebookButton(
-                title: '¡Síguenos!',
-                message:
-                    'https://www.facebook.com/profile.php?id=100083233511805',
-              ),
-              Divider(
-                height: 20,
-                thickness: 1,
-              ),
-              SizedBox(height: 20),
-              // GoogleAddWidget(),
-            ],
-          ),
+            );
+          },
         ),
-        floatingActionButton: Visibility(
-          visible: isFabVisable,
-          child: Fab(),
-        ),
+
+        floatingActionButton: Visibility(visible: isFabVisable, child: Fab()),
       ),
     );
   }

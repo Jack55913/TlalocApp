@@ -46,16 +46,14 @@ List<String> graphtitle = [
   "De Disperción interactivo (Comparación de Ejidos)",
   "De Barras (Comparación de Ejidos por fecha)",
   "De Barras (Comparación de Ejidos)",
-  "De Volúmenes (Comparación de Ejidos)"
+  "De Volúmenes (Comparación de Ejidos)",
 ];
 final graphscrens = [
   const DispersionBar(),
   const VolumenGraph(),
   const BarGraph(),
   const BubbleGraph(),
-  const PieChartTooltip(
-    key: Key('pie_chart_tooltip'),
-  ),
+  const PieChartTooltip(key: Key('pie_chart_tooltip')),
   // const CommonsLineGraph(),
   // const TrackballGraph(),
   // const MultipleCommonSeries(),
@@ -75,6 +73,8 @@ Map<String, String> parajes = {
   'Tlaltlatlately': 'Santa Catarina del Monte',
   'Agua de Chiqueros': 'Santa Catarina del Monte',
   'Camino a las Trancas': 'Nativitas',
+  'El Cedral': 'San Pablo Ixayoc',
+  'Tlachichilpa': 'San Dieguito',
 };
 
 Map<String, Widget> roles = {
@@ -91,19 +91,9 @@ List<String> commonimages = [
   "assets/images/6_manantiales.png",
   "assets/images/7_terreno.png",
   "assets/images/8_chiqueros.png",
-  "assets/images/9_trancas.png", // Cambiar**
-];
-
-List<String> commonurl = [
-  "https://goo.gl/maps/WAB9Jy6uvRyWa8kF9",
-  "https://goo.gl/maps/9eTXbdmHCFxVmTUX7",
-  "https://goo.gl/maps/juPjkikLeAS16dPh8",
-  "https://goo.gl/maps/hyRXM3A2UFXSAAys6",
-  "https://goo.gl/maps/QFXycULSkan1JK6c6",
-  "https://goo.gl/maps/vNSSgfQsofatUp7r7",
-  "https://goo.gl/maps/PNVAD8aFkkN84aoy5",
-  "https://goo.gl/maps/4xFZiqJSFhamPsmB8",
-  "https://goo.gl/maps/ropBszb46JPyiRx88", // Cambiar**
+  "assets/images/9_trancas.png",
+  "assets/images/10_cedral.png",
+  "assets/images/11_Tlalchichilpa.png",
 ];
 
 List<String> parajecolection = [
@@ -115,7 +105,9 @@ List<String> parajecolection = [
   'Los Manantiales',
   'Tlaltlatlately',
   'Agua de Chiqueros',
-  'Camino a las Trancas'
+  'Camino a las Trancas',
+  'El Cedral',
+  'Tlachichilpa',
 ];
 
 List<String> ejidocolection = [
@@ -127,7 +119,9 @@ List<String> ejidocolection = [
   'Tequexquinahuac',
   'Santa Catarina del Monte',
   'Santa Catarina del Monte',
-  'Nativitas',
+  'Nativitas', //TODO: Cambiar
+  'San Pablo Ixayoc',
+  'San Dieguito',
 ];
 
 // Iterator itr = commonimages.iterator;
@@ -143,36 +137,126 @@ final dateInALongTime = DateTime(3000, 12, 31);
 String appName = 'Tláloc App';
 
 class AppColors {
-  // From dark illustration
+  // Oscuros
   static const Color dark1 = Color(0xFF121212);
-  static const Color dark3 = Color(0xFF181818);
-  static const Color dark2 = Color(0xFF212121);
+  static const Color dark2 = Color(0xFF181818);
+  static const Color dark3 = Color(0xFF212121);
+
+  // Neutros y acentos
   static const Color gray1 = Color(0xFF828690);
   static const Color blue1 = Color(0xFF00AEEF);
   static const Color green1 = Color(0xFF00E583);
   static const Color red1 = Color(0xFFB01235);
-  static const Color whatsappgreen = Color(0xFF25D366);
+  static const Color whatsappGreen = Color(0xFF25D366);
 
-  // From light illustration
-  static const Color pruple1 = Color(0xFF2C2A6B);
+  // Ilustrativos
+  static const Color purple1 = Color(0xFF2C2A6B);
   static const Color purple2 = Color(0xFF345E9D);
   static const Color orange1 = Color(0xFFE6473A);
   static const Color lightBlue = Color(0xFF50A8AE);
   static const Color blue3 = Color(0xFF081A30);
 }
 
-ThemeData darkTheme = ThemeData(
-  
-  visualDensity: VisualDensity.adaptivePlatformDensity,
+final ThemeData appDarkTheme = ThemeData(
+  useMaterial3: true,
   brightness: Brightness.dark,
-  primaryColor: AppColors.dark1,
-  primarySwatch: Colors.blue,
+  colorScheme: const ColorScheme(
+    brightness: Brightness.dark,
+    primary: AppColors.blue1,
+    onPrimary: Colors.white,
+    secondary: AppColors.green1,
+    onSecondary: Colors.black,
+    error: AppColors.red1,
+    onError: Colors.white,
+    surface: Colors.white10,
+    onSurface: Colors.white,
+  ),
   appBarTheme: const AppBarTheme(
     elevation: 0,
-    backgroundColor: AppColors.dark2,
-    iconTheme: IconThemeData(
+    backgroundColor: AppColors.dark3,
+    iconTheme: IconThemeData(color: Colors.white),
+    titleTextStyle: TextStyle(
       color: Colors.white,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
     ),
   ),
   scaffoldBackgroundColor: AppColors.dark2,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: const TextTheme(
+    bodyLarge: TextStyle(color: Colors.white, fontSize: 16),
+    bodyMedium: TextStyle(color: Colors.white70, fontSize: 14),
+    titleLarge: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+    titleMedium: TextStyle(
+      color: Colors.white,
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+    ),
+  ),
 );
+
+final ThemeData appLightTheme = ThemeData(
+  useMaterial3: true,
+  brightness: Brightness.light,
+  colorScheme: const ColorScheme(
+    brightness: Brightness.light,
+    primary: AppColors.blue3,
+    onPrimary: Colors.white,
+    secondary: AppColors.orange1,
+    onSecondary: Colors.white,
+    error: AppColors.red1,
+    onError: Colors.white,
+    surface: Color(0xFFF5F5F5),
+    onSurface: Colors.black,
+  ),
+  appBarTheme: const AppBarTheme(
+    elevation: 0,
+    backgroundColor: Colors.white,
+    iconTheme: IconThemeData(color: Colors.black),
+    titleTextStyle: TextStyle(
+      color: Colors.black,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+    ),
+  ),
+  scaffoldBackgroundColor: Colors.grey.shade50,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: const TextTheme(
+    bodyLarge: TextStyle(color: Colors.black, fontSize: 16),
+    bodyMedium: TextStyle(color: Colors.black87, fontSize: 14),
+    titleLarge: TextStyle(
+      color: Colors.black,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+    titleMedium: TextStyle(
+      color: Colors.black,
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+    ),
+  ),
+);
+
+class SectionTitle extends StatelessWidget {
+  final String text;
+  final double fontSize;
+
+  const SectionTitle({super.key, required this.text, this.fontSize = 18});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: fontSize,
+        fontFamily: 'Poppins',
+        color: Colors.white,
+      ),
+      textAlign: TextAlign.center,
+    );
+  }
+}

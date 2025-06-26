@@ -1,8 +1,7 @@
 // ignore_for_file: unnecessary_string_escapes
 
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:tlaloc/src/models/constants.dart';
+import 'package:flutter_markdown/flutter_markdown.dart'; 
 // import '../shared/markdown_demo_widget.dart';
 
 // ignore_for_file: public_member_api_docs
@@ -140,16 +139,17 @@ persona de usar el Servicio o que pueda exponer a Tláloc o a
 sus usuarios a cualquier daño o responsabilidad de cualquier tipo.
 
 
+
 """;
 
 class PoliticPage extends StatelessWidget {
-  const PoliticPage({Key? key}) : super(key: key);
+  const PoliticPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.dark2,
+        // backgroundColor: AppColors.dark2,
         title: const Text('Políticas de Privacidad'),
       ),
       body: const SafeArea(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
 
 class PhraseCard extends StatelessWidget {
-  const PhraseCard({Key? key}) : super(key: key);
+  const PhraseCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,7 @@ class PhraseCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           gradient: const LinearGradient(
-            colors: [
-              AppColors.blue1,
-              AppColors.pruple1,
-            ],
+            colors: [AppColors.blue1, AppColors.purple1],
           ),
         ),
         child: const Padding(
@@ -28,9 +25,9 @@ class PhraseCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Acerca del\nProyecto💧',
+                    'Acerca de 💧',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 18,
                       color: Colors.white,
                       fontFamily: 'FredokaOne',
                     ),
@@ -53,11 +50,7 @@ class PhraseCard extends StatelessWidget {
                       fontSize: 14,
                     ),
                   ),
-                  Icon(
-                    Icons.navigate_next,
-                    color: Colors.white,
-                    size: 20,
-                  ),
+                  Icon(Icons.navigate_next, color: Colors.white, size: 20),
                 ],
               ),
             ],

@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:tlaloc/src/models/app_state.dart';
+import 'package:tlaloc/src/models/excel.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/empty_state.dart';
 import 'package:tlaloc/src/ui/widgets/objects/tablewiner.dart';
 
 class TableTlaloc extends StatelessWidget {
-  const TableTlaloc({Key? key}) : super(key: key);
+  const TableTlaloc({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appState = context.watch<AppState>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -20,6 +22,28 @@ class TableTlaloc extends StatelessWidget {
             ),
           ),
         ),
+        actions: [
+          IconButton(
+                  icon: const Icon(Icons.file_download),
+                  onPressed: () async {
+                    try {
+                      await appState.exportAllParajes(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Exportación completada',
+                            style: TextStyle(color: Colors.green),
+                          ),
+                        ),
+                      );
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Error al exportar: $e')),
+                      );
+                    }
+                  },
+                ),
+        ],
       ),
       body: CustomScrollView(
         slivers: <Widget>[
@@ -29,15 +53,14 @@ class TableTlaloc extends StatelessWidget {
                 Consumer<AppState>(
                   builder: (context, state, _) {
                     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: state.getElVentureroMeasurementsStream(),
+                      stream: state.getMeasurementsStreamForParaje('El Venturero'),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           return EmptyState('Error ${snapshot.error}');
                         } else if (snapshot.hasData) {
                           final measurementsSnapshot = snapshot.data!;
-                          final measurements =
-                              state.getMeasurementsFromSnapshot(
-                                  measurementsSnapshot);
+                          final measurements = state.getMeasurementsFromDocs(measurementsSnapshot.docs);
+
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -68,15 +91,14 @@ class TableTlaloc extends StatelessWidget {
                 Consumer<AppState>(
                   builder: (context, state, _) {
                     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: state.getElJardinMeasurementsStream(),
+                       stream: state.getMeasurementsStreamForParaje('El Jardín'),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           return EmptyState('Error ${snapshot.error}');
                         } else if (snapshot.hasData) {
                           final measurementsSnapshot = snapshot.data!;
-                          final measurements =
-                              state.getMeasurementsFromSnapshot(
-                                  measurementsSnapshot);
+                          final measurements = state.getMeasurementsFromDocs(measurementsSnapshot.docs);
+
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

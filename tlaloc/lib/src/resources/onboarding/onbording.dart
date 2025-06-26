@@ -6,7 +6,7 @@ import 'package:tlaloc/src/ui/widgets/cards/onbording_cards.dart';
 import 'package:tlaloc/src/resources/onboarding/sign_in.dart';
 
 class Onboarding extends StatelessWidget {
-  Onboarding({Key? key}) : super(key: key);
+  Onboarding({super.key});
 
   final List<CardPlanetData> data = [
     CardPlanetData(
@@ -34,6 +34,9 @@ class Onboarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ConcentricPageView(
+        direction: Axis.horizontal,
+        pageSnapping: true,
+
         onFinish: () {
           Navigator.push(
             context,

@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "228815382617-chous1nkvaj62kogsjejueeojeldqo7c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.TlalocApps.tlaloc",
+            "certificate_hash": "24f035fca033d2c25fef707cb8571f0e2288d5f0"
+          }
+        },
+        {
           "client_id": "228815382617-evr2gdane0kejbr700dunqfbq7c641n3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

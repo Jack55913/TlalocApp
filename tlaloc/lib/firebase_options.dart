@@ -70,9 +70,11 @@ class DefaultFirebaseOptions {
     projectId: 'tlaloc-3c65c',
     databaseURL: 'https://tlaloc-3c65c-default-rtdb.firebaseio.com',
     storageBucket: 'tlaloc-3c65c.appspot.com',
-    androidClientId: '228815382617-7ap23qdeu0g4v0i068cr6lor4l3a4air.apps.googleusercontent.com',
-    iosClientId: '228815382617-6befg3ke4p12a7ggddlu3evjisj9g0pt.apps.googleusercontent.com',
-    iosBundleId: 'com.example.tlaloc',
+    androidClientId:
+        '228815382617-7ap23qdeu0g4v0i068cr6lor4l3a4air.apps.googleusercontent.com',
+    iosClientId:
+        '228815382617-6befg3ke4p12a7ggddlu3evjisj9g0pt.apps.googleusercontent.com',
+    iosBundleId: 'com.TlalocApps.tlaloc',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -82,8 +84,10 @@ class DefaultFirebaseOptions {
     projectId: 'tlaloc-3c65c',
     databaseURL: 'https://tlaloc-3c65c-default-rtdb.firebaseio.com',
     storageBucket: 'tlaloc-3c65c.appspot.com',
-    androidClientId: '228815382617-7ap23qdeu0g4v0i068cr6lor4l3a4air.apps.googleusercontent.com',
-    iosClientId: '228815382617-6befg3ke4p12a7ggddlu3evjisj9g0pt.apps.googleusercontent.com',
-    iosBundleId: 'com.example.tlaloc',
+    androidClientId:
+        '228815382617-7ap23qdeu0g4v0i068cr6lor4l3a4air.apps.googleusercontent.com',
+    iosClientId:
+        '228815382617-6befg3ke4p12a7ggddlu3evjisj9g0pt.apps.googleusercontent.com',
+    iosBundleId: 'com.TlalocApps.tlaloc',
   );
 }

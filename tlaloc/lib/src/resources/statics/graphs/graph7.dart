@@ -11,7 +11,7 @@
 // // import '../../../models/datepicker.dart';
 
 // class StackedColumnChart extends StatefulWidget {
-//   const StackedColumnChart({Key? key}) : super(key: key);
+//   const StackedColumnChart({super.key});
 
 //   @override
 //   State<StackedColumnChart> createState() => _StackedColumnChartState();
@@ -58,8 +58,8 @@
 //                       return EmptyState('Error ${snapshot.error}');
 //                     } else if (snapshot.hasData) {
 //                       final measurementsSnapshot = snapshot.data!;
-//                       final measurements = state
-//                           .getMeasurementsFromSnapshot(measurementsSnapshot);
+//                       final measurements =
+//     state.getMeasurementsFromDocs(snapshot.data!.docs);
 //                       final filteredMeasurements = measurements
 //                           .where((measurement) =>
 //                               (measurement.dateTime!.isAfter(initialDate) &&
@@ -69,7 +69,7 @@
 //                         child: Center(
 //                             child: SfCartesianChart(
 //                                 primaryXAxis: CategoryAxis(),
-//                                 series: <ChartSeries>[
+//                                 series: <CartesianSeries>[
 //                               StackedColumnSeries<ChartData, String>(
 //                                   dataSource: chartData,
 //                                   xValueMapper: (ChartData data, _) => data.x,

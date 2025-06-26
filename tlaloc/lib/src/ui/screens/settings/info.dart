@@ -26,7 +26,7 @@ Revisa las reglas para el uso de datos de lluvia en información (i)
 """;
 
 class InfoProyectPage extends StatelessWidget {
-  const InfoProyectPage({Key? key}) : super(key: key);
+  const InfoProyectPage({super.key});
 
   @override
   Widget build(BuildContext context) {

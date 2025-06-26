@@ -15,7 +15,7 @@ import '../../../models/datepicker.dart';
 /// https://pub.dev/packages/syncfusion_flutter_charts/example
 
 class PieChartTooltip extends StatefulWidget {
-  const PieChartTooltip({Key? key}) : super(key: key);
+  const PieChartTooltip({super.key});
 
   @override
   State<PieChartTooltip> createState() => _PieChartTooltipState();
@@ -171,8 +171,7 @@ class _PieChartTooltipState extends State<PieChartTooltip> {
                       return EmptyState('Error ${snapshot.error}');
                     } else if (snapshot.hasData) {
                       final measurementsSnapshot = snapshot.data!;
-                      final measurements = state
-                          .getMeasurementsFromSnapshot(measurementsSnapshot);
+                      final measurements = state.getMeasurementsFromDocs(measurementsSnapshot.docs);
                       final filteredMeasurements = measurements
                           .where((measurement) =>
                               (measurement.dateTime!.isAfter(initialDate) &&

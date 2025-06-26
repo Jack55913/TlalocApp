@@ -11,7 +11,7 @@
 // // import '../../../models/datepicker.dart';
 
 // class MultipleCommonSeries extends StatefulWidget {
-//   const MultipleCommonSeries({Key? key}) : super(key: key);
+//   const MultipleCommonSeries({super.key});
 
 //   @override
 //   State<MultipleCommonSeries> createState() => _MultipleCommonSeriesState();
@@ -58,8 +58,8 @@
 //                       return EmptyState('Error ${snapshot.error}');
 //                     } else if (snapshot.hasData) {
 //                       final measurementsSnapshot = snapshot.data!;
-//                       final measurements = state
-//                           .getMeasurementsFromSnapshot(measurementsSnapshot);
+//                       final measurements =
+//     state.getMeasurementsFromDocs(snapshot.data!.docs);
 //                       final filteredMeasurements = measurements
 //                           .where((measurement) =>
 //                               (measurement.dateTime!.isAfter(initialDate) &&

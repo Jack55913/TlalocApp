@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:tlaloc/src/models/constants.dart';
 
 class MyTextFormField extends StatelessWidget {
   // final controller;
@@ -14,41 +15,46 @@ class MyTextFormField extends StatelessWidget {
   final controller;
   final focusNode;
   final suffixIcon;
-  const MyTextFormField(
-      {Key? key,
-      required this.icon,
-      required this.textInputType,
-      required this.onChanged,
-      this.hintText = '',
-      this.helperText = '',
-      this.suffixIcon,
-      this.initialValue,
-      this.focusNode,
-      this.onEditingComplete,
-      this.controller})
-      : super(key: key);
+  const MyTextFormField({
+    super.key,
+    required this.icon,
+    required this.textInputType,
+    required this.onChanged,
+    this.hintText = '',
+    this.helperText = '',
+    this.suffixIcon,
+    this.initialValue,
+    this.focusNode,
+    this.onEditingComplete,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextFormField(
+    return Container(
+      decoration: BoxDecoration(
+        color:
+            Theme.of(context).brightness == Brightness.dark
+                ? AppColors.dark3
+                : Colors.transparent,
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextFormField(
           controller: controller,
           focusNode: focusNode,
           onEditingComplete: onEditingComplete,
           enableSuggestions: true,
           autocorrect: true,
           initialValue: initialValue,
-          cursorColor: Colors.green,
-          style: const TextStyle(
-            fontSize: 16,
-            fontFamily: 'FredokaOne',
-          ),
+          // cursorColor: Colors.green,
+          style: const TextStyle(fontSize: 18, fontFamily: 'FredokaOne'),
           textAlign: TextAlign.left,
           decoration: InputDecoration(
             suffixIcon: suffixIcon,
             icon: CircleAvatar(
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.blueGrey[100],
               child: icon,
             ),
             helperText: helperText,
@@ -59,7 +65,7 @@ class MyTextFormField extends StatelessWidget {
           keyboardType: textInputType,
           autofocus: true,
         ),
-      ],
+      ),
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:tlaloc/src/models/custompathpainter.dart';
 num _level = 80;
 
 class TlalocPluviometer extends StatefulWidget {
-  const TlalocPluviometer({Key? key}) : super(key: key);
+  const TlalocPluviometer({super.key});
 
   @override
   State<TlalocPluviometer> createState() => _TlalocPluviometerState();
@@ -15,7 +15,7 @@ class _TlalocPluviometerState extends State<TlalocPluviometer> {
   _TlalocPluviometerState();
 
   final num _minimumLevel = 0;
-  final num _maximumLevel = 160;
+  final num _maximumLevel = 300;
   @override
   Widget build(BuildContext context) {
     return Center(

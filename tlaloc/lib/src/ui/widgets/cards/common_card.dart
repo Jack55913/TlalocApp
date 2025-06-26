@@ -1,136 +1,104 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tlaloc/src/models/app_state.dart';
 import 'package:tlaloc/src/models/constants.dart';
-import 'package:tlaloc/src/models/kernel.dart';
-import 'package:tlaloc/src/models/parallax.dart';
+import 'package:tlaloc/src/ui/widgets/cards/paralax_list.dart';
 
-void _goHome(BuildContext context) {
-  Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute<void>(builder: (BuildContext context) {
-    return const HomePage();
-  }), (Route<dynamic> route) => false);
+class CommonSelectWidget extends StatefulWidget {
+  const CommonSelectWidget({super.key});
+
+  @override
+  State<CommonSelectWidget> createState() => _CommonSelectWidgetState();
 }
 
-class CommonSelectWidget extends StatelessWidget {
-  const CommonSelectWidget({
-    super.key,
-  });
+class _CommonSelectWidgetState extends State<CommonSelectWidget> {
+  final TextEditingController _searchController = TextEditingController();
+  List<String> filteredParajes = parajecolection;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  void _onSearchChanged() {
+    setState(() {
+      final query = _searchController.text.toLowerCase();
+      filteredParajes =
+          parajecolection
+              .where((paraje) => paraje.toLowerCase().contains(query))
+              .toList();
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (var i = 0; i < parajes.length; i++)
-          LocationListItem(
-              paraje: parajecolection[i],
-              ejido: ejidocolection[i],
-              commonimage: commonimages[i]),
-      ],
-    );
-  }
-}
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth >= 600;
 
-class LocationListItem extends StatelessWidget {
-  LocationListItem({
-    super.key,
-    required this.commonimage,
-    required this.paraje,
-    required this.ejido,
-  });
-
-  final String commonimage;
-  final String paraje;
-  final String ejido;
-  final GlobalKey _backgroundImageKey = GlobalKey();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: InkWell(
-          onTap: () async {
-            _goHome(context);
-            final state = Provider.of<AppState>(context, listen: false);
-            state.changeParaje(paraje);
-          },
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Stack(
-              children: [
-                _buildParallaxBackground(context),
-                _buildGradient(),
-                _buildTitleAndSubtitle(),
-              ],
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Buscar paraje...',
+                  prefixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
+            _buildParallaxGrid(context, isWide),
+          ],
+        );
+      },
     );
   }
 
-  Widget _buildParallaxBackground(BuildContext context) {
-    return Flow(
-      delegate: ParallaxFlowDelegate(
-        scrollable: Scrollable.of(context),
-        listItemContext: context,
-        backgroundImageKey: _backgroundImageKey,
-      ),
-      children: [
-        Image.asset(
-          commonimage,
-          key: _backgroundImageKey,
-          fit: BoxFit.cover,
-        ),
-      ],
-    );
-  }
+  Widget _buildParallaxGrid(BuildContext context, bool isWide) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        final isWide = screenWidth >= 600;
 
-  Widget _buildGradient() {
-    return Positioned.fill(
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: const [0.6, 0.95],
-          ),
-        ),
-      ),
-    );
-  }
+        final itemWidth =
+            isWide
+                ? (screenWidth - 16 /* spacing */ - 32 /* padding */ ) / 2
+                : screenWidth - 32;
 
-  Widget _buildTitleAndSubtitle() {
-    return Positioned(
-      left: 20,
-      bottom: 20,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            paraje,
-            style: const TextStyle(
-              fontFamily: 'FredokaOne',
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            children: List.generate(filteredParajes.length, (i) {
+              final paraje = filteredParajes[i];
+              final index = parajecolection.indexOf(paraje);
+
+              return ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 400, // Máximo recomendado para móviles
+                  minWidth: 280, // Mínimo para buena legibilidad
+                ),
+                child: LocationListItem(
+                  paraje: parajecolection[index],
+                  ejido: ejidocolection[index],
+                  commonimage: commonimages[index],
+                ),
+                // ),
+              );
+            }),
           ),
-          Text(
-            ejido,
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-              color: Colors.white,
-              
-              fontSize: 14,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

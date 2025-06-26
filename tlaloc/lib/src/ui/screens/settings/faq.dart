@@ -1,8 +1,7 @@
 // ignore_for_file: unnecessary_string_escapes
 
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:tlaloc/src/models/constants.dart';
+import 'package:flutter_markdown/flutter_markdown.dart'; 
 // import '../shared/markdown_demo_widget.dart';
 
 // ignore_for_file: public_member_api_docs
@@ -26,13 +25,12 @@ Al estar en un paraje, puedes observar todos los datos de él, sin embargo para 
 """;
 
 class FaqPage extends StatelessWidget {
-  const FaqPage({Key? key}) : super(key: key);
+  const FaqPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.dark2,
         title: const Text('Preguntas Frecuentes ✒️'),
       ),
       body: const SafeArea(

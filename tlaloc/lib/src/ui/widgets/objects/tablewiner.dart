@@ -6,8 +6,7 @@ import 'package:tlaloc/src/models/app_state.dart';
 class TableWinerWidget extends StatelessWidget {
   final Measurement measurement;
 
-  const TableWinerWidget({Key? key, required this.measurement})
-      : super(key: key);
+  const TableWinerWidget({super.key, required this.measurement});
 
   @override
   Widget build(BuildContext context) {

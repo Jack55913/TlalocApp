@@ -10,7 +10,7 @@ import 'package:tlaloc/src/ui/widgets/backgrounds/empty_state.dart';
 import 'package:tlaloc/src/ui/widgets/chips/chips.dart';
 
 class BubbleGraph extends StatefulWidget {
-  const BubbleGraph({Key? key}) : super(key: key);
+  const BubbleGraph({super.key});
 
   @override
   State<BubbleGraph> createState() => _BubbleGraphState();
@@ -51,8 +51,8 @@ class _BubbleGraphState extends State<BubbleGraph> {
                       return EmptyState('Error ${snapshot.error}');
                     } else if (snapshot.hasData) {
                       final measurementsSnapshot = snapshot.data!;
-                      final measurements = state
-                          .getMeasurementsFromSnapshot(measurementsSnapshot);
+                      final measurements = state.getMeasurementsFromDocs(measurementsSnapshot.docs);
+
                       final filteredMeasurements = measurements
                           .where((measurement) =>
                               (measurement.dateTime!.isAfter(initialDate) &&
@@ -69,7 +69,7 @@ class _BubbleGraphState extends State<BubbleGraph> {
                               ),
                               primaryYAxis:
                                   NumericAxis(name: 'Precipitación (mm)'),
-                              series: <ChartSeries<Measurement, DateTime>>[
+                              series: <CartesianSeries<Measurement, DateTime>>[
                                 BubbleSeries<Measurement, DateTime>(
                                   xValueMapper: (measurement, _) =>
                                       measurement.dateTime,

@@ -24,8 +24,8 @@ class CardPlanetData {
 class CardPlanet extends StatelessWidget {
   const CardPlanet({
     required this.data,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final CardPlanetData data;
 

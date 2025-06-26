@@ -4,77 +4,49 @@ import 'package:tlaloc/src/models/constants.dart';
 class ButtonWidget extends StatefulWidget {
   final VoidCallback onClicked;
 
-  const ButtonWidget({Key? key, required this.onClicked}) : super(key: key);
+  const ButtonWidget({super.key, required this.onClicked});
 
   @override
   State<ButtonWidget> createState() => _ButtonWidgetState();
 }
 
 class _ButtonWidgetState extends State<ButtonWidget> {
-  bool isButtonActive = true;
-  late TextEditingController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TextEditingController();
-    controller.addListener(() {
-      final isButtonActive = controller.text.isNotEmpty;
-
-      setState(() => this.isButtonActive = isButtonActive);
-    });
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(AppColors.green1),
-          // TODO
-          
-          // disabledForegroundColor: MaterialStateProperty.all(AppColors.green1.withOpacity(0.38)),
-          // disabledBackgroundColor: MaterialStateProperty.all(AppColors.green1.withOpacity(0.12)),
-          
-          // shape:
-          //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))
-              
+    return TextButton(
+      onPressed: () => _showConfirmationDialog(context),
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.lightBlue,
+        textStyle: const TextStyle(fontFamily: 'FredokaOne', fontSize: 24),
+      ),
+      child: const Text('Guardar'),
+    );
+  }
+
+  void _showConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder:
+          (_) => AlertDialog(
+            backgroundColor: AppColors.dark2,
+            title: const Text('¿Seguro(a) que desea enviar?'),
+            content: const Text(
+              'Usted está mandando el registro a la base de datos, puede eliminarlo posteriormente.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancelar'),
               ),
-      onPressed: isButtonActive
-          ? () {
-              setState(() => isButtonActive = false);
-              controller.clear();
-              showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Text('¿Seguro(a) que desea enviar?'),
-                  content: const Text(
-                      'Usted está mandando el registro a la base de datos, puede eliminarlo posteriormente.'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'Cancelar'),
-                      child: const Text('Cancelar'),
-                    ),
-                    TextButton(
-                      onPressed: widget.onClicked,
-                      child: const Text('Enviar'),
-                    ),
-                  ],
-                ),
-              );
-            }
-          : null,
-      child: const Text('Guardar',
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: 'FredokaOne',
-            fontSize: 21,
-          )),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  widget.onClicked();
+                },
+                child: const Text('Enviar'),
+              ),
+            ],
+          ),
     );
   }
 }

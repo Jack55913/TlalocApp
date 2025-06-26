@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
 
 class GraphMenuWidget extends StatelessWidget {
-  const GraphMenuWidget({Key? key}) : super(key: key);
+  const GraphMenuWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

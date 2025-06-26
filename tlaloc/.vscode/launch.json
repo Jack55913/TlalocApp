@@ -1,28 +1,30 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    // Configuración de lanzamientos para Tláloc App con Flutter
     "version": "0.2.0",
     "configurations": [
-    
-        
         {
-            "name": "tlaloc",
+            "name": "tlaloc (debug mode - web)",
             "request": "launch",
             "type": "dart",
-            "args": ["--web-port","5000"]
+            "flutterMode": "debug",
+            "args": ["--web-port", "5000"],
+            "program": "lib/main.dart"
         },
         {
-            "name": "tlaloc (profile mode)",
+            "name": "tlaloc (profile mode - web)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "args": ["--web-port", "5000"],
+            "program": "lib/main.dart"
         },
         {
-            "name": "tlaloc (release mode)",
+            "name": "tlaloc (release mode - web)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "args": ["--web-port", "5000"],
+            "program": "lib/main.dart"
         }
     ]
 }

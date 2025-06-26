@@ -2,16 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:tlaloc/src/models/constants.dart';
-
+ 
 const String _markdownData = """
 
 # General
 
-En tlaloc, nos preocupamos por sus datos personales, por lo que
+En Tlaloc App, nos preocupamos por sus datos personales, por lo que
 hemos preparado esta Política de privacidad para explicar cómo les
 recopilamos, usamos y compartimos ES IMPORTANTE MENCIONAR que los 
-DATOS de NINGÚNA manera pueden ser utilizados sin el concentimiento 
+DATOS de NINGÚNA manera pueden ser utilizados sin el consentimiento 
 de los coordinadores del proyecto.
 
 Esta Política de privacidad (\"Política de privacidad\") detalla los
@@ -19,7 +18,7 @@ datos personales que PROYECTO tlaloc (\"tlaloc\",
 \"tlaloc\", \"nosotros\" o \"nuestro\") recibe sobre usted, cómo lo
 procesamos y sus derechos y obligaciones en relación con sus datos
 personales PROYECTO tlaloc, UN PROYECTO DE ORIGEN
-INDEPENDIENTE, OPERADA EN MEXICO, SIN UBICACIÓN FISICA ESPECIFICA, es el
+INDEPENDIENTE, OPERADA EN MÉXICO, SIN UBICACIÓN FÍSICA ESPECÍFICA, es el
 controlador de datos a los efectos del Reglamento General de Protección
 de Datos (\"GDPR\") y cualquier legislación local relevante (\" Leyes de
 protección de datos\").
@@ -117,13 +116,12 @@ que se ha ofrecido.
 """;
 
 class PrivacyPage extends StatelessWidget {
-  const PrivacyPage({Key? key}) : super(key: key);
+  const PrivacyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.dark2,
         title: const Text('Términos y condiciones del servicio'),
       ),
       body: const SafeArea(

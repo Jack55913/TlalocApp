@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class Datetime extends StatefulWidget {
   final void Function(DateTime) updateDateTime;
 
-  const Datetime({
-    Key? key,
-    required this.updateDateTime,
-  }) : super(key: key);
+  const Datetime({super.key, required this.updateDateTime});
 
   @override
   State<Datetime> createState() => _DatetimeState();
@@ -29,21 +26,18 @@ class _DatetimeState extends State<Datetime> {
 
     return Column(
       children: [
-        const ListTile(
+        ListTile(
+          subtitle: const Text('4. La fecha y hora actual es:'),
           leading: CircleAvatar(
             backgroundColor: Colors.transparent,
-            child: Icon(
-              Icons.access_time,
-              color: Colors.grey,
+            child: CircleAvatar(
+              backgroundColor: Colors.purple[300],
+              child: Icon(Icons.access_time, color: Colors.purple[900]),
             ),
           ),
-          title: Text(
+          title: const Text(
             'Revisa la fecha de colecta',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 18,
-              fontFamily: 'FredokaOne',
-            ),
+            style: TextStyle(fontSize: 18, fontFamily: 'FredokaOne'),
             textAlign: TextAlign.left,
           ),
         ),
@@ -55,23 +49,32 @@ class _DatetimeState extends State<Datetime> {
             children: [
               ElevatedButton.icon(
                 icon: const Icon(Icons.calendar_month),
-                label: Text(
-                  '${dateTime.day}/${dateTime.month}/${dateTime.year}',
+                label: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    '${dateTime.day}/${dateTime.month}/${dateTime.year}',
+                    style: const TextStyle(),
+                  ),
                 ),
                 onPressed: () async {
                   final date = await pickDate();
                   if (date == null) return;
-                  final newDateTime = DateTime(date.year, date.month, date.day,
-                      dateTime.hour, dateTime.minute);
+                  final newDateTime = DateTime(
+                    date.year,
+                    date.month,
+                    date.day,
+                    dateTime.hour,
+                    dateTime.minute,
+                  );
                   setState(() => dateTime = newDateTime);
                 },
               ),
               ElevatedButton.icon(
-                icon: const Icon(Icons.access_time, color: Colors.white),
-                label: Text('$hours:$minutes',
-                    style: const TextStyle(
-                      color: Colors.white,
-                    )),
+                icon: const Icon(Icons.access_time),
+                label: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('$hours:$minutes', style: const TextStyle()),
+                ),
                 onPressed: () async {
                   final time = await pickTime();
                   if (time == null) return;
@@ -88,42 +91,21 @@ class _DatetimeState extends State<Datetime> {
             ],
           ),
         ),
-        //
-        // ListTile(
-        //   leading: CircleAvatar(
-        //       backgroundColor: Colors.yellow[300],
-        //       child:
-        //           Icon(Icons.rocket_launch_rounded, color: Colors.yellow[900])),
-        //   title: Text(
-        //     'Elige un Rol',
-        //   ),
-        //   subtitle:
-        //       Text('Estás en modo: ${Provider.of<AppState>(context).rol}'),
-        //   onTap: () {
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) => RoleSelection()),
-        //     );
-        //   },
-        // ),
 
-        // Divider(
-        //   height: 20,
-        //   thickness: 1,
-        // ),
+        const SizedBox(height: 16), 
       ],
     );
   }
 
   Future<DateTime?> pickDate() => showDatePicker(
-        context: context,
-        initialDate: dateTime,
-        firstDate: DateTime(2022),
-        lastDate: DateTime(2100),
-      );
+    context: context,
+    initialDate: dateTime,
+    firstDate: DateTime(2022),
+    lastDate: DateTime(2100),
+  );
 
   Future<TimeOfDay?> pickTime() => showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-      );
+    context: context,
+    initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+  );
 }

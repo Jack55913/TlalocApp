@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tlaloc/src/models/constants.dart';
-import 'package:tlaloc/src/resources/statics/charts/chart1.dart';
+ import 'package:tlaloc/src/ui/widgets/objects/table.dart';
 
 class TableGrids extends StatelessWidget {
-  const TableGrids({Key? key}) : super(key: key);
+  const TableGrids({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class TableGrids extends StatelessWidget {
       "Marcador",
     ];
     final chartscrens = [
-      const TlalocChart(),
+      const TableTlaloc(),
     ];
     return Builder(builder: (context) {
       return Padding(

@@ -34,7 +34,7 @@ const String _markdownData = """
 """;
 
 class CreditsPage extends StatelessWidget {
-  const CreditsPage({Key? key}) : super(key: key);
+  const CreditsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

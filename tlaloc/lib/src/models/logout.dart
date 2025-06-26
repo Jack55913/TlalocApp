@@ -6,7 +6,7 @@ import 'package:tlaloc/src/models/kernel.dart';
 import 'package:tlaloc/src/resources/onboarding/sign_in.dart';
 
 class LogOut extends StatelessWidget {
-  const LogOut({Key? key}) : super(key: key);
+  const LogOut({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(

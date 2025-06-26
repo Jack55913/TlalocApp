@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TlalocChart extends StatelessWidget {
-  const TlalocChart({Key? key}) : super(key: key);
+  const TlalocChart({super.key});
 
   @override
   Widget build(BuildContext context) {

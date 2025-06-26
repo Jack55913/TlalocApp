@@ -1,0 +1,17 @@
+keytool -genkey -v -keystore $env:USERPROFILE\upload-keystore.jks `
+        -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 `
+        -alias upload
+
+
+
+
+flutter clean
+flutter pub get
+flutter build web
+firebase deploy
+
+
+flutter clean
+flutter pub get
+flutter build appbundle --release
+flutter build apk --release

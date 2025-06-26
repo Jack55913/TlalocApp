@@ -1,8 +1,5 @@
-/// De https://github.com/miyotl/miyotl/blob/master/lib/widgets/empty_state.dart
-
 import 'package:flutter/material.dart';
-import 'package:tlaloc/src/models/constants.dart';
-
+ 
 class EmptyState extends StatelessWidget {
   final String text;
   final String? image;
@@ -33,19 +30,25 @@ class EmptyState extends StatelessWidget {
                     fontSize: 24,
                   ),
                 ),
-                Image.asset(
-                  'assets/images/ajolote-triste.png',
-                  // width: MediaQuery.of(context).size.width * 0.8,
+                SizedBox(
+                  height: 20,
                 ),
-                const Text(
-                  '¡Inicia sesión para poder crear, editar o eliminar mediciones a la base de datos de Tláloc App!.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.green1,
-                    fontFamily: 'FredokaOne',
-                    fontSize: 24,
+                SizedBox(
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/ajolote-triste.png',
+                    // width: MediaQuery.of(context).size.width * 0.8,
                   ),
                 ),
+                // const Text(
+                //   '¡Inicia sesión para poder crear, editar o eliminar mediciones a la base de datos de Tláloc App!.',
+                //   textAlign: TextAlign.center,
+                //   style: TextStyle(
+                //     color: AppColors.green1,
+                //     fontFamily: 'FredokaOne',
+                //     fontSize: 24,
+                //   ),
+                // ),
               ],
             ),
           ),

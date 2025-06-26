@@ -6,12 +6,41 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tlaloc/src/models/app_state.dart';
-import 'package:tlaloc/src/ui/screens/dir/add.dart';
+import 'package:tlaloc/src/models/constants.dart';
+import 'package:tlaloc/src/resources/statics/modify_registration.dart';
 import 'package:tlaloc/src/ui/widgets/backgrounds/empty_state.dart';
 import 'package:tlaloc/src/ui/widgets/view/dataview.dart';
 
 class MyDataWidget extends StatelessWidget {
-  const MyDataWidget({super.key});
+  final ScrollController scrollController;
+  final Function(Measurement)? onMeasurementSelected;
+  final bool isWideLayout;
+
+  const MyDataWidget({
+    super.key,
+    required this.scrollController,
+    this.onMeasurementSelected,
+    this.isWideLayout = false,
+  });
+
+  String getTimeCategory(DateTime date) {
+    final now = DateTime.now();
+    final difference = now.difference(date);
+
+    if (difference.inDays == 0) {
+      return 'HOY';
+    } else if (difference.inDays == 1) {
+      return 'AYER';
+    } else if (difference.inDays < 7) {
+      return 'ESTA SEMANA';
+    } else if (difference.inDays < 30) {
+      return 'HACE UN MES';
+    } else if (difference.inDays < 365) {
+      return 'HACE UN AÑO';
+    } else {
+      return 'HACE MUCHO TIEMPO';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,238 +53,187 @@ class MyDataWidget extends StatelessWidget {
               return EmptyState('Error ${snapshot.error}');
             } else if (snapshot.hasData) {
               final measurementsSnapshot = snapshot.data!;
-              final measurements =
-                  state.getMeasurementsFromSnapshot(measurementsSnapshot);
-              return CustomScrollView(
-                slivers: <Widget>[
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        for (var measurement in measurements)
-                          Slidable(
-                              startActionPane: ActionPane(
-                                motion: const StretchMotion(),
-                                children: [
-                                  SlidableAction(
-                                    foregroundColor: Colors.black,
-                                      backgroundColor: Colors.white,
-                                      onPressed: (context) {
-                                        Share.share(
-                                            '¡Mira! el *${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.day} llovió ${measurement.precipitation} mm*. Ayúdame a medir, descargándo la app en tlaloc.web.app');
-                                      },
-                                      icon: Icons.share),
-                                  SlidableAction(
-                                    foregroundColor: Colors.white,
-                                      backgroundColor: Colors.blue,
-                                      onPressed: (context) async {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => AddScreen(
-                                                measurement: measurement),
-                                          ),
-                                        );
-                                      },
-                                      icon: Icons.edit),
-                                ],
-                              ),
-                              endActionPane: ActionPane(
-                                motion: const StretchMotion(),
-                                children: [
-                                  SlidableAction(
-                                    foregroundColor: Colors.white,
-                                    backgroundColor: Colors.red,
-                                    onPressed: (context) {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                          title: const Text(
-                                              '¿Estás seguro que quieres eliminar este registro?'),
-                                          content: const Text(
-                                              'No podrás recuperarlo una vez que lo elimines.'),
-                                          actions: [
-                                            TextButton(
-                                              child: const Text('Cancelar'),
-                                              onPressed: () =>
-                                                  Navigator.of(context).pop(),
-                                            ),
-                                            TextButton(
-                                              child: const Text('Eliminar'),
-                                              onPressed: () async {
-                                                try {
-                                                  final state =
-                                                      Provider.of<AppState>(
-                                                          context,
-                                                          listen: false);
-                                                  await state.deleteMeasurement(
-                                                      id: measurement.id);
-                                                  await state
-                                                      .deleteRealMeasurement(
-                                                          id: measurement.id);
-                                                  // TODO: PUNTO 1.1 DEL CONTRATO. Cuando eliminamos una medición, también eliminarlo de los reales
-                                                  Navigator.of(context).pop();
-                                                } catch (e) {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (context) =>
-                                                        AlertDialog(
-                                                      title: const Text(
-                                                          'Ocurrió un error al eliminar'),
-                                                      content: Text('$e'),
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                        barrierDismissible: true,
-                                      );
-                                    },
-                                    icon: Icons.delete,
-                                  ),
-                                ],
-                              ),
-                              child: DataWidgetView(measurement: measurement)),
-                        const Divider(
-                          thickness: 1,
+              final measurements = state.getMeasurementsFromDocs(
+                measurementsSnapshot.docs,
+              );
+
+              if (measurements.isEmpty) {
+                return const EmptyState('No hay registros aún.');
+              }
+
+              // Ordenamos por fecha descendente
+              measurements.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
+
+              List<Widget> itemWidgets = [];
+              String? lastCategory;
+              // final userId = state.currentUser?.uid;
+
+              for (var measurement in measurements) {
+                final category = getTimeCategory(measurement.dateTime!);
+
+                if (category != lastCategory) {
+                  itemWidgets.add(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 16.0,
+                      ),
+                      child: Text(
+                        category,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
+                      ),
+                    ),
+                  );
+                  lastCategory = category;
+                }
+
+                itemWidgets.add(
+                  Slidable(
+                    startActionPane: ActionPane(
+                      motion: const StretchMotion(),
+                      children: [
+                        SlidableAction(
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.white,
+                          onPressed: (context) {
+                            Share.share(
+                              '¡Mira! el *${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.year} llovió ${measurement.precipitation} mm*. Ayúdame a medir, descargando la app en tlaloc.web.app',
+                            );
+                          },
+                          icon: Icons.share,
+                        ),
+                        if (state.canEditMeasurement(measurement.uploaderId))
+                          SlidableAction(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.blue,
+                            onPressed: (context) {
+                              onMeasurementSelected?.call(measurement);
+                            },
+
+                            icon: Icons.edit,
+                          ),
                       ],
                     ),
-                  ),
-                ],
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        );
-      },
-    );
-  }
-}
 
-class MyRealDataWidget extends StatelessWidget {
-  const MyRealDataWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<AppState>(
-      builder: (context, state, _) {
-        return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: state.getRealMeasurementsStream(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return EmptyState('Error ${snapshot.error}');
-            } else if (snapshot.hasData) {
-              final measurementsSnapshot = snapshot.data!;
-              final measurements =
-                  state.getRealMeasurementsFromSnapshot(measurementsSnapshot);
-              return CustomScrollView(
-                slivers: <Widget>[
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        for (var measurement in measurements)
-                          Slidable(
-                            
-                              startActionPane: ActionPane(
-                                motion: const StretchMotion(),
-                                children: [
-                                  SlidableAction(
-                                    foregroundColor: Colors.black,
-                                      backgroundColor: Colors.white,
-                                      onPressed: (context) {
-                                        Share.share(
-                                            '¡Mira! el *${measurement.dateTime!.day}/${measurement.dateTime!.month}/${measurement.dateTime!.day} llovió ${measurement.precipitation} mm*. Ayúdame a medir, descargándo la app en tlaloc.web.app');
-                                      },
-                                      icon: Icons.share),
-                                  SlidableAction(
-                                    foregroundColor: Colors.white,
-                                      backgroundColor: Colors.blue,
-                                      onPressed: (context) async {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => AddScreen(
-                                                measurement: measurement),
-                                          ),
-                                        );
-                                      },
-                                      icon: Icons.edit),
-                                ],
-                              ),
-                              endActionPane: ActionPane(
-                                motion: const StretchMotion(),
-                                children: [
-                                  SlidableAction(
-                                    foregroundColor: Colors.white,
-                                    backgroundColor: Colors.red,
-                                    onPressed: (context) {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                          title: const Text(
-                                              '¿Estás seguro que quieres eliminar este registro?'),
-                                          content: const Text(
-                                              'No podrás recuperarlo una vez que lo elimines.'),
-                                          actions: [
-                                            TextButton(
-                                              child: const Text('Cancelar'),
-                                              onPressed: () =>
-                                                  Navigator.of(context).pop(),
+                    endActionPane:
+                        state.canEditMeasurement(measurement.uploaderId)
+                            ? ActionPane(
+                              motion: const StretchMotion(),
+                              children: [
+                                SlidableAction(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.red,
+                                  onPressed: (context) {
+                                    showDialog(
+                                      context: context,
+                                      builder:
+                                          (context) => AlertDialog(
+                                            backgroundColor: AppColors.dark2,
+                                            title: const Text(
+                                              '¿Estás seguro que quieres eliminar este registro?',
                                             ),
-                                            TextButton(
-                                              child: const Text('Eliminar'),
-                                              onPressed: () async {
-                                                try {
-                                                  final state =
-                                                      Provider.of<AppState>(
+                                            content: const Text(
+                                              'No podrás recuperarlo una vez que lo elimines.',
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                child: const Text('Cancelar'),
+                                                onPressed:
+                                                    () =>
+                                                        Navigator.of(
                                                           context,
-                                                          listen: false);
-                                                  await state.deleteMeasurement(
-                                                      id: measurement.id);
-                                                  await state
-                                                      .deleteRealMeasurement(
-                                                          id: measurement.id);
-                                                  Navigator.of(context).pop();
-                                                } catch (e) {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (context) =>
-                                                        AlertDialog(
-                                                      title: const Text(
-                                                          'Ocurrió un error al eliminar'),
-                                                      content: Text('$e'),
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                        barrierDismissible: true,
-                                      );
-                                    },
-                                    icon: Icons.delete,
-                                  ),
-                                ],
+                                                        ).pop(),
+                                              ),
+                                              TextButton(
+                                                child: const Text('Eliminar'),
+                                                onPressed: () async {
+                                                  try {
+                                                    final state =
+                                                        Provider.of<AppState>(
+                                                          context,
+                                                          listen: false,
+                                                        );
+                                                    await state
+                                                        .deleteMeasurement(
+                                                          id: measurement.id,
+                                                        );
+                                                    await state
+                                                        .deleteRealMeasurement(
+                                                          id: measurement.id,
+                                                        );
+                                                    Navigator.of(context).pop();
+                                                  } catch (e) {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (
+                                                            context,
+                                                          ) => AlertDialog(
+                                                            title: const Text(
+                                                              'Ocurrió un error al eliminar',
+                                                            ),
+                                                            content: Text('$e'),
+                                                          ),
+                                                    );
+                                                  }
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                      barrierDismissible: true,
+                                    );
+                                  },
+                                  icon: Icons.delete,
+                                ),
+                              ],
+                            )
+                            : null,
+                    child: GestureDetector(
+                      onTap: () {
+                        onMeasurementSelected?.call(measurement);
+                      },
+                      child: DataWidgetView(
+                        measurement: measurement,
+                        onTap: () {
+                          if (isWideLayout) {
+                            onMeasurementSelected?.call(measurement);
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (_) => ModifyRegistration(
+                                      measurement: measurement,
+                                    ),
                               ),
-                              child: DataWidgetView(measurement: measurement)),
-                        const Divider(
-                          thickness: 1,
-                        ),
-                      ],
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ),
-                ],
+                );
+
+                // itemWidgets.add(const Divider(thickness: 1));
+              }
+
+              return Scrollbar(
+                controller: scrollController,
+                thickness: 20.0,
+                thumbVisibility: true,
+                child: CustomScrollView(
+                  controller: scrollController,
+                  slivers: [
+                    SliverList(delegate: SliverChildListDelegate(itemWidgets)),
+                  ],
+                ),
               );
             } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
             }
           },
         );
